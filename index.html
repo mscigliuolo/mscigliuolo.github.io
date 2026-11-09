@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marco Scigliuolo · Ingegnere civile e BIM Coordinator</title>
+<meta name="description" content="Marco Scigliuolo, ingegnere civile e BIM Coordinator a Bolzano: lavori in corso e BIM News, le novità BIM per le opere pubbliche.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%2325584a' stroke-width='3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%2325584a'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Archivo";src:url("fonts/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("fonts/newsreader.woff2") format("woff2");font-weight:200 800;font-display:swap}
+
+/* Layout: sito personale su griglia di progetto; sezioni ad assi A–D come in tavola; WIP come fasi di commessa; BIM News come vetrina filtrabile; chiusura a cartiglio */
+:root{
+  --bg:#f3f4f1; --surface:#fbfbf9; --ink:#151b19; --muted:#59645f; --line:#cdd3ce; --accent:#25584a; --accent-soft:#e1ebe6; --mark:#e2b42c; --mark-ink:#151b19;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101513;--surface:#161d1a;--ink:#e7ece9;--muted:#9aa6a1;--line:#2a3430;--accent:#8cc7b0;--accent-soft:#1d2b26;--mark:#e2b42c;--mark-ink:#151b19;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101513;--surface:#161d1a;--ink:#e7ece9;--muted:#9aa6a1;--line:#2a3430;--accent:#8cc7b0;--accent-soft:#1d2b26;--mark:#e2b42c;--mark-ink:#151b19;color-scheme:dark}
+@media (monochrome){:root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#333;--line:#777;--accent:#000;--accent-soft:#fff;--mark:#fff;--mark-ink:#000}}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.1rem;line-height:1.6}
+.wrap{max-width:70rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ex{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;border:1px dashed var(--muted);color:var(--muted);padding:.05rem .35rem;white-space:nowrap}
+
+/* barra */
+.top{border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;justify-content:space-between;padding-block:.8rem}
+.brand{font-family:var(--display);font-weight:700;font-stretch:80%;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.top nav{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem}
+.top nav a{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none}
+.top nav a b{color:var(--accent);font-weight:500;margin-right:.3em}
+.top nav a:hover{color:var(--accent)}
+.theme{font-family:var(--mono);font-size:.72rem;background:none;border:1px solid var(--line);color:var(--muted);padding:.2rem .5rem;cursor:pointer}
+
+/* apertura */
+.hero{padding-block:3.6rem 3rem;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.4rem 2rem;align-items:start}
+.hero .role{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);grid-column:1/-1}
+.hero h1{font-family:var(--display);font-stretch:66%;font-weight:850;font-size:clamp(3rem,10vw,6.2rem);line-height:.9;margin:0;letter-spacing:-.01em}
+.hero p{grid-column:1/-1;max-width:36rem;margin:0;font-size:1.22rem}
+.stamp{border:2px solid var(--mark-ink);background:var(--mark);color:var(--mark-ink);padding:.6rem .8rem;transform:rotate(-4deg);font-family:var(--display);font-stretch:75%;font-weight:800;line-height:1.05;text-align:center;text-transform:uppercase;align-self:center}
+.stamp small{display:block;font-family:var(--mono);font-weight:400;font-size:.62rem;letter-spacing:.08em;margin-top:.3rem}
+.stamp span{font-size:1.4rem}
+
+/* sezioni ad assi */
+section{border-top:1px solid var(--line);padding-block:3rem;display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:1.2rem 2rem}
+.axis{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.axis b{width:2.6rem;height:2.6rem;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--accent)}
+.axis i{flex:1;width:0;border-left:1px dashed var(--line);min-height:2rem}
+.content{min-width:0;display:grid;gap:1.3rem}
+h2{font-family:var(--display);font-stretch:72%;font-weight:800;font-size:clamp(1.8rem,4.2vw,2.6rem);line-height:1;margin:0;text-wrap:balance}
+.lead{max-width:38rem;margin:0;color:var(--muted)}
+.prose{max-width:38rem}.prose p{margin:0 0 1rem}
+
+/* work in progress: fasi */
+.wip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.job{border:1px solid var(--line);background:var(--surface);padding:1.1rem 1.2rem;display:grid;gap:.55rem;align-content:start;min-width:0}
+.job h3{margin:0;font-family:var(--display);font-stretch:82%;font-weight:700;font-size:1.2rem;line-height:1.2;text-wrap:balance}
+.job p{margin:0;font-size:.98rem;color:var(--muted)}
+.phases{list-style:none;margin:.3rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}
+.phases li{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-top:4px solid var(--line);padding-top:.3rem}
+.phases li.done{border-color:var(--accent);color:var(--ink)}
+.phases li.now{border-color:var(--mark);color:var(--ink);font-weight:700}
+.phases li.now::after{content:" ◂"}
+
+/* BIM News: ricerca */
+.finder{display:grid;gap:.8rem;border:1px solid var(--ink);padding:1rem;background:var(--surface)}
+.finder .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:end}
+.field{display:grid;gap:.25rem;min-width:0}
+.field.grow{flex:1 1 16rem}
+.field label{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+input[type=search],select{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);padding:.5rem .6rem;border-radius:0;width:100%}
+input[type=search]:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 2px var(--accent-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:.3rem .6rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.status-line{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.reset{font-family:var(--mono);font-size:.75rem;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0}
+
+/* BIM News: vetrina */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.art{border:1px solid var(--line);background:var(--surface);display:grid;grid-template-rows:auto 1fr auto;min-width:0;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.art:hover{border-color:var(--accent);transform:translateY(-2px)}
+.art .num{display:flex;justify-content:space-between;align-items:center;padding:.6rem .9rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.art .num b{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.5rem;color:var(--accent);line-height:1}
+.art .body{padding:.9rem;display:grid;gap:.45rem;align-content:start}
+.art h3{margin:0;font-family:var(--display);font-stretch:84%;font-weight:700;font-size:1.12rem;line-height:1.22;text-wrap:balance}
+.art p{margin:0;font-size:.96rem;color:var(--muted)}
+.art .foot{display:flex;flex-wrap:wrap;gap:.35rem;padding:0 .9rem .9rem}
+.tag{font-family:var(--mono);font-size:.66rem;background:var(--accent-soft);color:var(--ink);padding:.12rem .4rem}
+mark{background:var(--mark);color:var(--mark-ink);padding:0 .1em}
+.empty{border:1px dashed var(--line);padding:1.4rem;text-align:center;color:var(--muted)}
+
+/* lettore articolo */
+.reader{position:fixed;inset:0;background:var(--bg);overflow-y:auto;z-index:20;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.reader .wrap{max-width:42rem;padding-block:1.6rem 4rem}
+.reader .back{font-family:var(--mono);font-size:.8rem;background:none;border:1px solid var(--line);color:var(--ink);padding:.35rem .7rem;cursor:pointer}
+.reader h1{font-family:var(--display);font-stretch:72%;font-weight:800;font-size:clamp(2rem,6vw,3rem);line-height:1.02;margin:1.4rem 0 .8rem;text-wrap:balance}
+.reader .meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1.6rem}
+.reader p{margin:0 0 1rem}
+.reader .src{border-top:1px solid var(--line);padding-top:1rem;margin-top:2rem;font-size:.95rem;color:var(--muted)}
+
+/* contatti e cartiglio */
+.contact{display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;align-items:center;font-family:var(--mono);font-size:.9rem}
+footer{padding-block:1.6rem 3rem}
+.cartiglio{display:grid;grid-template-columns:2fr repeat(3,minmax(0,1fr));border:1.5px solid var(--ink);font-family:var(--mono);font-size:.72rem}
+.cartiglio div{padding:.55rem .7rem;border-left:1px solid var(--ink);display:grid;gap:.15rem;min-width:0}
+.cartiglio div:first-child{border-left:0}
+.cartiglio span{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.62rem}
+.cartiglio strong{font-weight:500;overflow-wrap:anywhere}
+
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  section{grid-template-columns:minmax(0,1fr)}
+  .axis{flex-direction:row}.axis i{border-left:0;border-top:1px dashed var(--line);min-height:0;width:auto}
+  .grid,.wip{grid-template-columns:minmax(0,1fr)}
+  .hero{grid-template-columns:minmax(0,1fr)}.stamp{justify-self:start}
+  .cartiglio{grid-template-columns:1fr 1fr}.cartiglio div:nth-child(3){border-left:0}.cartiglio div:nth-child(n+3){border-top:1px solid var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){.art{transition:none}.art:hover{transform:none}}
+body{margin:0}
+.note{font-size:1rem;color:var(--muted);border-left:3px solid var(--mark);padding:.2rem 0 .2rem .8rem;max-width:36rem;margin:0}
+.foot-links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.8rem;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.foot-links a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Marco Scigliuolo</a>
+    <nav aria-label="Sezioni">
+      <a href="#chi-sono"><b>A</b>Chi sono</a>
+      <a href="#wip"><b>B</b>Work in progress</a>
+      <a href="#bim-news"><b>C</b>BIM News</a>
+      <a href="#contatti"><b>D</b>Contatti</a>
+    </nav>
+    <button class="theme" id="theme" type="button" hidden>Tema scuro</button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div class="role">Ingegnere civile · BIM Coordinator · Bolzano</div>
+    <h1>Marco<br>Scigliuolo</h1>
+    <div class="stamp" aria-label="Sito in lavorazione, revisione 01"><span>Work in<br>progress</span><small>Rev. 01 · 11/2026</small></div>
+    <p>Progetto edifici pubblici in Alto Adige e coordino i loro modelli informativi. Questo sito è un cantiere aperto: cresce insieme al mio lavoro.</p>
+  </div>
+
+  <section id="chi-sono">
+    <div class="axis" aria-hidden="true"><b>A</b><i></i></div>
+    <div class="content">
+      <h2>Chi sono</h2>
+      <div class="prose">
+        <p>Lavoro come BIM coordinator in uno studio di progettazione altoatesino, soprattutto su scuole e uffici pubblici. Sono coordinatore della sicurezza CSP/CSE; in passato ho lavorato su infrastrutture e ho insegnato.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="wip">
+    <div class="axis" aria-hidden="true"><b>B</b><i></i></div>
+    <div class="content">
+      <h2>Work in progress</h2>
+      <p class="lead">Quello su cui sto lavorando adesso, con la fase in cui si trova. Le schede si aggiornano man mano.</p>
+      <div class="wip">
+        <article class="job"><span class="label">Revit · dati</span><h3>Libreria di famiglie con struttura dati provinciale</h3><p>Famiglie con i parametri richiesti dalla Provincia di Bolzano, pronte da usare nei progetti.</p>
+          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">AutoCAD · AutoLISP</span><h3>Automazione dei disegni</h3><p>Script per le operazioni ripetitive, a partire dalla gestione dei riferimenti esterni.</p>
+          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">Impianti elettrici</span><h3>Verifiche automatiche da checklist</h3><p>Dalla checklist di controllo a verifiche ripetibili sui progetti.</p>
+          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">Energia · CasaClima</span><h3>Dalle superfici del disegno al calcolo CasaClima</h3><p>Estrarre le superfici dai DWG e portarle nel foglio di calcolo senza ricopiarle a mano.</p>
+          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="bim-news">
+    <div class="axis" aria-hidden="true"><b>C</b><i></i></div>
+    <div class="content">
+      <h2>BIM News</h2>
+      <p class="lead">Ogni mese nuovi articoli sulle novità BIM per le opere pubbliche: norme, Provincia, software. Ognuno con la sua fonte.</p>
+
+      <p class="note">Il primo numero esce a dicembre 2026. Gli articoli saranno raccolti qui, con ricerca per parola chiave, mese e argomento.</p>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="axis" aria-hidden="true"><b>D</b><i></i></div>
+    <div class="content">
+      <h2>Contatti</h2>
+      <div class="contact"><!-- DA COMPLETARE: indirizzo del profilo LinkedIn --><a href="https://www.linkedin.com/" rel="noopener">LinkedIn ↗</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="cartiglio">
+    <div><span>Elaborato</span><strong>Sito personale — Marco Scigliuolo</strong></div>
+    <div><span>Stato</span><strong>Work in progress</strong></div>
+    <div><span>Rev.</span><strong>01</strong></div>
+    <div><span>Data</span><strong>11/2026</strong></div>
+  </div>
+  <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie, nessun tracciamento.</span></div>
+</footer>
+
+<script>
+/* unico script: cambio tema. Senza JavaScript il pulsante resta nascosto e il sito funziona uguale */
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+function dark(){return r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+function label(){b.textContent=dark()?"Tema chiaro":"Tema scuro"}
+try{var t=localStorage.getItem("tema");if(t)r.dataset.theme=t}catch(e){}
+b.hidden=false;label();b.addEventListener("click",function(){var n=dark()?"light":"dark";r.dataset.theme=n;label();try{localStorage.setItem("tema",n)}catch(e){}})})();
+</script>
+</body>
+</html>
