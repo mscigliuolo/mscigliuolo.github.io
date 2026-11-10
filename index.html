@@ -454,9 +454,11 @@ body{margin:0}
 .tools a{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.1rem .6rem;align-items:center;padding:.55rem .7rem;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
 .tools a:hover{border-color:var(--accent)}
 .tools .ti{grid-row:span 2;width:1.6rem;height:1.6rem;display:grid;place-items:center}
-.tools .ti svg,.tools .ti img{width:100%;height:100%;fill:currentColor}
+.tools .ti{color:var(--accent)}
+.tools .ti svg{width:100%;height:100%}
 .tools b{font-family:var(--display);font-stretch:85%;font-weight:700;font-size:1rem;line-height:1.1}
 .tools span.tc{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+.tools-tm{margin:0;font-family:var(--mono);font-size:.66rem;color:var(--muted)}
 .pubs-h{font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.3rem;margin:.6rem 0 0}
 .pub{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);padding:1rem 1.2rem;display:grid;gap:.45rem}
 .pub-meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
@@ -679,7 +681,8 @@ footer{padding-block:1.6rem 3rem}
         <h3 class="pubs-h">Strumenti</h3>
         <p class="tl-intro">I software e gli strumenti che uso nel lavoro, con il collegamento al sito ufficiale.</p>
         <ul class="tools" id="tools"></ul>
-        <p class="note-soon" id="tools-empty">Work in progress: l'elenco è in preparazione.</p>
+        <p class="note-soon" id="tools-empty">Work in progress: l'elenco è in completamento.</p>
+        <p class="tools-tm">I nomi dei software sono marchi dei rispettivi titolari; il loro uso qui indica solo gli strumenti che utilizzo. Le icone sono generiche, per categoria.</p>
       </div>
       <div class="pubs">
         <h3 class="pubs-h">Pubblicazioni</h3>
@@ -769,7 +772,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>24 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>25 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -954,9 +957,24 @@ function cvtl(){$("cv-empty").hidden=CV.length>0;$("cv-tl").innerHTML=CV.map(fun
   (o?'<div class="tl-det"><p>'+esc(n.x)+'</p>'+(n.b&&n.b.length?'<ul>'+n.b.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>':'')+'</div>':'')+'</li>'}).join("")}
 $("cv-tl").addEventListener("click",function(e){var b=e.target.closest(".tl-btn");if(!b)return;var i=+b.dataset.i;cvOpen=cvOpen===i?-1:i;cvtl()});
 cvtl();
-// strumenti: {n:"nome", c:"categoria", u:"sito ufficiale", i:"icona SVG (opzionale)"}
-var TOOLS=[];
-(function(){$("tools-empty").hidden=TOOLS.length>0;$("tools").innerHTML=TOOLS.map(function(t){return'<li><a href="'+t.u+'" target="_blank" rel="noopener"><span class="ti" aria-hidden="true">'+(t.i||"")+'</span><b>'+esc(t.n)+'</b><span class="tc">'+esc(t.c)+'</span></a></li>'}).join("")})();
+// strumenti: {n:"nome", c:"categoria", u:"sito ufficiale", k:"icona per categoria"}
+// icone generiche disegnate per il sito (nessun logo di produttore)
+var TICO={
+ bim:'<path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/>',
+ cad:'<path d="M4 20V4l16 16z"/><path d="M8 16v-4l4 4z"/>',
+ code:'<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>',
+ coord:'<rect x="3" y="3" width="12" height="12"/><rect x="9" y="9" width="12" height="12"/>',
+ elec:'<path d="M13 2 5 13h6l-1 9 8-11h-6z"/>',
+ hvac:'<path d="M3 8h13a3 3 0 1 0-3-3M3 12h17a3 3 0 1 1-3 3M3 16h9"/>',
+ energy:'<path d="M12 3a3 3 0 0 0-3 3v8a4 4 0 1 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M12 10v7"/>',
+ safety:'<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 6v4"/><path d="M9 10.5V8M15 10.5V8"/>',
+ data:'<rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/>',
+ quality:'<rect x="4" y="4" width="16" height="16"/><path d="M8 12l3 3 5-6"/>'};
+var TOOLS=[
+ {n:"Revit",c:"Modellazione BIM",u:"https://www.autodesk.com/products/revit/overview",k:"bim"},
+ {n:"AutoCAD",c:"CAD · automazione con AutoLISP",u:"https://www.autodesk.com/products/autocad/overview",k:"cad"}];
+(function(){$("tools").innerHTML=TOOLS.map(function(t){var ic=TICO[t.k]?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">'+TICO[t.k]+'</svg>':"";
+  return'<li><a href="'+t.u+'" target="_blank" rel="noopener"><span class="ti" aria-hidden="true">'+ic+'</span><b>'+esc(t.n)+'</b><span class="tc">'+esc(t.c)+'</span></a></li>'}).join("")})();
 
 // "più lette": nel sito vero i conteggi arrivano da GoatCounter (clic su "Fonte" e aperture delle pagine).
 // Nell'anteprima non ci sono lettori reali: nessun numero inventato, solo lo stato vuoto.
