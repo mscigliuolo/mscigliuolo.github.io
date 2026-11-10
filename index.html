@@ -522,6 +522,13 @@ footer{padding-block:1.6rem 3rem}
       <h2 id="news-h">BIM News</h2>
       <p class="lead">Le novità BIM dall'Alto Adige al resto del mondo, raccolte ogni settimana, ognuna con il link alla fonte.</p>
       <nav class="news-tabs" aria-label="Viste di BIM News"><a href="#bim-news" data-ai="0">Tutte le notizie</a><a href="#bim-ai" data-ai="1">BIM &amp; AI</a></nav>
+      <article class="ai-intro" id="all-intro">
+        <span class="f-lab">Tutte le notizie</span>
+        <h3>Il BIM nel mondo, una settimana alla volta</h3>
+        <p>Questa è la rassegna completa: ogni settimana le notizie sul BIM arrivano da ogni parte del mondo, vengono riassunte in italiano e collocate sulla mappa, fino alla regione o allo stato in cui accadono. Norme e obblighi, appalti pubblici, progetti, standard e tecnologie.</p>
+        <p>La mappa è mondiale per scelta: il BIM non appartiene a un solo paese. Il desiderio del curatore è che ogni realtà, in qualunque parte del mondo, possa servirsi di questa tecnologia per costruire meglio, e quindi per migliorare la vita di chi negli edifici abita, studia e lavora.</p>
+        <p class="ai-crit">Esplora le notizie per luogo, tema e periodo con la mappa, i filtri e l'archivio; nella scheda BIM &amp; AI trovi quelle dedicate all'intelligenza artificiale.</p>
+      </article>
       <article class="ai-intro" id="ai-intro" hidden>
         <span class="f-lab">BIM &amp; AI</span>
         <h3>Quando la potenza dell'intelligenza artificiale incontra il BIM</h3>
@@ -727,7 +734,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>20 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>21 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1056,7 +1063,7 @@ function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-
   // BIM & AI: stessa pagina di BIM News, filtrata sulle notizie con tag AI
   var ai=h==="bim-ai";if(ai)v="bim-news";
   if(!wk&&!!state.ai!==ai){state.ai=ai;PAGE=1;render()}
-  $("ai-intro").hidden=!state.ai;document.documentElement.classList.toggle("ai-view",!!state.ai);$("latest").hidden=!!state.ai;$("news-h").textContent=state.ai?"BIM & AI":"BIM News";
+  $("ai-intro").hidden=!state.ai;$("all-intro").hidden=!!state.ai;document.documentElement.classList.toggle("ai-view",!!state.ai);$("latest").hidden=!!state.ai;$("news-h").textContent=state.ai?"BIM & AI":"BIM News";
   document.querySelectorAll(".news-tabs a").forEach(function(a){if((a.dataset.ai==="1")===!!state.ai)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   // work in progress e fuori dallo studio sono sottosezioni del curatore
   var sub=SUB[v];if(sub){v="chi-sono";document.documentElement.dataset.sub=sub;document.querySelectorAll(".subnav a").forEach(function(a){if(a.dataset.sub===sub)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")})}
