@@ -317,7 +317,13 @@ section .axis b{background:var(--accent-soft)}
 .subnav a:hover{color:var(--accent);border-color:var(--accent)}
 .subnav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sub{display:none;gap:1.1rem;min-width:0}
-:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+.st-list{display:grid;gap:.6rem}
+.st-item{display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:.2rem .8rem;background:var(--surface);border:1px solid var(--line);padding:.8rem 1rem}
+.st-n{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.6rem;line-height:1;color:var(--accent)}
+.st-item h4{margin:0;font-family:var(--display);font-stretch:84%;font-weight:720;font-size:1.12rem;line-height:1.2}
+.st-item p{margin:.25rem 0 0;font-size:.98rem;color:var(--muted)}
+.st-item .st-wip{font-family:var(--mono);font-size:.74rem;display:flex;gap:.5rem;align-items:center}
 .sub-h{margin:0;font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.5rem;line-height:1.1}
 main>section{display:none}
 :root[data-view="chi-sono"] #chi-sono,:root[data-view="wip"] #wip,:root[data-view="bim-5-minuti"] #bim-5-minuti,:root[data-view="bim-news"] #bim-news,:root[data-view="fuori"] #fuori,:root[data-view="contatti"] #contatti{display:grid}
@@ -640,8 +646,8 @@ footer{padding-block:1.6rem 3rem}
   <section id="chi-sono">
     <div class="content">
       <h2>Il curatore</h2>
-      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, i lavori in corso e qualche riflessione personale.</p>
-      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
+      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, i lavori in corso e qualche pensiero personale.</p>
+      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -664,6 +670,24 @@ footer{padding-block:1.6rem 3rem}
       <div class="sub" id="portfolio">
         <h3 class="sub-h">Portfolio</h3>
         <p class="note-soon">Work in progress: qui raccoglierò i progetti a cui ho lavorato.</p>
+      </div>
+      <div class="sub" id="studio">
+        <h3 class="sub-h">Nello studio</h3>
+        <p class="lead">Riflessioni e approfondimenti sul lavoro di progettazione: i problemi che si incontrano più spesso e come provare a risolverli. Ogni tema diventerà un articolo.</p>
+        <div class="st-list">
+          <article class="st-item" id="studio-01"><span class="st-n">01</span><div><h4>Coordinamento tra discipline</h4><p>Architettura, strutture e impianti progettati in parallelo ma verificati insieme troppo tardi: le interferenze emergono in cantiere, quando costano di più.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-02"><span class="st-n">02</span><div><h4>Requisiti del committente vaghi o mutevoli</h4><p>Capitolati informativi generici, obiettivi non scritti e richieste che cambiano a progetto avanzato: la causa di molte varianti.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-03"><span class="st-n">03</span><div><h4>Tempi compressi</h4><p>Scadenze di gara e di finanziamento che riducono le fasi di progetto: si consegna in tempo, ma si rimanda il controllo della qualità.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-04"><span class="st-n">04</span><div><h4>Progettare sull'esistente</h4><p>Rilievi incompleti o datati negli interventi di riqualificazione: si progetta su ciò che si crede ci sia, non su ciò che c'è.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-05"><span class="st-n">05</span><div><h4>Interoperabilità e dati persi</h4><p>Modelli che passano tra software diversi e perdono informazioni per strada: IFC esportati male, proprietà mancanti, geometrie da rifare.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-06"><span class="st-n">06</span><div><h4>Ambiente di condivisione dati</h4><p>L'ACDat usato come una cartella condivisa: versioni che si moltiplicano, stati non chiari, nessuno sa qual è il file buono.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-07"><span class="st-n">07</span><div><h4>Modelli belli ma vuoti</h4><p>Molta geometria e poche informazioni utili: livelli di fabbisogno informativo non definiti e dati che nessuno userà.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-08"><span class="st-n">08</span><div><h4>Verifiche normative frammentate</h4><p>Antincendio, energia, acustica e impianti controllati a mano e separatamente, a ogni revisione del progetto.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-09"><span class="st-n">09</span><div><h4>Computi e costi scollegati dal modello</h4><p>Quantità ricalcolate a parte e stime che non seguono le modifiche: il costo dell'opera resta un'incognita fino alla gara.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-10"><span class="st-n">10</span><div><h4>Sicurezza scollegata dal progetto</h4><p>Il piano di sicurezza scritto a valle, senza dialogo con le scelte progettuali e senza usare il modello per pianificare il cantiere.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-11"><span class="st-n">11</span><div><h4>Dal progetto al cantiere e alla gestione</h4><p>Le informazioni si perdono a ogni passaggio: l'impresa ridisegna, l'as-built non è affidabile, il gestore riceve carta invece di dati.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="studio-12"><span class="st-n">12</span><div><h4>Competenze, ruoli e responsabilità</h4><p>Figure BIM previste sulla carta ma non nei fatti, formazione discontinua e dubbi su chi risponde del dato digitale.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+        </div>
       </div>
       <div class="sub" id="wip">
       <h3 class="sub-h">Work in progress</h3>
@@ -694,7 +718,7 @@ footer{padding-block:1.6rem 3rem}
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
     <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, approfondimenti sul lavoro, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
   </nav>
 </main>
 
@@ -703,7 +727,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>19 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>20 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1027,7 +1051,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","portfolio","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",wip:"wip",fuori:"fuori"},SEEN={};
+var VIEWS=["chi-sono","portfolio","studio","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",wip:"wip",fuori:"fuori"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // BIM & AI: stessa pagina di BIM News, filtrata sulle notizie con tag AI
   var ai=h==="bim-ai";if(ai)v="bim-news";
