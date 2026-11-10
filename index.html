@@ -319,6 +319,16 @@ section .axis b{background:var(--accent-soft)}
 .sub{display:none;gap:1.1rem;min-width:0}
 :root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="proposte"] #proposte,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori,:root[data-sub="libri"] #libri{display:grid}
 .st-list{display:grid;gap:.6rem}
+.book{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:1rem 1.2rem;margin:.8rem 0 .4rem;padding:1rem 0 .4rem;border-top:1px solid var(--line)}
+.book-cover{aspect-ratio:3/4;border:1px dashed var(--line);display:grid;place-items:center;align-content:center;gap:.4rem;color:var(--accent);background:var(--bg);padding:.6rem;text-align:center}
+.book-cover svg{width:2.4rem;height:2.4rem}
+.book-cover span{font-family:var(--mono);font-size:.6rem;color:var(--muted)}
+.book-body{display:grid;gap:.5rem;min-width:0}
+.book-body h5{margin:0;font-family:var(--display);font-stretch:80%;font-weight:760;font-size:1.45rem;line-height:1.1}
+.book-body h6{margin:.4rem 0 0;font-family:var(--display);font-stretch:85%;font-weight:720;font-size:1.05rem}
+.book-body p{margin:0;font-size:1rem;color:var(--ink)}
+.book-body .book-sub{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+@media (max-width:560px){.book{grid-template-columns:minmax(0,1fr)}.book-cover{max-width:8rem}}
 .st-item{display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:.2rem .8rem;background:var(--surface);border:1px solid var(--line);padding:.8rem 1rem}
 .st-n{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.6rem;line-height:1;color:var(--accent)}
 .st-item h4{margin:0;font-family:var(--display);font-stretch:84%;font-weight:720;font-size:1.12rem;line-height:1.2}
@@ -780,7 +790,22 @@ footer{padding-block:1.6rem 3rem}
           <article class="st-item" id="libri-02"><span class="st-n">02</span><div><h4>Romanzi</h4><p>Le storie che mi hanno accompagnato e che continuo a portarmi dietro.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
           <article class="st-item" id="libri-03"><span class="st-n">03</span><div><h4>Poesia</h4><p>Le raccolte e gli autori a cui torno.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
           <article class="st-item" id="libri-04"><span class="st-n">04</span><div><h4>Saggistica</h4><p>I saggi che hanno cambiato il mio modo di ragionare, anche sul lavoro.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
-          <article class="st-item" id="libri-05"><span class="st-n">05</span><div><h4>Arte e fotografia</h4><p>I libri per imparare a guardare: forme, luce, composizione.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+          <article class="st-item" id="libri-05"><span class="st-n">05</span><div><h4>Arte e fotografia</h4><p>I libri per imparare a guardare: forme, luce, composizione.</p>
+            <article class="book" id="libro-regio-tratturo">
+              <div class="book-cover" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M9 8h6"/></svg><span>Copertina in arrivo</span></div>
+              <div class="book-body">
+                <span class="f-lab">Fotografia · 2017</span>
+                <h5>Il mio Regio Tratturo</h5>
+                <p class="book-sub">Fotografie, appunti di viaggio, natura e colori sul percorso tra Abruzzo e Puglia · Franco Giacopino</p>
+                <p>Un volume fotografico e narrativo nato da un cammino a piedi lungo il Regio Tratturo Pescasseroli–Candela: 211 chilometri tra Abruzzo, Molise e Puglia, sulla via della transumanza. Le immagini raccontano paesaggi, architetture rurali e tradizioni religiose e laiche della civiltà pastorale. Il libro accompagna la mostra itinerante presentata nel 2017 a Bari e a Foggia, con la presentazione di Giorgio Otranto e la prefazione dell'arcivescovo Francesco Cacucci.</p>
+                <div class="tl-links"><a href="https://www.giornalearmonia.it/2017/09/28/viaggi-colori-dei-tratturi-si-conclude-palazzo-poste-mostra-fotografica-franco-giacopino/" target="_blank" rel="noopener">La mostra a Bari · Giornale Armonia ↗</a><a href="https://www.ilmattinoquotidiano.it/news/cultura/34123/il-mio-regio-tratturo-lo-speciale-viaggio-pescasseroli-candela-del-fotografo-franco-giacopino.html" target="_blank" rel="noopener">La mostra a Foggia · Il Mattino di Foggia ↗</a></div>
+                <h6>Perché per me è importante</h6>
+                <p>Prima di tutto perché me l'ha comprato mio padre, cosa che di solito non fa. A dire il vero l'ho un po' spinto io: eravamo andati insieme alla presentazione del libro, tenuta da uno dei miei professori universitari, l'architetto <a href="https://www.ansa.it/puglia/notizie/2021/08/19/morto-arturo-cucciollasindaco-bari-perso-grande-intellettuale_49005c55-d327-4eb8-8ce0-793c9d2defd8.html" target="_blank" rel="noopener">Arturo Cucciolla</a> del Politecnico di Bari, scomparso nel 2021. Anche per questo è un libro che mi piace ricordare.</p>
+                <p>Mi lega alla mia terra d'origine e mi ricorda anche le promesse non mantenute. Non è il libro a raccontarlo, ma l'incontro a cui ho assistito: il mio professore provava a far rinascere queste immense autostrade del passato, i tratturi, su cui ogni anno si spostavano milioni di capi di bestiame (milioni, non migliaia), soprattutto pecore, tra i pascoli estivi dell'Abruzzo e le pianure della Puglia. Un recupero che poteva essere, e non è stato.</p>
+                <p>Il libro è prezioso anche per le fotografie delle architetture della transumanza: i recinti di pietra che proteggevano le greggi dai lupi, o il cosiddetto contapecore, un arco sotto cui passavano le pecore per essere contate e indirizzate verso le masserie, dove i pastori si fermavano a riposare. È la storia di un altro mondo, che secondo me meriterebbe di essere approfondita.</p>
+              </div>
+            </article>
+            <p class="st-wip"><span class="tag">Work in progress</span> Altre schede in preparazione.</p></div></article>
         </div>
       </div>
     </div>
@@ -799,7 +824,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>29 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>30 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
