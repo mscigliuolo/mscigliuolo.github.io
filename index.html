@@ -358,6 +358,26 @@ main>section{display:none}
 .foot-links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.8rem;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
 .foot-links a{color:var(--muted)}
 body{margin:0}
+
+/* archivio compatto */
+.news-main .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.week .num{padding:.5rem .75rem}
+.week .num b{font-size:1.15rem}
+.week .num span{font-size:.66rem}
+.week{grid-template-rows:auto 1fr}
+.week .wk-list{padding:.7rem .75rem .8rem;gap:.55rem;align-content:start}
+.week .wk-list li{align-content:start}
+.week .num{flex-wrap:wrap;gap:.2rem .6rem}
+.week .wk-list li{font-size:.92rem}
+.week .place{font-size:.6rem}
+.wk-more{font-family:var(--mono)!important;font-size:.7rem!important;font-weight:400!important;color:var(--accent)}
+.pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.pager button{font:inherit;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;cursor:pointer}
+.pager button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:default}
+@media (max-width:1100px){.news-main .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.news-main .grid{grid-template-columns:minmax(0,1fr)}}
+
 /* contatti e cartiglio */
 .contact{display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;align-items:center;font-family:var(--mono);font-size:.9rem}
 footer{padding-block:1.6rem 3rem}
@@ -557,6 +577,7 @@ footer{padding-block:1.6rem 3rem}
           </div>
           <h3 class="arch-h">Tutte le settimane</h3>
           <div class="grid" id="grid"></div>
+          <nav class="pager" id="pager" aria-label="Pagine dell'archivio" hidden></nav>
           <p class="empty" id="empty" hidden>Nessuna notizia corrisponde ai filtri. Prova con una parola diversa o azzera i filtri.</p>
           <div class="popular">
             <div class="pop-col"><h3 class="arch-h">Le più lette</h3><ol class="rank" id="top3"></ol></div>
@@ -676,10 +697,13 @@ function ranking(){
   var all=ARTS.slice().sort(function(a,b){return(READS[b.id]||0)-(READS[a.id]||0)});
   $("top3").innerHTML=all.slice(0,3).map(li).join("");
   $("wk-rank").innerHTML=wk.sort(function(a,b){return(READS[b.id]||0)-(READS[a.id]||0)}).map(li).join("")}
+document.addEventListener("click",function(e){var b=e.target.closest("#pager button");if(!b||b.disabled)return;PAGE=+b.dataset.p;render();
+  $("grid").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
 function latest(){var keys=Object.keys(WEEKS).sort(),k=keys[keys.length-1],it=ARTS.filter(function(a){return a.w===k});
   $("latest").innerHTML='<div class="lt-head"><span class="f-lab" id="latest-h">Aggiornamento settimanale</span><span class="lt-date">'+wkLabel(k)+'</span></div>'+
     it.map(function(a){return'<article class="lt-item"><div class="news-meta"><span class="place">'+esc(a.p)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h3>'+esc(a.t)+'</h3><p>'+esc(a.x)+'</p><div class="news-src">'+a.src.map(function(z){return'<a class="src-btn" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("")+
     '<p class="lt-de" lang="de"><span class="f-lab">Kurzfassung</span> '+esc(WEEKS[k].de)+'</p>'}
+var PAGE=1;
 function render(){
   var q=state.q.trim(),groups={},order=[],n=0;
   ARTS.forEach(function(a){
@@ -687,9 +711,13 @@ function render(){
     if(state.country){if(a.n!==state.country)return}else if(state.cont&&a.c!==state.cont)return;
     if(!groups[a.w]){groups[a.w]=[];order.push(a.w)}groups[a.w].push(a);n++});
   order.sort().reverse();
-  $("grid").innerHTML=order.map(function(k){var it=groups[k];
-    return '<a class="art week" href="#settimana-'+k+'"><div class="num"><b>'+wkShort(k)+'</b><span>'+k.slice(0,4)+'</span></div><div class="body"><span class="label">'+it.length+(it.length===1?" notizia":" notizie")+'</span><ul class="wk-list">'+
-      it.map(function(a){return'<li><span class="place">'+esc(a.p)+'</span>'+hl(a.t,q)+'</li>'}).join("")+'</ul></div><div class="foot"><span class="wk-open">Apri la settimana →</span></div></a>'}).join("");
+  // archivio compatto: 6 settimane per pagina, le più recenti per prime
+  var PER=6,pages=Math.max(1,Math.ceil(order.length/PER));PAGE=Math.min(PAGE,pages);
+  $("grid").innerHTML=order.slice((PAGE-1)*PER,PAGE*PER).map(function(k){var it=groups[k],more=it.length-3;
+    return '<a class="art week" href="#settimana-'+k+'"><div class="num"><b>'+wkShort(k)+'</b><span>'+k.slice(0,4)+' · '+it.length+(it.length===1?" notizia":" notizie")+'</span></div><ul class="wk-list">'+
+      it.slice(0,3).map(function(a){return'<li><span class="place">'+esc(a.p)+'</span>'+hl(a.t,q)+'</li>'}).join("")+(more>0?'<li class="wk-more">+ altre '+more+'</li>':'')+'</ul></a>'}).join("");
+  var pg=$("pager");pg.hidden=pages<2;
+  pg.innerHTML='<button type="button" data-p="'+(PAGE-1)+'"'+(PAGE<2?" disabled":"")+'>← Più recenti</button><span>Pagina '+PAGE+' di '+pages+'</span><button type="button" data-p="'+(PAGE+1)+'"'+(PAGE>=pages?" disabled":"")+'>Precedenti →</button>';
   regions();$("empty").hidden=n>0;
   $("count").textContent=n+(n===1?" notizia":" notizie")+" in "+order.length+(order.length===1?" settimana":" settimane");
 }
@@ -714,8 +742,8 @@ function regions(){var cnt={},nat={},tot=0;ARTS.forEach(function(a){if(passes(a)
   MAP.classList.toggle("zoomed",!!state.cont);
   document.querySelectorAll(".ctry").forEach(function(p){p.classList.toggle("has",!!nat[p.dataset.n]);p.classList.toggle("inc",state.cont===p.dataset.c);p.classList.toggle("sel",state.country===p.dataset.n)});
   $("map-where").textContent=state.country||(state.cont?AREE[state.cont]:"Mondo");$("map-back").hidden=!state.cont;if($("z-in"))zButtons()}
-function setCont(k){state.country="";state.cont=state.cont===k?"":k;zoomTo(state.cont&&CB[state.cont]?CB[state.cont]:null);render()}
-function setCountry(p){var n=p.dataset.n;if(state.country===n){setCont(p.dataset.c==="mondo"?"":p.dataset.c);state.cont=p.dataset.c;zoomTo(CB[p.dataset.c]);render();return}
+function setCont(k){PAGE=1;state.country="";state.cont=state.cont===k?"":k;zoomTo(state.cont&&CB[state.cont]?CB[state.cont]:null);render()}
+function setCountry(p){PAGE=1;var n=p.dataset.n;if(state.country===n){setCont(p.dataset.c==="mondo"?"":p.dataset.c);state.cont=p.dataset.c;zoomTo(CB[p.dataset.c]);render();return}
   state.cont=p.dataset.c;state.country=n;zoomTo(p.dataset.b.split(",").map(Number));render()}
 $("regions").addEventListener("click",function(e){var b=e.target.closest(".reg");if(b&&!b.disabled)setCont(b.dataset.c)});
 $("map-back").addEventListener("click",function(){state.cont="";state.country="";zoomTo(null);render()});
@@ -747,10 +775,10 @@ $("map").addEventListener("wheel",function(e){
   e.preventDefault();var now=Date.now();if(now-wheelLock<500)return;wheelLock=now;
   var hit=document.elementFromPoint(e.clientX,e.clientY),el=hit&&hit.closest?hit.closest(".ctry"):null;
   if(e.deltaY<0)zoomIn(el);else zoomOut();zButtons()},{passive:false});
-$("q").addEventListener("input",function(e){state.q=e.target.value;render()});
-$("year").addEventListener("change",function(e){state.year=e.target.value;render()});
-$("month").addEventListener("change",function(e){state.month=e.target.value;render()});
-$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;var t=b.dataset.t,on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);state.tags=on?state.tags.concat(t):state.tags.filter(function(x){return x!==t});render()});
+$("q").addEventListener("input",function(e){state.q=e.target.value;PAGE=1;render()});
+$("year").addEventListener("change",function(e){state.year=e.target.value;PAGE=1;render()});
+$("month").addEventListener("change",function(e){state.month=e.target.value;PAGE=1;render()});
+$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;PAGE=1;var t=b.dataset.t,on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);state.tags=on?state.tags.concat(t):state.tags.filter(function(x){return x!==t});render()});
 $("reset").addEventListener("click",function(){state={q:"",year:"",month:"",tags:[],cont:"",country:""};zoomTo(null);$("q").value="";$("year").value="";$("month").value="";document.querySelectorAll(".chip").forEach(function(b){b.setAttribute("aria-pressed","false")});render()});
 
 // lettore: apre l'articolo dall'indirizzo (#art-n), così ogni articolo ha il suo link
