@@ -450,6 +450,13 @@ body{margin:0}
 
 /* pubblicazioni */
 .pubs{display:grid;gap:.7rem;max-width:44rem}
+.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr));gap:.5rem}
+.tools a{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.1rem .6rem;align-items:center;padding:.55rem .7rem;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.tools a:hover{border-color:var(--accent)}
+.tools .ti{grid-row:span 2;width:1.6rem;height:1.6rem;display:grid;place-items:center}
+.tools .ti svg,.tools .ti img{width:100%;height:100%;fill:currentColor}
+.tools b{font-family:var(--display);font-stretch:85%;font-weight:700;font-size:1rem;line-height:1.1}
+.tools span.tc{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
 .pubs-h{font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.3rem;margin:.6rem 0 0}
 .pub{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);padding:1rem 1.2rem;display:grid;gap:.45rem}
 .pub-meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
@@ -662,6 +669,18 @@ footer{padding-block:1.6rem 3rem}
         <p>Il mio obiettivo è diventare BIM Manager e curare l'intera gestione informativa dei modelli.</p>
         <p>Curo BIM News: cerco le notizie, le verifico sulle fonti e ne scrivo la sintesi.</p>
       </div>
+      <div class="pubs cv">
+        <h3 class="pubs-h">CV</h3>
+        <p class="tl-intro">La mia storia professionale, dalla tappa più recente. Tocca una tappa per leggere i dettagli.</p>
+        <ol class="timeline" id="cv-tl"></ol>
+        <p class="note-soon" id="cv-empty">Work in progress: la timeline è in preparazione.</p>
+      </div>
+      <div class="pubs">
+        <h3 class="pubs-h">Strumenti</h3>
+        <p class="tl-intro">I software e gli strumenti che uso nel lavoro, con il collegamento al sito ufficiale.</p>
+        <ul class="tools" id="tools"></ul>
+        <p class="note-soon" id="tools-empty">Work in progress: l'elenco è in preparazione.</p>
+      </div>
       <div class="pubs">
         <h3 class="pubs-h">Pubblicazioni</h3>
         <article class="pub">
@@ -750,7 +769,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>23 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>24 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -926,6 +945,18 @@ $("timeline").addEventListener("click",function(e){var b=e.target.closest(".tl-b
 document.querySelector(".tl-filter").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;tlKind=b.dataset.k;tlOpen=-1;
   document.querySelectorAll(".tl-filter .chip").forEach(function(c){c.setAttribute("aria-pressed",c===b)});tl()});
 tl();
+
+// CV: tappe della carriera, dalla più recente; si apre una tappa alla volta
+// {d:"periodo", t:"ruolo", o:"organizzazione · luogo", k:"Lavoro|Formazione|Certificazione|Insegnamento", x:"descrizione", b:["punti"]}
+var CV=[],cvOpen=-1;
+function cvtl(){$("cv-empty").hidden=CV.length>0;$("cv-tl").innerHTML=CV.map(function(n,i){var o=i===cvOpen;
+  return'<li class="tl-item'+(o?" open":"")+'"><button type="button" class="tl-btn" data-i="'+i+'" aria-expanded="'+o+'"><span class="tl-date">'+esc(n.d)+'</span><span class="tl-name"><b>'+esc(n.t)+'</b><span>'+esc(n.o)+'</span></span><span class="tl-kind">'+esc(n.k)+'</span></button>'+
+  (o?'<div class="tl-det"><p>'+esc(n.x)+'</p>'+(n.b&&n.b.length?'<ul>'+n.b.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>':'')+'</div>':'')+'</li>'}).join("")}
+$("cv-tl").addEventListener("click",function(e){var b=e.target.closest(".tl-btn");if(!b)return;var i=+b.dataset.i;cvOpen=cvOpen===i?-1:i;cvtl()});
+cvtl();
+// strumenti: {n:"nome", c:"categoria", u:"sito ufficiale", i:"icona SVG (opzionale)"}
+var TOOLS=[];
+(function(){$("tools-empty").hidden=TOOLS.length>0;$("tools").innerHTML=TOOLS.map(function(t){return'<li><a href="'+t.u+'" target="_blank" rel="noopener"><span class="ti" aria-hidden="true">'+(t.i||"")+'</span><b>'+esc(t.n)+'</b><span class="tc">'+esc(t.c)+'</span></a></li>'}).join("")})();
 
 // "più lette": nel sito vero i conteggi arrivano da GoatCounter (clic su "Fonte" e aperture delle pagine).
 // Nell'anteprima non ci sono lettori reali: nessun numero inventato, solo lo stato vuoto.
