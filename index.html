@@ -306,7 +306,7 @@ section .axis b{background:var(--accent-soft)}
 .subnav a:hover{color:var(--accent);border-color:var(--accent)}
 .subnav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sub{display:none;gap:1.1rem;min-width:0}
-:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
 .sub-h{margin:0;font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.5rem;line-height:1.1}
 main>section{display:none}
 :root[data-view="chi-sono"] #chi-sono,:root[data-view="wip"] #wip,:root[data-view="bim-5-minuti"] #bim-5-minuti,:root[data-view="bim-news"] #bim-news,:root[data-view="fuori"] #fuori,:root[data-view="contatti"] #contatti{display:grid}
@@ -620,8 +620,8 @@ footer{padding-block:1.6rem 3rem}
   <section id="chi-sono">
     <div class="content">
       <h2>Il curatore</h2>
-      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, i lavori in corso e qualche riflessione personale.</p>
-      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
+      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, i lavori in corso e qualche riflessione personale.</p>
+      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -640,6 +640,10 @@ footer{padding-block:1.6rem 3rem}
           <a class="src-btn" href="https://poliba.academia.edu/MarcoScigliuolo" target="_blank" rel="noopener">Leggi su Academia ↗</a>
         </article>
       </div>
+      </div>
+      <div class="sub" id="portfolio">
+        <h3 class="sub-h">Portfolio</h3>
+        <p class="note-soon">Work in progress: qui raccoglierò i progetti a cui ho lavorato.</p>
       </div>
       <div class="sub" id="wip">
       <h3 class="sub-h">Work in progress</h3>
@@ -670,7 +674,7 @@ footer{padding-block:1.6rem 3rem}
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
     <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
   </nav>
 </main>
 
@@ -679,7 +683,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>17 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>18 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1002,7 +1006,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",wip:"wip",fuori:"fuori"},SEEN={};
+var VIEWS=["chi-sono","portfolio","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",wip:"wip",fuori:"fuori"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // work in progress e fuori dallo studio sono sottosezioni del curatore
   var sub=SUB[v];if(sub){v="chi-sono";document.documentElement.dataset.sub=sub;document.querySelectorAll(".subnav a").forEach(function(a){if(a.dataset.sub===sub)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")})}
