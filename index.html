@@ -192,9 +192,6 @@ mark{background:var(--mark);color:var(--mark-ink);padding:0 .1em}
 .langnote strong{color:var(--ink);font-family:var(--display);font-stretch:85%}
 .memo{font-size:.82rem;color:var(--muted);border-left:2px dashed var(--line);padding:.2rem 0 .2rem .6rem;margin:.3rem 0 .5rem}
 .memo .label{margin-right:.3rem}
-.de-box{border-left:3px solid var(--accent);background:var(--surface);padding:.7rem .9rem;margin:0 0 1.4rem}
-.de-box .label{display:block;margin-bottom:.2rem}
-.de-box p{margin:0;font-size:1rem}
 .src-btn{display:inline-block;font-family:var(--mono);font-size:.85rem;background:var(--ink);color:var(--bg);padding:.6rem 1rem;text-decoration:none;margin-top:.4rem}
 .src-btn:hover{background:var(--accent)}
 @media (max-width:640px){.langnote{grid-template-columns:minmax(0,1fr)}}
@@ -312,7 +309,6 @@ main>section{display:none}
 .lt-item{display:grid;gap:.35rem}
 .lt-item h3{margin:0;font-family:var(--display);font-stretch:82%;font-weight:720;font-size:1.15rem;line-height:1.2}
 .lt-item p{margin:0;font-size:1rem;color:var(--muted)}
-.lt-de{margin:0;font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.6rem}
 .latest .src-btn{font-size:.74rem;padding:.35rem .7rem}
 @media (max-width:900px){.news-layout{grid-template-columns:minmax(0,1fr)}.filters{position:static}.news-main .grid{grid-template-columns:minmax(0,1fr)}}
 
@@ -597,8 +593,8 @@ footer{padding-block:1.6rem 3rem}
         </div>
       </figure>
           <div class="langnote" lang="it">
-            <p><strong>Lingua.</strong> Le notizie sono scritte in italiano, con una breve sintesi in tedesco e il link alla fonte originale. Per il testo completo in un'altra lingua, usa la traduzione integrata nel tuo browser.</p>
-            <p lang="de"><strong>Sprache.</strong> Die Meldungen sind auf Italienisch verfasst, mit einer kurzen Zusammenfassung auf Deutsch und dem Link zur Originalquelle. Für den vollständigen Text nutzen Sie bitte die Übersetzungsfunktion Ihres Browsers.</p>
+            <p><strong>Lingua.</strong> Le notizie sono scritte in italiano, con il link alla fonte originale. Per il testo completo in un'altra lingua, usa la traduzione integrata nel tuo browser.</p>
+            <p lang="de"><strong>Sprache.</strong> Die Meldungen sind auf Italienisch verfasst, mit dem Link zur Originalquelle. Für den vollständigen Text nutzen Sie bitte die Übersetzungsfunktion Ihres Browsers.</p>
           </div>
           <h3 class="arch-h">Tutte le settimane</h3>
           <div class="grid" id="grid"></div>
@@ -697,21 +693,21 @@ var ARTS=[
 
 ];
 var WEEKS={
- "2026-08-31":{from:"2026-08-31",to:"2026-09-06",de:"Vereinigtes Königreich: Öffentliche Konsultation zu Anforderungen an As-built- und Übergabeinformationen."},
- "2026-09-21":{from:"2026-09-21",to:"2026-09-27",de:"Japan: Grundkonzept für die Prüfung von BIM-Daten (IFC) im Baugenehmigungsverfahren ab Frühjahr 2029."},
- "2026-09-28":{from:"2026-09-28",to:"2026-10-04",de:"Katar: Qatar Society of Engineers lanciert einen nationalen BIM-Preis."},
- "2026-10-05":{from:"2026-10-05",to:"2026-10-11",de:"Südkorea: BIM-Pflicht für öffentliche Bauten ab 50 Mrd. Won; Autodesk University mit KI-Agenten; IBIMI startet das BIMopenForum auf der SAIE Bologna."},
- "2026-10-19":{from:"2026-10-19",to:"2026-10-25",de:"Bilanz des buildingSMART International Summit in Tokio."},
- "2026-02-16":{from:"2026-02-16",to:"2026-02-22",de:"Südtirol: Ausschreibung einer gemeinsamen BIM-Plattform für 13 öffentliche Bauherren."},
- "2026-02-23":{from:"2026-02-23",to:"2026-03-01",de:"Italien: Das Ministerium veröffentlicht Leitlinien zum digitalen Informationsmanagement bei öffentlichen Aufträgen."},
- "2026-04-13":{from:"2026-04-13",to:"2026-04-19",de:"Südtirol: Gemeinsame Datenumgebung und BIM-Leitfaden für die öffentliche Verwaltung vorgestellt."},
- "2026-07-13":{from:"2026-07-13",to:"2026-07-19",de:"Shanghai: Elfter Jahresbericht zur BIM-Anwendung vorgestellt."},
- "2026-08-03":{from:"2026-08-03",to:"2026-08-09",de:"Hongkong: Der Weg zum zeichnungsfreien, modellbasierten Bauen."},
- "2026-09-07":{from:"2026-09-07",to:"2026-09-13",de:"Wien: Innovationskongress zu BIM, Daten und KI im Lebenszyklus von Gebäuden."},
- "2026-10-12":{from:"2026-10-12",to:"2026-10-18",de:"Die openBIM Awards 2026 wurden in Tokio vergeben; das deutsche BIM-Portal erscheint im Release 3.14.0; Symposium zu Bauvertragsstreitigkeiten in Kuala Lumpur; Hamburg auf dem Weg zur BIM-gestützten Baugenehmigung."},
- "2026-10-26":{from:"2026-10-26",to:"2026-11-01",de:"KI-Assistent Argus AI für Revit; IBIMI buildingSMART Italia startet eine Arbeitsgruppe zum Digitalen Produktpass; Allplan Max 2027; IBIMI im EU-Projekt Skills2Decarb; BIM-Fachmodell Landschaft im bSDD; Snaptrude Agent."},
- "2026-11-02":{from:"2026-11-02",to:"2026-11-08",de:"ASSOBIM bestätigt seinen Vorsitz; 30. buildingSMART-Forum in Berlin; KI-Agenten in Qonic; buildingSMART-Thementag zu BIM und Nachhaltigkeit in Fulda; produktbezogene CO2-Daten im BIM-Modell (UK)."},
- "2026-11-09":{from:"2026-11-09",to:"2026-11-15",de:"Restructura 2026; BIMEXPO in Madrid und spanische BIM-Schwellenwerte; IFC-Kolumne und BIM/CIM-Vorträge in Japan; Sommet BIM+ in Québec; Ruta BIM in Quito; Polen Partnerland der BIM World München; Umfrage zur BIM-Reife im sozialen Wohnungsbau in Brasilien; KI in Trimble Connect; Frankreich: BIM bei öffentlichen Aufträgen weiterhin freiwillig."}
+ "2026-08-31":{from:"2026-08-31",to:"2026-09-06"},
+ "2026-09-21":{from:"2026-09-21",to:"2026-09-27"},
+ "2026-09-28":{from:"2026-09-28",to:"2026-10-04"},
+ "2026-10-05":{from:"2026-10-05",to:"2026-10-11"},
+ "2026-10-19":{from:"2026-10-19",to:"2026-10-25"},
+ "2026-02-16":{from:"2026-02-16",to:"2026-02-22"},
+ "2026-02-23":{from:"2026-02-23",to:"2026-03-01"},
+ "2026-04-13":{from:"2026-04-13",to:"2026-04-19"},
+ "2026-07-13":{from:"2026-07-13",to:"2026-07-19"},
+ "2026-08-03":{from:"2026-08-03",to:"2026-08-09"},
+ "2026-09-07":{from:"2026-09-07",to:"2026-09-13"},
+ "2026-10-12":{from:"2026-10-12",to:"2026-10-18"},
+ "2026-10-26":{from:"2026-10-26",to:"2026-11-01"},
+ "2026-11-02":{from:"2026-11-02",to:"2026-11-08"},
+ "2026-11-09":{from:"2026-11-09",to:"2026-11-15"}
 };
 var AREE={europa:"Europa",asia:"Asia",africa:"Africa",america:"America",oceania:"Oceania",mondo:"Globale"};
 var MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
@@ -756,8 +752,7 @@ document.addEventListener("click",function(e){var b=e.target.closest("#pager but
   $("grid").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
 function latest(){var keys=Object.keys(WEEKS).sort(),k=keys[keys.length-1],it=ARTS.filter(function(a){return a.w===k});
   $("latest").innerHTML='<div class="lt-head"><span class="f-lab" id="latest-h">Aggiornamento settimanale</span><span class="lt-date">'+wkLabel(k)+'</span></div>'+
-    it.map(function(a){return'<article class="lt-item"><div class="news-meta"><span class="place">'+esc(a.p)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h3>'+esc(a.t)+'</h3><p>'+esc(a.x)+'</p>'+(a.m?'<p class="memo"><span class="label">Memo</span> '+esc(a.m)+'</p>':'')+'<div class="news-src">'+a.src.map(function(z){return'<a class="src-btn" data-id="'+a.id+'" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("")+
-    '<p class="lt-de" lang="de"><span class="f-lab">Kurzfassung</span> '+esc(WEEKS[k].de)+'</p>'}
+    it.map(function(a){return'<article class="lt-item"><div class="news-meta"><span class="place">'+esc(a.p)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h3>'+esc(a.t)+'</h3><p>'+esc(a.x)+'</p>'+(a.m?'<p class="memo"><span class="label">Memo</span> '+esc(a.m)+'</p>':'')+'<div class="news-src">'+a.src.map(function(z){return'<a class="src-btn" data-id="'+a.id+'" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("")}
 var PAGE=1;
 function render(){
   var q=state.q.trim(),groups={},order=[],n=0;
@@ -843,8 +838,7 @@ function route(){
   var it=ARTS.filter(function(a){return a.w===k}).sort(function(a,b){return a.d<b.d?-1:1});
   $("r-title").textContent="Settimana del "+wkLabel(k);
   $("r-meta").innerHTML='<span class="label">Aggiornamento settimanale · BIM News</span><span class="tag">'+it.length+(it.length===1?" notizia":" notizie")+'</span>';
-  $("r-body").innerHTML='<div class="de-box" lang="de"><span class="label">Kurzfassung · DE</span><p>'+esc(WEEKS[k].de)+'</p></div>'+
-    it.map(function(a){return'<article class="news"><div class="news-meta"><span class="place">'+esc(a.p)+'</span><span class="label">'+fmt(a.d)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h2>'+esc(a.t)+'</h2><p>'+esc(a.x)+'</p>'+(a.m?'<p class="memo"><span class="label">Memo</span> '+esc(a.m)+'</p>':'')+'<div class="news-src">'+
+  $("r-body").innerHTML=it.map(function(a){return'<article class="news"><div class="news-meta"><span class="place">'+esc(a.p)+'</span><span class="label">'+fmt(a.d)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h2>'+esc(a.t)+'</h2><p>'+esc(a.x)+'</p>'+(a.m?'<p class="memo"><span class="label">Memo</span> '+esc(a.m)+'</p>':'')+'<div class="news-src">'+
       a.src.map(function(z){return'<a class="src-btn" data-id="'+a.id+'" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("");
   $("r-src").innerHTML='<span class="label">Sintesi scritte da noi a partire dalle fonti indicate. Per il testo completo, apri la fonte.</span>';
   $("reader").hidden=false;document.body.style.overflow="hidden";$("back").focus();
