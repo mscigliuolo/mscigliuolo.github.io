@@ -1,6 +1,6 @@
 # mscigliuolo.github.io
 
-Sito personale di Marco Scigliuolo: chi sono, lavori in corso, BIM News.
+BIM News, rassegna settimanale sul BIM a cura di Marco Scigliuolo: notizie con mappa e archivio, BIM in 5 minuti, lavori in corso, il curatore.
 
 - `index.html` – pagina principale
 - `privacy.html` – informativa privacy
