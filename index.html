@@ -616,7 +616,7 @@ footer{padding-block:1.6rem 3rem}
     <div><span>Rev.</span><strong>04 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
-  <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie, nessun tracciamento.</span></div>
+  <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
 </footer>
 
 <div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="r-title">
@@ -700,7 +700,7 @@ document.addEventListener("click",function(e){var b=e.target.closest("#pager but
   $("grid").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
 function latest(){var keys=Object.keys(WEEKS).sort(),k=keys[keys.length-1],it=ARTS.filter(function(a){return a.w===k});
   $("latest").innerHTML='<div class="lt-head"><span class="f-lab" id="latest-h">Aggiornamento settimanale</span><span class="lt-date">'+wkLabel(k)+'</span></div>'+
-    it.map(function(a){return'<article class="lt-item"><div class="news-meta"><span class="place">'+esc(a.p)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h3>'+esc(a.t)+'</h3><p>'+esc(a.x)+'</p><div class="news-src">'+a.src.map(function(z){return'<a class="src-btn" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("")+
+    it.map(function(a){return'<article class="lt-item"><div class="news-meta"><span class="place">'+esc(a.p)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h3>'+esc(a.t)+'</h3><p>'+esc(a.x)+'</p><div class="news-src">'+a.src.map(function(z){return'<a class="src-btn" data-id="'+a.id+'" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("")+
     '<p class="lt-de" lang="de"><span class="f-lab">Kurzfassung</span> '+esc(WEEKS[k].de)+'</p>'}
 var PAGE=1;
 function render(){
@@ -789,7 +789,7 @@ function route(){
   $("r-meta").innerHTML='<span class="label">Aggiornamento settimanale · BIM News</span><span class="tag">'+it.length+(it.length===1?" notizia":" notizie")+'</span>';
   $("r-body").innerHTML='<div class="de-box" lang="de"><span class="label">Kurzfassung · DE</span><p>'+esc(WEEKS[k].de)+'</p></div>'+
     it.map(function(a){return'<article class="news"><div class="news-meta"><span class="place">'+esc(a.p)+'</span><span class="label">'+fmt(a.d)+'</span>'+a.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'</div><h2>'+esc(a.t)+'</h2><p>'+esc(a.x)+'</p><div class="news-src">'+
-      a.src.map(function(z){return'<a class="src-btn" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("");
+      a.src.map(function(z){return'<a class="src-btn" data-id="'+a.id+'" href="'+z[1]+'" target="_blank" rel="noopener">'+esc(z[0])+' ↗</a>'}).join(" ")+'</div></article>'}).join("");
   $("r-src").innerHTML='<span class="label">Sintesi scritte da noi a partire dalle fonti indicate. Per il testo completo, apri la fonte.</span>';
   $("reader").hidden=false;document.body.style.overflow="hidden";$("back").focus();
 }
@@ -803,7 +803,14 @@ function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-
   document.querySelectorAll(".top nav a").forEach(function(a){if(a.getAttribute("href")==="#"+v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   if(was!==v&&!wk)scrollTo(0,0);
   if(v==="bim-news"&&!wk)setTimeout(function(){},0);
-  route();dispatchEvent(new Event("scroll"))}
+  route();dispatchEvent(new Event("scroll"));count()}
+// statistiche anonime (GoatCounter): una visita per pagina interna, un evento per ogni fonte aperta
+var lastCounted="";
+function count(){var gc=window.goatcounter;if(!gc||!gc.count)return;var h=location.hash.slice(1),path="/"+(h&&h!=="home"?h:"");
+  if(path===lastCounted)return;lastCounted=path;gc.count({path:path,title:document.title})}
+document.addEventListener("click",function(e){var a=e.target.closest(".src-btn");if(!a||!window.goatcounter||!goatcounter.count)return;
+  goatcounter.count({path:"fonte-"+(a.dataset.id||"altro"),title:a.textContent.replace(" ↗",""),event:true})});
+window.addEventListener("load",function(){setTimeout(count,0)});
 window.addEventListener("hashchange",view);
 
 
@@ -846,5 +853,6 @@ latest();render();ranking();view();
     el.textContent=d.toLocaleDateString("it-IT",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"})+" · "+d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}
   tick();setTimeout(function(){tick();setInterval(tick,60000)},(60-new Date().getSeconds())*1000)})();
 </script>
+<script data-goatcounter="https://mscigliuolo.goatcounter.com/count" data-goatcounter-settings='{"no_onload":true}' async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
