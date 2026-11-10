@@ -104,7 +104,7 @@ a{color:var(--accent);text-underline-offset:3px}
 .stamp span{font-size:1.4rem}
 
 /* sezioni ad assi */
-section{padding-block:3rem;display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:1.2rem 2rem}
+section{padding-block:3rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.2rem 2rem}
 .axis{display:flex;flex-direction:column;align-items:center;gap:.5rem}
 .axis b{width:2.6rem;height:2.6rem;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--accent)}
 .axis i{flex:1;width:0;border-left:1px dashed var(--line);min-height:2rem}
@@ -445,6 +445,9 @@ body{margin:0}
 /* contatti e cartiglio */
 .contact{display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;align-items:center;font-family:var(--mono);font-size:.9rem}
 footer{padding-block:1.6rem 3rem}
+.foot-contact{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem;border-top:1px solid var(--line);padding-top:1.2rem;margin-bottom:1rem}
+.foot-contact p{margin:0;font-size:1rem}
+.foot-contact a{color:var(--ink);text-underline-offset:3px}
 .cartiglio{background:var(--surface);display:grid;grid-template-columns:2fr repeat(3,minmax(0,1fr));border:1.5px solid var(--ink);font-family:var(--mono);font-size:.72rem}
 .cartiglio div{padding:.55rem .7rem;border-left:1px solid var(--ink);display:grid;gap:.15rem;min-width:0}
 .cartiglio div:first-child{border-left:0}
@@ -477,10 +480,9 @@ footer{padding-block:1.6rem 3rem}
   <div class="wrap">
     <a class="brand" href="#home">BIM News <small>a cura di Marco Scigliuolo</small></a>
     <nav aria-label="Sezioni">
-      <a href="#bim-news"><b>A</b>BIM News</a>
-      <a href="#bim-5-minuti"><b>B</b>BIM in 5 minuti</a>
-      <a href="#chi-sono"><b>C</b>Il curatore</a>
-      <a href="#contatti"><b>D</b>Contatti</a>
+      <a href="#bim-news">BIM News</a>
+      <a href="#bim-5-minuti">BIM in 5 minuti</a>
+      <a href="#chi-sono">Il curatore</a>
     </nav>
   </div>
 </header>
@@ -498,7 +500,6 @@ footer{padding-block:1.6rem 3rem}
   <a class="home-link" href="#home" id="home-link">← Home · BIM News</a>
 
   <section id="bim-news">
-    <div class="axis" aria-hidden="true"><b>A</b><i></i></div>
     <div class="content">
       <h2>BIM News</h2>
       <p class="lead">Le novità BIM dall'Alto Adige al resto del mondo, raccolte ogni settimana, ognuna con il link alla fonte.</p>
@@ -550,7 +551,6 @@ footer{padding-block:1.6rem 3rem}
   </section>
 
   <section id="bim-5-minuti">
-    <div class="axis" aria-hidden="true"><b>B</b><i></i></div>
     <div class="content">
       <h2>BIM in 5 minuti</h2>
       <p class="lead">Non sai cos'è il BIM? Parti da qui: cos'è, a cosa serve in uno studio, perché oggi non se ne può fare a meno.</p>
@@ -618,7 +618,6 @@ footer{padding-block:1.6rem 3rem}
 
 
   <section id="chi-sono">
-    <div class="axis" aria-hidden="true"><b>C</b><i></i></div>
     <div class="content">
       <h2>Il curatore</h2>
       <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, i lavori in corso e qualche riflessione personale.</p>
@@ -667,27 +666,20 @@ footer{padding-block:1.6rem 3rem}
     </div>
   </section>
 
-  <section id="contatti">
-    <div class="axis" aria-hidden="true"><b>D</b><i></i></div>
-    <div class="content">
-      <h2>Contatti</h2>
-      <div class="contact"><a href="https://www.linkedin.com/in/marco-scigliuolo/" rel="noopener">LinkedIn ↗</a></div>
-    </div>
-  </section>
 
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
-    <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><b>B</b><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><b>C</b><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
-    <a class="pv" href="#contatti" style="--accent:var(--c-f);--accent-soft:var(--c-f-s)"><b>D</b><h2>Contatti</h2><p>Segnalazioni, correzioni, domande.</p><span>Apri →</span></a>
+    <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
   </nav>
 </main>
 
 <footer class="wrap">
+  <div class="foot-contact" id="contatti"><span class="f-lab">Contatti</span><p>Segnalazioni, correzioni o domande? Scrivimi su <a href="https://www.linkedin.com/in/marco-scigliuolo/" rel="noopener">LinkedIn ↗</a></p></div>
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>16 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>17 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1010,7 +1002,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","wip","bim-5-minuti","bim-news","fuori","contatti"],SUB={"chi-sono":"profilo",wip:"wip",fuori:"fuori"},SEEN={};
+var VIEWS=["chi-sono","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",wip:"wip",fuori:"fuori"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // work in progress e fuori dallo studio sono sottosezioni del curatore
   var sub=SUB[v];if(sub){v="chi-sono";document.documentElement.dataset.sub=sub;document.querySelectorAll(".subnav a").forEach(function(a){if(a.dataset.sub===sub)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")})}
@@ -1018,6 +1010,7 @@ function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-
   document.querySelectorAll(".top nav a").forEach(function(a){if(a.getAttribute("href")==="#"+v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   if(was!==v+(document.documentElement.dataset.sub||"")&&!wk)scrollTo(0,0);
   if(v==="bim-news"&&!wk)setTimeout(function(){},0);
+  if(h==="contatti")setTimeout(function(){$("contatti").scrollIntoView({behavior:"smooth"})},0);
   route();dispatchEvent(new Event("scroll"));count()}
 // statistiche anonime (GoatCounter): una visita per pagina interna, un evento per ogni fonte aperta
 var lastCounted="";
