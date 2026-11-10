@@ -276,6 +276,13 @@ section .axis b{background:var(--accent-soft)}
 .brand small{font-family:var(--mono);font-weight:400;font-stretch:normal;font-size:.7rem;color:var(--muted);margin-left:.4rem}
 .previews{margin-top:2.4rem}
 .pv-h{grid-column:1/-1;margin:0;font-size:1.35rem}
+.subnav{display:flex;flex-wrap:wrap;gap:.35rem;border-bottom:1px solid var(--line);padding-bottom:.6rem}
+.subnav a{font-family:var(--mono);font-size:.76rem;color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:.35rem .7rem}
+.subnav a:hover{color:var(--accent);border-color:var(--accent)}
+.subnav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sub{display:none;gap:1.1rem;min-width:0}
+:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+.sub-h{margin:0;font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.5rem;line-height:1.1}
 main>section{display:none}
 :root[data-view="chi-sono"] #chi-sono,:root[data-view="wip"] #wip,:root[data-view="bim-5-minuti"] #bim-5-minuti,:root[data-view="bim-news"] #bim-news,:root[data-view="fuori"] #fuori,:root[data-view="contatti"] #contatti{display:grid}
 :root:not([data-view]) main>section{display:grid}
@@ -444,10 +451,8 @@ footer{padding-block:1.6rem 3rem}
     <nav aria-label="Sezioni">
       <a href="#bim-news"><b>A</b>BIM News</a>
       <a href="#bim-5-minuti"><b>B</b>BIM in 5 minuti</a>
-      <a href="#wip"><b>C</b>Work in progress</a>
-      <a href="#fuori"><b>D</b>Fuori dallo studio</a>
-      <a href="#chi-sono"><b>E</b>Il curatore</a>
-      <a href="#contatti"><b>F</b>Contatti</a>
+      <a href="#chi-sono"><b>C</b>Il curatore</a>
+      <a href="#contatti"><b>D</b>Contatti</a>
     </nav>
   </div>
 </header>
@@ -458,7 +463,7 @@ footer{padding-block:1.6rem 3rem}
       <div class="role">Rassegna settimanale · dall'Alto Adige al mondo</div>
       <h1>BIM News</h1>
       <p>Le novità sul BIM raccolte ogni settimana, ognuna con una sintesi in italiano e il link alla fonte. Un sito a cura di <a href="#chi-sono">Marco Scigliuolo</a>.</p>
-      <div class="stamp" aria-label="Sito in lavorazione, revisione 06"><span>Work in progress</span><small>Rev. 06 · 10/11/2026</small></div>
+      <div class="stamp" aria-label="Sito in lavorazione, revisione 07"><span>Work in progress</span><small>Rev. 07 · 10/11/2026</small></div>
     </div>
   </div>
 
@@ -582,40 +587,15 @@ footer{padding-block:1.6rem 3rem}
     </div>
   </section>
 
-  <section id="wip">
-    <div class="axis" aria-hidden="true"><b>C</b><i></i></div>
-    <div class="content">
-      <h2>Work in progress</h2>
-      <p class="lead">Quello su cui sto lavorando adesso, con la fase in cui si trova. Le schede si aggiornano man mano.</p>
-      <div class="wip">
-        <article class="job"><span class="label">Revit · dati</span><h3>Libreria di famiglie con struttura dati provinciale</h3><p>Famiglie con i parametri richiesti dalla Provincia di Bolzano, pronte da usare nei progetti.</p>
-          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
-        <article class="job"><span class="label">AutoCAD · AutoLISP</span><h3>Automazione dei disegni</h3><p>Script per le operazioni ripetitive, a partire dalla gestione dei riferimenti esterni.</p>
-          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
-        <article class="job"><span class="label">Impianti elettrici</span><h3>Verifiche automatiche da checklist</h3><p>Dalla checklist di controllo a verifiche ripetibili sui progetti.</p>
-          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
-        <article class="job"><span class="label">Energia · CasaClima</span><h3>Dalle superfici del disegno al calcolo CasaClima</h3><p>Estrarre le superfici dai DWG e portarle nel foglio di calcolo senza ricopiarle a mano.</p>
-          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
-      </div>
-    </div>
-  </section>
 
-  <section id="fuori">
-    <div class="axis" aria-hidden="true"><b>D</b><i></i></div>
-    <div class="content">
-      <h2>Fuori dallo studio</h2>
-      <p class="lead">Riflessioni su quello che mi appassiona e su come cambia il modo di lavorare. Opinioni mie, con lo stesso rigore che metto nei progetti.</p>
-      <div class="interests">
-        <div><span class="label">Musica</span><p>Esplorazione e disciplina.</p></div>
-      </div>
-      <p class="note-soon">La prima riflessione è in arrivo.</p>
-    </div>
-  </section>
 
   <section id="chi-sono">
-    <div class="axis" aria-hidden="true"><b>E</b><i></i></div>
+    <div class="axis" aria-hidden="true"><b>C</b><i></i></div>
     <div class="content">
       <h2>Il curatore</h2>
+      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, i lavori in corso e qualche riflessione personale.</p>
+      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
+      <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile a Bolzano, e curo BIM News: cerco le notizie, le verifico sulle fonti e ne scrivo la sintesi. Lavoro in uno studio di progettazione altoatesino, soprattutto su scuole e uffici pubblici. Sono BIM Coordinator certificato e coordinatore della sicurezza CSP/CSE; in passato ho lavorato su infrastrutture e ho insegnato.</p>
       </div>
@@ -630,11 +610,34 @@ footer{padding-block:1.6rem 3rem}
           <a class="src-btn" href="https://poliba.academia.edu/MarcoScigliuolo" target="_blank" rel="noopener">Leggi su Academia ↗</a>
         </article>
       </div>
+      </div>
+      <div class="sub" id="wip">
+      <h3 class="sub-h">Work in progress</h3>
+      <p class="lead">Quello su cui sto lavorando adesso, con la fase in cui si trova. Le schede si aggiornano man mano.</p>
+      <div class="wip">
+        <article class="job"><span class="label">Revit · dati</span><h3>Libreria di famiglie con struttura dati provinciale</h3><p>Famiglie con i parametri richiesti dalla Provincia di Bolzano, pronte da usare nei progetti.</p>
+          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">AutoCAD · AutoLISP</span><h3>Automazione dei disegni</h3><p>Script per le operazioni ripetitive, a partire dalla gestione dei riferimenti esterni.</p>
+          <ol class="phases" aria-label="Fase attuale: sviluppo"><li class="done">Idea</li><li class="now">Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">Impianti elettrici</span><h3>Verifiche automatiche da checklist</h3><p>Dalla checklist di controllo a verifiche ripetibili sui progetti.</p>
+          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+        <article class="job"><span class="label">Energia · CasaClima</span><h3>Dalle superfici del disegno al calcolo CasaClima</h3><p>Estrarre le superfici dai DWG e portarle nel foglio di calcolo senza ricopiarle a mano.</p>
+          <ol class="phases" aria-label="Fase attuale: idea"><li class="now">Idea</li><li>Sviluppo</li><li>Test</li><li>Rilascio</li></ol></article>
+      </div>
+          </div>
+      <div class="sub" id="fuori">
+      <h3 class="sub-h">Fuori dallo studio</h3>
+      <p class="lead">Riflessioni su quello che mi appassiona e su come cambia il modo di lavorare. Opinioni mie, con lo stesso rigore che metto nei progetti.</p>
+      <div class="interests">
+        <div><span class="label">Musica</span><p>Esplorazione e disciplina.</p></div>
+      </div>
+      <p class="note-soon">La prima riflessione è in arrivo.</p>
+          </div>
     </div>
   </section>
 
   <section id="contatti">
-    <div class="axis" aria-hidden="true"><b>F</b><i></i></div>
+    <div class="axis" aria-hidden="true"><b>D</b><i></i></div>
     <div class="content">
       <h2>Contatti</h2>
       <div class="contact"><a href="https://www.linkedin.com/in/marco-scigliuolo/" rel="noopener">LinkedIn ↗</a></div>
@@ -644,10 +647,8 @@ footer{padding-block:1.6rem 3rem}
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
     <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><b>B</b><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#wip" style="--accent:var(--c-b);--accent-soft:var(--c-b-s)"><b>C</b><h2>Work in progress</h2><p>Quattro lavori in corso, ognuno con la sua fase.</p><span>Apri →</span></a>
-    <a class="pv" href="#fuori" style="--accent:var(--c-e);--accent-soft:var(--c-e-s)"><b>D</b><h2>Fuori dallo studio</h2><p>Riflessioni su quello che mi appassiona.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><b>E</b><h2>Il curatore</h2><p>Chi raccoglie e scrive le notizie. Pubblicazioni.</p><span>Apri →</span></a>
-    <a class="pv" href="#contatti" style="--accent:var(--c-f);--accent-soft:var(--c-f-s)"><b>F</b><h2>Contatti</h2><p>Segnalazioni, correzioni, domande.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><b>C</b><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
+    <a class="pv" href="#contatti" style="--accent:var(--c-f);--accent-soft:var(--c-f-s)"><b>D</b><h2>Contatti</h2><p>Segnalazioni, correzioni, domande.</p><span>Apri →</span></a>
   </nav>
 </main>
 
@@ -655,7 +656,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>Work in progress</strong></div>
-    <div><span>Rev.</span><strong>06 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>07 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -921,11 +922,13 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","wip","bim-5-minuti","bim-news","fuori","contatti"],SEEN={};
+var VIEWS=["chi-sono","wip","bim-5-minuti","bim-news","fuori","contatti"],SUB={"chi-sono":"profilo",wip:"wip",fuori:"fuori"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
-  var was=document.documentElement.dataset.view;document.documentElement.dataset.view=v;SEEN[v]=1;
+  // work in progress e fuori dallo studio sono sottosezioni del curatore
+  var sub=SUB[v];if(sub){v="chi-sono";document.documentElement.dataset.sub=sub;document.querySelectorAll(".subnav a").forEach(function(a){if(a.dataset.sub===sub)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")})}
+  var was=document.documentElement.dataset.view+(document.documentElement.dataset.sub||"");document.documentElement.dataset.view=v;SEEN[v]=1;
   document.querySelectorAll(".top nav a").forEach(function(a){if(a.getAttribute("href")==="#"+v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-  if(was!==v&&!wk)scrollTo(0,0);
+  if(was!==v+(document.documentElement.dataset.sub||"")&&!wk)scrollTo(0,0);
   if(v==="bim-news"&&!wk)setTimeout(function(){},0);
   route();dispatchEvent(new Event("scroll"));count()}
 // statistiche anonime (GoatCounter): una visita per pagina interna, un evento per ogni fonte aperta
