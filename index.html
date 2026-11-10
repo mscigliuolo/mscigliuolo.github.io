@@ -317,7 +317,7 @@ section .axis b{background:var(--accent-soft)}
 .subnav a:hover{color:var(--accent);border-color:var(--accent)}
 .subnav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sub{display:none;gap:1.1rem;min-width:0}
-:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="proposte"] #proposte,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="proposte"] #proposte,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori,:root[data-sub="libri"] #libri{display:grid}
 .st-list{display:grid;gap:.6rem}
 .st-item{display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:.2rem .8rem;background:var(--surface);border:1px solid var(--line);padding:.8rem 1rem}
 .st-n{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.6rem;line-height:1;color:var(--accent)}
@@ -654,7 +654,7 @@ footer{padding-block:1.6rem 3rem}
     <div class="content">
       <h2>Il curatore</h2>
       <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, le proposte per il mondo del BIM, i lavori in corso e qualche pensiero personale.</p>
-      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#proposte" data-sub="proposte">Le mie proposte</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
+      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#proposte" data-sub="proposte">Le mie proposte</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a><a href="#libri" data-sub="libri">I miei libri</a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -718,11 +718,22 @@ footer{padding-block:1.6rem 3rem}
       <div class="sub" id="fuori">
       <h3 class="sub-h">Fuori dallo studio</h3>
       <p class="lead">Riflessioni su quello che mi appassiona e su come cambia il modo di lavorare. Opinioni mie, con lo stesso rigore che metto nei progetti.</p>
-      <div class="interests">
-        <div><span class="label">Musica</span><p>Esplorazione e disciplina.</p></div>
+        <div class="st-list">
+          <article class="st-item" id="fuori-musica"><span class="st-n">01</span><div><h4>La musica</h4><p>Esplorazione e disciplina: cosa mi ha insegnato la musica, dentro e fuori dal lavoro.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+          <article class="st-item" id="fuori-libri"><span class="st-n">02</span><div><h4>I miei libri</h4><p>I libri che sono stati fondamentali per la mia formazione. Hanno una scheda tutta loro: <a href="#libri">I miei libri →</a></p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
+        </div>
       </div>
-      <p class="note-soon">La prima riflessione è in arrivo.</p>
-          </div>
+      <div class="sub" id="libri">
+        <h3 class="sub-h">I miei libri</h3>
+        <p class="lead">I libri che sono stati fondamentali per la mia formazione. Per ognuno ci sarà un breve articolo su che cosa mi ha dato, raccolto per categorie.</p>
+        <div class="st-list">
+          <article class="st-item" id="libri-01"><span class="st-n">01</span><div><h4>Crescita personale e psicologia</h4><p>I libri che mi hanno aiutato a capire come funzionano le persone, a partire da me stesso.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+          <article class="st-item" id="libri-02"><span class="st-n">02</span><div><h4>Romanzi</h4><p>Le storie che mi hanno accompagnato e che continuo a portarmi dietro.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+          <article class="st-item" id="libri-03"><span class="st-n">03</span><div><h4>Poesia</h4><p>Le raccolte e gli autori a cui torno.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+          <article class="st-item" id="libri-04"><span class="st-n">04</span><div><h4>Saggistica</h4><p>I saggi che hanno cambiato il mio modo di ragionare, anche sul lavoro.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+          <article class="st-item" id="libri-05"><span class="st-n">05</span><div><h4>Arte e fotografia</h4><p>I libri per imparare a guardare: forme, luce, composizione.</p><p class="st-wip"><span class="tag">Work in progress</span> Schede dei libri in preparazione.</p></div></article>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -739,7 +750,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>22 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>23 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1063,7 +1074,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","portfolio","studio","proposte","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",proposte:"proposte",wip:"wip",fuori:"fuori"},SEEN={};
+var VIEWS=["chi-sono","portfolio","studio","proposte","wip","bim-5-minuti","bim-news","fuori","libri"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",proposte:"proposte",wip:"wip",fuori:"fuori",libri:"libri"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // BIM & AI: stessa pagina di BIM News, filtrata sulle notizie con tag AI
   var ai=h==="bim-ai";if(ai)v="bim-news";
