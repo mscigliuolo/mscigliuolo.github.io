@@ -388,13 +388,16 @@ body{margin:0}
 .m-head:first-child{margin-top:0}
 .m-head span:first-child::first-letter{text-transform:uppercase}
 .m-cnt{font-family:var(--mono);font-size:.7rem;font-weight:400;color:var(--muted)}
-.m-nav{display:flex;flex-wrap:wrap;gap:.35rem;margin:.1rem 0 .4rem}
+.m-nav{display:grid;gap:.35rem;margin:.1rem 0 .4rem}
+.m-row{display:flex;flex-wrap:wrap;gap:.35rem}
+.m-row+.m-row{padding-left:.6rem;border-left:2px solid var(--line)}
 .m-nav button{font-family:var(--mono);font-size:.7rem;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:.28rem .55rem;cursor:pointer}
 .m-nav button:hover{border-color:var(--accent);color:var(--accent)}
 .m-nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .m-nav button span{color:var(--muted);margin-left:.25rem}
 .m-nav button[aria-pressed="true"] span{color:inherit;opacity:.75}
 .arch-tag{font-family:var(--mono);font-size:.62rem;border:1px dashed var(--muted);color:var(--muted);padding:.08rem .35rem;white-space:nowrap}
+.pager[hidden]{display:none}
 .pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;font-family:var(--mono);font-size:.76rem;color:var(--muted)}
 .pager button{font:inherit;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;cursor:pointer}
 .pager button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
@@ -463,7 +466,7 @@ footer{padding-block:1.6rem 3rem}
       <div class="role">Rassegna settimanale · dall'Alto Adige al mondo</div>
       <h1>BIM News</h1>
       <p>Le novità sul BIM raccolte ogni settimana, ognuna con una sintesi in italiano e il link alla fonte. Un sito a cura di <a href="#chi-sono">Marco Scigliuolo</a>.</p>
-      <div class="stamp" aria-label="Sito in lavorazione, revisione 07"><span>Work in progress</span><small>Rev. 07 · 10/11/2026</small></div>
+      <div class="stamp" aria-label="Sito in lavorazione, revisione 08"><span>Work in progress</span><small>Rev. 08 · 10/11/2026</small></div>
     </div>
   </div>
 
@@ -507,7 +510,7 @@ footer{padding-block:1.6rem 3rem}
             <p><strong>Lingua.</strong> Le notizie sono scritte in italiano, con il link alla fonte originale. Per il testo completo in un'altra lingua, usa la traduzione integrata nel tuo browser.</p>
             <p lang="de"><strong>Sprache.</strong> Die Meldungen sind auf Italienisch verfasst, mit dem Link zur Originalquelle. Für den vollständigen Text nutzen Sie bitte die Übersetzungsfunktion Ihres Browsers.</p>
           </div>
-          <h3 class="arch-h">Archivio per mese</h3>
+          <h3 class="arch-h">Archivio: dal 2015 a oggi, per anno e mese</h3>
           <div class="m-nav" id="m-nav" role="group" aria-label="Vai al mese"></div>
           <div class="grid" id="grid"></div>
           <nav class="pager" id="pager" aria-label="Pagine dell'archivio" hidden></nav>
@@ -656,7 +659,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>Work in progress</strong></div>
-    <div><span>Rev.</span><strong>07 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>08 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -734,7 +737,25 @@ var ARTS=[
  {id:"n56",w:"2026-07-20",d:"2026-07-22",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"IBIMI: tre gruppi di lavoro sugli impianti in IFC",x:"Nel Dominio Edifici partono tre gruppi per definire criteri condivisi con cui rappresentare gli impianti nello standard IFC, aperti a professionisti, aziende e produttori di software.",tags:["openBIM", "Associazioni"],src:[["BIMportale", "https://www.bimportale.com/openbim-e-interoperabilita-al-via-tre-nuovi-gruppi-di-lavoro-di-ibimi-buildingsmart-italia/"]]},
  {id:"n57",w:"2026-08-03",d:"2026-08-04",r:"2026-11-10",c:"europa",n:"Germania",p:"Germania",t:"BIM di base: rivista la linea guida VDI/bS-MT 2552 Blatt 8.1",x:"Sei anni dopo, la linea guida su cui sono state formate e certificate oltre 14.000 persone in Germania è stata aggiornata; la bozza resta in consultazione pubblica fino a fine settembre.",tags:["Formazione", "Normativa"],src:[["buildingSMART Deutschland", "https://www.buildingsmart.de/buildingsmart/aktuelles/ueberarbeitete-richtlinie-vdibs-mt-2552-blatt-81-im-gruendruck-erschienen"]]},
  {id:"n58",w:"2026-08-31",d:"2026-09-01",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"UNI 11337-11: il BIM entra nei procedimenti autorizzativi",x:"La norma, pubblicata il 23 luglio, definisce procedure e flusso informativo dell'e-Permit per autorizzare opere pubbliche e private: i dati del modello diventano una fonte strutturata anche per l'ente che istruisce la pratica.",tags:["Normativa", "Pubblica amministrazione"],src:[["BIMportale", "https://www.bimportale.com/la-norma-uni-11337-11-e-le-permit/"]]},
- {id:"n59",w:"2026-09-14",d:"2026-09-14",r:"2026-11-10",c:"mondo",n:"",p:"Globale",t:"IFC 4.4 avvia il percorso verso la norma ISO",x:"buildingSMART International ha approvato con il 93% dei voti (soglia 65%) il progetto per portare IFC 4.4 in ISO, in sostituzione della ISO 16739-1:2024 che corrisponde a IFC 4.3.",tags:["openBIM", "Normativa"],src:[["buildingSMART Deutschland", "https://www.buildingsmart.de/buildingsmart/aktuelles/ifc-44-nimmt-wichtige-huerde-auf-dem-weg-die-iso-normung"]]}
+ {id:"n59",w:"2026-09-14",d:"2026-09-14",r:"2026-11-10",c:"mondo",n:"",p:"Globale",t:"IFC 4.4 avvia il percorso verso la norma ISO",x:"buildingSMART International ha approvato con il 93% dei voti (soglia 65%) il progetto per portare IFC 4.4 in ISO, in sostituzione della ISO 16739-1:2024 che corrisponde a IFC 4.3.",tags:["openBIM", "Normativa"],src:[["buildingSMART Deutschland", "https://www.buildingsmart.de/buildingsmart/aktuelles/ifc-44-nimmt-wichtige-huerde-auf-dem-weg-die-iso-normung"]]},
+ {id:"n60",w:"2015-12-14",d:"2015-12-15",r:"2026-11-10",c:"europa",n:"Germania",p:"Germania · Berlino",t:"Germania: il piano per rendere il BIM obbligatorio nelle infrastrutture",x:"Il ministro Alexander Dobrindt presenta lo «Stufenplan Digitales Planen und Bauen»: progetti pilota, standard e regole comuni per arrivare dal 2020 al BIM vincolante nei grandi progetti di infrastrutture federali.",m:"Notizia storica: il piano è stato poi sviluppato nel Masterplan BIM Bundesfernstraßen (2021).",tags:["Normativa", "Pubblica amministrazione"],src:[["baulinks.de", "https://www.baulinks.de/webplugin/2015/1952.php4"]]},
+ {id:"n61",w:"2016-04-25",d:"2016-04-25",r:"2026-11-10",c:"europa",n:"Regno Unito",p:"Regno Unito",t:"Regno Unito: in vigore l'obbligo BIM Level 2",x:"Dal 4 aprile 2016 tutti i contratti pubblici di costruzione acquistati a livello centrale devono applicare il BIM Level 2, qualunque sia l'importo. Il BIM Task Group parla di un risultato «senza paragoni a livello internazionale».",m:"Notizia storica: il riferimento oggi è la serie ISO 19650 e lo UK BIM Framework, che ha sostituito le norme PAS 1192.",tags:["Normativa", "Pubblica amministrazione"],src:[["NBS", "https://www.thenbs.com/knowledge/bim-task-group-april-4-mandate-an-internationally-unparalleled-achievement-on-our-bim-journey"], ["Ashfords", "https://www.ashfords.co.uk/insights/articles/bim-level-2-mandate-now-in-effect"]]},
+ {id:"n62",w:"2017-01-30",d:"2017-01-31",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"Pubblicate le prime parti della UNI 11337",x:"La commissione UNI pubblica le parti 1, 4 e 5 della norma sulla gestione digitale dei processi informativi delle costruzioni: modelli ed elaborati, livelli di sviluppo degli oggetti, flussi informativi e capitolato.",m:"Notizia storica: diverse parti sono state poi riviste o affiancate dalla UNI EN ISO 19650.",tags:["Normativa"],src:[["LavoriPubblici", "https://www.lavoripubblici.it/news/Gestione-digitale-dei-processi-informativi-delle-costruzioni-18062"]]},
+ {id:"n63",w:"2017-07-03",d:"2017-07-06",r:"2026-11-10",c:"europa",n:"",p:"Unione europea · Bruxelles",t:"L'Europa pubblica il manuale BIM per il settore pubblico",x:"La EU BIM Task Group, con committenti pubblici di 21 paesi, presenta il «Handbook for the Introduction of BIM by the European Public Sector», per un approccio comune all'introduzione del BIM negli appalti.",m:"L'Unione europea non è una nazione della mappa: la notizia si trova con il filtro Europa.",tags:["Pubblica amministrazione", "openBIM"],src:[["NBS", "https://thenbs.com/knowledge/eu-bim-task-group-launches-handbook-for-the-strategic-implementation-of-bim"]]},
+ {id:"n64",w:"2017-11-27",d:"2017-12-01",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"Decreto BIM: firmato il DM 560/2017",x:"Il ministro Delrio firma il decreto che introduce gradualmente l'obbligo dei metodi BIM negli appalti pubblici, a partire dal 2019 per le opere più grandi e complesse.",m:"La notizia dell'ANCE è di gennaio 2018, quando il MIT ha pubblicato il decreto; la pagina non indica il giorno. Uso il 1° dicembre 2017, data della firma riportata nell'articolo. Notizia storica: il decreto è stato modificato dal DM 312/2021 e superato dal D.Lgs. 36/2023.",tags:["Normativa", "Pubblica amministrazione"],src:[["ANCE", "https://ance.it/2018/01/codice-dei-contratti-il-mit-pubblica-il-decreto-che-regola-la-digitalizzazione-degli-appalti-bim/"]]},
+ {id:"n65",w:"2018-12-17",d:"2018-12-18",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"UNI 11337-7: le figure professionali del BIM",x:"Pubblicata la parte 7 della UNI 11337, che definisce conoscenze, abilità e competenze di BIM Manager, BIM Coordinator, BIM Specialist e CDE Manager secondo il quadro europeo delle qualifiche.",tags:["Normativa", "Formazione"],src:[["LavoriPubblici", "https://www.lavoripubblici.it/news/2018/12/LAVORI-PUBBLICI/21321/BIM-pubblicata-la-parte-7-della-norma-UNI-11337"]]},
+ {id:"n66",w:"2019-03-25",d:"2019-03-25",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"La ISO 19650 arriva in italiano",x:"Il 14 marzo 2019 l'UNI pubblica la UNI EN ISO 19650 parti 1 e 2, recepite dal CEN a dicembre 2018: lo standard internazionale sulla gestione informativa con il BIM diventa norma italiana.",tags:["Normativa"],src:[["BibLus", "https://biblus.acca.it/uni-en-iso-19650-2019-pubblicate-in-italiano-le-norme-internazionali-sul-bim/"]]},
+ {id:"n67",w:"2019-08-19",d:"2019-08-23",r:"2026-11-10",c:"america",n:"Brasile",p:"Brasile",t:"Brasile: nasce il comitato per la strategia BIM nazionale",x:"Il Decreto 9.983/2019 istituisce il Comitato di gestione della Estratégia BIM BR, in vista dell'obbligo BIM per alcune opere pubbliche dal 2021 e delle estensioni fino al 2028.",m:"Notizia storica: il decreto è stato revocato e sostituito dal Decreto 11.888/2024.",tags:["Normativa", "Pubblica amministrazione"],src:[["CBIC", "https://cbic.org.br/inovacao/?p=4000"]]},
+ {id:"n68",w:"2020-03-02",d:"2020-03-06",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"UNI/PdR 78:2020: come si certificano le figure BIM",x:"UNI e Accredia pubblicano la prassi di riferimento per la valutazione di conformità delle figure professionali definite dalla UNI 11337-7.",tags:["Normativa", "Formazione"],src:[["Infobuild", "https://www.infobuild.it/certificazione-professionisti-bim-pubblicata-prassi-uni-pdr-78-2020/"]]},
+ {id:"n69",w:"2020-03-30",d:"2020-04-03",r:"2026-11-10",c:"america",n:"Brasile",p:"Brasile",t:"Brasile: il BIM diventa obbligatorio nelle opere federali",x:"Il Decreto 10.306/2020 stabilisce l'uso del BIM nelle opere e nei servizi di ingegneria dell'amministrazione federale, con un'introduzione graduale a partire dal 2021.",tags:["Normativa", "Pubblica amministrazione"],src:[["CBIC", "https://cbic.org.br/inovacao/2020/04/03/governo-estabelece-uso-do-bim-em-obras-e-servicos-de-engenharia-2/"]]},
+ {id:"n70",w:"2020-06-08",d:"2020-06-11",r:"2026-11-10",c:"asia",n:"Cina",p:"Hong Kong",t:"Hong Kong: le prime condizioni contrattuali per il BIM",x:"Pubblicate le «BIM Contract Conditions» dell'Hong Kong Institute of Surveyors con la BIM Contract Alliance, in risposta all'obbligo BIM introdotto dal governo nelle opere pubbliche.",tags:["Normativa"],src:[["Conventus Law", "https://conventuslaw.com/report/hong-kong-gets-new-building-information-modelling/"]]},
+ {id:"n71",w:"2021-08-02",d:"2021-08-02",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"DM 312/2021: aggiornato il decreto BIM",x:"Il nuovo decreto modifica il DM 560/2017: introduce punteggi premiali per l'uso del BIM nelle gare finanziate dal PNRR e rivede le scadenze, con obbligo solo sopra un milione di euro.",m:"La pagina dell'ANCE non riporta il giorno (l'indirizzo indica agosto 2021): uso il 2 agosto 2021, data del decreto. Notizia storica: la disciplina è stata superata dal D.Lgs. 36/2023.",tags:["Normativa", "Pubblica amministrazione"],src:[["ANCE", "https://ance.it/2021/08/pubblicato-il-nuovo-decreto-bim-per-gli-appalti-pubblici/"]]},
+ {id:"n72",w:"2021-12-06",d:"2021-12-08",r:"2026-11-10",c:"europa",n:"Germania",p:"Germania",t:"Masterplan BIM per le strade federali",x:"Il Ministero dei trasporti presenta il Masterplan BIM Bundesfernstraßen: il BIM deve diventare entro il 2025 lo standard per la gestione tecnica di autostrade e strade federali, in tre fasi.",m:"La pagina del Ministero non riporta una data: il Masterplan è stato pubblicato a ottobre 2021 e presentato al simposio dell'8 dicembre 2021, data che uso qui.",tags:["Pubblica amministrazione", "Normativa"],src:[["Ministero federale dei trasporti", "https://www.bmv.de/SharedDocs/DE/Artikel/StB/masterplan-bim-bundesfernstrassen.html"]]},
+ {id:"n73",w:"2022-07-18",d:"2022-07-21",r:"2026-11-10",c:"asia",n:"Corea del Sud",p:"Corea del Sud",t:"Corea del Sud: roadmap per l'obbligo BIM nelle opere pubbliche",x:"Con il piano per l'edilizia intelligente il Ministero fissa l'obiettivo di digitalizzare l'intero processo costruttivo entro il 2030, partendo dall'obbligo BIM per le opere pubbliche da 100 miliardi di won.",tags:["Normativa", "Pubblica amministrazione"],src:[["Maeil Construction News (coreano)", "https://www.mcnews.co.kr/76810"]]},
+ {id:"n74",w:"2024-01-01",d:"2024-01-05",r:"2026-11-10",c:"mondo",n:"",p:"Globale",t:"IFC 4.3 approvato come norma ISO",x:"L'ISO approva IFC 4.3, che estende lo standard aperto alle infrastrutture lineari (strade, ferrovie, ponti, porti e vie d'acqua) e diventa la nuova versione della ISO 16739; la pubblicazione segue ad aprile 2024.",tags:["openBIM", "Normativa"],src:[["Construction Management", "https://www.bimplus.co.uk/ifc-4-3-for-infrastructure-approved-as-final-standard/"]]},
+ {id:"n75",w:"2024-01-22",d:"2024-01-22",r:"2026-11-10",c:"america",n:"Brasile",p:"Brasile",t:"Brasile: la nuova Estratégia BIM BR",x:"Il presidente Lula firma il decreto che rilancia la strategia nazionale per diffondere il BIM, nell'ambito del piano Nova Indústria Brasil.",m:"La pagina di Abrainc non riporta l'anno: uso il 22 gennaio 2024, data del Decreto 11.888 indicata nel testo («lunedì 22/01»).",tags:["Normativa", "Pubblica amministrazione"],src:[["Abrainc", "https://abrainc.org.br/noticias/governo-publica-decreto-da-nova-estrategia-bimbr-para-impulsionar-tecnologia-digital-na-construcao-"]]},
+ {id:"n76",w:"2024-06-03",d:"2024-06-05",r:"2026-11-10",c:"europa",n:"Regno Unito",p:"Regno Unito · Londra",t:"Rinnovato lo UK BIM Framework",x:"nima e BSI aggiornano la risorsa gratuita su standard e guide per la gestione informativa: contenuti allineati alla serie ISO 19650, navigazione migliore e una funzione di ricerca con AI.",tags:["Normativa", "openBIM"],src:[["nima", "https://wearenima.im/uk-bim-framework-revamped-with-new-guidance-and-an-ai-capability/"]]},
+ {id:"n77",w:"2024-12-30",d:"2025-01-03",r:"2026-11-10",c:"europa",n:"Italia",p:"Italia",t:"Correttivo appalti: obbligo BIM sopra i 2 milioni dal 2025",x:"Pubblicato in Gazzetta il D.Lgs. 209/2024: dal 1° gennaio 2025 l'obbligo di gestione informativa digitale dell'art. 43 vale per le nuove opere e gli interventi sull'esistente oltre i 2 milioni di euro.",tags:["Normativa", "Pubblica amministrazione"],src:[["Ediltecnico", "https://ediltecnico.it/decreto-correttivo-appalti-pubblicato-testo-in-gazzetta/"]]}
 ];
 var WEEKS={
  "2026-08-31":{from:"2026-08-31",to:"2026-09-06"},
@@ -764,7 +785,25 @@ var WEEKS={
  "2026-06-22":{from:"2026-06-22",to:"2026-06-28"},
  "2026-07-06":{from:"2026-07-06",to:"2026-07-12"},
  "2026-07-20":{from:"2026-07-20",to:"2026-07-26"},
- "2026-09-14":{from:"2026-09-14",to:"2026-09-20"}
+ "2026-09-14":{from:"2026-09-14",to:"2026-09-20"},
+ "2015-12-14":{from:"2015-12-14",to:"2015-12-20"},
+ "2016-04-25":{from:"2016-04-25",to:"2016-05-01"},
+ "2017-01-30":{from:"2017-01-30",to:"2017-02-05"},
+ "2017-07-03":{from:"2017-07-03",to:"2017-07-09"},
+ "2017-11-27":{from:"2017-11-27",to:"2017-12-03"},
+ "2018-12-17":{from:"2018-12-17",to:"2018-12-23"},
+ "2019-03-25":{from:"2019-03-25",to:"2019-03-31"},
+ "2019-08-19":{from:"2019-08-19",to:"2019-08-25"},
+ "2020-03-02":{from:"2020-03-02",to:"2020-03-08"},
+ "2020-03-30":{from:"2020-03-30",to:"2020-04-05"},
+ "2020-06-08":{from:"2020-06-08",to:"2020-06-14"},
+ "2021-08-02":{from:"2021-08-02",to:"2021-08-08"},
+ "2021-12-06":{from:"2021-12-06",to:"2021-12-12"},
+ "2022-07-18":{from:"2022-07-18",to:"2022-07-24"},
+ "2024-01-01":{from:"2024-01-01",to:"2024-01-07"},
+ "2024-01-22":{from:"2024-01-22",to:"2024-01-28"},
+ "2024-06-03":{from:"2024-06-03",to:"2024-06-09"},
+ "2024-12-30":{from:"2024-12-30",to:"2025-01-05"}
 };
 var AREE={europa:"Europa",asia:"Asia",africa:"Africa",america:"America",oceania:"Oceania",mondo:"Globale"};
 var MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
@@ -842,10 +881,14 @@ function monthUI(){var cnt={},ym={};
     state.year="";ok=passes(a);if(ok)ym[a.d.slice(0,7)]=(ym[a.d.slice(0,7)]||0)+1;
     state.month=sm;state.year=sy});
   Array.prototype.forEach.call($("month").options,function(o){if(!o.value)return;var c=cnt[o.value]||0;o.textContent=MESI[+o.value-1]+(c?" ("+c+")":"");o.disabled=!c&&state.month!==o.value});
-  $("m-nav").innerHTML=Object.keys(ym).sort().reverse().map(function(k){var on=state.year===k.slice(0,4)&&state.month===k.slice(5);
-    return '<button type="button" data-ym="'+k+'" aria-pressed="'+on+'">'+MESI[+k.slice(5)-1].slice(0,3)+' '+k.slice(0,4)+'<span>'+ym[k]+'</span></button>'}).join("")}
-$("m-nav").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var k=b.dataset.ym,on=b.getAttribute("aria-pressed")==="true";
-  state.year=on?"":k.slice(0,4);state.month=on?"":k.slice(5);$("year").value=state.year;$("month").value=state.month;PAGE=1;render()});
+  var yrs={};Object.keys(ym).forEach(function(k){yrs[k.slice(0,4)]=(yrs[k.slice(0,4)]||0)+ym[k]});
+  var h='<div class="m-row">'+Object.keys(yrs).sort().reverse().map(function(y){return '<button type="button" data-y="'+y+'" aria-pressed="'+(state.year===y)+'">'+y+'<span>'+yrs[y]+'</span></button>'}).join("")+'</div>';
+  if(state.year)h+='<div class="m-row">'+Object.keys(ym).filter(function(k){return k.slice(0,4)===state.year}).sort().reverse().map(function(k){var on=state.month===k.slice(5);
+    return '<button type="button" data-ym="'+k+'" aria-pressed="'+on+'">'+MESI[+k.slice(5)-1]+'<span>'+ym[k]+'</span></button>'}).join("")+'</div>';
+  $("m-nav").innerHTML=h}
+$("m-nav").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var on=b.getAttribute("aria-pressed")==="true";
+  if(b.dataset.y){state.year=on?"":b.dataset.y;state.month=""}else{state.month=on?"":b.dataset.ym.slice(5)}
+  $("year").value=state.year;$("month").value=state.month;PAGE=1;render()});
 // mappa e pulsanti delle aree: i conteggi tengono conto degli altri filtri
 function passes(a){var q=norm(state.q.trim());
   if(state.year&&a.d.slice(0,4)!==state.year)return false;
