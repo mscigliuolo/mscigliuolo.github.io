@@ -378,6 +378,18 @@ body{margin:0}
 @media (max-width:1100px){.news-main .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.news-main .grid{grid-template-columns:minmax(0,1fr)}}
 
+
+/* pubblicazioni */
+.pubs{display:grid;gap:.7rem;max-width:44rem}
+.pubs-h{font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.3rem;margin:.6rem 0 0}
+.pub{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);padding:1rem 1.2rem;display:grid;gap:.45rem}
+.pub-meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.pub h4{margin:0;font-family:var(--display);font-stretch:82%;font-weight:750;font-size:1.25rem;line-height:1.15;text-wrap:balance}
+.pub p{margin:0;font-size:1rem}
+.pub .pub-en{font-style:italic;color:var(--muted);font-size:.95rem}
+.pub .pub-where{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.pub .src-btn{justify-self:start;margin-top:.3rem}
+
 /* contatti e cartiglio */
 .contact{display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;align-items:center;font-family:var(--mono);font-size:.9rem}
 footer{padding-block:1.6rem 3rem}
@@ -434,7 +446,7 @@ footer{padding-block:1.6rem 3rem}
   </div>
 
   <nav class="previews" aria-label="Sezioni del sito">
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><b>A</b><h2>Chi sono</h2><p>Ingegnere civile, modellazione MEP, edifici pubblici in Alto Adige.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><b>A</b><h2>Chi sono</h2><p>Ingegnere civile, modellazione MEP, edifici pubblici in Alto Adige. Pubblicazioni.</p><span>Apri →</span></a>
     <a class="pv" href="#wip" style="--accent:var(--c-b);--accent-soft:var(--c-b-s)"><b>B</b><h2>Work in progress</h2><p>Quattro lavori in corso, ognuno con la sua fase.</p><span>Apri →</span></a>
     <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><b>C</b><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui.</p><span>Apri →</span></a>
     <a class="pv pv-wide" href="#bim-news" style="--accent:var(--c-d);--accent-soft:var(--c-d-s)"><b>D</b><h2>BIM News</h2><p id="pv-news">Le novità BIM, ogni settimana.</p><span>Apri →</span></a>
@@ -450,6 +462,17 @@ footer{padding-block:1.6rem 3rem}
       <h2>Chi sono</h2>
       <div class="prose">
         <p>Lavoro in uno studio di progettazione altoatesino, soprattutto su scuole e uffici pubblici. Sono BIM Coordinator certificato e coordinatore della sicurezza CSP/CSE; in passato ho lavorato su infrastrutture e ho insegnato.</p>
+      </div>
+      <div class="pubs">
+        <h3 class="pubs-h">Pubblicazioni</h3>
+        <article class="pub">
+          <div class="pub-meta"><span class="label">Tesi di laurea · 2018</span><span class="tag">Rigenerazione urbana</span></div>
+          <h4>La rigenerazione urbana delle aree militari dismesse</h4>
+          <p class="pub-en" lang="en">Brownfields' urban regeneration process. Problems and future perspectives</p>
+          <p>Le caserme e le aree militari abbandonate dopo la fine della guerra fredda segnano il tessuto di molte città italiane ed europee. La tesi ripercorre come è nato il problema della dismissione e come è stato affrontato nel tempo, per ricavarne una linea guida utile a nuovi interventi di riqualificazione.</p>
+          <p class="pub-where">Politecnico di Bari · Ingegneria Edile-Architettura</p>
+          <a class="src-btn" href="https://poliba.academia.edu/MarcoScigliuolo" target="_blank" rel="noopener">Leggi su Academia ↗</a>
+        </article>
       </div>
     </div>
   </section>
