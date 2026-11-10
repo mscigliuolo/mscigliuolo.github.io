@@ -317,7 +317,7 @@ section .axis b{background:var(--accent-soft)}
 .subnav a:hover{color:var(--accent);border-color:var(--accent)}
 .subnav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sub{display:none;gap:1.1rem;min-width:0}
-:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
+:root:not([data-sub]) .sub,:root[data-sub="profilo"] #profilo,:root[data-sub="portfolio"] #portfolio,:root[data-sub="studio"] #studio,:root[data-sub="proposte"] #proposte,:root[data-sub="wip"] #wip,:root[data-sub="fuori"] #fuori{display:grid}
 .st-list{display:grid;gap:.6rem}
 .st-item{display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:.2rem .8rem;background:var(--surface);border:1px solid var(--line);padding:.8rem 1rem}
 .st-n{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.6rem;line-height:1;color:var(--accent)}
@@ -653,8 +653,8 @@ footer{padding-block:1.6rem 3rem}
   <section id="chi-sono">
     <div class="content">
       <h2>Il curatore</h2>
-      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, i lavori in corso e qualche pensiero personale.</p>
-      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
+      <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, le proposte per il mondo del BIM, i lavori in corso e qualche pensiero personale.</p>
+      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#proposte" data-sub="proposte">Le mie proposte</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -696,6 +696,11 @@ footer{padding-block:1.6rem 3rem}
           <article class="st-item" id="studio-12"><span class="st-n">12</span><div><h4>Competenze, ruoli e responsabilità</h4><p>Figure BIM previste sulla carta ma non nei fatti, formazione discontinua e dubbi su chi risponde del dato digitale.</p><p class="st-wip"><span class="tag">Work in progress</span> Articolo in preparazione.</p></div></article>
         </div>
       </div>
+      <div class="sub" id="proposte">
+        <h3 class="sub-h">Le mie proposte per il mondo del BIM</h3>
+        <p class="lead">Idee concrete per migliorare il modo in cui si progetta, si costruisce e si gestisce con il BIM: proposte scritte da me, aperte al confronto con chi lavora nel settore.</p>
+        <p class="note-soon">Work in progress: le prime proposte sono in preparazione. Ogni articolo di questa sezione sarà aperto ai commenti.</p>
+      </div>
       <div class="sub" id="wip">
       <h3 class="sub-h">Work in progress</h3>
       <p class="lead">Quello su cui sto lavorando adesso, con la fase in cui si trova. Le schede si aggiornano man mano.</p>
@@ -725,7 +730,7 @@ footer{padding-block:1.6rem 3rem}
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
     <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, approfondimenti sul lavoro, lavori in corso e riflessioni personali.</p><span>Apri →</span></a>
+    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, approfondimenti, proposte per il mondo del BIM e riflessioni personali.</p><span>Apri →</span></a>
   </nav>
 </main>
 
@@ -734,7 +739,7 @@ footer{padding-block:1.6rem 3rem}
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>21 · 10/11/2026</strong></div>
+    <div><span>Rev.</span><strong>22 · 10/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1058,7 +1063,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","portfolio","studio","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",wip:"wip",fuori:"fuori"},SEEN={};
+var VIEWS=["chi-sono","portfolio","studio","proposte","wip","bim-5-minuti","bim-news","fuori"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",proposte:"proposte",wip:"wip",fuori:"fuori"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // BIM & AI: stessa pagina di BIM News, filtrata sulle notizie con tag AI
   var ai=h==="bim-ai";if(ai)v="bim-news";
