@@ -1,0 +1,6 @@
+# Esempio di Property Set definito dall utente per l export IFC da Revit
+# File in UTF-8, campi separati da TAB. Sostituisci i nomi con quelli della tua struttura dati.
+PropertySet:	PBZ_Esempio	I	IfcWall, IfcWallType, IfcSlab, IfcSlabType
+	UnitaTecnologica	Text	2-Technologische Einheiten_Unitá tecnologiche
+	Contrassegno	Text	BuiltInParameter.ALL_MODEL_MARK
+	Portante	Boolean	PBZ_Portante

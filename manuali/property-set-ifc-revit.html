@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Property Set per l'export IFC da Revit · I manuali di BIM News</title>
+<meta name="description" content="Come portare i parametri richiesti dal committente nell'IFC esportato da Revit: il file dei Property Set definiti dall'utente, la configurazione di export passo per passo, un esempio con tre parametri e la checklist.">
+<link rel="stylesheet" href="manuale.css">
+<script>try{var t=localStorage.getItem("tema-2026");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>.tab{display:inline-block;background:var(--a3);color:#fff;border-radius:4px;padding:0 .3rem;font-size:.75em;margin:0 .15rem}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--accent)"/></marker></defs></svg>
+<div class="topbar"><div class="in"><a class="back" href="../#studio">← BIM News · Nello studio</a><span class="sp"></span><a class="btn ghost noprint" href="revit/Pset_esempio.txt" download>File di esempio .txt</a><a class="btn" href="property-set-ifc-revit.pdf" download>PDF</a></div></div>
+<div class="layout">
+<nav class="toc" aria-label="Indice">
+  <b>Indice</b>
+  <ol>
+    <li><a href="#c1">1 · A che cosa serve</a></li>
+    <li><a href="#c2">2 · La catena da tenere allineata</a></li>
+    <li><a href="#c3">3 · Il file dei Property Set</a></li>
+    <li><a href="#c4">4 · Un esempio con tre parametri</a></li>
+    <li><a href="#c5">5 · Impostare Revit, passo per passo</a></li>
+    <li><a href="#c6">6 · Verificare l'IFC</a></li>
+    <li><a href="#c7">7 · Errori tipici e checklist</a></li>
+    <li><a href="#fonti">Fonti</a></li>
+  </ol>
+</nav>
+<main>
+<header class="cover">
+  <div>
+    <span class="kick">I manuali di BIM News · Nello studio</span>
+    <h1>Property Set per l'export IFC da Revit</h1>
+    <p>Come far arrivare nell'IFC i parametri che il committente chiede, per esempio quelli della struttura dati della Provincia di Bolzano, con un file di testo e una configurazione di export.</p>
+    <div class="meta"><span class="pill">guida generica</span><span class="pill">esempio con 3 parametri</span><span class="pill">file .txt scaricabile</span><span class="pill">Revit 2026</span><span class="pill">Edizione novembre 2026</span></div>
+  </div>
+  <svg viewBox="0 0 360 240" role="img" aria-label="Illustrazione: un parametro di Revit che diventa una proprietà IFC">
+    <rect class="s-as" x="10" y="10" width="340" height="220" rx="22"/>
+    <g transform="translate(34 50)"><rect class="s-w" width="120" height="140" rx="10"/><rect class="s-a" width="120" height="26" rx="10"/><text class="s-tw" x="60" y="18" text-anchor="middle">Revit</text>
+      <text class="s-tm" x="12" y="50">Muro base</text><rect class="s-3s" x="10" y="62" width="100" height="22" rx="5"/><text class="s-tm" x="16" y="77">Unità tecnol.</text><rect class="s-3s" x="10" y="90" width="100" height="22" rx="5"/><text class="s-tm" x="16" y="105">Contrassegno</text></g>
+    <g transform="translate(206 50)"><rect class="s-w" width="120" height="140" rx="10"/><rect class="s-2" width="120" height="26" rx="10"/><text class="s-tw" x="60" y="18" text-anchor="middle">IFC</text>
+      <text class="s-tm" x="12" y="50">IfcWall</text><text class="s-tm" x="12" y="70">PBZ_Esempio</text><rect class="s-2s" x="10" y="80" width="100" height="22" rx="5"/><text class="s-tm" x="16" y="95">UnitaTecnol.</text><rect class="s-2s" x="10" y="106" width="100" height="22" rx="5"/><text class="s-tm" x="16" y="121">Contrassegno</text></g>
+    <path d="M156 120h46" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/><text class="s-tm" x="160" y="110">.txt</text>
+  </svg>
+</header>
+
+<section class="ch" id="c1">
+  <div class="ch-h"><span class="ch-n">1</span><h2>A che cosa serve</h2></div>
+  <p>Un <b>Property Set definito dall'utente</b> è un file di testo che dice all'esportatore IFC di Revit quali parametri del modello esportare, con quale nome, con quale tipo di dato e su quali classi IFC. È la via standard per portare nell'IFC i parametri condivisi richiesti dal committente, senza dipendere dai set di proprietà generici di Revit.</p>
+  <div class="box bim"><b>Un esempio concreto</b><p>Un committente pubblico chiede che ogni muro e ogni solaio dell'IFC riporti l'unità tecnologica secondo la sua classificazione. In Revit il dato c'è, in un parametro condiviso. Senza un Property Set non arriva nell'IFC, oppure arriva con un nome che nessuno riconosce.</p></div>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-h"><span class="ch-n">2</span><h2>La catena da tenere allineata</h2></div>
+  <figure>
+    <svg viewBox="0 0 900 170" role="img" aria-label="La catena: parametri condivisi, modello, file Pset, configurazione di export, file IFC">
+      <rect class="s-as" width="900" height="170" rx="18"/>
+      <g class="s-t">
+        <g transform="translate(18 34)"><rect class="s-w" width="156" height="100" rx="14"/><circle class="s-5" cx="22" cy="22" r="13"/><text class="s-tw" x="22" y="27" text-anchor="middle">1</text><text class="s-tb" x="42" y="27">Parametri</text><text x="14" y="58">file dei parametri</text><text x="14" y="76">condivisi: nome e tipo</text></g>
+        <g transform="translate(194 34)"><rect class="s-w" width="156" height="100" rx="14"/><circle class="s-3" cx="22" cy="22" r="13"/><text class="s-tw" x="22" y="27" text-anchor="middle">2</text><text class="s-tb" x="42" y="27">Modello</text><text x="14" y="58">parametro caricato</text><text x="14" y="76">e compilato</text></g>
+        <g transform="translate(370 34)"><rect class="s-w" width="156" height="100" rx="14"/><circle class="s-4" cx="22" cy="22" r="13"/><text class="s-tw" x="22" y="27" text-anchor="middle">3</text><text class="s-tb" x="42" y="27">File Pset</text><text x="14" y="58">.txt: parametro →</text><text x="14" y="76">proprietà IFC</text></g>
+        <g transform="translate(546 34)"><rect class="s-w" width="156" height="100" rx="14"/><circle class="s-a" cx="22" cy="22" r="13"/><text class="s-tw" x="22" y="27" text-anchor="middle">4</text><text class="s-tb" x="42" y="27">Export</text><text x="14" y="58">la configurazione</text><text x="14" y="76">punta al file Pset</text></g>
+        <g transform="translate(722 34)"><rect class="s-2" width="160" height="100" rx="14"/><circle style="fill:#fff" cx="22" cy="22" r="13"/><text class="s-tb" x="22" y="27" text-anchor="middle">5</text><text class="s-tw" x="42" y="27">File IFC</text><text class="s-tw" x="14" y="58" style="font-weight:400">la proprietà c'è</text><text class="s-tw" x="14" y="76" style="font-weight:400">ed è piena</text></g>
+        <path d="M174 84h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M350 84h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M526 84h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M702 84h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      </g>
+    </svg>
+    <figcaption><b>Cinque anelli, un solo nome.</b> Se un anello non coincide carattere per carattere con il precedente, la proprietà non viene esportata, di solito senza alcun messaggio di errore.</figcaption>
+  </figure>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-h"><span class="ch-n">3</span><h2>Il file dei Property Set</h2></div>
+  <p>Il file è fatto di blocchi: una riga di intestazione <code>PropertySet:</code> seguita dalle righe delle proprietà. Tutti i campi sono separati da un <span class="tab">TAB</span>, mai da spazi.</p>
+  <h3>La riga di intestazione</h3>
+<pre><code>PropertySet:<span class="n">⇥</span>NomePset<span class="n">⇥</span>I<span class="n">⇥</span>IfcWall, IfcWallType</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Campo</th><th>Contenuto</th><th>Note</th></tr>
+    <tr><td>1</td><td><code>PropertySet:</code></td><td>Scritto attaccato, con i due punti. <code>Property Set:</code> con lo spazio non viene riconosciuto</td></tr>
+    <tr><td>2</td><td>Nome del set</td><td>Non usare i nomi dei set standard (per esempio <code>Pset_WallCommon</code>) e il prefisso <code>Pset_</code></td></tr>
+    <tr><td>3</td><td><code>I</code></td><td>Da Revit 2024.1 Autodesk indica di usare sempre <code>I</code>, anche per i parametri di tipo</td></tr>
+    <tr><td>4</td><td>Classi IFC</td><td>Separate da virgola. Per i parametri di tipo aggiungi anche la classe Type corrispondente (<code>IfcWallType</code>)</td></tr>
+  </table></div>
+  <h3>Le righe delle proprietà</h3>
+<pre><code><span class="n">⇥</span>NomeInIFC<span class="n">⇥</span>TipoDato<span class="n">⇥</span>NomeParametroRevit</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Colonna</th><th>Contenuto</th><th>Note</th></tr>
+    <tr><td>1</td><td>Nome della proprietà nell'IFC</td><td>È il nome che vedrà chi apre il file</td></tr>
+    <tr><td>2</td><td>Tipo di dato</td><td><code>Text</code>, <code>Boolean</code>, <code>Integer</code>, <code>Real</code>, <code>Length</code>, <code>Area</code>, <code>Volume</code>, <code>Power</code>… L'elenco completo è nel file di esempio di Autodesk</td></tr>
+    <tr><td>3</td><td>Nome del parametro Revit</td><td>Deve coincidere carattere per carattere, spazi e accenti compresi. I parametri di sistema si richiamano con <code>BuiltInParameter.NOME</code></td></tr>
+  </table></div>
+  <ul>
+    <li>Le righe che iniziano con <code>#</code> sono commenti; spazi e TAB a inizio riga vengono ignorati.</li>
+    <li>Salva sempre in <b>UTF-8</b>: con accenti e dieresi un file in ANSI altera i nomi.</li>
+    <li>Usa un editor che mostri i caratteri invisibili (Notepad++, VS Code): vedi subito TAB, spazi e fine riga.</li>
+  </ul>
+</section>
+
+<section class="ch" id="c4">
+  <div class="ch-h"><span class="ch-n">4</span><h2>Un esempio con tre parametri</h2></div>
+  <p>Un set con tre proprietà, applicato a muri e solai: un parametro della struttura dati provinciale, il contrassegno di Revit e un parametro Sì/No. Il nome del set e i nomi delle proprietà IFC sono di esempio: sostituiscili con quelli richiesti dal capitolato informativo.</p>
+  <p class="codecap">Versione leggibile: ⇥ indica un TAB</p>
+<pre><code><span class="c"># Esempio · UTF-8 · campi separati da TAB</span>
+PropertySet:<span class="n">⇥</span>PBZ_Esempio<span class="n">⇥</span>I<span class="n">⇥</span>IfcWall, IfcWallType, IfcSlab, IfcSlabType
+<span class="n">⇥</span>UnitaTecnologica<span class="n">⇥</span>Text<span class="n">⇥</span>2-Technologische Einheiten_Unitá tecnologiche
+<span class="n">⇥</span>Contrassegno<span class="n">⇥</span>Text<span class="n">⇥</span>BuiltInParameter.ALL_MODEL_MARK
+<span class="n">⇥</span>Portante<span class="n">⇥</span>Boolean<span class="n">⇥</span>PBZ_Portante</code></pre>
+  <div class="noprint" style="margin:.4rem 0 1rem"><a class="btn" href="revit/Pset_esempio.txt" download>Scarica il file con i TAB veri</a></div>
+  <ul>
+    <li>La prima proprietà ha un nome di parametro bilingue, con spazi e un accento: va bene, perché il separatore è solo il TAB. Basta però uno spazio in coda, invisibile, per rompere la corrispondenza.</li>
+    <li><code>BuiltInParameter.ALL_MODEL_MARK</code> richiama il Contrassegno con il suo nome interno, indipendente dalla lingua di Revit.</li>
+    <li><code>Boolean</code> corrisponde ai parametri Sì/No.</li>
+    <li><code>IfcWallType</code> e <code>IfcSlabType</code> servono solo se tra i parametri ce ne sono di tipo.</li>
+  </ul>
+</section>
+
+<section class="ch" id="c5">
+  <div class="ch-h"><span class="ch-n">5</span><h2>Impostare Revit, passo per passo</h2></div>
+  <p class="codecap">I nomi delle opzioni sono quelli dell'interfaccia inglese dell'esportatore IFC; in italiano possono cambiare leggermente.</p>
+  <ol class="steps">
+    <li><b>Controlla i parametri.</b> Nel file dei parametri condivisi verifica il nome esatto di ogni parametro; nel progetto controlla che sia caricato nelle categorie giuste e compilato sugli elementi. I parametri vuoti non vengono esportati.</li>
+    <li><b>Prepara il file Pset.</b> Parti dal file di esempio, scrivi il tuo blocco con i TAB, salva in UTF-8 in una cartella stabile, per esempio quella degli standard di studio.</li>
+    <li><b>Apri la configurazione di export.</b> File → Esporta → IFC → <i>Modify Setup</i>. Duplica una configurazione esistente invece di modificare quella predefinita.</li>
+    <li><b>Scheda Property Sets.</b> Spunta <i>Export user defined property sets</i> e indica il percorso del file .txt. Valuta se lasciare attivi anche <i>Export Revit property sets</i> e <i>Export IFC common property sets</i>: aggiungono molte proprietà non richieste.</li>
+    <li><b>Parametri di tipo.</b> Se vuoi che i valori dei parametri di tipo finiscano nel set dell'istanza, attiva l'opzione che consente l'uso delle proprietà di tipo nei set di istanza, se la tua versione dell'esportatore la prevede.</li>
+    <li><b>Mappatura delle classi.</b> La corrispondenza categoria Revit → classe IFC si imposta in Revit: tabella di mappatura delle categorie, o parametro <i>Export to IFC As</i> sul singolo elemento. Le classi scritte nel file Pset devono essere quelle che gli elementi avranno davvero nell'IFC.</li>
+    <li><b>Salva la configurazione</b> con un nome parlante, per esempio <code>IFC4_RV_Committente</code>, ed esporta.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-label="Schema della finestra di configurazione dell'export IFC, scheda Property Sets">
+      <rect class="s-as" width="760" height="230" rx="16"/>
+      <rect class="s-w" x="30" y="24" width="700" height="186" rx="10"/>
+      <rect class="s-a" x="30" y="24" width="700" height="26" rx="10"/><text class="s-tw" x="44" y="42">Modify Setup · configurazione duplicata</text>
+      <g class="s-t" style="font-size:12px">
+        <rect class="s-w" x="44" y="62" width="90" height="22" rx="5"/><text x="52" y="77">General</text>
+        <rect class="s-w" x="140" y="62" width="110" height="22" rx="5"/><text x="148" y="77">Additional</text>
+        <rect class="s-3" x="256" y="62" width="120" height="22" rx="5"/><text class="s-tw" x="266" y="77">Property Sets</text>
+        <rect class="s-w" x="56" y="102" width="14" height="14" rx="3"/><text x="78" y="114">Export Revit property sets</text><text class="s-tm" x="320" y="114">valuta: spesso superfluo</text>
+        <rect class="s-w" x="56" y="126" width="14" height="14" rx="3"/><text x="78" y="138">Export IFC common property sets</text><text class="s-tm" x="320" y="138">valuta</text>
+        <rect class="s-2" x="56" y="150" width="14" height="14" rx="3"/><path d="M59 157l3 3 6-6" style="fill:none;stroke:#fff;stroke-width:2"/><text x="78" y="162" style="font-weight:700">Export user defined property sets</text>
+        <rect class="s-w" x="78" y="172" width="380" height="24" rx="5" style="stroke:var(--a2);stroke-width:2"/><text class="s-tm" x="88" y="188">…\Standard\Pset_esempio.txt</text>
+        <text class="s-tm" x="480" y="188">percorso del file</text>
+      </g>
+    </svg>
+    <figcaption><b>Schema della scheda Property Sets.</b> Disegno indicativo, non una schermata: l'aspetto reale dipende dalla versione dell'esportatore.</figcaption>
+  </figure>
+</section>
+
+<section class="ch" id="c6">
+  <div class="ch-h"><span class="ch-n">6</span><h2>Verificare l'IFC</h2></div>
+  <p>Apri il file esportato in un visualizzatore IFC, seleziona un elemento per ogni classe del set e controlla che il Property Set ci sia, con i nomi e i valori attesi. Un tipo di dato scritto male non blocca l'esportazione, ma la proprietà esce come testo: l'errore si nota solo quando qualcuno prova a filtrare per valore.</p>
+  <div class="box tip"><b>Tipi fisici per gli impianti</b><p>Per potenze, portate, correnti e trasmittanze usa i tipi fisici (<code>Power</code>, <code>VolumetricFlowRate</code>, <code>ElectricCurrent</code>, <code>ThermalTransmittance</code>) invece di <code>Real</code>: l'IFC porta anche l'unità di misura, e chi riceve il file non deve indovinarla.</p></div>
+</section>
+
+<section class="ch" id="c7">
+  <div class="ch-h"><span class="ch-n">7</span><h2>Errori tipici e checklist</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Errore nel file</th><th>Effetto</th></tr>
+    <tr><td>Spazi al posto dei TAB</td><td>La riga viene letta come un campo unico: proprietà o intero set ignorati</td></tr>
+    <tr><td><code>Property Set:</code> invece di <code>PropertySet:</code></td><td>Intestazione non riconosciuta, il blocco sparisce</td></tr>
+    <tr><td>Spazio finale dopo il nome del parametro</td><td>Nessuna corrispondenza con Revit, proprietà assente</td></tr>
+    <tr><td>Classe IFC diversa da quella esportata</td><td>Il set non viene agganciato a quegli elementi</td></tr>
+    <tr><td>Parametro vuoto sull'elemento</td><td>La proprietà non compare</td></tr>
+    <tr><td>File salvato in ANSI con accenti</td><td>Nomi alterati, nessuna corrispondenza</td></tr>
+    <tr><td>Nome uguale a un set standard</td><td>Il set viene rinominato dall'esportatore</td></tr>
+  </table></div>
+  <h3>Checklist prima dell'export</h3>
+  <ul>
+    <li>File salvato in UTF-8, campi separati da TAB</li>
+    <li>Intestazione <code>PropertySet:</code> con quattro campi; <code>I</code> nel terzo</li>
+    <li>Nome del set senza prefisso <code>Pset_</code></li>
+    <li>Classi IFC coerenti con la mappatura; classi Type aggiunte se ci sono parametri di tipo</li>
+    <li>Nomi dei parametri identici al file dei parametri condivisi, senza spazi in coda</li>
+    <li>Parametri compilati sugli elementi da esportare</li>
+    <li>Configurazione di export salvata e collegata al file giusto</li>
+    <li>Controllo a campione nell'IFC: un elemento per ogni classe</li>
+  </ul>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-h"><span class="ch-n">≡</span><h2>Fonti</h2></div>
+  <ul class="src">
+    <li>Autodesk, <a href="https://help.autodesk.com/cloudhelp/2026/ENU/Revit-DocumentPresent/files/GUID-0968B3FF-832B-4155-8B36-E848ACC97B95.htm" target="_blank" rel="noopener">Create a TXT file to Export User Defined Properties to IFC</a> (Revit 2026, in inglese): sintassi del file, campo I dalla 2024.1, file di esempio da scaricare.</li>
+    <li>Autodesk, <a href="https://github.com/Autodesk/revit-ifc" target="_blank" rel="noopener">esportatore IFC open source (revit-ifc)</a>: codice e file di esempio <code>DefaultUserDefinedParameterSets.txt</code>, con l'elenco dei tipi di dato.</li>
+    <li>BIM Corner, <a href="https://bimcorner.com/exporting-ifc-from-revit-part-3-user-defined-properties/" target="_blank" rel="noopener">Exporting IFC from Revit, part 3: user defined properties</a> (in inglese).</li>
+  </ul>
+  <div class="box idea"><b>Come è nata questa guida</b><p>È uno dei «manuali di Claude»: l'ha scritta Claude, l'assistente di intelligenza artificiale di Anthropic, seguendo indicazioni precise e verificando la sintassi sulla documentazione Autodesk.</p></div>
+  <p class="foot">BIM News · I manuali di Claude · Property Set per l'export IFC da Revit · edizione novembre 2026</p>
+</section>
+</main>
+</div>
+</body>
+</html>
