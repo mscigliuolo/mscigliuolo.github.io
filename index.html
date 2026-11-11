@@ -356,7 +356,7 @@ section .axis b{background:var(--accent-soft)}
 .st-item .st-wip{font-family:var(--mono);font-size:.74rem;display:flex;gap:.5rem;align-items:center}
 .sub-h{margin:0;font-family:var(--display);font-stretch:80%;font-weight:750;font-size:1.5rem;line-height:1.1}
 main>section{display:none}
-:root[data-view="video"] #video,:root[data-view="mappa"] #mappa,:root[data-view="chi-sono"] #chi-sono,:root[data-view="wip"] #wip,:root[data-view="bim-5-minuti"] #bim-5-minuti,:root[data-view="bim-news"] #bim-news,:root[data-view="fuori"] #fuori,:root[data-view="contatti"] #contatti{display:grid}
+:root[data-view="video"] #video,:root[data-view="agenda"] #agenda,:root[data-view="mappa"] #mappa,:root[data-view="chi-sono"] #chi-sono,:root[data-view="wip"] #wip,:root[data-view="bim-5-minuti"] #bim-5-minuti,:root[data-view="bim-news"] #bim-news,:root[data-view="fuori"] #fuori,:root[data-view="contatti"] #contatti{display:grid}
 :root:not([data-view]) main>section{display:grid}
 :root:not([data-view]) .home-link{display:none}
 .home-link{display:inline-block;margin-top:1.6rem;font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none}
@@ -789,6 +789,7 @@ body{transition:background-color .3s}
 :root[data-theme="dark"]{--k-vid:#f09ab9;--k-vid-2:#f5b9cf;--k-vid-s:#4a2434;--k-vid-h:#552a3c;--k-vid-bg:#241a20;--k-vid-on:#2a0f1b}
 :root[data-view="video"]{--accent:var(--k-vid);--accent-2:var(--k-vid-2);--accent-soft:var(--k-vid-s);--hi:var(--k-vid-h);--bg:var(--k-vid-bg);--on-accent:var(--k-vid-on)}
 #video{--accent:inherit;--accent-soft:inherit}
+.k-ag{--accent:var(--k-ag);--accent-2:var(--k-ag-2);--accent-soft:var(--k-ag-s);--hi:var(--k-ag-h);--on-accent:var(--k-ag-on)}
 .k-vid{--accent:var(--k-vid);--accent-2:var(--k-vid-2);--accent-soft:var(--k-vid-s);--hi:var(--k-vid-h);--on-accent:var(--k-vid-on)}
 .top nav a[href="#video"]{--dotc:var(--k-vid)}
 .vd-bar{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
@@ -948,6 +949,46 @@ body{transition:background-color .3s}
 .fs-all{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--accent);text-decoration:none;align-self:center}
 @media (max-width:1100px){.fc-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.fs-it:nth-child(3){border-left:0;padding-left:.2rem}}
 @media (max-width:560px){.fc-strip{grid-template-columns:minmax(0,1fr)}.fs-it{border-left:0;padding-left:.2rem;border-top:1px solid var(--line);padding-top:.4rem}.fs-it:first-child{border-top:0;padding-top:.15rem}}
+
+/* area scelta nella barra delle impostazioni */
+.util .wrap{justify-content:space-between;gap:.4rem 1rem;flex-wrap:wrap}
+.area-set{display:flex;align-items:center;gap:.35rem}
+.area-set[hidden]{display:none}
+.area-set select{appearance:auto;padding-block:.22rem;border-radius:999px;width:auto;flex:none}
+.area-set .set-lab,.area-hint{white-space:nowrap}
+.area-hint{font-size:.72rem;color:var(--muted)}
+@media (max-width:640px){.area-hint{display:none}}
+/* striscia della home: quattro appuntamenti e il tasto per l'agenda */
+.fc-strip{grid-template-columns:repeat(4,minmax(0,1fr)) auto}
+.fs-it.sc .fs-lab::before{content:"";display:inline-block;width:.45rem;height:.45rem;border-radius:2px;margin-right:.35rem;background:var(--k-ag)}
+.fs-all{display:inline-flex;align-items:center;gap:.4rem;justify-self:end;white-space:nowrap;font-family:var(--mono);font-size:.76rem;font-weight:700;background:var(--k-ag);color:var(--k-ag-on);text-decoration:none;padding:.55rem .9rem;border-radius:999px;margin-left:.4rem}
+.fs-all:hover{background:var(--k-ag-2)}
+@media (max-width:1100px){.fc-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.fs-it:nth-child(3){border-left:0;padding-left:.2rem}.fs-all{grid-column:1/-1;justify-self:start;margin:0}}
+@media (max-width:560px){.fc-strip{grid-template-columns:minmax(0,1fr)}}
+/* pagina Agenda */
+:root{--k-ag:#a0670a;--k-ag-2:#83540a;--k-ag-s:#fbefd8;--k-ag-h:#fdf5e7;--k-ag-bg:#fdfaf3;--k-ag-on:#fff}
+:root[data-theme="dark"]{--k-ag:#f0c06a;--k-ag-2:#f5d495;--k-ag-s:#3e2f14;--k-ag-h:#4a3818;--k-ag-bg:#211c12;--k-ag-on:#2a1d04}
+:root[data-view="agenda"]{--accent:var(--k-ag);--accent-2:var(--k-ag-2);--accent-soft:var(--k-ag-s);--hi:var(--k-ag-h);--bg:var(--k-ag-bg);--on-accent:var(--k-ag-on)}
+.top nav a[href="#agenda"]{--dotc:var(--k-ag)}
+#agenda .content{display:grid;gap:1.1rem}
+.agp-bar{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;align-items:center}
+.agp-grp{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+.agp-grp .f-lab{margin-right:.2rem}
+#agp-area{display:contents}
+.agp-grp button,.agp-world{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.32rem .75rem;border-radius:999px;cursor:pointer}
+.agp-grp button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.agp-grp button:hover,.agp-world:hover{border-color:var(--accent)}
+.agp-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr);gap:1rem;align-items:start}
+.agp-col{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:1rem;display:grid;gap:.6rem}
+.agp-h{margin:0;font-family:var(--display);font-size:1.15rem;font-weight:750;display:flex;align-items:center;gap:.5rem}
+.agp-i{width:.7rem;height:.7rem;border-radius:50%;background:var(--accent)}
+.agp-i.wb{background:#8a5cd6}.agp-i.sc{border-radius:3px;background:var(--k-news)}
+.agp-sub{margin:-.3rem 0 0;font-size:.86rem;color:var(--muted)}
+.agp-m{font-family:var(--mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:.4rem 0 0}
+.ag-date.yr b{font-size:.92rem}
+.agp-src{font-family:var(--mono);font-size:.66rem}
+.agp-none{padding:.4rem 0;display:grid;gap:.5rem;justify-items:start}
+@media (max-width:1000px){.agp-cols{grid-template-columns:minmax(0,1fr)}#agp-ev-box{order:-1}}
 </style>
 </head>
 <body>
@@ -955,6 +996,7 @@ body{transition:background-color .3s}
 
 <div id="build-slot" aria-hidden="true"></div>
 <div class="util"><div class="wrap">
+    <div class="area-set" id="area-set" hidden><label class="set-lab" for="area-sel">La tua area</label><select class="set" id="area-sel" aria-describedby="area-hint"><option value="">Tutto il mondo</option><option value="europa">Europa</option><option value="asia">Asia</option><option value="africa">Africa</option><option value="america">America</option><option value="oceania">Oceania</option></select><span class="area-hint" id="area-hint">eventi e scadenze vicino a te</span></div>
     <div class="settings" id="settings" role="group" aria-label="Impostazioni del sito" hidden>
       <span class="set-lab">Impostazioni</span>
       <button class="set" id="theme" type="button"><span class="ico" aria-hidden="true">◐</span><span id="theme-txt">Tema scuro</span></button>
@@ -970,6 +1012,7 @@ body{transition:background-color .3s}
       <a href="#bim-5-minuti">BIM in 5 minuti</a>
       <a href="#video">Video</a>
       <a href="#chi-sono">Il curatore</a>
+      <a href="#agenda">Agenda</a>
       <a href="#mappa">Mappa del sito</a>
     </nav>
   </div>
@@ -1059,7 +1102,7 @@ body{transition:background-color .3s}
               <div class="status-line"><span id="count" aria-live="polite"></span><button class="reset" id="reset" type="button">Azzera filtri</button></div>
             </div>
           </details>
-                  <section class="agenda" id="agenda" aria-labelledby="ag-h">
+                  <section class="agenda" id="ag-side" aria-labelledby="ag-h">
             <h3 id="ag-h">Eventi e webinar</h3>
             <div class="ag-tabs" role="group" aria-label="Tipo"><button type="button" data-k="ev" aria-pressed="true">Eventi</button><button type="button" data-k="wb" aria-pressed="false">Webinar</button></div>
             <div class="ag-tools"><button type="button" class="ag-geo" id="ag-geo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Il più vicino a me</span></button></div>
@@ -1110,6 +1153,23 @@ body{transition:background-color .3s}
       <h3 class="vd-h">Canali YouTube sul BIM</h3>
       <div class="vd-grid ch" id="ch-list"></div>
       <p class="vd-note">I video si aprono su YouTube: non li incorporiamo nel sito, così nessun cookie di terze parti viene caricato finché non scegli tu di guardarli. L'elenco cresce ogni settimana insieme alla rassegna; per i sottotitoli in italiano puoi usare la traduzione automatica di YouTube.</p>
+    </div>
+  </section>
+
+  <section id="agenda">
+    <div class="content">
+      <h2>Agenda</h2>
+      <p class="lead">Tutto quello che sta per arrivare nel mondo del BIM, in un posto solo: le scadenze delle norme, gli eventi in presenza e i webinar online. Ogni appuntamento ha il link alla pagina ufficiale, la data e il costo.</p>
+      <div class="agp-bar">
+        <div class="agp-grp" role="group" aria-label="Area geografica"><span class="f-lab">Area</span><span id="agp-area"></span></div>
+        <div class="agp-grp" role="group" aria-label="Costo"><span class="f-lab">Costo</span><button type="button" data-pr="" aria-pressed="true">Tutti</button><button type="button" data-pr="free" aria-pressed="false">Gratuiti</button><button type="button" data-pr="paid" aria-pressed="false">A pagamento</button><button type="button" data-pr="verify" aria-pressed="false">Da verificare</button></div>
+      </div>
+      <div class="agp-cols">
+        <div class="agp-col" id="agp-sc-box"><h3 class="agp-h"><span class="agp-i sc" aria-hidden="true"></span>Scadenze normative</h3><p class="agp-sub">Obblighi BIM che entrano in vigore, paese per paese.</p><ol class="ag-list" id="agp-sc"></ol></div>
+        <div class="agp-col" id="agp-ev-box"><h3 class="agp-h"><span class="agp-i ev" aria-hidden="true"></span>Eventi</h3><p class="agp-sub">Fiere, congressi e conferenze in presenza.</p><ol class="ag-list" id="agp-ev"></ol></div>
+        <div class="agp-col" id="agp-wb-box"><h3 class="agp-h"><span class="agp-i wb" aria-hidden="true"></span>Webinar</h3><p class="agp-sub">Online: si seguono da qualunque paese.</p><ol class="ag-list" id="agp-wb"></ol></div>
+      </div>
+      <p class="ag-note">Date, luoghi e costi sono verificati sulle pagine ufficiali quando li inseriamo: controllali sempre prima di iscriverti. Le scadenze riportano la fonte della norma o della notizia. L'area che scegli qui vale per tutto il sito: la trovi anche in alto, nella barra delle impostazioni, e resta salvata solo nel tuo browser.</p>
     </div>
   </section>
 
@@ -1628,7 +1688,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>78 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>79 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -2152,7 +2212,7 @@ $("back").addEventListener("click",function(){location.hash="bim-news"});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("reader").hidden)location.hash="bim-news"});
 
 // pagine: #chi-sono, #wip, ... ; nessun indirizzo = home; #settimana-AAAA-MM-GG apre la settimana dentro BIM News
-var VIEWS=["chi-sono","portfolio","studio","proposte","wip","bim-5-minuti","bim-news","fuori","libri","video","mappa"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",proposte:"proposte",wip:"wip",fuori:"fuori",libri:"libri"},SEEN={};
+var VIEWS=["chi-sono","portfolio","studio","proposte","wip","bim-5-minuti","bim-news","fuori","libri","video","agenda","mappa"],SUB={"chi-sono":"profilo",portfolio:"portfolio",studio:"studio",proposte:"proposte",wip:"wip",fuori:"fuori",libri:"libri"},SEEN={};
 function view(){var h=location.hash.slice(1),wk=/^settimana-/.test(h),v=wk?"bim-news":(VIEWS.indexOf(h)>-1?h:"home");
   // BIM & AI: stessa pagina di BIM News, filtrata sulle notizie con tag AI
   var ai=h==="bim-ai";if(ai)v="bim-news";
@@ -2230,7 +2290,7 @@ new MutationObserver(function(){loadHeavy()}).observe(r,{attributes:true,attribu
 
 latest();render();ranking();view();
 // mappa del sito: albero apribile, collegamenti alle pagine, linee curve disegnate sul posto
-var SITEMAP={"t": "Il sito", "d": "BIM News, la rassegna sul BIM nel mondo, a cura di Marco Scigliuolo: un sito inclusivo, perché tutti adottino il BIM", "h": "#home", "c": [{"t": "BIM News", "k": "k-news", "d": "La rassegna settimanale dal mondo, con la mappa interattiva", "h": "#bim-news", "c": [{"t": "Ultimo aggiornamento", "d": "Le notizie della settimana più recente", "h": "#bim-news", "e": "latest"}, {"t": "Come scegliamo le notizie", "d": "I criteri della selezione, a partire dall'inclusività", "h": "#bim-news", "e": "all-intro"}, {"t": "Mappa del mondo", "d": "Continenti, paesi e regioni con il numero di notizie", "h": "#bim-news", "e": "map"}, {"t": "Archivio dal 2015", "d": "Tutte le notizie per anno e mese, con filtri e ricerca", "h": "#bim-news", "e": "m-nav"}, {"t": "Eventi e webinar", "d": "I prossimi appuntamenti, anche quelli più vicini a te", "h": "#bim-news", "e": "agenda"}]}, {"t": "BIM & AI", "k": "k-ai", "d": "Le notizie in cui il BIM incontra l'intelligenza artificiale", "h": "#bim-ai"}, {"t": "BIM in 5 minuti", "k": "k-b5", "d": "Che cos'è il BIM, spiegato semplice, con la timeline delle norme", "h": "#bim-5-minuti"}, {"t": "Video", "k": "k-vid", "d": "Webinar registrati e canali gratuiti sul BIM", "h": "#video", "c": [{"t": "Webinar e conferenze", "d": "Registrazioni gratuite in quattro lingue", "h": "#video", "e": "vd-list"}, {"t": "Canali YouTube", "d": "I canali che parlano di BIM", "h": "#video", "e": "ch-list"}]}, {"t": "Il curatore", "k": "k-cur", "d": "Chi cura il sito: profilo, progetti, idee e passioni", "h": "#chi-sono", "c": [{"t": "Profilo", "d": "Chi sono, percorso, competenze e strumenti", "h": "#chi-sono"}, {"t": "Portfolio", "d": "I progetti a cui ho lavorato", "h": "#portfolio"}, {"t": "Nello studio", "d": "Riflessioni, soluzioni e manuali per chi progetta", "h": "#studio", "c": [{"t": "Riflessioni", "d": "Che cosa vuol dire essere ingegnere", "h": "#studio", "tab": 0}, {"t": "I problemi della progettazione", "d": "Dodici problemi frequenti, da risolvere uno per uno", "h": "#studio", "tab": 1}, {"t": "Ottimizzazione per il BIM", "d": "Script per ridurre il lavoro ripetitivo nella modellazione", "h": "#studio", "tab": 2}, {"t": "Ottimizzazione per AutoCAD", "d": "Routine e script da copiare o scaricare", "h": "#studio", "tab": 3}, {"t": "I manuali di Claude", "d": "Manuali professionali scritti con Claude su mie indicazioni", "h": "#studio", "tab": 4}]}, {"t": "Le mie proposte", "d": "Idee per il mondo del BIM", "h": "#proposte"}, {"t": "Work in progress", "d": "I lavori in corso", "h": "#wip"}, {"t": "Fuori dallo studio", "d": "Passioni, riflessioni e manuali non professionali", "h": "#fuori", "c": [{"t": "La musica", "d": "Esplorazione e disciplina", "h": "#fuori", "e": "fuori-musica", "box": "fuori", "tab": 0}, {"t": "I miei libri", "d": "I libri che mi hanno formato", "h": "#fuori", "e": "fuori-libri", "box": "fuori", "tab": 0}, {"t": "Essere ingegnere", "d": "Come ci si vede e ci si sente", "h": "#fuori", "e": "fuori-ingegnere", "box": "fuori", "tab": 0}, {"t": "Lo scautismo", "d": "Un'altra parte di me", "h": "#fuori", "e": "fuori-scout", "box": "fuori", "tab": 0}, {"t": "I manuali di Claude", "d": "Manuali non professionali: suono, chitarra, basso", "h": "#fuori", "box": "fuori", "tab": 1}]}, {"t": "I miei libri", "d": "Sei categorie di letture fondamentali", "h": "#libri", "c": [{"t": "Crescita personale e psicologia", "d": "Capire le persone, a partire da sé", "h": "#libri", "e": "libri-01"}, {"t": "Romanzi", "d": "Le storie che restano", "h": "#libri", "e": "libri-02"}, {"t": "Poesia", "d": "Le raccolte a cui torno", "h": "#libri", "e": "libri-03"}, {"t": "Saggistica", "d": "I saggi che cambiano il modo di ragionare", "h": "#libri", "e": "libri-04"}, {"t": "Arte e fotografia", "d": "Imparare a guardare", "h": "#libri", "e": "libri-05"}, {"t": "Economia", "d": "Capire l'economia, oltre gli slogan", "h": "#libri", "e": "libri-06"}]}]}]};
+var SITEMAP={"t": "Il sito", "d": "BIM News, la rassegna sul BIM nel mondo, a cura di Marco Scigliuolo: un sito inclusivo, perché tutti adottino il BIM", "h": "#home", "c": [{"t": "BIM News", "k": "k-news", "d": "La rassegna settimanale dal mondo, con la mappa interattiva", "h": "#bim-news", "c": [{"t": "Ultimo aggiornamento", "d": "Le notizie della settimana più recente", "h": "#bim-news", "e": "latest"}, {"t": "Come scegliamo le notizie", "d": "I criteri della selezione, a partire dall'inclusività", "h": "#bim-news", "e": "all-intro"}, {"t": "Mappa del mondo", "d": "Continenti, paesi e regioni con il numero di notizie", "h": "#bim-news", "e": "map"}, {"t": "Archivio dal 2015", "d": "Tutte le notizie per anno e mese, con filtri e ricerca", "h": "#bim-news", "e": "m-nav"}, {"t": "Eventi e webinar", "d": "I prossimi appuntamenti, accanto alle notizie", "h": "#bim-news", "e": "ag-side"}]}, {"t": "BIM & AI", "k": "k-ai", "d": "Le notizie in cui il BIM incontra l'intelligenza artificiale", "h": "#bim-ai"}, {"t": "BIM in 5 minuti", "k": "k-b5", "d": "Che cos'è il BIM, spiegato semplice, con la timeline delle norme", "h": "#bim-5-minuti"}, {"t": "Video", "k": "k-vid", "d": "Webinar registrati e canali gratuiti sul BIM", "h": "#video", "c": [{"t": "Webinar e conferenze", "d": "Registrazioni gratuite in quattro lingue", "h": "#video", "e": "vd-list"}, {"t": "Canali YouTube", "d": "I canali che parlano di BIM", "h": "#video", "e": "ch-list"}]}, {"t": "Agenda", "k": "k-ag", "d": "Scadenze normative, eventi e webinar in arrivo, filtrati per area", "h": "#agenda", "c": [{"t": "Scadenze normative", "d": "Gli obblighi BIM che entrano in vigore, paese per paese", "h": "#agenda", "e": "agp-sc-box"}, {"t": "Eventi", "d": "Fiere, congressi e conferenze, mese per mese", "h": "#agenda", "e": "agp-ev-box"}, {"t": "Webinar", "d": "Appuntamenti online, gratuiti e a pagamento", "h": "#agenda", "e": "agp-wb-box"}]}, {"t": "Il curatore", "k": "k-cur", "d": "Chi cura il sito: profilo, progetti, idee e passioni", "h": "#chi-sono", "c": [{"t": "Profilo", "d": "Chi sono, percorso, competenze e strumenti", "h": "#chi-sono"}, {"t": "Portfolio", "d": "I progetti a cui ho lavorato", "h": "#portfolio"}, {"t": "Nello studio", "d": "Riflessioni, soluzioni e manuali per chi progetta", "h": "#studio", "c": [{"t": "Riflessioni", "d": "Che cosa vuol dire essere ingegnere", "h": "#studio", "tab": 0}, {"t": "I problemi della progettazione", "d": "Dodici problemi frequenti, da risolvere uno per uno", "h": "#studio", "tab": 1}, {"t": "Ottimizzazione per il BIM", "d": "Script per ridurre il lavoro ripetitivo nella modellazione", "h": "#studio", "tab": 2}, {"t": "Ottimizzazione per AutoCAD", "d": "Routine e script da copiare o scaricare", "h": "#studio", "tab": 3}, {"t": "I manuali di Claude", "d": "Manuali professionali scritti con Claude su mie indicazioni", "h": "#studio", "tab": 4}]}, {"t": "Le mie proposte", "d": "Idee per il mondo del BIM", "h": "#proposte"}, {"t": "Work in progress", "d": "I lavori in corso", "h": "#wip"}, {"t": "Fuori dallo studio", "d": "Passioni, riflessioni e manuali non professionali", "h": "#fuori", "c": [{"t": "La musica", "d": "Esplorazione e disciplina", "h": "#fuori", "e": "fuori-musica", "box": "fuori", "tab": 0}, {"t": "I miei libri", "d": "I libri che mi hanno formato", "h": "#fuori", "e": "fuori-libri", "box": "fuori", "tab": 0}, {"t": "Essere ingegnere", "d": "Come ci si vede e ci si sente", "h": "#fuori", "e": "fuori-ingegnere", "box": "fuori", "tab": 0}, {"t": "Lo scautismo", "d": "Un'altra parte di me", "h": "#fuori", "e": "fuori-scout", "box": "fuori", "tab": 0}, {"t": "I manuali di Claude", "d": "Manuali non professionali: suono, chitarra, basso", "h": "#fuori", "box": "fuori", "tab": 1}]}, {"t": "I miei libri", "d": "Sei categorie di letture fondamentali", "h": "#libri", "c": [{"t": "Crescita personale e psicologia", "d": "Capire le persone, a partire da sé", "h": "#libri", "e": "libri-01"}, {"t": "Romanzi", "d": "Le storie che restano", "h": "#libri", "e": "libri-02"}, {"t": "Poesia", "d": "Le raccolte a cui torno", "h": "#libri", "e": "libri-03"}, {"t": "Saggistica", "d": "I saggi che cambiano il modo di ragionare", "h": "#libri", "e": "libri-04"}, {"t": "Arte e fotografia", "d": "Imparare a guardare", "h": "#libri", "e": "libri-05"}, {"t": "Economia", "d": "Capire l'economia, oltre gli slogan", "h": "#libri", "e": "libri-06"}]}]}]};
 (function(){var root=$("mm"),svg=$("mm-lines"),wrap=$("mm-wrap");if(!root)return;var uid=0;
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
 function build(n,depth,k){var li=document.createElement("li"),kids=n.c||[],cls=n.k||k||"";li.setAttribute("role","treeitem");if(cls)li.className=cls;
@@ -2284,6 +2344,8 @@ document.querySelectorAll(".vd-bar button").forEach(function(b){b.addEventListen
 
 // eventi e webinar: i passati spariscono da soli; prima quelli della zona scelta sulla mappa o i più vicini a te
 var AGENDA=[{"k": "ev", "t": "Restructura 2026", "d": "2026-11-12", "e": "2026-11-14", "city": "Torino · Lingotto Fiere", "n": "Italia", "c": "europa", "lat": 45.031, "lon": 7.666, "pr": "free", "pn": "Ingresso gratuito per gli operatori del settore, con registrazione", "u": "https://www.restructura.com/", "x": "Recupero, riqualificazione e restauro dell'esistente, con tecnologie digitali e AI."}, {"k": "ev", "t": "Big 5 Global 2026", "d": "2026-11-23", "e": "2026-11-26", "city": "Dubai · World Trade Centre", "n": "Emirati Arabi Uniti", "c": "asia", "lat": 25.225, "lon": 55.287, "pr": "paid", "pn": "Biglietto a pagamento; gratuito con l'invito di un espositore", "u": "https://www.big5global.com/", "x": "La grande fiera delle costruzioni del Medio Oriente, con spazi dedicati al digitale."}, {"k": "ev", "t": "BIM World Munich 2026", "d": "2026-11-24", "e": "2026-11-25", "city": "Monaco di Baviera · ICM", "n": "Germania", "c": "europa", "lat": 48.138, "lon": 11.699, "pr": "free", "pn": "Biglietto gratuito con il codice di un partner (ad es. Bayern Innovativ)", "u": "https://www.bim-world.de/", "x": "Fiera e congresso tedesco del BIM e della digitalizzazione delle costruzioni, decima edizione."}, {"k": "ev", "t": "BAU 2027", "d": "2027-01-11", "e": "2027-01-15", "city": "Monaco di Baviera · Messe München", "n": "Germania", "c": "europa", "lat": 48.135, "lon": 11.7, "pr": "verify", "pn": "Costo del biglietto da verificare sul sito", "u": "https://bau-muenchen.com/", "x": "La fiera mondiale di architettura, materiali e sistemi, ogni due anni, con ampio spazio al digitale."}, {"k": "ev", "t": "Digital Construction Week 2027", "d": "2027-06-23", "e": "2027-06-24", "city": "Londra · ExCeL", "n": "Regno Unito", "c": "europa", "lat": 51.508, "lon": 0.029, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://digitalconstructionweek.com/", "x": "Due giorni sulla costruzione digitale, con un'area dedicata alla gestione informativa."}, {"k": "wb", "t": "BIMbrunch online · Archicad", "d": "2026-11-27", "e": "2026-12-16", "when": "27 novembre, 9 e 16 dicembre · 15:00–17:30", "org": "Fermat Design, rivenditore Graphisoft", "lang": "Italiano", "pr": "free", "pn": "Gratuito, con prenotazione", "u": "https://www.fermatdesign.it/", "x": "Incontri pratici su Archicad: stratigrafie, porte e finestre, viste e impaginazione."}, {"k": "wb", "t": "From BIM to Digital Twins", "d": "2026-12-09", "e": "2026-12-09", "when": "9 dicembre", "org": "Oxford Brookes University", "lang": "Inglese", "pr": "verify", "pn": "Costo da verificare: la pagina non lo indica", "u": "https://www.brookes.ac.uk/open-days/pg-webinars/2027/from-bim-to-digital-twins-practical-workflows-for", "x": "Flussi di lavoro pratici dal modello BIM al gemello digitale, per una costruzione guidata dai dati."}, {"k": "wb", "t": "Building Information Modeling · corso virtuale AGC", "d": "2026-12-14", "e": "2026-12-14", "when": "14 dicembre", "org": "Associated General Contractors of America", "lang": "Inglese", "pr": "paid", "pn": "A pagamento: 1.695 $ per i soci, 2.075 $ per gli altri", "u": "https://business.nwagc.org/ap/Events/Register/QZFya4mhdCnC0", "x": "Corso online su Zoom per imprese e tecnici di cantiere."}, {"k": "ev", "t": "Sommet BIM+ 2026", "d": "2026-11-17", "e": "2026-11-18", "city": "Québec · Centre des congrès", "n": "Canada", "c": "america", "lat": 46.809, "lon": -71.212, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://www.sqi.gouv.qc.ca/feuille-de-route-gouvernementale-pour-le-bim/sommet-bim", "x": "Il vertice della roadmap governativa BIM del Québec per le infrastrutture."}, {"k": "ev", "t": "Ruta BIM 2026", "d": "2026-11-17", "e": "2026-11-17", "city": "Quito · Swissôtel", "n": "Ecuador", "c": "america", "lat": -0.196, "lon": -78.484, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://rutabim.bimforum.ec/", "x": "Conferenze internazionali e confronto pubblico sul BIM in Ecuador, del BIM Forum Ecuador."}, {"k": "ev", "t": "Conferenza BIM/CIM · Sapporo", "d": "2026-11-26", "e": "2026-11-26", "city": "Sapporo", "n": "Giappone", "c": "asia", "lat": 43.062, "lon": 141.354, "pr": "free", "pn": "Gratuita", "u": "https://prtimes.jp/main/html/rd/p/000000008.000181525.html", "x": "Conferenza gratuita su BIM/CIM dell'ente giapponese per le indagini sui prezzi delle costruzioni; seguono Morioka e Hiroshima."}];
+// scadenze normative in arrivo: d = data di entrata in vigore; when = data leggibile se il giorno non è noto
+var SCADENZE=[{"d": "2027-01-01", "c": "europa", "n": "Cechia", "t": "Repubblica Ceca: BIM obbligatorio nei grandi progetti pubblici", "x": "I progetti pubblici oltre 135 milioni di corone (circa 5,4 milioni di euro) devono usare il BIM per tutto il ciclo di vita dell'edificio.", "u": "https://public-buyers-community.ec.europa.eu/communities/bim-and-public-procurement/news/czech-republic-adopts-bim-mandate-major-public", "f": "Commissione europea"}, {"d": "2027-10-01", "c": "europa", "n": "Spagna", "t": "Spagna: livello BIM avanzato negli appalti dello Stato", "x": "Plan BIM: le gare dell'amministrazione statale da 5.382.000 € in su richiedono il livello BIM «avanzato», quelle tra 2 e 5,38 milioni il livello «medio».", "u": "https://www.boe.es/boe/dias/2023/07/20/pdfs/BOE-A-2023-16784.pdf", "f": "BOE, Orden PCM/818/2023"}, {"d": "2028-01-01", "when": "nel 2028", "c": "asia", "n": "Corea del Sud", "t": "Corea del Sud: BIM nelle opere pubbliche da 30 miliardi di won", "x": "Secondo la roadmap del Ministero del 2022, la soglia dell'obbligo BIM scende da 50 a 30 miliardi di won.", "u": "https://www.kmjournal.net/news/articleView.html?idxno=13703", "f": "KMJ (coreano)"}, {"d": "2029-04-01", "when": "primavera 2029", "c": "asia", "n": "Giappone", "t": "Giappone: permessi di costruire verificati sul modello IFC", "x": "Il ministero punta ad avviare la «verifica dei dati BIM»: l'istruttoria si farà direttamente sul file IFC, con controlli automatici.", "u": "https://news.build-app.jp/article/42787/", "f": "BuildApp News (giapponese)"}, {"d": "2030-01-01", "when": "nel 2030", "c": "asia", "n": "Corea del Sud", "t": "Corea del Sud: BIM in tutte le opere pubbliche", "x": "Ultima tappa della roadmap: l'obbligo BIM si estende a tutte le opere pubbliche.", "u": "https://www.kmjournal.net/news/articleView.html?idxno=13703", "f": "KMJ (coreano)"}, {"d": "2030-04-01", "c": "europa", "n": "Spagna", "t": "Spagna: livello BIM integrato negli appalti dello Stato", "x": "Plan BIM: le gare statali da 5.382.000 € in su passano al livello «integrato», quelle tra 2 e 5,38 milioni al livello «avanzato».", "u": "https://www.boe.es/boe/dias/2023/07/20/pdfs/BOE-A-2023-16784.pdf", "f": "BOE, Orden PCM/818/2023"}];
 (function(){var K="ev",POS=null,MM=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"],PR={free:"Gratuito",paid:"A pagamento",verify:"Costo da verificare"};
 function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
 function km(a){if(!POS||a.lat==null)return null;var R=6371,r=Math.PI/180,dl=(a.lat-POS[0])*r,dn=(a.lon-POS[1])*r,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(POS[0]*r)*Math.cos(a.lat*r)*Math.sin(dn/2)*Math.sin(dn/2);return Math.round(2*R*Math.asin(Math.sqrt(x)))}
@@ -2305,12 +2367,39 @@ $("ag-geo").addEventListener("click",function(){var b=this;if(POS){POS=null;b.se
   $("ag-ctx").textContent="Cerco la tua posizione…";
   navigator.geolocation.getCurrentPosition(function(p){POS=[p.coords.latitude,p.coords.longitude];b.setAttribute("aria-pressed","true");agendaRender()},function(){$("ag-ctx").textContent="Posizione non disponibile: per vedere gli eventi di una zona, scegli un paese sulla mappa."},{maximumAge:600000,timeout:15000})});
 agendaRender();
-// home: striscia con prossimo evento, prossimo webinar e gli altri appuntamenti in arrivo
-(function(){var box=$("fc-strip");if(!box)return;var L=list().slice().sort(function(a,b){return a.d<b.d?-1:1});if(!L.length)return;
-  var ev=L.filter(function(a){return a.k==="ev"})[0],wb=L.filter(function(a){return a.k==="wb"})[0],rest=L.filter(function(a){return a!==ev&&a!==wb}).slice(0,2);
-  function cell(a,lab){return '<div class="fs-it '+a.k+'"><span class="fs-lab">'+lab+'</span><a class="fs-t" href="'+esc(a.u)+'" target="_blank" rel="noopener" title="'+esc(a.t)+'">'+esc(a.t)+' ↗</a><span class="fs-w"><span>'+esc(span(a))+' · '+esc(a.k==="ev"?a.city.split(" · ")[0]:"online")+'</span><span class="ag-pr '+a.pr+'" title="'+esc(a.pn)+'">'+PR[a.pr]+'</span></span></div>'}
-  var h=(ev?cell(ev,"Prossimo evento"):"")+(wb?cell(wb,"Prossimo webinar"):"")+rest.map(function(a){return cell(a,a.k==="ev"?"Poi, evento":"Poi, webinar")}).join("");
-  box.innerHTML=h;box.hidden=false})();
+// area scelta (barra delle impostazioni): filtra la striscia della home e la pagina Agenda
+var AR={"":"Tutto il mondo",europa:"Europa",asia:"Asia",africa:"Africa",america:"America",oceania:"Oceania"},AREA="";
+try{AREA=localStorage.getItem("area")||""}catch(x){}if(!(AREA in AR))AREA="";
+function inArea(a){return !AREA||a.c===AREA||a.c==="mondo"}
+function setArea(v){AREA=v in AR?v:"";try{localStorage.setItem("area",AREA)}catch(x){}var sel=$("area-sel");if(sel)sel.value=AREA;strip();page()}
+(function(){var sel=$("area-sel");if(!sel)return;sel.value=AREA;sel.addEventListener("change",function(){setArea(sel.value)});$("area-set").hidden=false})();
+function scList(){var t=today();return (typeof SCADENZE!=="undefined"?SCADENZE:[]).filter(function(a){return a.d>=t||(a.when&&a.d.slice(0,4)>=t.slice(0,4))}).sort(function(a,b){return a.d<b.d?-1:1})}
+function scWhen(a){if(a.when)return a.when;var d=a.d.split("-");return "dal "+(+d[2]===1?"1°":+d[2])+" "+MM[+d[1]-1]+" "+d[0]}
+function first(L,f){var a=L.filter(function(x){return inArea(x)&&f(x)})[0];if(a)return [a,false];a=L.filter(f)[0];return a?[a,true]:null}
+// home: prossimo evento gratuito, a pagamento, prossimo webinar, prossima scadenza e il tasto per l'agenda
+function strip(){var box=$("fc-strip");if(!box)return;var L=list().slice().sort(function(a,b){return a.d<b.d?-1:1});
+  function cell(r,lab,k){if(!r)return "";var a=r[0],far=r[1]&&AREA;return '<div class="fs-it '+k+'"><span class="fs-lab">'+lab+(far?' · nel mondo':'')+'</span><a class="fs-t" href="'+esc(a.u)+'" target="_blank" rel="noopener" title="'+esc(a.t)+'">'+esc(a.t)+' ↗</a><span class="fs-w"><span>'+(k==="sc"?esc(scWhen(a))+' · '+esc(a.n||"Globale"):esc(span(a))+' · '+esc(a.k==="ev"?a.city.split(" · ")[0]:"online"))+'</span>'+(k==="sc"?'':'<span class="ag-pr '+a.pr+'" title="'+esc(a.pn)+'">'+PR[a.pr]+'</span>')+'</span></div>'}
+  var ev=function(x){return x.k==="ev"},fr=first(L,function(x){return ev(x)&&x.pr==="free"}),pd=first(L,function(x){return ev(x)&&x.pr==="paid"});
+  var pdLab="Prossimo evento a pagamento";if(!pd||(pd[1]&&AREA)){var vf=first(L,function(x){return ev(x)&&x.pr==="verify"});if(vf&&(!pd||!vf[1])){pd=vf;pdLab="Prossimo evento · costo da verificare"}}
+  var wb=L.filter(function(x){return x.k==="wb"})[0],sc=first(scList(),function(){return true});
+  box.innerHTML=cell(fr,"Prossimo evento gratuito","ev")+cell(pd,pdLab,"ev")+cell(wb?[wb,false]:null,"Prossimo webinar","wb")+cell(sc,"Prossima scadenza","sc")+'<a class="fs-all" href="#agenda">Tutti gli appuntamenti <span aria-hidden="true">→</span></a>';
+  box.setAttribute("aria-label","Prossimi appuntamenti"+(AREA?" in "+AR[AREA]:""));box.hidden=false}
+// pagina Agenda
+var APR="";
+function item(a,sc){var d=a.d.split("-"),yr=sc&&a.when;
+  return '<li class="ag-it"><span class="ag-date'+(sc?' yr':'')+'"><b>'+(sc?d[0]:+d[2])+'</b><small>'+(yr?(a.when.indexOf("primavera")>-1?"prim.":"anno"):MM[+d[1]-1])+'</small></span><span class="ag-t"><a href="'+esc(a.u)+'" target="_blank" rel="noopener">'+esc(a.t)+' ↗</a></span><span class="ag-w">'+(sc?esc(scWhen(a))+' · '+esc(a.n||"Globale")+'<br>'+esc(a.x)+'<br><span class="agp-src">Fonte: '+esc(a.f)+'</span>':esc(span(a))+' · '+esc(a.k==="ev"?a.city:"Online, "+a.lang+(a.org?" · "+a.org:""))+'<br>'+esc(a.x))+'</span>'+(sc?'':'<span class="ag-tags"><span class="ag-pr '+a.pr+'" title="'+esc(a.pn)+'">'+PR[a.pr]+'</span></span>')+'</li>'}
+function page(){if(!$("agp-ev"))return;
+  $("agp-area").innerHTML=Object.keys(AR).map(function(k){return '<button type="button" data-a="'+k+'" aria-pressed="'+(k===AREA)+'">'+AR[k]+'</button>'}).join("");
+  var none=function(w){return '<li class="ag-w agp-none">'+w+(AREA?' <button type="button" class="agp-world" data-a="">Mostra tutto il mondo</button>':'')+'</li>'};
+  var sc=scList().filter(inArea);$("agp-sc").innerHTML=sc.length?sc.map(function(a){return item(a,true)}).join(""):none("Nessuna scadenza in "+AR[AREA]+" per ora.");
+  var cost=function(a){return !APR||a.pr===APR},L=list().slice().sort(function(a,b){return a.d<b.d?-1:1});
+  var ev=L.filter(function(a){return a.k==="ev"&&inArea(a)&&cost(a)}),last="",h="";
+  ev.forEach(function(a){var m=a.d.slice(0,7);if(m!==last){last=m;var q=m.split("-");h+='<li class="agp-m">'+["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"][+q[1]-1]+' '+q[0]+'</li>'}h+=item(a,false)});
+  $("agp-ev").innerHTML=h||none("Nessun evento"+(AREA?" in "+AR[AREA]:"")+(APR?" con questo costo":"")+" per ora: il curatore aggiorna l'elenco ogni settimana.");
+  var wb=L.filter(function(a){return a.k==="wb"&&cost(a)});$("agp-wb").innerHTML=wb.length?wb.map(function(a){return item(a,false)}).join(""):'<li class="ag-w agp-none">Nessun webinar con questo costo per ora.</li>'}
+document.addEventListener("click",function(e){var b=e.target.closest("#agenda [data-a]");if(b){setArea(b.dataset.a);return}
+  b=e.target.closest("#agenda [data-pr]");if(b){APR=b.dataset.pr;document.querySelectorAll("#agenda [data-pr]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});page()}});
+strip();page();
 })();
 
 // prima pagina: la mappa di BIM News si sposta nella facciata e torna al suo posto sulle altre pagine
