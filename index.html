@@ -699,6 +699,44 @@ body{transition:background-color .3s}
 .pf-soon{border:1px dashed var(--accent);border-radius:var(--r);background:var(--surface);padding:1rem 1.2rem;color:var(--muted);margin:0}
 #portfolio>.sub-h{display:none}
 @media (max-width:700px){.pf-hero{grid-template-columns:minmax(0,1fr);padding:1.4rem}.pf-hero .pf-art{order:-1;justify-self:center;max-width:16rem}}
+
+/* ===== prima pagina: facciata divisa, a sinistra le pagine, a destra la mappa ===== */
+.facade{display:none}
+:root[data-view="home"] .facade{display:grid}
+:root[data-view="home"] #bim-news .content>*:not(.facade),:root[data-view="home"] .previews{display:none!important}
+:root[data-view="home"] #bim-news{border-top:0;padding-block:1.6rem 2.4rem}
+.facade{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:2rem 2.6rem;align-items:center;min-height:calc(100vh - 12rem)}
+.fc-left{display:grid;gap:.9rem;align-content:center;min-width:0}
+.fc-h{font-family:var(--display);font-weight:800;font-size:clamp(3rem,7vw,5rem);line-height:.95;margin:.1rem 0 0;color:var(--ink);letter-spacing:-.015em}
+.fc-by{margin:0;font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.fc-by a{color:var(--accent)}
+.fc-p{margin:.2rem 0 .4rem;font-size:1.12rem;color:var(--ink);max-width:28rem}
+.fc-nav{display:grid;gap:.6rem;max-width:27rem}
+.fc-btn{display:grid;grid-template-columns:2.7rem minmax(0,1fr) auto;align-items:center;gap:.9rem;padding:.75rem 1rem .75rem .8rem;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink);text-decoration:none;transition:background-color .2s,border-color .2s,box-shadow .2s,transform .2s}
+.fc-ico{width:2.7rem;height:2.7rem;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);transition:background-color .2s,color .2s}
+.fc-ico svg{width:1.35rem;height:1.35rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.fc-t{display:grid;gap:.05rem;min-width:0}
+.fc-t b{font-family:var(--display);font-size:1.15rem;font-weight:750;color:var(--accent);line-height:1.2}
+.fc-t small{font-size:.9rem;color:var(--muted);line-height:1.3}
+.fc-go{font-size:1.2rem;color:var(--accent);transition:transform .2s}
+.fc-btn:hover,.fc-btn:focus-visible{background:var(--hi);border-color:var(--accent);box-shadow:var(--shadow-hi);transform:translateX(4px)}
+.fc-btn:hover .fc-ico,.fc-btn:focus-visible .fc-ico{background:var(--accent);color:var(--on-accent)}
+.fc-btn:hover .fc-go{transform:translateX(3px)}
+.fc-upd{margin:.2rem 0 0;font-family:var(--mono);font-size:.74rem;color:var(--muted);display:flex;align-items:flex-start;gap:.5rem}
+.fc-map .ctry.has,.fc-map .ctry.inc.has{fill:color-mix(in srgb,var(--accent) 34%,var(--land))}
+.fc-map .ctry.has:hover{fill:color-mix(in srgb,var(--accent) 55%,var(--land))}
+.fc-map .ctry.sel,.fc-map .ctry.sel.inc.has{fill:var(--accent)}
+.fc-upd::before{content:"";flex:none;margin-top:.35em;width:.5rem;height:.5rem;border-radius:50%;background:#3fb27f;box-shadow:0 0 0 3px rgba(63,178,127,.18)}
+.fc-upd:empty{display:none}
+.fc-right{display:grid;gap:.7rem;min-width:0}
+.fc-map .world{margin:0}
+.fc-map .map-wrap{border-radius:22px;box-shadow:var(--shadow-hi)}
+.fc-map .map-credit{padding-inline:.4rem}
+.fc-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;padding:.2rem .4rem;font-size:.98rem;color:var(--muted)}
+.fc-open{font-family:var(--mono);font-size:.82rem;font-weight:700;background:var(--accent);color:var(--on-accent);text-decoration:none;padding:.55rem 1rem;border-radius:999px}
+.fc-open:hover{background:var(--accent-2)}
+.lite .fc-btn:hover{transform:none}
+@media (max-width:900px){.facade{grid-template-columns:minmax(0,1fr);min-height:0}.fc-nav{max-width:none}}
 </style>
 </head>
 <body>
@@ -738,6 +776,20 @@ body{transition:background-color .3s}
 
   <section id="bim-news">
     <div class="content">
+      <div class="facade">
+        <div class="fc-left">
+          <span class="bn-kick">Rassegna settimanale · il BIM nel mondo</span>
+          <h1 class="fc-h">BIM News</h1>
+          <p class="fc-by">a cura di <a href="#chi-sono">Marco Scigliuolo</a></p>
+          <p class="fc-p">Le novità sul BIM da tutto il mondo, raccolte ogni settimana e riassunte in italiano, ognuna con il link alla fonte.</p>
+          <nav class="fc-nav" aria-label="Pagine del sito"><a class="fc-btn k-news" href="#bim-news"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="fc-t"><b>BIM News</b><small>La rassegna settimanale dal mondo</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-ai" href="#bim-ai"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="fc-t"><b>BIM &amp; AI</b><small>Quando il BIM incontra l'intelligenza artificiale</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-b5" href="#bim-5-minuti"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/></svg></span><span class="fc-t"><b>BIM in 5 minuti</b><small>Che cos'è il BIM, spiegato semplice</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-cur" href="#chi-sono"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6"/></svg></span><span class="fc-t"><b>Il curatore</b><small>Chi cura il sito, profilo e progetti</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
+          <p class="fc-upd" id="fc-upd"></p>
+        </div>
+        <div class="fc-right">
+          <div class="fc-map" id="fc-map"></div>
+          <div class="fc-cta"><span id="fc-sel">Tocca un paese sulla mappa per vedere le sue notizie.</span><a class="fc-open" href="#bim-news" id="fc-open">Vedi le notizie →</a></div>
+        </div>
+      </div>
       <h1 id="news-h" class="pg-h">BIM News</h1>
       <div class="banner">
         <div class="bn-text">
@@ -1274,7 +1326,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>52 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>53 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1701,6 +1753,18 @@ mb.addEventListener("click",function(){var on=!r.classList.contains("lite");setL
 tLabel();$("settings").hidden=false})();
 
 latest();render();ranking();view();
+// prima pagina: la mappa di BIM News si sposta nella facciata e torna al suo posto sulle altre pagine
+(function(){var fig=document.querySelector("figure.world"),home=$("fc-map"),lat=$("latest");if(!fig||!home)return;
+function place(){var h=document.documentElement.dataset.view==="home";if(h&&fig.parentNode!==home)home.appendChild(fig);else if(!h&&fig.parentNode===home)lat.parentNode.insertBefore(fig,lat.nextSibling)}
+addEventListener("hashchange",function(){setTimeout(place,0)});place();
+var keys=Object.keys(WEEKS).sort(),k=keys[keys.length-1],n=ARTS.filter(function(a){return a.w===k}).length;
+$("fc-upd").textContent="Ultimo aggiornamento: "+wkLabel(k)+" · "+n+(n===1?" notizia":" notizie");
+function sync(){var w=($("map-where").textContent||"").trim(),c=(($("count").textContent||"").match(/^\d+/)||[""])[0];
+  $("fc-sel").textContent=(!w||w==="Mondo")?"Tocca un paese sulla mappa per vedere le sue notizie.":w+(c?" · "+c+(c==="1"?" notizia":" notizie"):"");
+  $("fc-open").textContent=(!w||w==="Mondo")?"Vedi tutte le notizie →":"Vedi le notizie di "+w+" →"}
+new MutationObserver(sync).observe($("map-where"),{childList:true,characterData:true,subtree:true});
+new MutationObserver(sync).observe($("count"),{childList:true,characterData:true,subtree:true});sync()})();
+
 (function(){var d=$("filters-box");function fit(){d.open=matchMedia("(min-width:901px)").matches}fit();matchMedia("(min-width:901px)").addEventListener("change",fit)})();
 // edificio sullo sfondo: si costruisce in 7,5 secondi ogni volta che si apre la home (assi, acciaio, involucro, impianti, copertura); nelle altre pagine resta completo
 (function(){var svg=$("build");if(!svg)return;var r=document.documentElement,DUR=7500;
