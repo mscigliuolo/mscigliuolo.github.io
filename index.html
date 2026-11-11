@@ -1116,16 +1116,44 @@ body{transition:background-color .3s}
 @media (max-width:640px){.brand-by{display:none}}
 
 .st-item.hl{box-shadow:0 0 0 4px var(--accent-soft);border-color:var(--accent);transition:box-shadow .3s}
+
+/* guida al sito: visita guidata della home */
+.tour-btn{border-color:var(--k-news);color:var(--k-news);font-weight:700}
+.tour-btn .ico{display:inline-grid;place-items:center;width:1.05rem;height:1.05rem;border-radius:50%;background:var(--k-news);color:#fff;font-size:.66rem}
+#tour{position:fixed;inset:0;z-index:100}
+#tour[hidden]{display:none}
+#tour svg.tour-mask{position:absolute;inset:0;width:100%;height:100%}
+.tour-dim{fill:rgba(28,36,50,.62)}
+:root[data-theme="dark"] .tour-dim{fill:rgba(0,0,0,.68)}
+.tour-ring{fill:none;stroke:#ffd166;stroke-width:3;rx:16}
+.tour-arrow{fill:none;stroke:#ffd166;stroke-width:3.5;stroke-linecap:round}
+.tour-card{position:absolute;width:min(23rem,calc(100vw - 32px));background:var(--surface);color:var(--ink);border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.35);padding:1rem 1.1rem .9rem;display:grid;gap:.55rem;border-top:6px solid #ffd166}
+.tour-card h3{margin:0;font-family:var(--display);font-size:1.15rem;line-height:1.25}
+.tour-card p{margin:0;font-size:.97rem;line-height:1.5}
+.tour-nav{display:flex;align-items:center;gap:.5rem;justify-content:space-between;margin-top:.2rem}
+.tour-nav button{font-family:var(--mono);font-size:.78rem;font-weight:700;border-radius:999px;cursor:pointer;padding:.42rem .8rem;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.tour-nav button.pri{background:var(--k-news);border-color:var(--k-news);color:#fff}
+.tour-nav button:disabled{opacity:.35;cursor:default}
+.tour-dots{display:flex;gap:.3rem}
+.tour-dots i{width:.5rem;height:.5rem;border-radius:50%;background:var(--line)}
+.tour-dots i.on{background:var(--k-news)}
+.tour-x{position:absolute;top:.5rem;right:.6rem;border:0;background:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1}
+.tour-step{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 </style>
 </head>
 <body>
 
 
 <div id="build-slot" aria-hidden="true"></div>
+<div id="tour" role="dialog" aria-modal="true" aria-labelledby="tour-h" hidden>
+  <svg class="tour-mask" aria-hidden="true"><defs><mask id="tour-hole"><rect width="100%" height="100%" fill="#fff"/><g id="tour-holes"></g></mask><marker id="tour-ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#ffd166"/></marker></defs><rect class="tour-dim" width="100%" height="100%" mask="url(#tour-hole)"/><g id="tour-rings"></g><g id="tour-arrows"></g></svg>
+  <div class="tour-card" id="tour-card"><button type="button" class="tour-x" id="tour-x" aria-label="Chiudi la guida">×</button><span class="tour-step" id="tour-step"></span><h3 id="tour-h"></h3><p id="tour-p"></p><div class="tour-nav"><button type="button" id="tour-prev" aria-label="Passo precedente">‹ Indietro</button><span class="tour-dots" id="tour-dots"></span><button type="button" class="pri" id="tour-next">Avanti ›</button></div></div>
+</div>
 <div class="util"><div class="wrap">
     <div class="area-set" id="area-set" hidden><label class="set-lab" for="area-sel">La tua area</label><select class="set" id="area-sel" aria-describedby="area-hint"><option value="">Tutto il mondo</option><option value="europa">Europa</option><option value="asia">Asia</option><option value="africa">Africa</option><option value="america">America</option><option value="oceania">Oceania</option></select><span class="area-hint" id="area-hint">eventi e scadenze vicino a te</span></div>
     <div class="settings" id="settings" role="group" aria-label="Impostazioni del sito" hidden>
       <span class="set-lab">Impostazioni</span>
+      <button class="set tour-btn" id="tour-btn" type="button" title="Una visita guidata della pagina iniziale"><span class="ico" aria-hidden="true">?</span><span>Guida al sito</span></button>
       <button class="set" id="theme" type="button"><span class="ico" aria-hidden="true">◐</span><span id="theme-txt">Tema scuro</span></button>
       <button class="set" id="mode" type="button" aria-pressed="false"><span class="ico" aria-hidden="true">◇</span><span id="mode-txt">Versione essenziale</span></button>
     </div>
@@ -1843,7 +1871,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>84 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>85 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -2453,6 +2481,48 @@ function setLite(on){r.classList.toggle("lite",on);mb.setAttribute("aria-pressed
 setLite(m?m==="essenziale":!!auto);
 mb.addEventListener("click",function(){var on=!r.classList.contains("lite");setLite(on);put("versione",on?"essenziale":"completa")});
 tLabel();$("settings").hidden=false})();
+
+// guida al sito: visita guidata della home, con zone evidenziate, frecce e descrizioni
+(function(){var T=$("tour"),btn=$("tour-btn");if(!T||!btn)return;var i=0,NS="http://www.w3.org/2000/svg";
+var STEPS=[
+ {t:["fc-nav"],h:"Le pagine del sito",p:"Qui trovi tutto quello che ti serve sul mondo del BIM: la rassegna delle notizie, il BIM e l'intelligenza artificiale, il BIM spiegato in cinque minuti, i video e chi cura il sito."},
+ {t:["fc-map"],h:"La mappa del mondo",p:"Questa è la mappa con tutte le notizie che arrivano dal mondo. I numeri dicono quante sono; tocca un continente, poi un paese e una regione per vederle."},
+ {t:["fc-strip"],h:"Eventi e agenda",p:"Questa è la barra degli eventi e dell'agenda: il prossimo evento gratuito e quello a pagamento, il prossimo webinar e la prossima scadenza normativa. Con «Tutti gli appuntamenti» apri l'agenda completa."},
+ {t:["util"],h:"Le impostazioni",p:"Qui scegli la tua area geografica, che filtra eventi e scadenze, il tema chiaro o scuro e la versione essenziale, più leggera per le connessioni lente."},
+ {t:innerWidth<700?["topnav","fc-nav"]:["fc-nav","topnav"],h:"Due modi per navigare",p:"Per muoverti nel sito puoi usare i pulsanti a sinistra oppure le schede in alto a destra: portano alle stesse pagine. Il bottone blu «BIM News» in alto a sinistra ti riporta sempre qui."}];
+function el(k){return k==="fc-nav"?document.querySelector(".fc-nav"):k==="fc-map"?document.querySelector("#fc-map .map-wrap")||$("fc-map"):k==="fc-strip"?$("fc-strip"):k==="util"?document.querySelector(".util"):k==="topnav"?document.querySelector(".top nav"):null}
+function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+function draw(){var st=STEPS[i],W=innerWidth,H=innerHeight,pad=8,R=[];
+  st.t.forEach(function(k){var e=el(k);if(!e||!e.offsetParent&&e!==document.querySelector(".util"))return;var r=e.getBoundingClientRect();R.push({x:r.left-pad,y:r.top-pad,w:r.width+2*pad,h:r.height+2*pad})});
+  var holes=$("tour-holes"),rings=$("tour-rings"),arrows=$("tour-arrows");holes.innerHTML="";rings.innerHTML="";arrows.innerHTML="";
+  R.forEach(function(r){holes.appendChild(mk("rect",{x:r.x,y:r.y,width:r.w,height:r.h,rx:16,fill:"#000"}));rings.appendChild(mk("rect",{class:"tour-ring",x:r.x,y:r.y,width:r.w,height:r.h,rx:16}))});
+  $("tour-step").textContent="Passo "+(i+1)+" di "+STEPS.length;$("tour-h").textContent=st.h;$("tour-p").textContent=st.p;
+  $("tour-dots").innerHTML=STEPS.map(function(_,j){return '<i class="'+(j===i?"on":"")+'"></i>'}).join("");
+  $("tour-prev").disabled=i===0;$("tour-next").textContent=i===STEPS.length-1?"Fine":"Avanti ›";
+  var c=$("tour-card"),cw=c.offsetWidth,ch=c.offsetHeight,g=34,r0=R[0]||{x:W/2,y:H/2,w:0,h:0},cx,cy;
+  // posizione della scheda: a destra, a sinistra, sotto o sopra la prima zona, dove c'è spazio
+  var opts=[[r0.x+r0.w+g,r0.y+r0.h/2-ch/2],[r0.x-g-cw,r0.y+r0.h/2-ch/2],[r0.x+r0.w/2-cw/2,r0.y+r0.h+g],[r0.x+r0.w/2-cw/2,r0.y-g-ch]];
+  var ok=opts.filter(function(o){return o[0]>=12&&o[0]+cw<=W-12&&o[1]>=12&&o[1]+ch<=H-12})[0];
+  if(W<700)ok=[(W-cw)/2,H-ch-12];
+  if(!ok){ok=[Math.max(12,Math.min(W-cw-12,r0.x+r0.w/2-cw/2)),Math.max(12,Math.min(H-ch-12,r0.y+r0.h-ch-16))]}
+  cx=ok[0];cy=ok[1];c.style.left=cx+"px";c.style.top=cy+"px";
+  // una freccia dalla scheda a ogni zona evidenziata
+  R.forEach(function(r){var ax=cx+cw/2,ay=cy+ch/2,tx=Math.max(r.x,Math.min(ax,r.x+r.w)),ty=Math.max(r.y,Math.min(ay,r.y+r.h));
+    var inside=ax>r.x&&ax<r.x+r.w&&ay>r.y&&ay<r.y+r.h;if(inside){tx=r.x+r.w/2;ty=r.y+12}
+    var sx=Math.max(cx,Math.min(tx,cx+cw)),sy=Math.max(cy,Math.min(ty,cy+ch));if(sx>cx&&sx<cx+cw&&sy>cy&&sy<cy+ch)sy=ty<ay?cy:cy+ch;
+    var dx=tx-sx,dy=ty-sy;if(Math.abs(dx)+Math.abs(dy)<20)return;var mx=(sx+tx)/2-dy*.18,my=(sy+ty)/2+dx*.18;
+    arrows.appendChild(mk("path",{class:"tour-arrow",d:"M"+sx+" "+sy+" Q"+mx+" "+my+" "+tx+" "+ty,"marker-end":"url(#tour-ah)"}))})}
+function go(n){i=n;var e=el(STEPS[i].t[0]);
+  if(innerWidth<700){var k0=STEPS[i].t[0];if(k0==="util"||k0==="topnav")scrollTo(0,0);else if(e)scrollBy(0,e.getBoundingClientRect().top-16);requestAnimationFrame(draw);return}if(e&&e.scrollIntoView&&STEPS[i].t[0]!=="util"){var r=e.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)e.scrollIntoView({block:"center"})}if(STEPS[i].t[0]==="util")scrollTo(0,0);requestAnimationFrame(draw)}
+function open(){if(document.documentElement.dataset.view!=="home"){location.hash="#home";setTimeout(open,350);return}T.hidden=false;document.body.style.overflow="hidden";go(0);$("tour-next").focus()}
+function close(){T.hidden=true;document.body.style.overflow="";btn.focus()}
+btn.addEventListener("click",open);$("tour-x").addEventListener("click",close);
+$("tour-prev").addEventListener("click",function(){if(i>0)go(i-1)});
+$("tour-next").addEventListener("click",function(){if(i<STEPS.length-1)go(i+1);else close()});
+T.addEventListener("click",function(e){if(e.target.closest(".tour-card"))return;if(i<STEPS.length-1)go(i+1);else close()});
+addEventListener("keydown",function(e){if(T.hidden)return;if(e.key==="Escape")close();else if(e.key==="ArrowRight")$("tour-next").click();else if(e.key==="ArrowLeft")$("tour-prev").click()});
+addEventListener("resize",function(){if(!T.hidden)draw()})})();
+
 
 // versione completa: scarica mappa ed edificio solo quando servono; la versione essenziale li salta
 (function(){var r=document.documentElement,mapDone=false,buildDone=false,wrap=document.querySelector(".map-wrap");
