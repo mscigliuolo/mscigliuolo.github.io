@@ -822,6 +822,24 @@ body{transition:background-color .3s}
 .code-head button,.code-head a{font:inherit;color:#e6edf6;background:#24384f;border:1px solid #33506e;border-radius:999px;padding:.25rem .7rem;cursor:pointer;text-decoration:none}
 .code-head button:hover,.code-head a:hover{background:#2f4a68}
 .code-box pre{margin:0;padding:.9rem 1rem;overflow:auto;max-height:28rem;font-family:var(--mono);font-size:.82rem;line-height:1.55;color:#e6edf6;tab-size:4}
+
+/* nello studio: sottoschede */
+.st-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin:.3rem 0 .2rem}
+.st-tab{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.1rem .7rem;align-items:center;text-align:left;padding:.7rem .8rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);color:var(--ink);cursor:pointer;font:inherit;transition:background-color .2s,border-color .2s,box-shadow .2s,transform .2s}
+.st-tab .ti{grid-row:span 2;width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.st-tab .ti svg{width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.st-tab b{font-family:var(--display);font-size:1rem;font-weight:750;line-height:1.2}
+.st-tab small{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.st-tab:hover{background:var(--hi);border-color:var(--accent);transform:translateY(-2px)}
+.st-tab[aria-selected="true"]{border:2px solid var(--accent);box-shadow:var(--shadow-hi)}
+.st-tab[aria-selected="true"] .ti{background:var(--accent);color:var(--on-accent)}
+.st-tab[aria-selected="true"] b{color:var(--accent)}
+.tag{white-space:nowrap}
+.st-panel[hidden]{display:none}
+.st-panel{display:grid;gap:.6rem}
+.st-panel>.cv-h{display:none}
+@media (max-width:900px){.st-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.st-tab{grid-template-columns:2rem minmax(0,1fr);padding:.6rem}.st-tab .ti{width:2rem;height:2rem}.st-tab b{font-size:.92rem}}
 </style>
 </head>
 <body>
@@ -1459,7 +1477,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>71 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>72 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -2047,6 +2065,20 @@ mb.addEventListener("click",function(){var on=!r.classList.contains("lite");setL
 tLabel();$("settings").hidden=false})();
 
 latest();render();ranking();view();
+// nello studio: le quattro sezioni diventano sottoschede, tutte visibili in alto
+(function(){var box=document.getElementById("studio");if(!box)return;var hs=[].slice.call(box.querySelectorAll(":scope>h4.cv-h"));if(hs.length<2)return;
+var IC={"Riflessioni":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.6M12 17h.01"/>',"I problemi della progettazione":'<path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5M3 16.5 12 21l9-4.5"/>',"Ottimizzazione per il BIM":'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',"Ottimizzazione per AutoCAD":'<path d="M8 7 3 12l5 5M16 7l5 5-5 5M14 4l-4 16"/>'};
+var nav=document.createElement("div");nav.className="st-tabs";nav.setAttribute("role","tablist");nav.setAttribute("aria-label","Sezioni di Nello studio");hs[0].parentNode.insertBefore(nav,hs[0]);
+var panels=hs.map(function(h,k){var pn=document.createElement("div");pn.className="st-panel";pn.id="st-pane-"+k;pn.setAttribute("role","tabpanel");h.parentNode.insertBefore(pn,h);
+  var n=h;while(n&&!(n!==h&&n.matches&&n.matches("h4.cv-h"))){var nx=n.nextElementSibling;pn.appendChild(n);n=nx}
+  var c=pn.querySelectorAll(".st-item").length,pub=pn.querySelectorAll(".tag.ok").length,t=h.textContent.trim();
+  var b=document.createElement("button");b.type="button";b.className="st-tab";b.id="st-tab-"+k;b.setAttribute("role","tab");b.setAttribute("aria-controls",pn.id);pn.setAttribute("aria-labelledby",b.id);
+  b.innerHTML='<span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true">'+(IC[t]||IC["Riflessioni"])+'</svg></span><b>'+t+'</b><small>'+(pub?pub+" pubblicat"+(pub>1?"i":"o")+" · ":"")+c+(c===1?" voce":" voci")+'</small>';
+  b.addEventListener("click",function(){sel(k,true)});nav.appendChild(b);return pn});
+function sel(k,save){panels.forEach(function(p,i){p.hidden=i!==k;nav.children[i].setAttribute("aria-selected",i===k);nav.children[i].tabIndex=i===k?0:-1});if(save){try{sessionStorage.setItem("studio-tab",k)}catch(e){}}}
+nav.addEventListener("keydown",function(e){var i=[].indexOf.call(nav.children,document.activeElement);if(i<0)return;var j=e.key==="ArrowRight"?(i+1)%panels.length:e.key==="ArrowLeft"?(i+panels.length-1)%panels.length:-1;if(j<0)return;e.preventDefault();sel(j,true);nav.children[j].focus()});
+var st=0;try{st=+sessionStorage.getItem("studio-tab")||0}catch(e){}sel(st<panels.length?st:0,false)})();
+
 // riquadri di codice: pulsante «Copia» (per gli articoli «Pubblicato e verificato»)
 document.addEventListener("click",function(e){var b=e.target.closest(".code-copy");if(!b)return;var pre=b.closest(".code-box").querySelector("pre"),t=pre.innerText;
   function ok(){var o=b.textContent;b.textContent="Copiato ✓";setTimeout(function(){b.textContent=o},1600)}
