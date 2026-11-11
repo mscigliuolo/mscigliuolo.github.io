@@ -737,6 +737,13 @@ body{transition:background-color .3s}
 .fc-open:hover{background:var(--accent-2)}
 .lite .fc-btn:hover{transform:none}
 @media (max-width:900px){.facade{grid-template-columns:minmax(0,1fr);min-height:0}.fc-nav{max-width:none}}
+
+/* mappa: mare chiaro e pallini con il numero di notizie */
+:root{--sea:#ddedfa;--land:#ffffff;--land-off:#f1f5f9}
+:root[data-theme="dark"]{--sea:#34506c;--land:#1e2e42;--land-off:#233549}
+.bdg{pointer-events:none}
+.bdg circle{fill:var(--accent);stroke:var(--surface);stroke-width:1.6px;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 1.5px rgba(20,40,70,.3))}
+.bdg text{fill:var(--on-accent);font-family:var(--display);font-weight:800;text-anchor:middle;dominant-baseline:central}
 </style>
 </head>
 <body>
@@ -1326,7 +1333,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>53 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>54 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1607,7 +1614,16 @@ function passes(a){var q=norm(state.q.trim());
 var CB={europa:[315.2, 13.1, 440.6, 88.4],asia:[390.9, 5.4, 652.8, 234.2],africa:[324.9, 66.3, 461.5, 279.1],america:[32.1, 5.7, 321.1, 339.1],oceania:[539.9, 175, 711.3, 304.4]};
 var MAP=$("map"),VB=[0,0,720,350],FULL=[0,0,720,350],anim=0;
 function still(){return document.documentElement.classList.contains("lite")||matchMedia("(prefers-reduced-motion: reduce)").matches}
-function setVB(v){VB=v;MAP.setAttribute("viewBox",v.map(function(x){return x.toFixed(1)}).join(" "))}
+function setVB(v){VB=v;MAP.setAttribute("viewBox",v.map(function(x){return x.toFixed(1)}).join(" "));bScale()}
+// pallini con il numero di notizie: baricentro dell'anello più grande di ogni forma
+var BDG=null,ANCH={"europa": "Germania", "asia": "Cina", "africa": "Repubblica Centrafricana", "america": "Stati Uniti d\u0027America", "oceania": "Australia"};
+function cen(el){if(el._c)return el._c;var best=null,ba=0;(el.getAttribute("d")||"").split("M").forEach(function(r){var n=r.match(/-?\d+(\.\d+)?/g);if(!n||n.length<6)return;var a=0,cx=0,cy=0;
+  for(var i=0;i<n.length;i+=2){var x0=+n[i],y0=+n[i+1],j=(i+2)%n.length,x1=+n[j],y1=+n[j+1],f=x0*y1-x1*y0;a+=f;cx+=(x0+x1)*f;cy+=(y0+y1)*f}
+  if(Math.abs(a)>ba&&a!==0){ba=Math.abs(a);best=[cx/(3*a),cy/(3*a)]}});el._c=best;return best}
+function bScale(){if(!BDG)return;var w=MAP.getBoundingClientRect().width||720,k=VB[2]/w;BDG.querySelectorAll(".bdg").forEach(function(g){g.setAttribute("transform","translate("+g.dataset.x+","+g.dataset.y+") scale("+k.toFixed(4)+")")})}
+function badges(list){if(!BDG){BDG=document.createElementNS("http://www.w3.org/2000/svg","g");BDG.id="badges";MAP.appendChild(BDG)}
+  BDG.innerHTML=list.map(function(b){if(!b.p)return"";var r=b.n>99?13:b.n>9?11:9.5;return'<g class="bdg" data-x="'+b.p[0].toFixed(1)+'" data-y="'+b.p[1].toFixed(1)+'"><circle r="'+r+'"/><text font-size="'+(b.n>99?10:11)+'">'+b.n+'</text></g>'}).join("");bScale()}
+addEventListener("resize",bScale);
 function target(b,mn){if(!b)return FULL.slice();mn=mn||40;var w=b[2]-b[0],h=b[3]-b[1],pad=.12,r=FULL[2]/FULL[3];w=Math.max(w*(1+2*pad),mn);h=Math.max(h*(1+2*pad),mn/r);if(w/h>r)h=w/r;else w=h*r;var cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2;return[cx-w/2,cy-h/2,w,h]}
 function zoomTo(b,mn){var to=target(b,mn),from=VB.slice();cancelAnimationFrame(anim);MAP.parentNode.parentNode.classList.toggle("is-zoomed",!!b);
   if(still()){setVB(to);return}var t0=performance.now(),D=700;
@@ -1628,6 +1644,12 @@ function regions(){var cnt={},nat={},tot=0;ARTS.forEach(function(a){if(passes(a)
   Object.keys(SUBREG).forEach(function(k){SUBREG[k].classList.toggle("on",k===state.country)});
   var rl=$("rg-list");rl.hidden=!sub;
   if(sub){var ks=Object.keys(rc).sort();rl.innerHTML='<span class="f-lab">Aree citate</span>'+(ks.length?ks.map(function(r){return'<button type="button" data-r="'+r+'" aria-pressed="'+(state.region===r)+'">'+r+'<span>'+rc[r]+'</span></button>'}).join(""):'<span class="f-lab">nessuna con questi filtri</span>')}
+  var bl=[];
+  if(sub)SUBREG[state.country].querySelectorAll(".rg").forEach(function(p){if(rc[p.dataset.r])bl.push({p:cen(p),n:rc[p.dataset.r]})});
+  else if(state.country){var ce=ctryEl(state.country);if(ce&&nat[state.country])bl.push({p:cen(ce),n:nat[state.country]})}
+  else if(state.cont)document.querySelectorAll('.ctry[data-c="'+state.cont+'"]').forEach(function(p){if(nat[p.dataset.n])bl.push({p:cen(p),n:nat[p.dataset.n]})});
+  else Object.keys(ANCH).forEach(function(k){var e=document.querySelector('.ctry[data-n="'+ANCH[k]+'"]');if(cnt[k]&&e)bl.push({p:cen(e),n:cnt[k]})});
+  badges(bl);
   $("map-where").textContent=state.country?(state.country+(state.region?" · "+state.region:"")):(state.cont?AREE[state.cont]:"Mondo");$("map-back").hidden=!state.cont;if($("z-in"))zButtons()}
 function setCont(k){PAGE=1;state.country="";state.region="";state.cont=state.cont===k?"":k;zoomTo(state.cont&&CB[state.cont]?CB[state.cont]:null);render()}
 function setCountry(p){PAGE=1;state.region="";var n=p.dataset.n;if(state.country===n){setCont(p.dataset.c==="mondo"?"":p.dataset.c);state.cont=p.dataset.c;zoomTo(CB[p.dataset.c]);render();return}
@@ -1755,7 +1777,7 @@ tLabel();$("settings").hidden=false})();
 latest();render();ranking();view();
 // prima pagina: la mappa di BIM News si sposta nella facciata e torna al suo posto sulle altre pagine
 (function(){var fig=document.querySelector("figure.world"),home=$("fc-map"),lat=$("latest");if(!fig||!home)return;
-function place(){var h=document.documentElement.dataset.view==="home";if(h&&fig.parentNode!==home)home.appendChild(fig);else if(!h&&fig.parentNode===home)lat.parentNode.insertBefore(fig,lat.nextSibling)}
+function place(){var h=document.documentElement.dataset.view==="home";if(h&&fig.parentNode!==home)home.appendChild(fig);else if(!h&&fig.parentNode===home)lat.parentNode.insertBefore(fig,lat.nextSibling);if(typeof bScale==="function")bScale()}
 addEventListener("hashchange",function(){setTimeout(place,0)});place();
 var keys=Object.keys(WEEKS).sort(),k=keys[keys.length-1],n=ARTS.filter(function(a){return a.w===k}).length;
 $("fc-upd").textContent="Ultimo aggiornamento: "+wkLabel(k)+" · "+n+(n===1?" notizia":" notizie");
