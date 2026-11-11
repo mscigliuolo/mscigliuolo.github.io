@@ -7,10 +7,14 @@
 <meta name="description" content="BIM News: le novità sul BIM dall'Alto Adige al resto del mondo, ogni settimana, con sintesi in italiano e link alle fonti. Mappa, filtri, archivio per mese, BIM in 5 minuti e timeline delle norme. A cura di Marco Scigliuolo.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%232f6db5' stroke-width='3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%232f6db5'%3EM%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/atkinson-next-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:"Archivo";src:url("fonts/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
-@font-face{font-family:"Newsreader";src:url("fonts/newsreader.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fonts/atkinson-next-latin.woff2") format("woff2");font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fonts/atkinson-next-latin-ext.woff2") format("woff2");font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fonts/atkinson-next-italic-latin.woff2") format("woff2");font-style:italic;font-weight:200 800;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fonts/atkinson-next-italic-latin-ext.woff2") format("woff2");font-style:italic;font-weight:200 800;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Atkinson Hyperlegible Mono";src:url("fonts/atkinson-mono-latin.woff2") format("woff2");font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Atkinson Hyperlegible Mono";src:url("fonts/atkinson-mono-latin-ext.woff2") format("woff2");font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 /* Layout: BIM News, rassegna a cura di Marco Scigliuolo, su griglia di progetto; sezioni ad assi A–D come in tavola; WIP come fasi di commessa; BIM News come vetrina filtrabile; chiusura a cartiglio */
 :root{
   --bg:#f2f4f7; --surface:#fbfcfd; --ink:#1b2130; --muted:#5b6577; --line:#d4dae3;
@@ -19,8 +23,8 @@
   --c-d:#2f6db5; --c-d-s:#e3ecf7; --c-e:#845a8a; --c-e-s:#f1e8f2; --c-f:#4b5563; --c-f-s:#e9ecf0;
   --hot:#d0543c; --cold:#2f7bd1; --elec:#d99a00;
   --dot:#c9d0d9; --sea:#eaeef3; --land:#fbfcfd; --land-off:#eef1f5; --border:#98a3b3;
-  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
-  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  --display:"Atkinson Hyperlegible Next",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible Next",system-ui,sans-serif;
   --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
 }
 :root[data-theme="dark"]{--bg:#0f131a;--surface:#161b24;--ink:#e7ebf1;--muted:#9aa4b5;--line:#29313e;--accent:#7fb0ec;--accent-soft:#1c2a3d;--mark:#e8b23a;--mark-ink:#1b2130;--c-a:#9bb2d1;--c-a-s:#1e2633;--c-b:#f0b955;--c-b-s:#33281a;--c-c:#5cc8bf;--c-c-s:#15302e;--c-d:#7fb0ec;--c-d-s:#1c2a3d;--c-e:#c9a0cf;--c-e-s:#2c2030;--c-f:#b5bdc9;--c-f-s:#1f242c;--hot:#ff7a62;--cold:#6aa8ff;--elec:#ffc533;--dot:#2a323f;--sea:#0b0f15;--land:#1a202b;--land-off:#131820;--border:#4d5a6c;color-scheme:dark}
@@ -612,6 +616,89 @@ input[type=search],select{border-radius:var(--r-s)}
   .bn-art{order:-1;margin:-.6rem -1.2rem .2rem;width:calc(100% + 2.4rem);max-width:none}
   .bn-p{font-size:1.08rem}}
 @media (max-width:420px){.bn-tag{display:none}}
+
+/* ===== font leggibile e un colore per ogni pagina ===== */
+:root{--display:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--body:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,Consolas,monospace;
+  --k-news:#2a78cc;--k-news-2:#1d5fa8;--k-news-s:#e5f0fb;--k-news-h:#e9f3fd;--k-news-bg:#f3f7fb;--k-news-on:#fff;
+  --k-ai:#6f55c8;--k-ai-2:#5641a8;--k-ai-s:#eeeafb;--k-ai-h:#f2eefd;--k-ai-bg:#f7f5fd;--k-ai-on:#fff;
+  --k-b5:#14857a;--k-b5-2:#0e6a61;--k-b5-s:#dcf2ee;--k-b5-h:#e6f6f2;--k-b5-bg:#f2f9f7;--k-b5-on:#fff;
+  --k-cur:#b5552f;--k-cur-2:#963f1f;--k-cur-s:#fbe9e1;--k-cur-h:#fdf0ea;--k-cur-bg:#fbf7f4;--k-cur-on:#fff;
+  --k-pf:#d39a2a;--k-pf-2:#b98216;--k-pf-s:#f8edd5;--k-pf-h:#fbf3e2;--k-pf-bg:#f3f0e9;--k-pf-on:#1b2a3e;--k-pf-navy:#1f3249;
+  --il-y:#f2c35a;--il-g:#92cfae;--il-b:#a9cdf0}
+:root[data-theme="dark"]{
+  --k-news:#7db7f2;--k-news-2:#a6cdf6;--k-news-s:#223a56;--k-news-h:#24405f;--k-news-bg:#152131;--k-news-on:#0f1c2c;
+  --k-ai:#b4a3f4;--k-ai-2:#cdc1f8;--k-ai-s:#302a52;--k-ai-h:#352e5c;--k-ai-bg:#1a1a30;--k-ai-on:#17142a;
+  --k-b5:#6fd0c3;--k-b5-2:#9adfd6;--k-b5-s:#1d3f3b;--k-b5-h:#214843;--k-b5-bg:#132524;--k-b5-on:#0d1f1d;
+  --k-cur:#f0a184;--k-cur-2:#f5bca7;--k-cur-s:#4a2c22;--k-cur-h:#533327;--k-cur-bg:#241b1a;--k-cur-on:#24130d;
+  --k-pf:#f0c060;--k-pf-2:#f5d38f;--k-pf-s:#463718;--k-pf-h:#4e3e1c;--k-pf-bg:#1d2230;--k-pf-on:#1b2a3e;--k-pf-navy:#101b2b;
+  --il-y:#c99a3e;--il-g:#4f8f72;--il-b:#4f80b3}
+body{font-size:1.06rem;line-height:1.62;letter-spacing:.005em}
+.label,.f-lab,.place,.bn-kick{letter-spacing:.06em}
+/* ogni pagina il suo colore, tenue */
+:root[data-view]{--accent:var(--k-news);--accent-2:var(--k-news-2);--accent-soft:var(--k-news-s);--hi:var(--k-news-h);--bg:var(--k-news-bg);--on-accent:var(--k-news-on)}
+:root.ai-view{--accent:var(--k-ai);--accent-2:var(--k-ai-2);--accent-soft:var(--k-ai-s);--hi:var(--k-ai-h);--bg:var(--k-ai-bg);--on-accent:var(--k-ai-on)}
+:root[data-view="bim-5-minuti"]{--accent:var(--k-b5);--accent-2:var(--k-b5-2);--accent-soft:var(--k-b5-s);--hi:var(--k-b5-h);--bg:var(--k-b5-bg);--on-accent:var(--k-b5-on)}
+:root[data-view="chi-sono"]{--accent:var(--k-cur);--accent-2:var(--k-cur-2);--accent-soft:var(--k-cur-s);--hi:var(--k-cur-h);--bg:var(--k-cur-bg);--on-accent:var(--k-cur-on)}
+:root[data-view="chi-sono"][data-sub="portfolio"]{--accent:var(--k-pf);--accent-2:var(--k-pf-2);--accent-soft:var(--k-pf-s);--hi:var(--k-pf-h);--bg:var(--k-pf-bg);--on-accent:var(--k-pf-on)}
+#chi-sono,#wip,#bim-5-minuti,#bim-news,#fuori,#contatti{--accent:inherit;--accent-soft:inherit}
+:root.ai-view .banner{--bn-a:var(--k-ai-s);--bn-b:var(--k-ai-bg)}
+:root.ai-view .bn-art{--accent:var(--k-ai)}
+body{transition:background-color .3s}
+/* menu in alto: un pallino col colore di ogni pagina */
+.top nav a{display:inline-flex;align-items:center;gap:.4rem}
+.top nav a::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--dotc,var(--muted));opacity:.85}
+.top nav a[href="#bim-news"]{--dotc:var(--k-news)}.top nav a[href="#bim-ai"]{--dotc:var(--k-ai)}.top nav a[href="#bim-5-minuti"]{--dotc:var(--k-b5)}.top nav a[href="#chi-sono"]{--dotc:var(--k-cur)}
+.top nav a[aria-current="page"]{color:var(--dotc);font-weight:700}
+/* schede con immagine */
+.k-news{--accent:var(--k-news);--accent-2:var(--k-news-2);--accent-soft:var(--k-news-s);--hi:var(--k-news-h);--on-accent:var(--k-news-on)}
+.k-ai{--accent:var(--k-ai);--accent-2:var(--k-ai-2);--accent-soft:var(--k-ai-s);--hi:var(--k-ai-h);--on-accent:var(--k-ai-on)}
+.k-b5{--accent:var(--k-b5);--accent-2:var(--k-b5-2);--accent-soft:var(--k-b5-s);--hi:var(--k-b5-h);--on-accent:var(--k-b5-on)}
+.k-cur{--accent:var(--k-cur);--accent-2:var(--k-cur-2);--accent-soft:var(--k-cur-s);--hi:var(--k-cur-h);--on-accent:var(--k-cur-on)}
+.il{display:block;width:100%;height:100%}
+.il-dec{fill:var(--il-y);opacity:.55}.il-ring{fill:none;stroke:var(--accent);stroke-width:2.5;opacity:.35}
+.il-w{fill:var(--surface);stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round}
+.il-s{fill:var(--accent);opacity:.3}.il-a{fill:var(--accent)}.il-y{fill:var(--il-y)}.il-g{fill:var(--il-g)}.il-b{fill:var(--il-b)}
+.il-l,.il-l2,.il-lk,.il-dim,.il-net,.il-arc,.il-ray,.il-gear,.il-note,.il-a2,.il-y2,.il-w2,.il-ring2{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.il-l{stroke:var(--accent);stroke-width:1.6;opacity:.55}.il-l2{stroke:var(--accent);stroke-width:2}.il-lk{stroke:var(--muted);stroke-width:2}.il-dim{stroke:var(--il-y);stroke-width:1.4}
+.il-net{stroke:var(--accent);stroke-width:1.3;opacity:.7}.il-arc{stroke:var(--il-y);stroke-width:2;stroke-dasharray:4 4}.il-ray{stroke:var(--il-y);stroke-width:2.4}
+.il-gear{stroke:var(--accent);stroke-width:4;opacity:.5}.il-note{stroke:var(--accent);stroke-width:2.2}.il-a2{stroke:var(--accent);stroke-width:3}.il-y2{stroke:var(--il-y);stroke-width:2.6}
+.il-w2{stroke:var(--surface);stroke-width:1.5;opacity:.8}.il-ring2{stroke:var(--accent);stroke-width:1.2;stroke-dasharray:2 3;opacity:.6}
+.card-img{display:block;aspect-ratio:16/10;border-radius:calc(var(--r) - 4px);background:linear-gradient(140deg,var(--accent-soft),var(--hi));overflow:hidden;transition:transform .25s}
+/* anteprime in home: una scheda per pagina, ognuna col suo colore */
+.previews{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem}
+.pv{border:1px solid var(--line);border-top:1px solid var(--line);border-radius:var(--r);padding:.75rem .75rem 1rem;background:var(--surface);box-shadow:var(--shadow);gap:.5rem;transition:background-color .2s,border-color .2s,box-shadow .2s,transform .2s}
+.pv h2,.pv p,.pv span{padding-inline:.35rem}
+.pv h2{font-size:1.35rem;color:var(--accent)}
+.pv:hover{background:var(--hi);border-color:var(--accent);box-shadow:var(--shadow-hi);transform:translateY(-3px)}
+.pv:hover .card-img{transform:scale(1.02)}
+.pv span{font-weight:700}
+/* sottosezioni del curatore come schede illustrate */
+.subnav.sn-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;padding:0;border:0}
+.subnav.sn-cards a{display:grid;gap:.35rem;align-content:start;padding:.6rem .6rem .8rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);font-family:var(--body);color:var(--ink);text-decoration:none;transition:background-color .2s,border-color .2s,box-shadow .2s,transform .2s}
+.subnav.sn-cards a b{font-family:var(--display);font-size:1.08rem;font-weight:750;padding-inline:.25rem;line-height:1.2}
+.subnav.sn-cards a small{font-size:.86rem;color:var(--muted);padding-inline:.25rem;line-height:1.35}
+.subnav.sn-cards a:hover{background:var(--hi);border-color:var(--accent);box-shadow:var(--shadow-hi);transform:translateY(-3px);color:var(--ink)}
+.subnav.sn-cards a[aria-current="page"]{background:var(--surface);color:var(--ink);border:2px solid var(--accent);box-shadow:var(--shadow-hi)}
+.subnav.sn-cards a[aria-current="page"] b{color:var(--accent)}
+.subnav.sn-cards a[aria-current="page"] .card-img{background:linear-gradient(140deg,var(--accent-soft),var(--accent-soft))}
+.subnav.sn-cards a[aria-current="page"]:hover{background:var(--hi)}
+.subnav.sn-cards .card-img{aspect-ratio:16/9}
+@media (max-width:900px){.subnav.sn-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){
+  .subnav.sn-cards{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;gap:.6rem;padding:.2rem .1rem .7rem;margin-inline:-.1rem;overscroll-behavior-x:contain}
+  .subnav.sn-cards a{flex:0 0 9.6rem;scroll-snap-align:start}
+  .subnav.sn-cards a small{display:none}
+  .previews{grid-template-columns:minmax(0,1fr)}}
+/* portfolio: pagina con colori dedicati, blu notte e oro */
+.pf-hero{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:1rem 2rem;align-items:center;background:var(--k-pf-navy);color:#eef2f7;border-radius:24px;padding:2rem 2rem 2rem 2.2rem;overflow:hidden;box-shadow:var(--shadow-hi)}
+.pf-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:7px;background:var(--k-pf)}
+.pf-hero .pf-kick{font-family:var(--mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--k-pf)}
+.pf-hero h3{margin:.3rem 0 .6rem;font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;color:#fff}
+.pf-hero p{margin:0;font-size:1.08rem;color:#d3dbe6;max-width:30rem}
+.pf-hero .pf-art{--accent:var(--k-pf);--surface:#26405e;--muted:#8fa3bb;--il-b:#3d5f86;aspect-ratio:16/10;max-width:24rem;justify-self:end;width:100%}
+.pf-soon{border:1px dashed var(--accent);border-radius:var(--r);background:var(--surface);padding:1rem 1.2rem;color:var(--muted);margin:0}
+#portfolio>.sub-h{display:none}
+@media (max-width:700px){.pf-hero{grid-template-columns:minmax(0,1fr);padding:1.4rem}.pf-hero .pf-art{order:-1;justify-self:center;max-width:16rem}}
 </style>
 </head>
 <body>
@@ -793,7 +880,19 @@ input[type=search],select{border-radius:var(--r-s)}
     <div class="content">
       <h2>Il curatore</h2>
       <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, le proposte per il mondo del BIM, i lavori in corso e qualche pensiero personale.</p>
-      <nav class="subnav" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo">Profilo</a><a href="#portfolio" data-sub="portfolio">Portfolio</a><a href="#studio" data-sub="studio">Nello studio</a><a href="#proposte" data-sub="proposte">Le mie proposte</a><a href="#wip" data-sub="wip">Work in progress</a><a href="#fuori" data-sub="fuori">Fuori dallo studio</a><a href="#libri" data-sub="libri">I miei libri</a></nav>
+      <nav class="subnav sn-cards" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-w" x="42" y="16" width="76" height="70" rx="9"/><rect class="il-a" x="72" y="10" width="16" height="9" rx="3"/>
+<circle class="il-s" cx="66" cy="44" r="12"/><path class="il-y" d="M53 42a13 13 0 0 1 26 0z"/><rect class="il-y" x="51" y="41" width="30" height="3.5" rx="1.5"/>
+<path class="il-s" d="M52 70c2-8 8-11 14-11s12 3 14 11z"/><path class="il-l" d="M88 40h20M88 48h14M88 56h18M52 78h56"/></svg></span><b>Profilo</b><small>Chi sono, percorso, competenze e strumenti</small></a><a href="#portfolio" data-sub="portfolio"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-b" x="34" y="18" width="62" height="70" rx="5" transform="rotate(-9 65 53)"/><rect class="il-w" x="62" y="14" width="64" height="72" rx="5" transform="rotate(5 94 50)"/>
+<g transform="rotate(5 94 50)"><path class="il-l2" d="M74 74V42l20-14 20 14v32z"/><path class="il-l" d="M80 50h6v6h-6zM98 50h6v6h-6zM80 62h6v6h-6zM98 62h6v6h-6z"/><path class="il-y2" d="M90 74v-9h8v9"/><path class="il-dim" d="M72 80h44M72 78v4M116 78v4"/></g></svg></span><b>Portfolio</b><small>I progetti a cui ho lavorato</small></a><a href="#studio" data-sub="studio"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-w" d="M26 72 46 26h92l-20 46z"/><path class="il-l" d="M52 34h70M48 44h40M58 54h30M44 62h54"/><path class="il-a" d="M98 40l26 0-26 24z"/>
+<path class="il-w" d="M104 46l12 0-12 11z"/><rect class="il-y" x="60" y="66" width="56" height="5" rx="2.5" transform="rotate(-24 88 68)"/><path class="il-lk" d="M30 76h100M40 76v14M120 76v14"/></svg></span><b>Nello studio</b><small>I problemi della progettazione, uno per uno</small></a><a href="#proposte" data-sub="proposte"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-w" d="M80 14a24 24 0 0 0-14 43.5c3 2.4 4 5 4 8.5h20c0-3.5 1-6.1 4-8.5A24 24 0 0 0 80 14z"/><rect class="il-s" x="70" y="70" width="20" height="5" rx="2"/><rect class="il-s" x="72" y="78" width="16" height="5" rx="2"/>
+<path class="il-a" d="M80 28l12 7v14l-12 7-12-7V35z"/><path class="il-w2" d="M68 35l12 7 12-7M80 42v14"/><path class="il-ray" d="M80 4v5M108 16l-4 4M52 16l4 4M116 38h-6M44 38h6"/>
+<rect class="il-w" x="104" y="56" width="34" height="20" rx="6"/><path class="il-w" d="M110 76l-2 7 8-7z"/><path class="il-l" d="M110 63h22M110 69h14"/></svg></span><b>Le mie proposte</b><small>Idee per il mondo del BIM</small></a><a href="#wip" data-sub="wip"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-w" x="30" y="16" width="92" height="70" rx="8"/><path class="il-l" d="M30 30h92M54 30v56"/><path class="il-lk" d="M38 23h10"/>
+<rect class="il-a" x="58" y="38" width="40" height="7" rx="3.5"/><rect class="il-y" x="70" y="50" width="34" height="7" rx="3.5"/><rect class="il-g" x="62" y="62" width="26" height="7" rx="3.5"/><rect class="il-b" x="84" y="74" width="30" height="7" rx="3.5"/>
+<path class="il-l" d="M38 41h10M38 53h10M38 65h10M38 77h10"/><circle class="il-s" cx="124" cy="78" r="12"/><circle class="il-w" cx="124" cy="78" r="4.5"/><path class="il-gear" d="M124 61v5M124 90v5M107 78h5M136 78h5"/></svg></span><b>Work in progress</b><small>I lavori in corso</small></a><a href="#fuori" data-sub="fuori"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><circle class="il-y" cx="112" cy="30" r="12"/><path class="il-b" d="M10 86 52 34l26 30 18-18 40 40z"/><path class="il-w" d="M52 34l-9 11 6-2 4 4 4-6 5 3z"/><path class="il-w" d="M96 46l-6 6 4-1 3 3 3-4z"/>
+<path class="il-g" d="M34 86c0-10 4-17 8-17s8 7 8 17z"/><path class="il-g" d="M118 86c0-8 3-13 6-13s6 5 6 13z"/><path class="il-lk" d="M10 86h140"/>
+<path class="il-note" d="M70 26V12l14-3v13"/><circle class="il-a" cx="67" cy="26" r="3.5"/><circle class="il-a" cx="81" cy="22" r="3.5"/></svg></span><b>Fuori dallo studio</b><small>La musica, i libri e il resto</small></a><a href="#libri" data-sub="libri"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-lk" d="M24 86h112"/><rect class="il-a" x="34" y="74" width="56" height="12" rx="2.5"/><rect class="il-y" x="38" y="62" width="50" height="12" rx="2.5"/><rect class="il-b" x="32" y="50" width="58" height="12" rx="2.5"/>
+<path class="il-w2" d="M42 80h40M46 68h34M40 56h44"/><rect class="il-g" x="98" y="34" width="12" height="52" rx="2.5"/><rect class="il-s" x="111" y="40" width="10" height="46" rx="2.5"/>
+<rect class="il-a" x="122" y="30" width="11" height="56" rx="2.5" transform="rotate(8 127 58)"/><path class="il-g" d="M54 50c-6-12 0-20 8-22-2 8 0 14-8 22zM66 50c4-10 12-12 18-10-6 4-8 8-18 10z"/></svg></span><b>I miei libri</b><small>I libri che mi hanno formato</small></a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -841,7 +940,12 @@ input[type=search],select{border-radius:var(--r-s)}
       </div>
       <div class="sub" id="portfolio">
         <h3 class="sub-h">Portfolio</h3>
-        <p class="note-soon">Work in progress: qui raccoglierò i progetti a cui ho lavorato.</p>
+        <div class="pf-hero">
+          <div><span class="pf-kick">Il curatore · Portfolio</span><h3>Progetti</h3><p>I progetti a cui ho lavorato, raccontati uno per uno: il problema, le scelte, il modello e che cosa ho imparato.</p></div>
+          <div class="pf-art"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-b" x="34" y="18" width="62" height="70" rx="5" transform="rotate(-9 65 53)"/><rect class="il-w" x="62" y="14" width="64" height="72" rx="5" transform="rotate(5 94 50)"/>
+<g transform="rotate(5 94 50)"><path class="il-l2" d="M74 74V42l20-14 20 14v32z"/><path class="il-l" d="M80 50h6v6h-6zM98 50h6v6h-6zM80 62h6v6h-6zM98 62h6v6h-6z"/><path class="il-y2" d="M90 74v-9h8v9"/><path class="il-dim" d="M72 80h44M72 78v4M116 78v4"/></g></svg></div>
+        </div>
+        <p class="pf-soon"><span class="tag">Work in progress</span> Le schede dei progetti sono in preparazione.</p>
       </div>
       <div class="sub" id="studio">
         <h3 class="sub-h">Nello studio</h3>
@@ -1154,8 +1258,14 @@ di stelle –
 
   <nav class="previews" aria-label="Altre sezioni del sito">
     <h2 class="pv-h">Altro sul sito</h2>
-    <a class="pv" href="#bim-5-minuti" style="--accent:var(--c-c);--accent-soft:var(--c-c-s)"><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
-    <a class="pv" href="#chi-sono" style="--accent:var(--c-a);--accent-soft:var(--c-a-s)"><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, approfondimenti, proposte per il mondo del BIM e riflessioni personali.</p><span>Apri →</span></a>
+    <a class="pv k-ai" href="#bim-ai"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-w" d="M80 16l32 18v36L80 88 48 70V34z"/><path class="il-s" d="M48 34l32 18 32-18M80 52v36"/><path class="il-l" d="M48 34l32 18 32-18"/>
+<path class="il-net" d="M64 48l16 10 16-10M64 66l16-8 16 8"/><circle class="il-a" cx="64" cy="48" r="3.5"/><circle class="il-a" cx="96" cy="48" r="3.5"/><circle class="il-a" cx="80" cy="58" r="4.5"/><circle class="il-a" cx="64" cy="66" r="3.5"/><circle class="il-a" cx="96" cy="66" r="3.5"/>
+<path class="il-y" d="M124 46l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><path class="il-y" d="M34 20l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></span><h2>BIM &amp; AI</h2><p>Le notizie in cui il BIM incontra l'intelligenza artificiale, con uno sguardo critico.</p><span>Apri →</span></a>
+    <a class="pv k-b5" href="#bim-5-minuti"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-s" x="74" y="8" width="12" height="7" rx="2"/><circle class="il-w" cx="80" cy="54" r="34"/><circle class="il-ring2" cx="80" cy="54" r="27"/>
+<path class="il-a" d="M80 54V27a27 27 0 0 1 23.4 13.5z"/><path class="il-lk" d="M80 54l-12 10"/><circle class="il-s" cx="80" cy="54" r="3.5"/><path class="il-l" d="M80 23v4M111 54h-4M80 85v-4M49 54h4"/>
+<path class="il-g" d="M120 70l12 7v13l-12 7-12-7V77z"/><path class="il-w2" d="M108 77l12 7 12-7M120 84v13"/></svg></span><h2>BIM in 5 minuti</h2><p>Non sai cos'è il BIM? Parti da qui. Con la timeline delle norme.</p><span>Apri →</span></a>
+    <a class="pv k-cur" href="#chi-sono"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-w" x="30" y="22" width="78" height="62" rx="6"/><path class="il-l" d="M40 34h40M40 42h28"/><path class="il-arc" d="M48 74a30 30 0 0 1 52-20"/>
+<circle class="il-s" cx="104" cy="22" r="5"/><path class="il-a2" d="M102 26 86 74M106 26l18 46"/><path class="il-y2" d="M92 58h26"/><circle class="il-a" cx="86" cy="74" r="3"/></svg></span><h2>Il curatore</h2><p>Chi cura il sito. Con profilo, portfolio, approfondimenti, proposte per il mondo del BIM e riflessioni personali.</p><span>Apri →</span></a>
   </nav>
 </main>
 
@@ -1164,7 +1274,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>51 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>52 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1556,7 +1666,6 @@ window.addEventListener("hashchange",view);
 (function(){var I={"globe": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18\"/>", "spark": "<path d=\"M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z\"/><path d=\"M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z\"/>", "person": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6\"/>", "grid": "<rect x=\"3\" y=\"3\" width=\"7.5\" height=\"7.5\" rx=\"1.8\"/><rect x=\"13.5\" y=\"3\" width=\"7.5\" height=\"7.5\" rx=\"1.8\"/><rect x=\"3\" y=\"13.5\" width=\"7.5\" height=\"7.5\" rx=\"1.8\"/><rect x=\"13.5\" y=\"13.5\" width=\"7.5\" height=\"7.5\" rx=\"1.8\"/>", "square": "<path d=\"M4 20V4l16 16z\"/><path d=\"M8 16v-5l5 5z\"/>", "flag": "<path d=\"M5 21V4\"/><path d=\"M5 4h12l-2.5 4L17 12H5\"/>", "gear": "<circle cx=\"12\" cy=\"12\" r=\"3\"/><circle cx=\"12\" cy=\"12\" r=\"6.5\"/><path d=\"M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1\"/>", "tree": "<path d=\"M12 21v-7\"/><path d=\"M12 14c-4.5 0-7-2.6-7-6.2C5 4.7 8 3 12 3s7 1.7 7 4.8c0 3.6-2.5 6.2-7 6.2z\"/>", "book": "<path d=\"M3 5.5c2.5-1 6-1 9 1 3-2 6.5-2 9-1v13c-2.5-1-6-1-9 1-3-2-6.5-2-9-1z\"/><path d=\"M12 6.5v13\"/>", "mind": "<path d=\"M15.5 21v-3h1.8a2 2 0 0 0 2-2v-2.8l1.6-.7-1.7-3.3A7.5 7.5 0 1 0 7 15.3V21\"/><path d=\"M11.5 12.8l-2.2-2.1a1.4 1.4 0 0 1 2.2-1.8 1.4 1.4 0 0 1 2.2 1.8z\"/>", "feather": "<path d=\"M20 4C12 4 6.5 9 6.5 17.5L4 20\"/><path d=\"M6.5 17.5C13 17.5 18 13 20 4\"/><path d=\"M9.5 13.5h5M12 9.8h5\"/>", "bulb": "<path d=\"M9 18h6M10 21h4\"/><path d=\"M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z\"/>", "camera": "<rect x=\"3\" y=\"7\" width=\"18\" height=\"13\" rx=\"2.5\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.5\"/><path d=\"M8.5 7 10 4h4l1.5 3\"/>", "chart": "<path d=\"M4 20h16\"/><path d=\"M5.5 16l4-4 3 3 6-6.5\"/><path d=\"M15 8.5h3.5V12\"/>", "compass": "<circle cx=\"12\" cy=\"4.5\" r=\"1.6\"/><path d=\"M11.2 6 6 20.5M12.8 6 18 20.5M8.2 14.5h7.6\"/>", "layers": "<path d=\"M12 3l9 4.5-9 4.5-9-4.5z\"/><path d=\"M3 12l9 4.5 9-4.5M3 16.5 12 21l9-4.5\"/>", "clip": "<rect x=\"5\" y=\"4\" width=\"14\" height=\"17\" rx=\"2\"/><path d=\"M9 4V2.8h6V4M8.5 10h7M8.5 14h7M8.5 18h4\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3.5 2\"/>", "house": "<path d=\"M3.5 21V10.5L9.5 5l6 5.5V21z\"/><path d=\"M7.5 21v-5h4v5\"/><path d=\"M19.5 5v16M19.5 5H21M19.5 9h1.2M19.5 13H21M19.5 17h1.2\"/>", "swap": "<path d=\"M4 8h15l-3.5-3.5M20 16H5l3.5 3.5\"/>", "cloud": "<path d=\"M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.8 4.8 0 0 1-.5 9.5z\"/><path d=\"M12 11.5v5M9.8 14.3 12 16.5l2.2-2.2\"/>", "cube": "<path d=\"M12 2.8 20 7.3v9.4L12 21.2 4 16.7V7.3z\"/><path d=\"M4 7.3l8 4.5 8-4.5M12 11.8v9.4\"/>", "shield": "<path d=\"M12 3l7.5 3v5.5c0 4.5-3.2 8-7.5 9.5-4.3-1.5-7.5-5-7.5-9.5V6z\"/><path d=\"M8.5 12l2.5 2.5 4.5-5\"/>", "calc": "<rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"2\"/><path d=\"M8 7h8M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5\"/>", "hat": "<path d=\"M3 17h18v2.5H3z\"/><path d=\"M5 17a7 7 0 0 1 14 0\"/><path d=\"M10 10.3V7h4v3.3\"/>", "crane": "<path d=\"M6 21V4M3 21h6M6 4l14 3M6 4 3 7M6 8.5l14-1.5M17 7v4.5\"/><rect x=\"15.4\" y=\"11.5\" width=\"3.2\" height=\"2.6\" rx=\".5\"/>", "people": "<circle cx=\"9\" cy=\"8\" r=\"3.2\"/><path d=\"M3 20c.8-3.5 3-5.2 6-5.2s5.2 1.7 6 5.2\"/><circle cx=\"17\" cy=\"9\" r=\"2.5\"/><path d=\"M15.8 14.6c2.6-.3 4.6 1.2 5.2 4.4\"/>", "note": "<path d=\"M9 18V5l11-2v13\"/><circle cx=\"6.5\" cy=\"18\" r=\"2.5\"/><circle cx=\"17.5\" cy=\"16\" r=\"2.5\"/>"},ST={"studio-ingegnere": "compass", "studio-01": "layers", "studio-02": "clip", "studio-03": "clock", "studio-04": "house", "studio-05": "swap", "studio-06": "cloud", "studio-07": "cube", "studio-08": "shield", "studio-09": "calc", "studio-10": "hat", "studio-11": "crane", "studio-12": "people", "fuori-musica": "note", "fuori-libri": "book", "fuori-ingegnere": "compass", "libri-01": "mind", "libri-02": "book", "libri-03": "feather", "libri-04": "bulb", "libri-05": "camera", "libri-06": "chart"},SUB={"profilo": "person", "portfolio": "grid", "studio": "square", "proposte": "flag", "wip": "gear", "fuori": "tree", "libri": "book"};
 function svg(n,c){return '<svg viewBox="0 0 24 24" class="'+(c||"")+'" aria-hidden="true">'+I[n]+'</svg>'}
 Object.keys(ST).forEach(function(id){var it=document.getElementById(id),n=it&&it.querySelector(".st-n");if(!n)return;var t=n.textContent.trim();n.innerHTML=svg(ST[id])+(/^\d+$/.test(t)?"<small>"+t+"</small>":"")});
-document.querySelectorAll(".subnav a[data-sub]").forEach(function(a){var k=SUB[a.dataset.sub];if(k)a.insertAdjacentHTML("afterbegin",svg(k,"ico-s"))});
 document.querySelectorAll(".news-tabs a[data-ai]").forEach(function(a){a.insertAdjacentHTML("afterbegin",svg(a.dataset.ai==="1"?"spark":"globe","ico-s"))})})();
 // I miei libri: categorie e schede a scomparsa, con il triangolo a destra
 (function(){var TRI='<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 0l7 5-7 5z" fill="currentColor"/></svg>',k=0;
