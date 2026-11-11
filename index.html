@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BIM News · Un sito a cura di Marco Scigliuolo</title>
 <meta name="description" content="BIM News: le novità sul BIM dall'Alto Adige al resto del mondo, ogni settimana, con sintesi in italiano e link alle fonti. Mappa, filtri, archivio per mese, BIM in 5 minuti e timeline delle norme. A cura di Marco Scigliuolo.">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%232f6db5' stroke-width='3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%232f6db5'%3EM%3C/text%3E%3C/svg%3E">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("tema-2026")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}})();</script>
 <script>/* versione essenziale decisa subito, prima di scaricare font e illustrazioni */(function(){try{var m=localStorage.getItem("versione"),c=navigator.connection,a=matchMedia("(prefers-reduced-motion: reduce)").matches||(c&&(c.saveData||/(^|-)2g$/.test(c.effectiveType||"")));if(m?m==="essenziale":a)document.documentElement.classList.add("lite")}catch(e){}})();</script>
 <style>
 @font-face{font-family:"Atkinson Hyperlegible Next";src:url("fonts/atkinson-next-latin.woff2") format("woff2");font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
@@ -1238,6 +1239,161 @@ body{transition:background-color .3s}
 :root[data-view="home"] footer{padding-top:.2rem}
 :root[data-view="home"] #contatti{padding-top:.3rem}
 .fc-p{font-size:.98rem;line-height:1.45}
+
+
+
+
+
+
+
+
+
+/* ===== Veste C · «Cantiere di notte» (novembre 2026) ===== */
+@font-face{font-family:"Inter";src:url("fonts/inter-latin.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Inter";src:url("fonts/inter-latin-ext.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Inter Tight";src:url("fonts/intertight-latin.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Inter Tight";src:url("fonts/intertight-latin-ext.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"JetBrains Mono";src:url("fonts/jbmono-latin.woff2") format("woff2");font-weight:100 800;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"JetBrains Mono";src:url("fonts/jbmono-latin-ext.woff2") format("woff2");font-weight:100 800;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{color-scheme:light;
+  --display:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bg:#f2f4f6;--surface:#ffffff;--ink:#121820;--muted:#5d6873;--line:#dfe4e9;--border:#b9c2cb;
+  --glass:rgba(255,255,255,.72);--glass-line:rgba(18,24,32,.09);--glow:0 0 0 transparent;
+  --sea:#e7ebef;--land:#ffffff;--land-off:#f4f6f8;--dot:#cfd6dd;
+  --r:12px;--r-s:8px;
+  --shadow:0 1px 0 rgba(18,24,32,.04),0 8px 24px -14px rgba(18,24,32,.22);
+  --shadow-hi:0 14px 34px -14px rgba(18,24,32,.32);
+  --k-news:#2463ad;--k-news-2:#1e518e;--k-news-s:#e7eef6;--k-news-h:#f0f4f9;--k-news-bg:#ecf0f4;--k-news-on:#ffffff;--k-ai:#5a49b8;--k-ai-2:#4a3c97;--k-ai-s:#edebf7;--k-ai-h:#f3f2fa;--k-ai-bg:#edeff4;--k-ai-on:#ffffff;--k-acc:#2f7445;--k-acc-2:#275f39;--k-acc-s:#e8f0eb;--k-acc-h:#f0f5f2;--k-acc-bg:#ecf0f1;--k-acc-on:#ffffff;--k-b5:#0c766f;--k-b5-2:#0a615b;--k-b5-s:#e4f0ef;--k-b5-h:#eef5f5;--k-b5-bg:#ebf0f2;--k-b5-on:#ffffff;--k-vid:#a3305f;--k-vid-2:#86274e;--k-vid-s:#f5e8ed;--k-vid-h:#f9f1f4;--k-vid-bg:#f0eef1;--k-vid-on:#ffffff;--k-cur:#ad4d27;--k-cur-2:#8e3f20;--k-cur-s:#f6ebe7;--k-cur-h:#f9f3f0;--k-cur-bg:#f0eff0;--k-cur-on:#ffffff;--k-ag:#9b6410;--k-ag-2:#7f520d;--k-ag-s:#f4eee5;--k-ag-h:#f8f4ee;--k-ag-bg:#eff0ef;--k-ag-on:#ffffff;--k-pf:#866715;--k-pf-2:#6e5411;--k-pf-s:#f2eee5;--k-pf-h:#f7f4ef;--k-pf-bg:#eff0ef;--k-pf-on:#ffffff}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0d1115;--surface:#141a20;--ink:#e8ecef;--muted:#8d98a3;--line:#242d36;--border:#3a4652;
+  --accent-soft:#16212c;
+  --glass:rgba(255,255,255,.035);--glass-line:rgba(255,255,255,.08);--glow:0 0 22px -6px var(--accent);
+  --sea:#0f151b;--land:#1f2933;--land-off:#182028;--dot:#26303a;
+  --shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px -18px rgba(0,0,0,.8);
+  --shadow-hi:inset 0 1px 0 rgba(255,255,255,.06),0 18px 40px -16px rgba(0,0,0,.9);
+  --bn-a:#16212c;--bn-b:#0f151b;--bn-sun:#c99a3e;--bn-ring:#c99a3e;--bn-tree:#3f7a5a;--bn-trunk:#5d6873;
+  --bn-f1:#1d2731;--bn-f2:#18212a;--bn-f3:#222d38;--bn-win:#3d6c9c;--bn-ground:#141c24;--bn-crane:#c99a3e;
+  --il-y:#c99a3e;--il-g:#3f7a5a;--il-b:#3d6c9c;
+  --k-news:#6fa8e8;--k-news-2:#93beee;--k-news-s:#1d2937;--k-news-h:#233243;--k-news-bg:#10161c;--k-news-on:#0d1115;--k-ai:#a898f0;--k-ai-2:#beb2f4;--k-ai-s:#262738;--k-ai-h:#2f2f45;--k-ai-bg:#12161d;--k-ai-on:#0d1115;--k-acc:#7cc48f;--k-acc-2:#9dd3ab;--k-acc-s:#1f2e29;--k-acc-h:#253830;--k-acc-bg:#111719;--k-acc-on:#0d1115;--k-b5:#5ec8be;--k-b5-2:#86d6ce;--k-b5-s:#1a2e30;--k-b5-h:#1f393a;--k-b5-bg:#10171b;--k-b5-on:#0d1115;--k-vid:#e58db0;--k-vid-2:#ecaac4;--k-vid-s:#30252e;--k-vid-h:#3d2c37;--k-vid-bg:#15151a;--k-vid-on:#0d1115;--k-cur:#e79a78;--k-cur-2:#edb39a;--k-cur-s:#302725;--k-cur-h:#3d2f2b;--k-cur-bg:#151618;--k-cur-on:#0d1115;--k-ag:#e6b45c;--k-ag-2:#ecc785;--k-ag-s:#302b20;--k-ag-h:#3d3525;--k-ag-bg:#151717;--k-ag-on:#0d1115;--k-pf:#d9bc6a;--k-pf-2:#e2cd8f;--k-pf-s:#2e2c23;--k-pf-h:#3a3728;--k-pf-bg:#141718;--k-pf-on:#0d1115}
+:root.lite{--display:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+body{letter-spacing:0;font-feature-settings:"cv11","ss01"}
+h1,h2,h3,.fc-t b{letter-spacing:-.02em}
+/* il monospaziato resta per date ed etichette; menu e pulsanti tornano al testo */
+.top nav a,.set,.src-btn,.btn-next,.fs-all,.news-tabs a,.subnav a,.b5-toc button,.reader .back,.map-back,.pager button,.reset,.m-nav button{font-family:var(--body)}
+.top nav a{font-size:.84rem}
+.set{font-size:.78rem}
+/* angoli: niente capsule per i pulsanti d'azione */
+.set,.src-btn,.btn-next,.fs-all,.reader .back,.map-back,.reset,.pager button,.news-tabs a,.subnav a{border-radius:8px}
+/* pannelli in vetro, solo nella versione completa */
+:root:not(.lite) .fc-btn,:root:not(.lite) .fc-strip,:root:not(.lite) .art,:root:not(.lite) .latest,:root:not(.lite) .finder,:root:not(.lite) .filters details,:root:not(.lite) .ai-intro,:root:not(.lite) .ac-bar{background:var(--glass);border-color:var(--glass-line)}
+:root{--glass:rgba(255,255,255,.86)}:root[data-theme="dark"]{--glass:rgba(20,26,32,.84)}
+.bg-build{opacity:.2}:root[data-theme="dark"] .bg-build{opacity:.16}
+.ac-lang button,.ac-act button,.ac-act .go,.ag-chips button,.chip{font-family:var(--body);border-radius:8px}
+:root:not([data-theme="dark"]):not(.lite) .banner::before{opacity:.14}
+:root[data-theme="dark"] .fc-btn:hover,:root[data-theme="dark"] .art:hover{box-shadow:var(--shadow-hi),var(--glow)}
+/* pulsante home: vetro scuro con anello nel colore delle notizie */
+.brand{background:var(--k-news-s);color:var(--ink);border:1px solid color-mix(in srgb,var(--k-news) 55%,transparent);box-shadow:0 0 24px -10px var(--k-news);border-radius:12px;padding:.32rem .55rem .32rem .32rem}
+:root[data-theme="dark"] .brand{color:var(--ink)}
+.br-ico,:root[data-theme="dark"] .br-ico{background:var(--k-news);border-radius:8px}
+.br-ico svg{stroke:var(--k-news-on)!important;color:var(--k-news-on)}
+.br-t{font-family:var(--display);font-weight:700;letter-spacing:-.01em}
+.br-home,:root[data-theme="dark"] .br-home{background:color-mix(in srgb,var(--k-news) 22%,transparent);color:var(--k-news);border-radius:6px;font-family:var(--mono)}
+.brand:hover{box-shadow:0 0 30px -6px var(--k-news)}
+/* home: titoli dei pulsanti in inchiostro, il colore resta nella miniatura e nella freccia */
+.fc-t b{color:var(--ink);font-family:var(--display);font-weight:650}
+.fc-ico{border-radius:8px}
+:root:not(.lite) .fc-btn .fc-ico{background-color:var(--accent);background-size:cover;background-position:center;background-blend-mode:luminosity;width:3.2rem;height:2.4rem;box-shadow:0 0 16px -6px var(--accent)}
+:root:not(.lite) .fc-btn .fc-ico svg{display:none}
+:root:not(.lite) .fc-btn{grid-template-columns:3.2rem minmax(0,1fr) auto}
+:root:not(.lite) .fc-btn.k-news .fc-ico{background-image:url("assets/foto/news-t.jpg")}
+:root:not(.lite) .fc-btn.k-ai .fc-ico{background-image:url("assets/foto/ai-t.jpg")}
+:root:not(.lite) .fc-btn.k-acc .fc-ico{background-image:url("assets/foto/acc-t.jpg")}
+:root:not(.lite) .fc-btn.k-b5 .fc-ico{background-image:url("assets/foto/b5-t.jpg")}
+:root:not(.lite) .fc-btn.k-vid .fc-ico{background-image:url("assets/foto/vid-t.jpg")}
+:root:not(.lite) .fc-btn.k-cur .fc-ico{background-image:url("assets/foto/cur-t.jpg")}
+/* mappa */
+.map-where{font-family:var(--mono);font-weight:500;font-size:.68rem;letter-spacing:.14em;background:transparent;border:0;color:var(--muted)}
+#fc-open{font-family:var(--body);font-weight:600;border-radius:8px;background:var(--ink);color:var(--bg);letter-spacing:0}
+/* striscia eventi: titoli in inchiostro */
+.fs-t{color:var(--ink)}
+.fs-t:hover{color:var(--accent)}
+.fs-all{font-family:var(--body);border-radius:8px}
+/* testate fotografiche in duotono, solo nella versione completa */
+.pg-hero{display:none}
+:root:not(.lite) .pg-hero{display:block;position:absolute;top:0;left:0;right:0;height:24rem;z-index:0;pointer-events:none;background-color:var(--accent);background-size:cover;background-position:center 40%;background-blend-mode:luminosity;opacity:.42;
+  -webkit-mask-image:linear-gradient(to right,transparent 18%,#000 75%),linear-gradient(to bottom,#000 25%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 18%,#000 75%),linear-gradient(to bottom,#000 25%,transparent 100%);mask-composite:intersect}
+:root:not([data-theme="dark"]):not(.lite) .pg-hero{opacity:.28}
+section:has(>.pg-hero){position:relative;overflow:hidden}
+section:has(>.pg-hero)>.content{position:relative;z-index:1}
+:root:not(.lite)[data-view="bim-accademia"] #bim-accademia>.pg-hero{background-image:url("assets/foto/acc.jpg")}
+:root:not(.lite)[data-view="bim-5-minuti"] #bim-5-minuti>.pg-hero{background-image:url("assets/foto/b5.jpg")}
+:root:not(.lite)[data-view="video"] #video>.pg-hero{background-image:url("assets/foto/vid.jpg")}
+:root:not(.lite)[data-view="agenda"] #agenda>.pg-hero{background-image:url("assets/foto/ag.jpg")}
+:root:not(.lite)[data-view="chi-sono"] #chi-sono>.pg-hero{background-image:url("assets/foto/cur.jpg")}
+:root:not(.lite)[data-view="chi-sono"][data-sub="portfolio"] #chi-sono>.pg-hero{background-image:url("assets/foto/pf.jpg")}
+/* BIM News e BIM & AI: la foto entra nella testata al posto dell'illustrazione */
+:root:not(.lite) .banner{isolation:isolate}
+:root:not(.lite) .banner::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--k-news) url("assets/foto/news.jpg") center 45%/cover;background-blend-mode:luminosity;opacity:.26;-webkit-mask-image:linear-gradient(to right,transparent 30%,#000 80%);mask-image:linear-gradient(to right,transparent 30%,#000 80%)}
+:root:not(.lite).ai-view .banner::before{background-color:var(--k-ai);background-image:url("assets/foto/ai.jpg")}
+:root:not([data-theme="dark"]):not(.lite) .banner::before{opacity:.32}
+:root:not(.lite) .banner .bn-art{opacity:0}
+:root:not(.lite) .banner canvas.bn-cloud{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.lite .bn-cloud{display:none}
+.bn-text{position:relative;z-index:1}
+/* copertine dei manuali e animazione APPLOAD: solo nella versione completa */
+.st-cover,.st-gif{display:none}
+:root:not(.lite) .st-cover{display:block;aspect-ratio:3/2;max-width:20rem;border-radius:8px;border:1px solid var(--line);background:#0d1115 center/cover no-repeat;margin-bottom:.7rem;box-shadow:var(--shadow)}
+:root:not(.lite) #man-pro-03 .st-cover{background-image:url("assets/copertine/manuale-03.webp")}
+:root:not(.lite) #man-pro-04 .st-cover{background-image:url("assets/copertine/manuale-04.webp")}
+:root:not(.lite) #man-pro-05 .st-cover{background-image:url("assets/copertine/manuale-05.webp")}
+:root:not(.lite) #man-pro-08 .st-cover{background-image:url("assets/copertine/manuale-08.webp")}
+:root:not(.lite) #man-pro-11 .st-cover{background-image:url("assets/copertine/manuale-11.webp")}
+:root:not(.lite) .st-gif{display:block;aspect-ratio:480/300;max-width:20rem;border-radius:8px;border:1px solid var(--line);background:#0d1115 url("assets/gif/appload.gif") center/contain no-repeat;margin-bottom:.7rem}
+:root:not(.lite) #man-pro-05 .st-cover{display:none}
+@media (prefers-reduced-motion:reduce){:root:not(.lite) .st-gif{display:none}:root:not(.lite) #man-pro-05 .st-cover{display:block}}
+@media (min-width:760px){:root:not(.lite) .st-item>div:has(>.st-cover){display:grid;grid-template-columns:minmax(0,1fr) 15rem;column-gap:1.6rem;align-content:start}
+:root:not(.lite) .st-item>div:has(>.st-cover)>*{grid-column:1}
+:root:not(.lite) .st-item>div>.st-cover,:root:not(.lite) .st-item>div>.st-gif{grid-column:2;grid-row:1/span 8;margin:0;width:100%}}
+/* illustrazioni delle schede del curatore: via i soli e gli anelli decorativi */
+.sn-cards .il-dec,.sn-cards .il-ring{display:none}
+/* grafici */
+.ac-hist{position:relative;max-width:40rem}
+.ac-hist svg{display:block;width:100%;height:auto;overflow:visible}
+.ac-hist .hb{stroke:var(--line);stroke-width:1}
+.ac-hist .hit{fill:transparent}
+.ac-hist .hc{cursor:pointer;outline:none}
+.ac-hist .hc[data-n="0"]{cursor:default}
+.ac-hist .bar{fill:var(--accent);opacity:.7;transition:opacity .2s}
+.ac-hist .hc:hover .bar,.ac-hist .hc:focus-visible .bar,.ac-hist .hc.on .bar{opacity:1}
+.ac-hist .hc.dim .bar{opacity:.28}
+.ac-hist .hc:focus-visible .hit{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:3 3}
+.ac-hist .hy{fill:var(--muted);font:500 11px var(--mono);text-anchor:middle}
+.ac-hist .hc.on .hy{fill:var(--ink)}
+.h-tip{position:absolute;top:-.4rem;transform:translate(-50%,-100%);background:var(--ink);color:var(--bg);font-size:.78rem;padding:.25rem .55rem;border-radius:6px;white-space:nowrap;pointer-events:none}
+.h-cap{font-size:.78rem;color:var(--muted);margin:.3rem 0 0}
+.rc-meter{display:block;height:6px;border-radius:3px;background:color-mix(in srgb,var(--accent) 16%,transparent);overflow:hidden;margin:.35rem 0 .2rem}
+.rc-meter i{display:block;height:100%;width:var(--v);background:var(--accent);border-radius:3px}
+:root:not(.lite) .rc-meter i{animation:rcm 1.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rcm{from{width:0}}
+.credits{display:grid;gap:.6rem;border-top:1px solid var(--line);padding-top:1.2rem;margin-top:1rem;font-size:.92rem;color:var(--muted)}
+.credits ul{margin:0;padding-left:1.1rem;display:grid;gap:.25rem}
+.credits b{color:var(--ink);font-weight:600}
+
+/* icone del curatore: disegni tecnici a tratto, come le copertine dei manuali */
+.sn-cards .card-img,.sn-cards a[aria-current="page"] .card-img{background:color-mix(in srgb,var(--accent) 6%,var(--bg)) linear-gradient(transparent 0 0);background-image:linear-gradient(color-mix(in srgb,var(--ink) 5%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ink) 5%,transparent) 1px,transparent 1px);background-size:12px 12px;border:1px solid var(--line)}
+.sn-cards svg.ic{display:block;width:100%;height:100%}
+.sn-cards svg.ic path,.sn-cards svg.ic circle{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.sn-cards svg.ic .ln{stroke:var(--accent);stroke-width:1.5}
+.sn-cards svg.ic .lm{stroke:var(--muted);stroke-width:1;opacity:.7}
+.sn-cards svg.ic .ls{stroke:var(--accent);stroke-width:1;stroke-dasharray:3 3;opacity:.7}
+.sn-cards svg.ic .lq{stroke:var(--muted);stroke-width:1}
+.sn-cards svg.ic .lg{stroke:var(--line);stroke-width:1}
+.sn-cards svg.ic .lt{stroke:var(--muted);stroke-width:1;opacity:.6}
+.sn-cards svg.ic .lf{fill:var(--accent);stroke:none}
+.sn-cards svg.ic .lf2{fill:var(--accent);stroke:none;opacity:.35}
+.sn-cards svg.ic .lr,.sn-cards svg.ic .lr2{font:500 6px var(--mono);fill:var(--muted);text-anchor:end;letter-spacing:.06em}
+.sn-cards svg.ic .lr2{text-anchor:start;fill:var(--accent)}
+.sn-cards a:hover svg.ic .ln{stroke-width:1.8}
 </style>
 </head>
 <body>
@@ -1305,6 +1461,7 @@ body{transition:background-color .3s}
       </div>
       <h1 id="news-h" class="pg-h">BIM News</h1>
       <div class="banner">
+        <canvas class="bn-cloud" aria-hidden="true"></canvas>
         <div class="bn-text">
           <span class="bn-kick">Rassegna settimanale · il BIM nel mondo</span>
           <p class="bn-p bn-news">Le novità BIM dall'Alto Adige al resto del mondo, raccolte ogni settimana, ognuna con il link alla fonte.</p>
@@ -1398,6 +1555,7 @@ body{transition:background-color .3s}
   </section>
 
   <section id="bim-accademia">
+    <div class="pg-hero" aria-hidden="true"></div>
     <div class="content">
       <h2>BIM Accademia</h2>
       <p class="lead">Le ricerche universitarie sul BIM, da leggere anche senza conoscere bene l'inglese: per ogni articolo il titolo e l'abstract tradotti in italiano, l'originale a un clic e il collegamento diretto alla pubblicazione.</p>
@@ -1408,6 +1566,7 @@ body{transition:background-color .3s}
         <div class="ac-lang" role="group" aria-label="Lingua dell'abstract"><span class="f-lab">Abstract</span><button type="button" data-l="it" aria-pressed="true">Tradotto in italiano</button><button type="button" data-l="orig" aria-pressed="false">Lingua originale</button></div>
       </div>
       <p class="ac-count" id="ac-count" aria-live="polite"></p>
+      <div class="ac-hist" id="ac-hist"></div>
       <div class="ac-list" id="ac-list"></div>
       <div class="crit ac-crit">
         <h4>Come scegliamo gli articoli</h4>
@@ -1418,6 +1577,7 @@ body{transition:background-color .3s}
   </section>
 
   <section id="video">
+    <div class="pg-hero" aria-hidden="true"></div>
     <div class="content">
       <h2>Video</h2>
       <p class="lead">Webinar e conferenze registrati e canali che parlano di BIM: tutto gratuito e a disposizione di tutti. Li scegliamo con gli stessi criteri della rassegna: norme, standard aperti, appalti, strumenti e intelligenza artificiale.</p>
@@ -1434,6 +1594,7 @@ body{transition:background-color .3s}
   </section>
 
   <section id="agenda">
+    <div class="pg-hero" aria-hidden="true"></div>
     <div class="content">
       <h2>Agenda</h2>
       <p class="lead">Tutto quello che sta per arrivare nel mondo del BIM, in un posto solo: le scadenze delle norme, gli eventi in presenza e i webinar online. Ogni appuntamento ha il link alla pagina ufficiale, la data e il costo.</p>
@@ -1461,10 +1622,26 @@ body{transition:background-color .3s}
       </ul>
       <div class="mm-bar"><button type="button" id="mm-all">Apri tutto</button><button type="button" id="mm-none">Chiudi tutto</button></div>
       <div class="mm-wrap" id="mm-wrap"><svg class="mm-lines" id="mm-lines" aria-hidden="true"></svg><ul class="mm" id="mm" role="tree" aria-label="Mappa del sito"></ul></div>
+      <div class="credits" id="crediti">
+        <h3>Crediti delle immagini e dei caratteri</h3>
+        <p>Le fotografie delle pagine vengono da Wikimedia Commons e sono dedicate al pubblico dominio con CC0 1.0: gli autori hanno rinunciato a ogni diritto. Le citiamo lo stesso, per rispetto del loro lavoro. Sul sito le foto sono tinte nel colore di ogni pagina e compaiono solo nella versione completa.</p>
+        <ul>
+          <li><b>BIM News</b> · <a href="https://commons.wikimedia.org/wiki/File:Victoria_Harbour_skyscrapers.jpg" target="_blank" rel="noopener">Victoria Harbour skyscrapers</a>, di Wilfredor</li>
+          <li><b>BIM &amp; AI</b> · <a href="https://commons.wikimedia.org/wiki/File:Data_center_roof.jpg" target="_blank" rel="noopener">Data center roof</a>, di Rsparks3</li>
+          <li><b>BIM Accademia</b> · <a href="https://commons.wikimedia.org/wiki/File:The_John_Rylands_Library_Reading_Room_Enclosure.jpg" target="_blank" rel="noopener">The John Rylands Library, Reading Room</a>, di Michael D Beckwith</li>
+          <li><b>BIM in 5 minuti</b> · <a href="https://commons.wikimedia.org/wiki/File:Steel_frame_structure.jpg" target="_blank" rel="noopener">Steel frame structure</a>, di Wikideas1</li>
+          <li><b>Video</b> · <a href="https://commons.wikimedia.org/wiki/File:H%C3%B6rsaal_101_LMU.jpg" target="_blank" rel="noopener">Hörsaal 101, LMU</a>, di Slashme</li>
+          <li><b>Agenda</b> · <a href="https://commons.wikimedia.org/wiki/File:Six_workers_on_crane_in_Shibuya.jpg" target="_blank" rel="noopener">Six workers on crane in Shibuya</a>, di Syced</li>
+          <li><b>Il curatore</b> · <a href="https://commons.wikimedia.org/wiki/File:Rebar_combo.jpg" target="_blank" rel="noopener">Rebar combo</a>, di Henryeke</li>
+          <li><b>Portfolio</b> · <a href="https://commons.wikimedia.org/wiki/File:Steel_frame_building_under_construction_in_Taiwan.jpg" target="_blank" rel="noopener">Steel frame building under construction in Taiwan</a>, di SSJF01</li>
+        </ul>
+        <p>Caratteri: Inter, Inter Tight e JetBrains Mono, con licenza SIL Open Font License 1.1 (i testi delle licenze sono nella cartella <code>fonts</code> del sito). La nuvola di punti nelle testate di BIM News e BIM &amp; AI è disegnata dal codice del sito.</p>
+      </div>
     </div>
   </section>
 
   <section id="bim-5-minuti">
+    <div class="pg-hero" aria-hidden="true"></div>
     <div class="content">
       <h2>BIM in 5 minuti</h2>
       <p class="lead">Non sai cos'è il BIM? Parti da qui: cos'è, a cosa serve in uno studio, perché oggi non se ne può fare a meno, le norme e le sigle. Cinque minuti per l'essenziale, il resto quando vuoi.</p>
@@ -1589,22 +1766,11 @@ body{transition:background-color .3s}
 
 
   <section id="chi-sono">
+    <div class="pg-hero" aria-hidden="true"></div>
     <div class="content">
       <h2>Il curatore</h2>
       <p class="lead">Chi cura BIM News. Qui, in secondo piano, il profilo, il portfolio, le riflessioni sul lavoro, le proposte per il mondo del BIM, i lavori in corso e qualche pensiero personale.</p>
-      <nav class="subnav sn-cards" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-w" x="42" y="16" width="76" height="70" rx="9"/><rect class="il-a" x="72" y="10" width="16" height="9" rx="3"/>
-<circle class="il-s" cx="66" cy="44" r="12"/><path class="il-y" d="M53 42a13 13 0 0 1 26 0z"/><rect class="il-y" x="51" y="41" width="30" height="3.5" rx="1.5"/>
-<path class="il-s" d="M52 70c2-8 8-11 14-11s12 3 14 11z"/><path class="il-l" d="M88 40h20M88 48h14M88 56h18M52 78h56"/></svg></span><b>Profilo</b><small>Chi sono, percorso, competenze e strumenti</small></a><a href="#portfolio" data-sub="portfolio"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-b" x="34" y="18" width="62" height="70" rx="5" transform="rotate(-9 65 53)"/><rect class="il-w" x="62" y="14" width="64" height="72" rx="5" transform="rotate(5 94 50)"/>
-<g transform="rotate(5 94 50)"><path class="il-l2" d="M74 74V42l20-14 20 14v32z"/><path class="il-l" d="M80 50h6v6h-6zM98 50h6v6h-6zM80 62h6v6h-6zM98 62h6v6h-6z"/><path class="il-y2" d="M90 74v-9h8v9"/><path class="il-dim" d="M72 80h44M72 78v4M116 78v4"/></g></svg></span><b>Portfolio</b><small>I progetti a cui ho lavorato</small></a><a href="#studio" data-sub="studio"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-w" d="M26 72 46 26h92l-20 46z"/><path class="il-l" d="M52 34h70M48 44h40M58 54h30M44 62h54"/><path class="il-a" d="M98 40l26 0-26 24z"/>
-<path class="il-w" d="M104 46l12 0-12 11z"/><rect class="il-y" x="60" y="66" width="56" height="5" rx="2.5" transform="rotate(-24 88 68)"/><path class="il-lk" d="M30 76h100M40 76v14M120 76v14"/></svg></span><b>Nello studio</b><small>Problemi, soluzioni e manuali per chi progetta</small></a><a href="#proposte" data-sub="proposte"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-w" d="M80 14a24 24 0 0 0-14 43.5c3 2.4 4 5 4 8.5h20c0-3.5 1-6.1 4-8.5A24 24 0 0 0 80 14z"/><rect class="il-s" x="70" y="70" width="20" height="5" rx="2"/><rect class="il-s" x="72" y="78" width="16" height="5" rx="2"/>
-<path class="il-a" d="M80 28l12 7v14l-12 7-12-7V35z"/><path class="il-w2" d="M68 35l12 7 12-7M80 42v14"/><path class="il-ray" d="M80 4v5M108 16l-4 4M52 16l4 4M116 38h-6M44 38h6"/>
-<rect class="il-w" x="104" y="56" width="34" height="20" rx="6"/><path class="il-w" d="M110 76l-2 7 8-7z"/><path class="il-l" d="M110 63h22M110 69h14"/></svg></span><b>Le mie proposte</b><small>Idee per il mondo del BIM</small></a><a href="#wip" data-sub="wip"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><rect class="il-w" x="30" y="16" width="92" height="70" rx="8"/><path class="il-l" d="M30 30h92M54 30v56"/><path class="il-lk" d="M38 23h10"/>
-<rect class="il-a" x="58" y="38" width="40" height="7" rx="3.5"/><rect class="il-y" x="70" y="50" width="34" height="7" rx="3.5"/><rect class="il-g" x="62" y="62" width="26" height="7" rx="3.5"/><rect class="il-b" x="84" y="74" width="30" height="7" rx="3.5"/>
-<path class="il-l" d="M38 41h10M38 53h10M38 65h10M38 77h10"/><circle class="il-s" cx="124" cy="78" r="12"/><circle class="il-w" cx="124" cy="78" r="4.5"/><path class="il-gear" d="M124 61v5M124 90v5M107 78h5M136 78h5"/></svg></span><b>Work in progress</b><small>I lavori in corso</small></a><a href="#fuori" data-sub="fuori"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><circle class="il-y" cx="112" cy="30" r="12"/><path class="il-b" d="M10 86 52 34l26 30 18-18 40 40z"/><path class="il-w" d="M52 34l-9 11 6-2 4 4 4-6 5 3z"/><path class="il-w" d="M96 46l-6 6 4-1 3 3 3-4z"/>
-<path class="il-g" d="M34 86c0-10 4-17 8-17s8 7 8 17z"/><path class="il-g" d="M118 86c0-8 3-13 6-13s6 5 6 13z"/><path class="il-lk" d="M10 86h140"/>
-<path class="il-note" d="M70 26V12l14-3v13"/><circle class="il-a" cx="67" cy="26" r="3.5"/><circle class="il-a" cx="81" cy="22" r="3.5"/></svg></span><b>Fuori dallo studio</b><small>Passioni, riflessioni e manuali non professionali</small></a><a href="#libri" data-sub="libri"><span class="card-img"><svg class="il" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="il-dec" cx="132" cy="20" r="11"/><circle class="il-ring" cx="22" cy="80" r="8"/><path class="il-lk" d="M24 86h112"/><rect class="il-a" x="34" y="74" width="56" height="12" rx="2.5"/><rect class="il-y" x="38" y="62" width="50" height="12" rx="2.5"/><rect class="il-b" x="32" y="50" width="58" height="12" rx="2.5"/>
-<path class="il-w2" d="M42 80h40M46 68h34M40 56h44"/><rect class="il-g" x="98" y="34" width="12" height="52" rx="2.5"/><rect class="il-s" x="111" y="40" width="10" height="46" rx="2.5"/>
-<rect class="il-a" x="122" y="30" width="11" height="56" rx="2.5" transform="rotate(8 127 58)"/><path class="il-g" d="M54 50c-6-12 0-20 8-22-2 8 0 14-8 22zM66 50c4-10 12-12 18-10-6 4-8 8-18 10z"/></svg></span><b>I miei libri</b><small>I libri che mi hanno formato</small></a></nav>
+      <nav class="subnav sn-cards" aria-label="Sottosezioni del curatore"><a href="#chi-sono" data-sub="profilo"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-01</text><path class="ln" d="M52 18H108V64H52Z"/><path class="lm" d="M52 54H108"/><circle class="ln" cx="68" cy="32" r="6"/><path class="ln" d="M58 48c2-6 6-8 10-8s8 2 10 8"/><path class="lm" d="M84 28H100M84 34H100M84 40H94"/><path class="lm" d="M58 59H76M86 59H102"/><path class="lq" d="M52 72H108M52 69v6M108 69v6"/><circle class="lf" cx="80" cy="72" r="1.6"/></svg></span><b>Profilo</b><small>Chi sono, percorso, competenze e strumenti</small></a><a href="#portfolio" data-sub="portfolio"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-02</text><path class="ln" d="M44 58L72 70L100 58L72 46Z"/><path class="ln" d="M44 58V40L72 28L100 40V58"/><path class="ln" d="M72 46V28"/><path class="lm" d="M44 40L72 52L100 40M72 52V70"/><path class="ln" d="M100 58L118 50V34L100 40"/><path class="lm" d="M118 34L100 28L72 40"/><path class="ls" d="M30 50L130 50"/><path class="lm" d="M30 47v6M130 47v6"/></svg></span><b>Portfolio</b><small>I progetti a cui ho lavorato</small></a><a href="#studio" data-sub="studio"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-03</text><path class="lm" d="M36 70H124"/><path class="ln" d="M48 66L48 26L88 66Z"/><path class="lm" d="M54 60L54 40L74 60Z"/><path class="ln" d="M60 74L122 36"/><path class="lm" d="M66 70.3l3 4.9M78 63l3 4.9M90 55.6l3 4.9M102 48.3l3 4.9M114 41l3 4.9"/><path class="ln" d="M96 30A26 26 0 0 1 120 56"/><circle class="lf" cx="96" cy="56" r="1.8"/><path class="ls" d="M96 56L120 56M96 56L96 30"/></svg></span><b>Nello studio</b><small>Problemi, soluzioni e manuali per chi progetta</small></a><a href="#proposte" data-sub="proposte"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-04</text><circle class="ln" cx="40" cy="26" r="4"/><circle class="ln" cx="40" cy="46" r="4"/><circle class="ln" cx="40" cy="66" r="4"/><path class="lm" d="M44 26C66 26 64 46 86 46M44 46H86M44 66C66 66 64 46 86 46"/><path class="ln" d="M104 30L120 38V56L104 64L88 56V38Z"/><path class="ln" d="M88 38L104 46L120 38M104 46V64"/><circle class="lf" cx="86" cy="46" r="1.8"/></svg></span><b>Le mie proposte</b><small>Idee per il mondo del BIM</small></a><a href="#wip" data-sub="wip"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-05</text><path class="lm" d="M36 22H128M36 36H128M36 50H128M36 64H128"/><path class="lm" d="M36 18V70"/><path class="ln" d="M42 26H82V32H42Z"/><path class="lf2" d="M42 26H82V32H42Z"/><path class="ln" d="M64 40H108V46H64Z"/><path class="lf2" d="M64 40H88V46H64Z"/><path class="ln" d="M84 54H122V60H84Z"/><path class="ls" d="M92 16V72"/><path class="ln" d="M89 14L95 14L92 18Z"/></svg></span><b>Work in progress</b><small>I lavori in corso</small></a><a href="#fuori" data-sub="fuori"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-06</text><path class="ln" d="M80 26c10 0 18 6 18 14s-8 12-18 12-16-4-16-12 6-14 16-14Z"/><path class="lm" d="M80 18c18 0 30 10 30 22s-12 20-30 20-28-8-28-20 10-22 28-22Z"/><path class="lm" d="M80 11c25 0 41 13 41 29s-17 27-41 27-38-11-38-27 13-29 38-29Z"/><path class="ln" d="M80 31l3 5h-6Z"/><path class="ls" d="M34 74H126"/><text class="lr2" x="72" y="48">2450</text></svg></span><b>Fuori dallo studio</b><small>Passioni, riflessioni e manuali non professionali</small></a><a href="#libri" data-sub="libri"><span class="card-img"><svg class="ic" viewBox="0 0 160 90" aria-hidden="true" focusable="false"><path class="lg" d="M8 8H152V82H8Z"/><path class="lt" d="M8 8v4M48 8v4M88 8v4M128 8v4M8 82h4"/><text class="lr" x="150" y="78">P-07</text><path class="lm" d="M34 70H126"/><path class="ln" d="M44 70V30H54V70M54 70V36H62V70M62 70V26H74V70"/><path class="lm" d="M44 36H54M62 32H74M62 64H74"/><path class="ln" d="M78 70L92 32L101 35L87 73"/><path class="ln" d="M104 70V42H118V70"/><path class="lm" d="M104 48H118"/></svg></span><b>I miei libri</b><small>I libri che mi hanno formato</small></a></nav>
       <div class="sub" id="profilo">
       <div class="prose">
         <p>Sono Marco Scigliuolo, ingegnere civile abilitato alla professione. Ho studiato al Politecnico di Bari e per un periodo ho insegnato; poi mi sono dedicato alla professione di ingegnere. In passato ho lavorato su grandi infrastrutture, in un'azienda del settore. Oggi mi occupo di progettazione degli impianti, soprattutto per scuole e uffici pubblici (attualmente in uno studio altoatesino).</p>
@@ -1699,15 +1865,15 @@ body{transition:background-color .3s}
         <div class="st-list">
           <article class="st-item" id="man-pro-01"><span class="st-n">01</span><div><h4>Manuale famiglie Revit 2026</h4><p>Come creare e gestire le famiglie in Revit 2026.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-02"><span class="st-n">02</span><div><h4>Manuale parametri Revit: identificazione, classificazione e dimensioni BIM</h4><p>I parametri per identificare, classificare e dimensionare gli oggetti BIM in Revit.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
-          <article class="st-item" id="man-pro-03"><span class="st-n">03</span><div><h4>Property Set per l'export IFC da Revit</h4><p>Come portare nell'IFC i parametri richiesti dal committente, per esempio quelli della struttura dati provinciale: la sintassi del file dei Property Set, un esempio con soli tre parametri e la configurazione di export di Revit passo per passo, con la checklist finale.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/property-set-ifc-revit.html">Leggi online</a><a class="man-btn ghost" href="manuali/property-set-ifc-revit.pdf" download>PDF</a><a class="man-btn ghost" href="manuali/revit/Pset_esempio.txt" download>File di esempio .txt</a></p></div></article>
-          <article class="st-item" id="man-pro-04"><span class="st-n">04</span><div><h4>Sostituire l'IFC collegato con Dynamo</h4><p>Quante volte abbiamo dovuto aggiornare l'IFC dell'architetto collegato in Revit, perdendo prese e apparecchi ospitati? Due grafi Dynamo risolvono il problema in pochi passi. Prima fotografano il collegamento: posizione, rotazione (decisiva con i modelli georeferenziati) ed elementi ospitati. Poi, dopo la ricarica del nuovo IFC, lo riallineano se serve e riassociano gli elementi. La guida ha lo schema delle azioni da seguire, spiega come caricare i file e come leggere il report.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/dynamo-sostituzione-ifc.html">Leggi online</a><a class="man-btn ghost" href="manuali/dynamo-sostituzione-ifc.pdf" download>Scarica il PDF</a><span class="man-note">I file .dyn sono in arrivo.</span></p></div></article>
-          <article class="st-item" id="man-pro-05"><span class="st-n">05</span><div><h4>AutoCAD 2026: xrif e stampa</h4><p>Due script AutoLISP pronti da usare. <b>SOSTXRIF</b> sostituisce l'xrif dell'architetto con la nuova versione e ti dice se è ancora allineato. <b>RETINITRASP</b> evita i retini neri pieni in stampa.</p><p><b>Dove metterli:</b> copia i due file in <code>%AppData%\Autodesk\AutoCAD 2026\R25.1\ita\Support</code>, poi caricali con <code>APPLOAD</code> e scrivi il nome del comando. La guida, ridotta all'essenziale, ha lo schema in cinque passi e il codice.</p><p class="man-dl"><span class="tag">Da provare su una copia</span><a class="man-btn" href="manuali/autocad-2026-xrif-stampa.html">Leggi la guida</a><a class="man-btn ghost" href="manuali/autocad-2026-xrif-stampa.pdf" download>PDF</a><a class="man-btn ghost" href="manuali/autocad/SOSTXRIF.lsp" download>SOSTXRIF.lsp</a><a class="man-btn ghost" href="manuali/autocad/RETINITRASP.lsp" download>RETINITRASP.lsp</a></p></div></article>
+          <article class="st-item" id="man-pro-03"><span class="st-n">03</span><div><span class="st-cover" aria-hidden="true"></span><span class="st-cover" aria-hidden="true"></span><h4>Property Set per l'export IFC da Revit</h4><p>Come portare nell'IFC i parametri richiesti dal committente, per esempio quelli della struttura dati provinciale: la sintassi del file dei Property Set, un esempio con soli tre parametri e la configurazione di export di Revit passo per passo, con la checklist finale.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/property-set-ifc-revit.html">Leggi online</a><a class="man-btn ghost" href="manuali/property-set-ifc-revit.pdf" download>PDF</a><a class="man-btn ghost" href="manuali/revit/Pset_esempio.txt" download>File di esempio .txt</a></p></div></article>
+          <article class="st-item" id="man-pro-04"><span class="st-n">04</span><div><span class="st-cover" aria-hidden="true"></span><span class="st-cover" aria-hidden="true"></span><h4>Sostituire l'IFC collegato con Dynamo</h4><p>Quante volte abbiamo dovuto aggiornare l'IFC dell'architetto collegato in Revit, perdendo prese e apparecchi ospitati? Due grafi Dynamo risolvono il problema in pochi passi. Prima fotografano il collegamento: posizione, rotazione (decisiva con i modelli georeferenziati) ed elementi ospitati. Poi, dopo la ricarica del nuovo IFC, lo riallineano se serve e riassociano gli elementi. La guida ha lo schema delle azioni da seguire, spiega come caricare i file e come leggere il report.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/dynamo-sostituzione-ifc.html">Leggi online</a><a class="man-btn ghost" href="manuali/dynamo-sostituzione-ifc.pdf" download>Scarica il PDF</a><span class="man-note">I file .dyn sono in arrivo.</span></p></div></article>
+          <article class="st-item" id="man-pro-05"><span class="st-n">05</span><div><span class="st-cover" aria-hidden="true"></span><span class="st-cover" aria-hidden="true"></span><span class="st-gif" role="img" aria-label="Animazione: APPLOAD, scelta del file .lsp, Carica, poi il comando SOSTXRIF"></span><h4>AutoCAD 2026: xrif e stampa</h4><p>Due script AutoLISP pronti da usare. <b>SOSTXRIF</b> sostituisce l'xrif dell'architetto con la nuova versione e ti dice se è ancora allineato. <b>RETINITRASP</b> evita i retini neri pieni in stampa.</p><p><b>Dove metterli:</b> copia i due file in <code>%AppData%\Autodesk\AutoCAD 2026\R25.1\ita\Support</code>, poi caricali con <code>APPLOAD</code> e scrivi il nome del comando. La guida, ridotta all'essenziale, ha lo schema in cinque passi e il codice.</p><p class="man-dl"><span class="tag">Da provare su una copia</span><a class="man-btn" href="manuali/autocad-2026-xrif-stampa.html">Leggi la guida</a><a class="man-btn ghost" href="manuali/autocad-2026-xrif-stampa.pdf" download>PDF</a><a class="man-btn ghost" href="manuali/autocad/SOSTXRIF.lsp" download>SOSTXRIF.lsp</a><a class="man-btn ghost" href="manuali/autocad/RETINITRASP.lsp" download>RETINITRASP.lsp</a></p></div></article>
           <article class="st-item" id="man-pro-06"><span class="st-n">06</span><div><h4>Checklist BIM-MEP</h4><p>I controlli da fare su un modello degli impianti.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-07"><span class="st-n">07</span><div><h4>Promemoria avvio progetto MEP</h4><p>Che cosa preparare all'inizio di un progetto impiantistico.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
-          <article class="st-item" id="man-pro-08"><span class="st-n">08</span><div><h4>Progettazione elettrica con i-project</h4><p>Il workflow completo per progettare un impianto elettrico con i-project di Schneider Electric, in nove fasi: i dati da chiedere prima di disegnare, il disegno in CAD, le impostazioni del programma, quadri e utenze, i calcoli con formule ed esempi numerici, che cosa fare quando una verifica non passa, schemi, computo con l'elenco prezzi provinciale e una checklist finale. Con schemi disegnati apposta, le norme di riferimento (CEI 64-8, 9ª edizione) e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/progettazione-elettrica-iproject.html">Leggi online</a><a class="man-btn ghost" href="manuali/progettazione-elettrica-iproject.pdf" download>Scarica il PDF · 30 pagine</a></p></div></article>
+          <article class="st-item" id="man-pro-08"><span class="st-n">08</span><div><span class="st-cover" aria-hidden="true"></span><span class="st-cover" aria-hidden="true"></span><h4>Progettazione elettrica con i-project</h4><p>Il workflow completo per progettare un impianto elettrico con i-project di Schneider Electric, in nove fasi: i dati da chiedere prima di disegnare, il disegno in CAD, le impostazioni del programma, quadri e utenze, i calcoli con formule ed esempi numerici, che cosa fare quando una verifica non passa, schemi, computo con l'elenco prezzi provinciale e una checklist finale. Con schemi disegnati apposta, le norme di riferimento (CEI 64-8, 9ª edizione) e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/progettazione-elettrica-iproject.html">Leggi online</a><a class="man-btn ghost" href="manuali/progettazione-elettrica-iproject.pdf" download>Scarica il PDF · 30 pagine</a></p></div></article>
           <article class="st-item" id="man-pro-09"><span class="st-n">09</span><div><h4>Guida alla progettazione antincendio</h4><p>Un percorso guidato nella progettazione antincendio.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-10"><span class="st-n">10</span><div><h4>Programma di studio: progettare un edificio in c.a.</h4><p>Un programma di studio per progettare un edificio in cemento armato.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
-          <article class="st-item" id="man-pro-11"><span class="st-n">11</span><div><h4>Linguaggi di programmazione per chi lavora nel BIM</h4><p>Una guida per chi ha già visto un po' di codice e vuole orientarsi: le famiglie dei linguaggi e dove si usano, con esempi in Python, C#, Dynamo, SQL e AutoLISP. Due capitoli spiegano che cosa succede nel computer, dal tasto premuto alla modifica del modello, e perché il GUID è l'identità di ogni oggetto BIM. Sedici capitoli, con grafiche disegnate apposta e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/linguaggi-di-programmazione.html">Leggi online</a><a class="man-btn ghost" href="manuali/linguaggi-di-programmazione.pdf" download>Scarica il PDF · 40 pagine</a></p></div></article>
+          <article class="st-item" id="man-pro-11"><span class="st-n">11</span><div><span class="st-cover" aria-hidden="true"></span><span class="st-cover" aria-hidden="true"></span><h4>Linguaggi di programmazione per chi lavora nel BIM</h4><p>Una guida per chi ha già visto un po' di codice e vuole orientarsi: le famiglie dei linguaggi e dove si usano, con esempi in Python, C#, Dynamo, SQL e AutoLISP. Due capitoli spiegano che cosa succede nel computer, dal tasto premuto alla modifica del modello, e perché il GUID è l'identità di ogni oggetto BIM. Sedici capitoli, con grafiche disegnate apposta e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/linguaggi-di-programmazione.html">Leggi online</a><a class="man-btn ghost" href="manuali/linguaggi-di-programmazione.pdf" download>Scarica il PDF · 40 pagine</a></p></div></article>
         </div>
       </div>
       <div class="sub" id="proposte">
@@ -2023,7 +2189,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>91 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>92 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -2675,7 +2841,7 @@ function put(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 // tema
 function dark(){return r.dataset.theme==="dark"}
 function tLabel(){$("theme-txt").textContent=dark()?"Tema chiaro":"Tema scuro"}
-var t=get("tema-2026");if(t)r.dataset.theme=t;
+var t=get("tema-2026")||"dark";r.dataset.theme=t;
 tb.addEventListener("click",function(){var n=dark()?"light":"dark";r.dataset.theme=n;tLabel();put("tema-2026",n)});
 // versione: scelta salvata, altrimenti essenziale per chi ha chiesto meno movimento o risparmio dati
 var m=get("versione"),auto=matchMedia("(prefers-reduced-motion: reduce)").matches||(navigator.connection&&(navigator.connection.saveData||/(^|-)2g$/.test(navigator.connection.effectiveType||"")));
@@ -2890,6 +3056,87 @@ window.initBuild=function(){var svg=$("build");if(!svg)return;var r=document.doc
   function tick(){var d=new Date();el.dateTime=d.toISOString();
     el.textContent=d.toLocaleDateString("it-IT",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"})+" · "+d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}
   tick();setTimeout(function(){tick();setInterval(tick,60000)},(60-new Date().getSeconds())*1000)})();
+// «Rilievo lento»: nuvola di punti che si forma come una scansione laser (solo versione completa)
+(function(){
+var cv=document.querySelector(".bn-cloud");if(!cv||!cv.getContext)return;
+var root=document.documentElement,cx=cv.getContext("2d"),still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){var u=r()||1e-9,v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v)}
+var IP=3.2,PW=1.35;// interpiano e passo delle finestre, in metri
+var VOL=[[0,0,0,26,16,2],[4,2,2,16,11,7]];// [x,y,floor0,lx,ly,piani]
+function survey(seed){
+  var r=rng(seed),P=[],side=seed%2?1:-1,S=[side>0?40:-14,side>0?-10:30];
+  function keep(u,v){var f=v%IP,w=u%PW;if(f<.22)return true;if(f>.85&&f<2.65&&w>.22&&w<1.13)return r()<.05;return true}
+  function put(x,y,z){var d=Math.hypot(x-S[0],y-S[1]);if(r()>Math.min(1,(18/d)*(18/d)))return;
+    P.push({x:x,y:y,z:z,a:Math.atan2(y-S[1],x-S[0]),gx:gauss(r),gy:gauss(r),gz:gauss(r),t:-1})}
+  for(var k=0;k<VOL.length;k++){var V=VOL[k],x0=V[0],y0=V[1],z0=V[2]*IP,lx=V[3],ly=V[4],h=V[5]*IP,n=Math.round((lx+ly)*h*5);
+    for(var i=0;i<n;i++){var u,v=r()*h;
+      if(r()<.5){u=r()*lx;if(keep(u,v))put(x0+u,y0+ly,z0+v)}else{u=r()*ly;if(keep(u,v))put(x0+lx,y0+u,z0+v)}}
+    for(i=0;i<lx*ly*2;i++)put(x0+r()*lx,y0+r()*ly,z0+h);
+    for(i=0;i<h*30;i++){v=r()*h;put(x0,y0+ly,z0+v);put(x0+lx,y0+ly,z0+v);put(x0+lx,y0,z0+v)}}
+  var amin=1e9,amax=-1e9;P.forEach(function(p){amin=Math.min(amin,p.a);amax=Math.max(amax,p.a)});
+  return{P:P,S:S,amin:amin,amax:amax,dir:side,t0:0}
+}
+var W,H,sc,ox,oy,cur=null,old=null,seed=7,color="#6fa8e8",run=false,vis=false;
+function pr(x,y,z){return[ox+(x-y)*.866*sc,oy+((x+y)*.5-z)*sc]}
+// ingombro isometrico dei volumi, per adattare il rilievo alla testata
+var BX=(function(){var a=[1e9,1e9,-1e9,-1e9];VOL.forEach(function(V){[[0,0],[V[3],0],[0,V[4]],[V[3],V[4]]].forEach(function(c){[V[2]*IP,(V[2]+V[5])*IP].forEach(function(z){var x=V[0]+c[0],y=V[1]+c[1],u=(x-y)*.866,v=(x+y)*.5-z;a[0]=Math.min(a[0],u);a[1]=Math.min(a[1],v);a[2]=Math.max(a[2],u);a[3]=Math.max(a[3],v)})})});return a})();
+function fit(){var r=cv.getBoundingClientRect(),d=devicePixelRatio||1;W=cv.width=Math.round(r.width*d);H=cv.height=Math.round(r.height*d);
+  var bw=BX[2]-BX[0],bh=BX[3]-BX[1],wide=W>H*1.6;sc=Math.min((wide?W*.42:W*.8)/bw,H*.84/bh);
+  ox=(wide?W*.97-bw*sc:(W-bw*sc)/2)-BX[0]*sc;oy=H*.92-BX[3]*sc}
+function sweep(s,now){return s.dir>0?s.amin+(s.amax-s.amin)*Math.min(1,(now-s.t0)/7000):s.amax-(s.amax-s.amin)*Math.min(1,(now-s.t0)/7000)}
+function draw(s,now,alpha){if(!s)return;var ang=sweep(s,now);cx.fillStyle=color;var d=devicePixelRatio||1,sz=1.6*d;
+  for(var i=0;i<s.P.length;i++){var p=s.P[i];
+    if(p.t<0){if(still||(s.dir>0?p.a<=ang:p.a>=ang))p.t=now;else continue}
+    var e=still?0:.6*Math.exp(-(now-p.t)/1400),q=pr(p.x+p.gx*e,p.y+p.gy*e,p.z+p.gz*e);
+    cx.globalAlpha=alpha*(.45+.45*Math.min(1,p.z/20)+(e>.3?.1:0));cx.fillRect(q[0],q[1],sz,sz)}
+  if(!still&&now-s.t0<7000&&alpha>.9){var a=pr(s.S[0],s.S[1],1.6),L=70;var b=pr(s.S[0]+Math.cos(ang)*L,s.S[1]+Math.sin(ang)*L,1.6);
+    var g=cx.createLinearGradient(a[0],a[1],b[0],b[1]);g.addColorStop(0,color);g.addColorStop(1,"transparent");
+    cx.globalAlpha=.5;cx.strokeStyle=g;cx.lineWidth=d;cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke();
+    cx.globalAlpha=.9;cx.fillRect(a[0]-2*d,a[1]-2*d,4*d,4*d)}}
+function frame(now){if(!run)return;cx.clearRect(0,0,W,H);
+  if(!cur){cur=survey(seed);cur.t0=now}
+  if(now-cur.t0>12000){old=cur;old.f0=now;seed=seed*7%97+3;cur=survey(seed);cur.t0=now+600}
+  if(old){var fa=1-(now-old.f0)/2500;if(fa<=0)old=null;else draw(old,now,fa*.8)}
+  draw(cur,now,1);cx.globalAlpha=1;
+  if(still){run=false;return}requestAnimationFrame(frame)}
+function want(){return vis&&!root.classList.contains("lite")&&!document.hidden&&cv.offsetWidth>0}
+function check(){color=getComputedStyle(cv).getPropertyValue("--accent").trim()||color;
+  if(want()&&!run){fit();run=true;requestAnimationFrame(frame)}else if(!want())run=false}
+new IntersectionObserver(function(e){vis=e[0].isIntersecting;check()}).observe(cv);
+new ResizeObserver(function(){if(run)fit()}).observe(cv);
+new MutationObserver(check).observe(root,{attributes:true,attributeFilter:["class","data-view","data-theme"]});
+document.addEventListener("visibilitychange",check);
+})();
+// «Grafici della veste C»: articoli di BIM Accademia per anno (filtro) e misuratori dei risultati
+(function(){
+var box=$("ac-hist");if(box&&window.PAPERS){
+  var C={};PAPERS.forEach(function(p){var y=+p.d.slice(0,4);C[y]=(C[y]||0)+1});
+  var ys=Object.keys(C).map(Number),y0=Math.min.apply(0,ys),y1=Math.max.apply(0,ys),Y=[];for(var y=y0;y<=y1;y++)Y.push(y);
+  var max=Math.max.apply(0,Y.map(function(y){return C[y]||0})),W=Y.length*44,H=96,bw=40,top=8,base=H-22;
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-labelledby="ac-hist-t"><title id="ac-hist-t">Articoli per anno di pubblicazione</title>';
+  svg+='<line class="hb" x1="0" x2="'+W+'" y1="'+base+'" y2="'+base+'"/>';
+  Y.forEach(function(y,i){var n=C[y]||0,h=n?Math.max(3,(base-top)*n/max):0,x=i*44+2,yy=base-h,r=Math.min(4,h);
+    svg+='<g class="hc" data-y="'+y+'" data-n="'+n+'" tabindex="'+(n?0:-1)+'" role="button" aria-label="'+y+': '+n+' articoli'+(n?', filtra':'')+'">';
+    svg+='<rect class="hit" x="'+(i*44)+'" y="0" width="44" height="'+H+'"/>';
+    if(n)svg+='<path class="bar" d="M'+x+','+base+'V'+(yy+r)+'q0,-'+r+' '+r+',-'+r+'H'+(x+bw-r)+'q'+r+',0 '+r+','+r+'V'+base+'Z"/>';
+    svg+='<text class="hy" x="'+(x+bw/2)+'" y="'+(H-6)+'">'+(Y.length>12&&y%2?"":"’"+String(y).slice(2))+'</text></g>'});
+  box.innerHTML=svg+'</svg><div class="h-tip" id="ac-tip" hidden></div><p class="h-cap">Articoli per anno di pubblicazione · tocca una barra per filtrare, di nuovo per togliere il filtro</p>';
+  var sel=$("ac-year"),tip=$("ac-tip");
+  function mark(){var v=sel.value;box.querySelectorAll(".hc").forEach(function(g){g.classList.toggle("on",g.dataset.y===v);g.classList.toggle("dim",!!v&&g.dataset.y!==v)})}
+  function pick(g){if(!+g.dataset.n)return;sel.value=sel.value===g.dataset.y?"":g.dataset.y;sel.dispatchEvent(new Event("input"));mark()}
+  box.querySelectorAll(".hc").forEach(function(g){
+    g.addEventListener("click",function(){pick(g)});
+    g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(g)}});
+    g.addEventListener("pointerenter",function(){var b=g.getBoundingClientRect(),o=box.getBoundingClientRect();tip.innerHTML="<b>"+g.dataset.y+"</b> · "+g.dataset.n+(g.dataset.n==="1"?" articolo":" articoli");tip.hidden=false;tip.style.left=(b.left-o.left+b.width/2)+"px"});
+    g.addEventListener("pointerleave",function(){tip.hidden=true})});
+  sel.addEventListener("input",mark);mark();
+}
+// misuratori: ogni percentuale sulla sua scala da 0 a 100, senza confronti tra voci diverse
+document.querySelectorAll('.rc-stat .rc-num[data-u="%"]').forEach(function(n){var st=n.closest(".rc-stat");if(st.querySelector(".rc-meter"))return;
+  var m=document.createElement("span");m.className="rc-meter";m.setAttribute("aria-hidden","true");m.innerHTML='<i style="--v:'+n.dataset.to+'%"></i>';
+  n.closest(".rc-big").after(m)});
+})();
 </script>
 <script data-goatcounter="https://mscigliuolo.goatcounter.com/count" data-goatcounter-settings='{"no_onload":true}' async src="//gc.zgo.at/count.js"></script>
 </body>
