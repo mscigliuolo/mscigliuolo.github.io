@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AutoCAD 2026: xrif e stampa · I manuali di BIM News</title>
+<meta name="description" content="Guida essenziale per AutoCAD 2026: dove mettere gli script, come caricarli con APPLOAD, come sostituire un xrif verificandone l'allineamento e come evitare i retini neri in stampa.">
+<link rel="stylesheet" href="manuale.css">
+<script>try{var t=localStorage.getItem("tema-2026");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>.path{font-family:var(--mono);font-size:.95rem;background:var(--code);color:var(--code-ink);padding:.8rem 1rem;border-radius:12px;overflow-x:auto;white-space:nowrap}
+.dl{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 1rem}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--accent)"/></marker></defs></svg>
+<div class="topbar"><div class="in"><a class="back" href="../#studio">← BIM News · Nello studio</a><span class="sp"></span><a class="btn ghost noprint" href="autocad/SOSTXRIF.lsp" download>SOSTXRIF.lsp</a><a class="btn ghost noprint" href="autocad/RETINITRASP.lsp" download>RETINITRASP.lsp</a><a class="btn" href="autocad-2026-xrif-stampa.pdf" download>PDF</a></div></div>
+<div class="layout">
+<nav class="toc" aria-label="Indice">
+  <b>Indice</b>
+  <ol>
+    <li><a href="#c1">1 · Lo schema in cinque passi</a></li>
+    <li><a href="#c2">2 · Dove mettere gli script</a></li>
+    <li><a href="#c3">3 · Caricarli con APPLOAD</a></li>
+    <li><a href="#c4">4 · SOSTXRIF: sostituire un xrif</a></li>
+    <li><a href="#c5">5 · Piante spostate o modificate</a></li>
+    <li><a href="#c6">6 · RETINITRASP: retini neri in stampa</a></li>
+    <li><a href="#c7">7 · Comandi e buone pratiche</a></li>
+    <li><a href="#c8">8 · Il codice</a></li>
+  </ol>
+</nav>
+<main>
+<header class="cover">
+  <div>
+    <span class="kick">I manuali di BIM News · Nello studio</span>
+    <h1>AutoCAD 2026: xrif e stampa</h1>
+    <p>Due script AutoLISP e l'essenziale per usarli: sostituire il file dell'architetto verificando che sia ancora allineato, ed evitare i retini neri pieni in stampa.</p>
+    <div class="meta"><span class="pill">guida essenziale</span><span class="pill">2 script da scaricare</span><span class="pill">AutoCAD 2026 in italiano</span><span class="pill">Edizione novembre 2026</span></div>
+  </div>
+  <svg viewBox="0 0 360 240" role="img" aria-label="Illustrazione: un disegno con un riferimento esterno sostituito">
+    <rect class="s-as" x="10" y="10" width="340" height="220" rx="22"/>
+    <rect class="s-w" x="40" y="40" width="130" height="150" rx="8"/><path class="s-l" d="M60 70h90v100H60zM60 110h50M110 70v40" style="opacity:.45"/>
+    <rect class="s-w" x="190" y="50" width="130" height="150" rx="8" style="stroke:var(--accent);stroke-width:2"/><path class="s-al" d="M210 80h90v100h-90zM210 120h50M260 80v40"/>
+    <path d="M172 115h14" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+    <text class="s-tm" x="60" y="208">versione vecchia</text><text class="s-tm" x="212" y="218">versione nuova</text>
+    <circle class="s-2" cx="300" cy="66" r="12"/><path d="M294 66l4 4 8-9" style="fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round"/>
+  </svg>
+</header>
+
+<div class="box warn"><b>Prima di usarli</b><p>Prova gli script su una <b>copia</b> del disegno. Ogni script raccoglie le sue modifiche in un'unica operazione, quindi un solo <code>ANNULLA</code> riporta il disegno com'era. Non modificare mai il file originale ricevuto dall'architetto.</p></div>
+
+<section class="ch" id="c1">
+  <div class="ch-h"><span class="ch-n">1</span><h2>Lo schema in cinque passi</h2></div>
+  <figure>
+    <svg viewBox="0 0 900 200" role="img" aria-label="I cinque passi per usare gli script">
+      <rect class="s-as" width="900" height="200" rx="18"/>
+      <g class="s-t">
+        <g transform="translate(18 34)"><rect class="s-w" width="156" height="120" rx="14"/><circle class="s-5" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">1</text><text class="s-tb" x="46" y="29">Scarica</text><text x="14" y="60">SOSTXRIF.lsp</text><text x="14" y="78">RETINITRASP.lsp</text><text class="s-tm" x="14" y="104">dal capitolo 8</text></g>
+        <g transform="translate(194 34)"><rect class="s-w" width="156" height="120" rx="14"/><circle class="s-3" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">2</text><text class="s-tb" x="46" y="29">Copia</text><text x="14" y="60">nella cartella</text><text x="14" y="78">Support</text><text class="s-tm" x="14" y="104">%AppData%\…\Support</text></g>
+        <g transform="translate(370 34)"><rect class="s-w" width="156" height="120" rx="14"/><circle class="s-4" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">3</text><text class="s-tb" x="46" y="29">Autorizza</text><text x="14" y="60">OPZIONI → File →</text><text x="14" y="78">Posizioni attendibili</text><text class="s-tm" x="14" y="104">una volta sola</text></g>
+        <g transform="translate(546 34)"><rect class="s-w" width="156" height="120" rx="14"/><circle class="s-a" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">4</text><text class="s-tb" x="46" y="29">Carica</text><text x="14" y="60">APPLOAD</text><text x="14" y="78">o (load "SOSTXRIF")</text><text class="s-tm" x="14" y="104">o Gruppo di avvio</text></g>
+        <g transform="translate(722 34)"><rect class="s-2" width="160" height="120" rx="14"/><circle style="fill:#fff" cx="24" cy="24" r="14"/><text class="s-tb" x="24" y="29" text-anchor="middle">5</text><text class="s-tw" x="46" y="29">Usa</text><text class="s-tw" x="14" y="60" style="font-weight:400">scrivi SOSTXRIF</text><text class="s-tw" x="14" y="78" style="font-weight:400">o RETINITRASP</text><text class="s-tw" x="14" y="104" style="font-weight:400;font-size:11px">leggi il report (F2)</text></g>
+        <path d="M174 94h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M350 94h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M526 94h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M702 94h18" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      </g>
+    </svg>
+    <figcaption><b>I passi 1–3 si fanno una volta sola.</b> Poi, ogni volta che arriva una nuova consegna dell'architetto, bastano i passi 4 e 5.</figcaption>
+  </figure>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-h"><span class="ch-n">2</span><h2>Dove mettere gli script</h2></div>
+  <p>Copia i due file <code>.lsp</code> nella cartella <b>Support</b> del tuo profilo AutoCAD. AutoCAD la cerca già da solo, quindi gli script si caricano scrivendo solo il loro nome.</p>
+  <div class="path">%AppData%\Autodesk\AutoCAD 2026\R25.1\ita\Support</div>
+  <ul>
+    <li>Incolla il percorso nella barra degli indirizzi di Esplora file: <code>%AppData%</code> porta alla cartella <code>C:\Users\&lt;utente&gt;\AppData\Roaming</code>, che di solito è nascosta.</li>
+    <li><code>ita</code> vale per AutoCAD in italiano; con altre lingue cambia (<code>deu</code>, <code>enu</code>).</li>
+    <li>Per avere il percorso esatto del tuo computer scrivi sulla riga di comando: <code>(findfile "acad.pgp")</code>. La cartella che compare è quella giusta.</li>
+  </ul>
+  <div class="tbl"><table>
+    <tr><th>Posizione</th><th>Valutazione</th></tr>
+    <tr><td>Support del profilo utente</td><td>Consigliata: nessuna configurazione</td></tr>
+    <tr><td>Cartella dedicata, per esempio <code>C:\AutoCAD_Tools</code> o una cartella di rete</td><td>Consigliata quando gli script crescono o si condividono: va aggiunta al <b>percorso di ricerca dei file di supporto</b> e alle posizioni attendibili</td></tr>
+    <tr><td>Cartella di installazione di AutoCAD</td><td>Sconsigliata: servono permessi di amministratore e un aggiornamento può cancellare i file</td></tr>
+  </table></div>
+  <p><b>Una sola copia di ogni script.</b> Con due copie in cartelle diverse AutoCAD carica la prima che trova, e rischi di usare la versione vecchia.</p>
+  <p><b>Per non vedere l'avviso di sicurezza</b>: <code>OPZIONI</code> → scheda <b>File</b> → <b>Posizioni attendibili</b> → aggiungi la cartella degli script.</p>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-h"><span class="ch-n">3</span><h2>Caricarli con APPLOAD</h2></div>
+  <ol class="steps">
+    <li><b>Carica</b> lo script in uno di questi modi: scrivi <code>APPLOAD</code>, scegli il file <code>.lsp</code>, <b>Carica</b> e <b>Chiudi</b>; oppure scrivi <code>(load "SOSTXRIF")</code> con parentesi e virgolette; oppure trascina il file nell'area di disegno.</li>
+    <li><b>Avviso di sicurezza</b>: se compare, scegli <b>Carica una volta</b>. Sparisce se la cartella è tra le posizioni attendibili.</li>
+    <li><b>Conferma</b>: sulla riga di comando compare «SOSTXRIF caricato».</li>
+    <li><b>Lancia</b> il comando scrivendo il suo nome: <code>SOSTXRIF</code> o <code>RETINITRASP</code>.</li>
+  </ol>
+  <div class="box tip"><b>Caricamento automatico</b><p>Uno script va caricato in ogni disegno in cui lo usi. Per averlo sempre: <code>APPLOAD</code> → <b>Gruppo di avvio</b> (l'icona della valigetta) → <b>Aggiungi</b> i due file.</p></div>
+</section>
+
+<section class="ch" id="c4">
+  <div class="ch-h"><span class="ch-n">4</span><h2>SOSTXRIF: sostituire un xrif e verificarne l'allineamento</h2></div>
+  <p>Sostituisce il file di un riferimento esterno con la nuova versione e confronta l'ingombro dell'istanza prima e dopo: ti dice se il nuovo disegno è sovrapposto al vecchio.</p>
+  <ol class="steps">
+    <li>Scrivi <code>SOSTXRIF</code> e seleziona l'xrif nel disegno.</li>
+    <li>Scegli il nuovo file DWG.</li>
+    <li>Imposta la tolleranza in unità del disegno (Invio = 0,01).</li>
+    <li>Leggi il risultato sulla riga di comando (<b>F2</b> per vederlo a finestra intera).</li>
+  </ol>
+  <div class="tbl"><table>
+    <tr><th>Risultato</th><th>Che cosa significa</th><th>Che cosa fare</th></tr>
+    <tr><td>ALLINEATO</td><td>Ingombro identico entro la tolleranza</td><td>Niente</td></tr>
+    <tr><td>TRASLATO</td><td>Stesso ingombro, spostato</td><td>Chiedere il motivo all'architetto; lo script propone di spostare l'istanza selezionata</td></tr>
+    <tr><td>SCALA DIVERSA</td><td>Ingombro in proporzione diversa da 1</td><td>Probabile differenza di unità tra i file (m, cm, mm)</td></tr>
+    <tr><td>INGOMBRO CAMBIATO</td><td>Né traslazione né scala</td><td>Il contenuto è cambiato: controlla pianta per pianta (capitolo 5)</td></tr>
+  </table></div>
+  <div class="box warn"><b>Limiti da conoscere</b><ul>
+    <li>Lo script misura l'ingombro dell'<b>intero file</b>, non della singola pianta: se l'architetto aggiunge o sposta una tavola nel model space, l'ingombro cambia anche se la tua pianta è a posto.</li>
+    <li>Un oggetto dimenticato lontano dal disegno falsa il risultato.</li>
+    <li>Il percorso cambia per <b>tutte</b> le istanze dell'xrif; il riallineamento sposta solo quella selezionata.</li>
+    <li>Dopo la sostituzione l'xrif mantiene il vecchio nome: rinominalo nella palette Riferimenti esterni.</li>
+  </ul></div>
+</section>
+
+<section class="ch" id="c5">
+  <div class="ch-h"><span class="ch-n">5</span><h2>Piante spostate o modificate</h2></div>
+  <div class="grid2">
+    <div class="card"><h4>Pianta spostata</h4><p>Tutta la pianta è sfalsata dello stesso vettore: assi, muri, quote. Si riallinea.</p></div>
+    <div class="card"><h4>Pianta modificata</h4><p>Assi e pilastri coincidono, cambia qualche parte. Non si riallinea: sono modifiche di progetto da controllare rispetto agli impianti.</p></div>
+  </div>
+  <ol class="steps">
+    <li>Nelle Proprietà controlla che l'xrif abbia inserimento 0,0,0, scala 1, rotazione 0.</li>
+    <li>Inserisci il vecchio file come sovrapposizione temporanea: <code>_XATTACH</code>, tipo <b>Sovrapposizione</b>, punto 0,0, scala 1, e dai ai suoi layer il colore 8.</li>
+    <li>Su ogni pianta prendi un punto omologo (incrocio di assi, spigolo di un pilastro) e misura con <code>_DIST</code>: leggi Delta X e Delta Y.</li>
+    <li>Delta zero: la pianta è a posto. Delta diverso da zero: sposta l'istanza con <code>_MOVE</code> dal punto nuovo al punto vecchio.</li>
+    <li>Per vedere le modifiche di contenuto usa <code>_COMPARE</code> tra il vecchio e il nuovo file: funziona se i due file hanno la stessa origine.</li>
+    <li>Alla fine stacca il vecchio xrif e annota le differenze trovate.</li>
+  </ol>
+  <p class="codecap">Con AutoCAD in italiano il trattino basso davanti al comando (<code>_MOVE</code>) usa il nome inglese, valido in ogni lingua.</p>
+</section>
+
+<section class="ch" id="c6">
+  <div class="ch-h"><span class="ch-n">6</span><h2>RETINITRASP: retini neri in stampa</h2></div>
+  <p>A schermo i retini dell'architetto sono grigio chiaro, in stampa escono neri pieni. La causa è la <b>dissolvenza degli xrif</b>: AutoCAD li schiarisce solo a schermo (variabile <code>XDWGFADECTL</code>), mentre in stampa escono con il loro colore reale. Cambiare lo stile di stampa o la trasparenza dei layer dell'xrif non basta; funziona impostare la trasparenza sui retini nel file di base, su una copia.</p>
+  <ol class="steps">
+    <li>Copia il file dell'architetto, per esempio <code>Pianta.dwg</code> → <code>Pianta_STAMPA.dwg</code>.</li>
+    <li>Apri la copia, scrivi <code>RETINITRASP</code>, valore 50 (Invio). Lo script agisce su tutti i retini, anche dentro i blocchi, e segnala quelli su layer bloccati.</li>
+    <li>Salva la copia e punta l'xrif alla copia con <code>SOSTXRIF</code>.</li>
+    <li>In <code>_PLOT</code>: stile <code>acad.ctb</code>, spunta <b>Stampa trasparenza</b>, <b>Anteprima</b>, poi <b>Applica al layout</b>.</li>
+    <li>Se le trasparenze non escono, controlla che <code>PLOTTRANSPARENCYOVERRIDE</code> valga 1.</li>
+  </ol>
+  <div class="box tip"><b>Da sapere</b><p>Lo script agisce solo sugli oggetti di tipo <b>Retino</b>: aree nere fatte con Solido 2D, Regione o Mascheratura richiedono un adattamento. A ogni nuova consegna dell'architetto ripeti i passi 1–3.</p></div>
+</section>
+
+<section class="ch" id="c7">
+  <div class="ch-h"><span class="ch-n">7</span><h2>Comandi e buone pratiche</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Comando o variabile</th><th>A che cosa serve</th></tr>
+    <tr><td><code>APPLOAD</code></td><td>Carica gli script; gestisce il gruppo di avvio</td></tr>
+    <tr><td><code>(findfile "acad.pgp")</code></td><td>Mostra il percorso della cartella Support</td></tr>
+    <tr><td><code>OPZIONI</code> → File</td><td>Percorsi di ricerca e posizioni attendibili</td></tr>
+    <tr><td><code>F2</code></td><td>Cronologia della riga di comando a finestra intera</td></tr>
+    <tr><td><code>_XATTACH</code> · <code>_DIST</code> · <code>_COMPARE</code> · <code>XCOMPARE</code></td><td>Inserire un xrif · misurare Delta X e Y · confrontare due DWG · confrontare un xrif con la sua versione aggiornata</td></tr>
+    <tr><td><code>XDWGFADECTL</code></td><td>Dissolvenza degli xrif a schermo: 0 per vedere come in stampa</td></tr>
+    <tr><td><code>VISRETAIN</code></td><td>1: conserva le modifiche ai layer degli xrif</td></tr>
+    <tr><td><code>PLOTTRANSPARENCYOVERRIDE</code></td><td>1: la stampa delle trasparenze segue l'impostazione pagina</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Non modificare mai i file ricevuti</b>: lavora su copie con un suffisso chiaro.</li>
+    <li><b>Rinomina gli xrif</b> con il nome della versione caricata.</li>
+    <li><b>Prima di riallineare, chiedi</b>: concorda con l'architetto quale origine vale per il progetto.</li>
+    <li><b>Concorda due regole semplici</b>: piante sempre nella stessa posizione nel model space, e un segno di riferimento fisso per ogni pianta (una croce sull'incrocio degli assi A/1, su un layer dedicato).</li>
+  </ul>
+</section>
+
+<section class="ch" id="c8">
+  <div class="ch-h"><span class="ch-n">8</span><h2>Il codice</h2></div>
+  <p>Puoi scaricare i file o copiare il testo in un file con lo stesso nome e l'estensione <code>.lsp</code>, salvato con codifica UTF-8.</p>
+  <div class="dl noprint"><a class="btn" href="autocad/SOSTXRIF.lsp" download>Scarica SOSTXRIF.lsp</a><a class="btn" href="autocad/RETINITRASP.lsp" download>Scarica RETINITRASP.lsp</a></div>
+  <p class="codecap">SOSTXRIF.lsp</p>
+<pre><code>;;; SOSTXRIF.lsp - Sostituisce il file di un riferimento esterno (xrif)
+;;; e confronta l&#x27;ingombro dell&#x27;istanza prima e dopo, per dire se il
+;;; nuovo disegno e&#x27; allineato al vecchio.
+;;;
+;;; BIM News - I manuali di Claude - AutoCAD 2026
+;;; Versione pubblicata sul sito: provala sempre su una COPIA del disegno.
+;;;
+;;; Uso:  (load &quot;SOSTXRIF&quot;)  poi  SOSTXRIF
+;;;   1. seleziona l&#x27;xrif nel disegno
+;;;   2. scegli il nuovo file DWG
+;;;   3. imposta la tolleranza (Invio = 0.01 unita&#x27; del disegno)
+;;;   4. leggi il risultato: ALLINEATO, TRASLATO, SCALA DIVERSA, INGOMBRO CAMBIATO
+;;; Tutte le modifiche sono un&#x27;unica operazione: un solo ANNULLA le toglie.
+
+(vl-load-com)
+
+(defun sx:bbox (obj / pmin pmax)
+  ;; ingombro dell&#x27;istanza in coordinate del disegno: (xmin ymin xmax ymax)
+  (vla-GetBoundingBox obj &#x27;pmin &#x27;pmax)
+  (setq pmin (vlax-safearray-&gt;list pmin)
+        pmax (vlax-safearray-&gt;list pmax))
+  (list (car pmin) (cadr pmin) (car pmax) (cadr pmax))
+)
+
+(defun sx:fmt (x) (rtos x 2 4))
+
+(defun c:SOSTXRIF (/ doc sel ent obj bname bdef oldpath newpath tol
+                     b1 b2 w1 h1 w2 h2 dx dy dx2 dy2 rx ry esito ans)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (princ &quot;\nSOSTXRIF - sostituzione di un xrif con verifica dell&#x27;allineamento.&quot;)
+  (setq sel (entsel &quot;\nSeleziona l&#x27;xrif da sostituire: &quot;))
+  (cond
+    ((null sel) (princ &quot;\nNessun oggetto selezionato.&quot;))
+    ((/= (cdr (assoc 0 (entget (setq ent (car sel))))) &quot;INSERT&quot;)
+     (princ &quot;\nL&#x27;oggetto selezionato non e&#x27; un riferimento esterno.&quot;))
+    (T
+     (setq obj   (vlax-ename-&gt;vla-object ent)
+           bname (vla-get-EffectiveName obj)
+           bdef  (vla-Item (vla-get-Blocks doc) bname))
+     (if (= (vla-get-IsXRef bdef) :vlax-false)
+       (princ (strcat &quot;\n\&quot;&quot; bname &quot;\&quot; e&#x27; un blocco, non un xrif.&quot;))
+       (progn
+         (setq oldpath (vla-get-Path bdef))
+         (princ (strcat &quot;\nXrif: &quot; bname &quot;\nFile attuale: &quot; oldpath))
+         (setq newpath (getfiled &quot;Scegli il nuovo file DWG&quot; oldpath &quot;dwg&quot; 0))
+         (if (null newpath)
+           (princ &quot;\nOperazione annullata: nessun file scelto.&quot;)
+           (progn
+             (setq tol (getreal &quot;\nTolleranza in unita&#x27; del disegno &lt;0.01&gt;: &quot;))
+             (if (or (null tol) (&lt;= tol 0.0)) (setq tol 0.01))
+             (vla-StartUndoMark doc)
+             (setq b1 (sx:bbox obj))
+             (vla-put-Path bdef newpath)
+             (vla-Reload bdef)
+             (setq b2 (sx:bbox obj))
+             (setq w1 (- (nth 2 b1) (nth 0 b1))  h1 (- (nth 3 b1) (nth 1 b1))
+                   w2 (- (nth 2 b2) (nth 0 b2))  h2 (- (nth 3 b2) (nth 1 b2))
+                   dx (- (nth 0 b2) (nth 0 b1))  dy (- (nth 1 b2) (nth 1 b1))
+                   dx2 (- (nth 2 b2) (nth 2 b1)) dy2 (- (nth 3 b2) (nth 3 b1)))
+             (setq rx (if (&gt; (abs w1) 1e-9) (/ w2 w1) 0.0)
+                   ry (if (&gt; (abs h1) 1e-9) (/ h2 h1) 0.0))
+             (setq esito
+               (cond
+                 ((and (&lt; (abs dx) tol) (&lt; (abs dy) tol) (&lt; (abs dx2) tol) (&lt; (abs dy2) tol))
+                  &quot;ALLINEATO&quot;)
+                 ((and (&lt; (abs (- w2 w1)) tol) (&lt; (abs (- h2 h1)) tol))
+                  &quot;TRASLATO&quot;)
+                 ((and (&gt; rx 0.0) (&lt; (abs (- rx ry)) 0.001) (&gt; (abs (- rx 1.0)) 0.001))
+                  &quot;SCALA DIVERSA&quot;)
+                 (T &quot;INGOMBRO CAMBIATO&quot;)))
+             (princ &quot;\n----------------------------------------------&quot;)
+             (princ (strcat &quot;\nNuovo file:  &quot; newpath))
+             (princ (strcat &quot;\nIngombro prima:  &quot; (sx:fmt w1) &quot; x &quot; (sx:fmt h1)))
+             (princ (strcat &quot;\nIngombro dopo:   &quot; (sx:fmt w2) &quot; x &quot; (sx:fmt h2)))
+             (princ (strcat &quot;\nSpostamento dell&#x27;angolo in basso a sinistra: dX &quot; (sx:fmt dx) &quot;  dY &quot; (sx:fmt dy)))
+             (princ (strcat &quot;\nRISULTATO: &quot; esito))
+             (cond
+               ((= esito &quot;ALLINEATO&quot;) (princ &quot;\nIl nuovo file e&#x27; sovrapposto al vecchio: nulla da fare.&quot;))
+               ((= esito &quot;TRASLATO&quot;)
+                (princ &quot;\nStesso ingombro, spostato. Verifica il motivo con l&#x27;architetto prima di riallineare.&quot;)
+                (initget &quot;Si No&quot;)
+                (setq ans (getkword &quot;\nSpostare l&#x27;istanza selezionata per riallinearla? [Si/No] &lt;No&gt;: &quot;))
+                (if (= ans &quot;Si&quot;)
+                  (progn
+                    (vla-Move obj (vlax-3d-point (list dx dy 0.0)) (vlax-3d-point &#x27;(0.0 0.0 0.0)))
+                    (princ &quot;\nIstanza spostata. Le altre istanze dello stesso xrif non sono state toccate.&quot;))))
+               ((= esito &quot;SCALA DIVERSA&quot;)
+                (princ (strcat &quot;\nRapporto di scala circa &quot; (sx:fmt rx) &quot;: probabile differenza di unita&#x27; (m, cm, mm) tra i due file.&quot;)))
+               (T (princ &quot;\nIl contenuto e&#x27; cambiato: controlla le piante una per una (vedi la guida, \&quot;Verificare piante spostate o modificate\&quot;).&quot;)))
+             (princ &quot;\nRicorda di rinominare l&#x27;xrif nella palette Riferimenti esterni con il nome della nuova versione.&quot;)
+             (princ &quot;\n----------------------------------------------&quot;)
+             (vla-EndUndoMark doc)))))))
+  (princ)
+)
+
+(princ &quot;\nSOSTXRIF caricato. Scrivi SOSTXRIF per usarlo.&quot;)
+(princ)</code></pre>
+  <p class="codecap">RETINITRASP.lsp</p>
+<pre><code>;;; RETINITRASP.lsp - Imposta la trasparenza di tutti i retini del disegno,
+;;; anche dentro i blocchi, per evitare i retini neri pieni in stampa
+;;; quando il file viene usato come xrif.
+;;;
+;;; BIM News - I manuali di Claude - AutoCAD 2026
+;;; Versione pubblicata sul sito: usala su una COPIA del file dell&#x27;architetto,
+;;; mai sull&#x27;originale ricevuto.
+;;;
+;;; Uso:  (load &quot;RETINITRASP&quot;)  poi  RETINITRASP
+;;;   valore da 0 a 90 (Invio = 50, simile alla dissolvenza degli xrif a schermo)
+;;; Tutte le modifiche sono un&#x27;unica operazione: un solo ANNULLA le toglie.
+
+(vl-load-com)
+
+(defun c:RETINITRASP (/ doc val n bloccati blk obj lay res)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (princ &quot;\nRETINITRASP - trasparenza dei retini.&quot;)
+  (setq val (getint &quot;\nTrasparenza da 0 a 90 &lt;50&gt;: &quot;))
+  (if (or (null val) (&lt; val 0) (&gt; val 90)) (setq val 50))
+  (setq n 0 bloccati &#x27;())
+  (vla-StartUndoMark doc)
+  ;; tutti i blocchi del disegno: spazio modello, layout e definizioni di blocco
+  (vlax-for blk (vla-get-Blocks doc)
+    (if (= (vla-get-IsXRef blk) :vlax-false)
+      (vlax-for obj blk
+        (if (= (vla-get-ObjectName obj) &quot;AcDbHatch&quot;)
+          (progn
+            (setq res (vl-catch-all-apply &#x27;vla-put-EntityTransparency (list obj (itoa val))))
+            (if (vl-catch-all-error-p res)
+              (progn
+                (setq lay (vla-get-Layer obj))
+                (if (not (member lay bloccati)) (setq bloccati (cons lay bloccati))))
+              (setq n (1+ n))))))))
+  (vla-EndUndoMark doc)
+  (princ (strcat &quot;\nRetini modificati: &quot; (itoa n) &quot; (trasparenza &quot; (itoa val) &quot;).&quot;))
+  (if bloccati
+    (progn
+      (princ &quot;\nRetini non modificati, probabilmente su layer bloccati:&quot;)
+      (foreach l bloccati (princ (strcat &quot;\n  - &quot; l)))
+      (princ &quot;\nSblocca questi layer e rilancia il comando.&quot;)))
+  (princ &quot;\nSalva la copia e punta l&#x27;xrif alla copia (SOSTXRIF). In stampa spunta \&quot;Stampa trasparenza\&quot;.&quot;)
+  (princ)
+)
+
+(princ &quot;\nRETINITRASP caricato. Scrivi RETINITRASP per usarlo.&quot;)
+(princ)</code></pre>
+  <div class="box idea"><b>Come sono nati</b><p>Gli script e la guida sono «manuali di Claude»: li ha scritti Claude, l'assistente di intelligenza artificiale di Anthropic, a partire da un caso reale di sostituzione di xrif e di stampa dei retini. Le funzioni usate sono quelle documentate di AutoLISP e ActiveX per AutoCAD; provali su una copia prima di usarli su un progetto.</p></div>
+  <p class="foot">BIM News · I manuali di Claude · AutoCAD 2026: xrif e stampa · edizione novembre 2026</p>
+</section>
+</main>
+</div>
+</body>
+</html>
