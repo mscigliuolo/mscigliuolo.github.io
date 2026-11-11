@@ -32,7 +32,7 @@
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.1rem;line-height:1.6}
-.wrap{max-width:70rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:112rem;margin:0 auto;padding-left:max(16px,2vw,env(safe-area-inset-left,0px));padding-right:max(16px,2vw,env(safe-area-inset-right,0px))}
 a{color:var(--accent);text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -888,6 +888,31 @@ body{transition:background-color .3s}
 .lite .map-zoom,.lite .map-hud{display:none}
 .lite .map-wrap{border-style:dashed}
 :root.lite{--display:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+
+/* facciata: colonna sinistra compatta, la mappa prende il resto dello schermo */
+.facade{grid-template-columns:minmax(17rem,23rem) minmax(0,1fr);gap:1.4rem 2rem;align-items:start;min-height:0;padding-top:.4rem}
+.fc-left{gap:.6rem}
+.fc-h{font-size:clamp(2.4rem,4vw,3.4rem)}
+.fc-p{font-size:1rem;margin:0 0 .2rem}
+.fc-nav{gap:.45rem;max-width:none}
+.fc-btn{grid-template-columns:2.2rem minmax(0,1fr) auto;gap:.7rem;padding:.5rem .8rem .5rem .6rem}
+.fc-ico{width:2.2rem;height:2.2rem}
+.fc-ico svg{width:1.15rem;height:1.15rem}
+.fc-t b{font-size:1.02rem}
+.fc-t small{font-size:.8rem}
+.fc-map-link{font-size:.88rem}
+.fc-upd{font-size:.7rem}
+.fc-next{font-size:.84rem}
+.fc-right{gap:.4rem}
+.fc-map .map-wrap{border-radius:18px}
+.fc-map #map{max-height:calc(100vh - 9rem);margin:0 auto}
+.fc-map .map-credit{font-size:.56rem;opacity:.8}
+.fc-cta{padding:0 .2rem;font-size:.92rem}
+.banner{grid-template-columns:minmax(0,1fr) minmax(0,30rem);padding-block:1rem}
+.bn-art{width:100%;max-height:none}
+@media (max-width:760px){.banner{grid-template-columns:minmax(0,1fr)}.bn-art{max-height:none;width:calc(100% + 2.4rem)}}
+.fc-incl{margin:0;font-size:.86rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:.6rem}
+@media (max-width:900px){.facade{grid-template-columns:minmax(0,1fr)}.fc-right{order:-1}.fc-map #map{max-height:none}}
 </style>
 </head>
 <body>
@@ -934,7 +959,8 @@ body{transition:background-color .3s}
           <span class="bn-kick">Rassegna settimanale · il BIM nel mondo</span>
           <h1 class="fc-h">BIM News</h1>
           <p class="fc-by">a cura di <a href="#chi-sono">Marco Scigliuolo</a></p>
-          <p class="fc-p">Le novità sul BIM da tutto il mondo, raccolte ogni settimana e riassunte in italiano, ognuna con il link alla fonte.</p>
+          <p class="fc-p">Le novità sul BIM da tutto il mondo, ogni settimana, in italiano e con il link alla fonte.</p>
+          <p class="fc-incl">Un sito inclusivo: il BIM è per tutti, dal grande ente al piccolo studio, in ogni paese.</p>
           <nav class="fc-nav" aria-label="Pagine del sito"><a class="fc-btn k-news" href="#bim-news"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="fc-t"><b>BIM News</b><small>La rassegna settimanale dal mondo</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-ai" href="#bim-ai"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="fc-t"><b>BIM &amp; AI</b><small>Quando il BIM incontra l'intelligenza artificiale</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-b5" href="#bim-5-minuti"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/></svg></span><span class="fc-t"><b>BIM in 5 minuti</b><small>Che cos'è il BIM, spiegato semplice</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-vid" href="#video"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg></span><span class="fc-t"><b>Video</b><small>Webinar registrati e canali gratuiti sul BIM</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-cur" href="#chi-sono"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6"/></svg></span><span class="fc-t"><b>Il curatore</b><small>Chi cura il sito, profilo e progetti</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
           <p class="fc-map-link"><a href="#mappa">Non sai da dove iniziare? Apri la mappa del sito →</a></p>
           <p class="fc-upd" id="fc-upd"></p>
@@ -959,6 +985,7 @@ body{transition:background-color .3s}
         <span class="f-lab">Tutte le notizie</span>
         <h3>Il BIM nel mondo, una settimana alla volta</h3>
         <p>Questa è la rassegna completa: ogni settimana le notizie sul BIM arrivano da ogni parte del mondo, vengono riassunte in italiano e collocate sulla mappa, fino alla regione o allo stato in cui accadono. Norme e obblighi, appalti pubblici, progetti, standard e tecnologie.</p>
+        <p><b>Il criterio di fondo è l'inclusività.</b> Questo sito nasce perché tutti adottino il BIM: non solo i grandi committenti e le grandi società di ingegneria, ma anche il piccolo studio, l'impresa di paese, il comune di montagna, lo studente. Per questo le notizie sono scritte in italiano semplice, le sigle vengono spiegate, si privilegiano i formati aperti e le risorse gratuite, e sulla mappa trova posto ogni paese che fa un passo avanti, anche piccolo.</p>
         <p>La mappa è mondiale per scelta: il BIM non appartiene a un solo paese. Il desiderio del curatore è che ogni realtà, in qualunque parte del mondo, possa servirsi di questa tecnologia per costruire meglio, e quindi per migliorare la vita di chi negli edifici abita, studia e lavora.</p>
         <div class="crit">
           <h4>Come scegliamo le notizie</h4>
@@ -970,6 +997,7 @@ body{transition:background-color .3s}
             <li><b>Software e intelligenza artificiale</b>: solo le novità che cambiano il modo di lavorare</li>
             <li><b>Eventi di riferimento</b>: fiere, congressi e premi del settore</li>
           </ul>
+          <p>A parità di interesse, si preferisce la notizia che aiuta qualcuno a cominciare: una guida gratuita, un obbligo spiegato, un primo progetto pilota, un paese che parte da zero.</p>
           <p>Ogni notizia ha il link alla fonte principale, per chi vuole leggerla per intero. Quando una data o un dettaglio non sono certi, lo segnala una nota.</p>
         </div>
         <p class="ai-crit">Esplora le notizie per luogo, tema e periodo con la mappa, i filtri e l'archivio; nella scheda BIM &amp; AI trovi quelle dedicate all'intelligenza artificiale. Nella colonna a sinistra trovi anche i prossimi eventi e webinar.</p>
@@ -1565,7 +1593,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>75 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>76 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -2167,7 +2195,7 @@ new MutationObserver(function(){loadHeavy()}).observe(r,{attributes:true,attribu
 
 latest();render();ranking();view();
 // mappa del sito: albero apribile, collegamenti alle pagine, linee curve disegnate sul posto
-var SITEMAP={"t": "Il sito", "d": "BIM News, la rassegna sul BIM nel mondo, a cura di Marco Scigliuolo", "h": "#home", "c": [{"t": "BIM News", "k": "k-news", "d": "La rassegna settimanale dal mondo, con la mappa interattiva", "h": "#bim-news", "c": [{"t": "Ultimo aggiornamento", "d": "Le notizie della settimana più recente", "h": "#bim-news", "e": "latest"}, {"t": "Come scegliamo le notizie", "d": "I criteri della selezione", "h": "#bim-news", "e": "all-intro"}, {"t": "Mappa del mondo", "d": "Continenti, paesi e regioni con il numero di notizie", "h": "#bim-news", "e": "map"}, {"t": "Archivio dal 2015", "d": "Tutte le notizie per anno e mese, con filtri e ricerca", "h": "#bim-news", "e": "m-nav"}, {"t": "Eventi e webinar", "d": "I prossimi appuntamenti, anche quelli più vicini a te", "h": "#bim-news", "e": "agenda"}]}, {"t": "BIM & AI", "k": "k-ai", "d": "Le notizie in cui il BIM incontra l'intelligenza artificiale", "h": "#bim-ai"}, {"t": "BIM in 5 minuti", "k": "k-b5", "d": "Che cos'è il BIM, spiegato semplice, con la timeline delle norme", "h": "#bim-5-minuti"}, {"t": "Video", "k": "k-vid", "d": "Webinar registrati e canali gratuiti sul BIM", "h": "#video", "c": [{"t": "Webinar e conferenze", "d": "Registrazioni gratuite in quattro lingue", "h": "#video", "e": "vd-list"}, {"t": "Canali YouTube", "d": "I canali che parlano di BIM", "h": "#video", "e": "ch-list"}]}, {"t": "Il curatore", "k": "k-cur", "d": "Chi cura il sito: profilo, progetti, idee e passioni", "h": "#chi-sono", "c": [{"t": "Profilo", "d": "Chi sono, percorso, competenze e strumenti", "h": "#chi-sono"}, {"t": "Portfolio", "d": "I progetti a cui ho lavorato", "h": "#portfolio"}, {"t": "Nello studio", "d": "Riflessioni, soluzioni e manuali per chi progetta", "h": "#studio", "c": [{"t": "Riflessioni", "d": "Che cosa vuol dire essere ingegnere", "h": "#studio", "tab": 0}, {"t": "I problemi della progettazione", "d": "Dodici problemi frequenti, da risolvere uno per uno", "h": "#studio", "tab": 1}, {"t": "Ottimizzazione per il BIM", "d": "Script per ridurre il lavoro ripetitivo nella modellazione", "h": "#studio", "tab": 2}, {"t": "Ottimizzazione per AutoCAD", "d": "Routine e script da copiare o scaricare", "h": "#studio", "tab": 3}, {"t": "I manuali di Claude", "d": "Manuali professionali scritti con Claude su mie indicazioni", "h": "#studio", "tab": 4}]}, {"t": "Le mie proposte", "d": "Idee per il mondo del BIM", "h": "#proposte"}, {"t": "Work in progress", "d": "I lavori in corso", "h": "#wip"}, {"t": "Fuori dallo studio", "d": "Passioni, riflessioni e manuali non professionali", "h": "#fuori", "c": [{"t": "La musica", "d": "Esplorazione e disciplina", "h": "#fuori", "e": "fuori-musica", "box": "fuori", "tab": 0}, {"t": "I miei libri", "d": "I libri che mi hanno formato", "h": "#fuori", "e": "fuori-libri", "box": "fuori", "tab": 0}, {"t": "Essere ingegnere", "d": "Come ci si vede e ci si sente", "h": "#fuori", "e": "fuori-ingegnere", "box": "fuori", "tab": 0}, {"t": "Lo scautismo", "d": "Un'altra parte di me", "h": "#fuori", "e": "fuori-scout", "box": "fuori", "tab": 0}, {"t": "I manuali di Claude", "d": "Manuali non professionali: suono, chitarra, basso", "h": "#fuori", "box": "fuori", "tab": 1}]}, {"t": "I miei libri", "d": "Sei categorie di letture fondamentali", "h": "#libri", "c": [{"t": "Crescita personale e psicologia", "d": "Capire le persone, a partire da sé", "h": "#libri", "e": "libri-01"}, {"t": "Romanzi", "d": "Le storie che restano", "h": "#libri", "e": "libri-02"}, {"t": "Poesia", "d": "Le raccolte a cui torno", "h": "#libri", "e": "libri-03"}, {"t": "Saggistica", "d": "I saggi che cambiano il modo di ragionare", "h": "#libri", "e": "libri-04"}, {"t": "Arte e fotografia", "d": "Imparare a guardare", "h": "#libri", "e": "libri-05"}, {"t": "Economia", "d": "Capire l'economia, oltre gli slogan", "h": "#libri", "e": "libri-06"}]}]}]};
+var SITEMAP={"t": "Il sito", "d": "BIM News, la rassegna sul BIM nel mondo, a cura di Marco Scigliuolo: un sito inclusivo, perché tutti adottino il BIM", "h": "#home", "c": [{"t": "BIM News", "k": "k-news", "d": "La rassegna settimanale dal mondo, con la mappa interattiva", "h": "#bim-news", "c": [{"t": "Ultimo aggiornamento", "d": "Le notizie della settimana più recente", "h": "#bim-news", "e": "latest"}, {"t": "Come scegliamo le notizie", "d": "I criteri della selezione, a partire dall'inclusività", "h": "#bim-news", "e": "all-intro"}, {"t": "Mappa del mondo", "d": "Continenti, paesi e regioni con il numero di notizie", "h": "#bim-news", "e": "map"}, {"t": "Archivio dal 2015", "d": "Tutte le notizie per anno e mese, con filtri e ricerca", "h": "#bim-news", "e": "m-nav"}, {"t": "Eventi e webinar", "d": "I prossimi appuntamenti, anche quelli più vicini a te", "h": "#bim-news", "e": "agenda"}]}, {"t": "BIM & AI", "k": "k-ai", "d": "Le notizie in cui il BIM incontra l'intelligenza artificiale", "h": "#bim-ai"}, {"t": "BIM in 5 minuti", "k": "k-b5", "d": "Che cos'è il BIM, spiegato semplice, con la timeline delle norme", "h": "#bim-5-minuti"}, {"t": "Video", "k": "k-vid", "d": "Webinar registrati e canali gratuiti sul BIM", "h": "#video", "c": [{"t": "Webinar e conferenze", "d": "Registrazioni gratuite in quattro lingue", "h": "#video", "e": "vd-list"}, {"t": "Canali YouTube", "d": "I canali che parlano di BIM", "h": "#video", "e": "ch-list"}]}, {"t": "Il curatore", "k": "k-cur", "d": "Chi cura il sito: profilo, progetti, idee e passioni", "h": "#chi-sono", "c": [{"t": "Profilo", "d": "Chi sono, percorso, competenze e strumenti", "h": "#chi-sono"}, {"t": "Portfolio", "d": "I progetti a cui ho lavorato", "h": "#portfolio"}, {"t": "Nello studio", "d": "Riflessioni, soluzioni e manuali per chi progetta", "h": "#studio", "c": [{"t": "Riflessioni", "d": "Che cosa vuol dire essere ingegnere", "h": "#studio", "tab": 0}, {"t": "I problemi della progettazione", "d": "Dodici problemi frequenti, da risolvere uno per uno", "h": "#studio", "tab": 1}, {"t": "Ottimizzazione per il BIM", "d": "Script per ridurre il lavoro ripetitivo nella modellazione", "h": "#studio", "tab": 2}, {"t": "Ottimizzazione per AutoCAD", "d": "Routine e script da copiare o scaricare", "h": "#studio", "tab": 3}, {"t": "I manuali di Claude", "d": "Manuali professionali scritti con Claude su mie indicazioni", "h": "#studio", "tab": 4}]}, {"t": "Le mie proposte", "d": "Idee per il mondo del BIM", "h": "#proposte"}, {"t": "Work in progress", "d": "I lavori in corso", "h": "#wip"}, {"t": "Fuori dallo studio", "d": "Passioni, riflessioni e manuali non professionali", "h": "#fuori", "c": [{"t": "La musica", "d": "Esplorazione e disciplina", "h": "#fuori", "e": "fuori-musica", "box": "fuori", "tab": 0}, {"t": "I miei libri", "d": "I libri che mi hanno formato", "h": "#fuori", "e": "fuori-libri", "box": "fuori", "tab": 0}, {"t": "Essere ingegnere", "d": "Come ci si vede e ci si sente", "h": "#fuori", "e": "fuori-ingegnere", "box": "fuori", "tab": 0}, {"t": "Lo scautismo", "d": "Un'altra parte di me", "h": "#fuori", "e": "fuori-scout", "box": "fuori", "tab": 0}, {"t": "I manuali di Claude", "d": "Manuali non professionali: suono, chitarra, basso", "h": "#fuori", "box": "fuori", "tab": 1}]}, {"t": "I miei libri", "d": "Sei categorie di letture fondamentali", "h": "#libri", "c": [{"t": "Crescita personale e psicologia", "d": "Capire le persone, a partire da sé", "h": "#libri", "e": "libri-01"}, {"t": "Romanzi", "d": "Le storie che restano", "h": "#libri", "e": "libri-02"}, {"t": "Poesia", "d": "Le raccolte a cui torno", "h": "#libri", "e": "libri-03"}, {"t": "Saggistica", "d": "I saggi che cambiano il modo di ragionare", "h": "#libri", "e": "libri-04"}, {"t": "Arte e fotografia", "d": "Imparare a guardare", "h": "#libri", "e": "libri-05"}, {"t": "Economia", "d": "Capire l'economia, oltre gli slogan", "h": "#libri", "e": "libri-06"}]}]}]};
 (function(){var root=$("mm"),svg=$("mm-lines"),wrap=$("mm-wrap");if(!root)return;var uid=0;
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
 function build(n,depth,k){var li=document.createElement("li"),kids=n.c||[],cls=n.k||k||"";li.setAttribute("role","treeitem");if(cls)li.className=cls;
