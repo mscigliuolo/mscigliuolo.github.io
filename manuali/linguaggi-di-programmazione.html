@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Linguaggi di programmazione per il BIM · I manuali di BIM News</title>
+<meta name="description" content="Guida ai linguaggi di programmazione per chi lavora nelle costruzioni e nel BIM: famiglie, usi, esempi, cosa succede dal tasto al modello e perché il GUID è così importante.">
+<link rel="stylesheet" href="manuale.css">
+<script>try{var t=localStorage.getItem("tema-2026");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<div class="topbar"><div class="in"><a class="back" href="../#studio">← BIM News · Nello studio</a><span class="sp"></span><a class="btn" href="linguaggi-di-programmazione.pdf" download>Scarica il PDF</a></div></div>
+<div class="layout">
+<nav class="toc" aria-label="Indice">
+  <b>Indice</b>
+  <ol>
+    <li><a href="#guida">Come usare questa guida</a></li>
+    <li><a href="#c1">1 · Concetti di base</a></li>
+    <li><a href="#c2">2 · Dal tasto al modello</a></li>
+    <li><a href="#c3">3 · Bit, numeri e coordinate</a></li>
+    <li><a href="#c4">4 · Il GUID, l'identità degli oggetti</a></li>
+    <li><a href="#c5">5 · La mappa dei linguaggi</a></li>
+    <li><a href="#c6">6 · Basso livello e imperativi</a></li>
+    <li><a href="#c7">7 · Orientati agli oggetti</a></li>
+    <li><a href="#c8">8 · Funzionali, logici, dichiarativi</a></li>
+    <li><a href="#c9">9 · Scripting e web</a></li>
+    <li><a href="#c10">10 · Calcolo scientifico</a></li>
+    <li><a href="#c11">11 · I linguaggi del BIM</a></li>
+    <li><a href="#c12">12 · Formati che leggerai</a></li>
+    <li><a href="#c13">13 · Leggere codice che non conosci</a></li>
+    <li><a href="#c14">14 · Da dove cominciare</a></li>
+    <li><a href="#c15">15 · Glossario</a></li>
+    <li><a href="#c16">16 · Curiosità che insegnano</a></li>
+    <li><a href="#fonti">Fonti e approfondimenti</a></li>
+  </ol>
+</nav>
+<main>
+<header class="cover">
+  <div>
+    <span class="kick">I manuali di BIM News · Nello studio</span>
+    <h1>Linguaggi di programmazione per chi lavora nel BIM</h1>
+    <p>Che cosa sono i linguaggi, come si riconoscono le loro famiglie, quali si incontrano in uno studio di progettazione e che cosa succede davvero, dentro il computer, tra la pressione di un tasto e la modifica di un modello.</p>
+    <p class="lead">Per chi ha già visto un po' di codice e vuole orientarsi, senza essere un programmatore.</p>
+    <div class="meta"><span class="pill">16 capitoli</span><span class="pill">oltre 60 linguaggi</span><span class="pill">esempi in Python, C#, Dynamo, SQL</span><span class="pill">Edizione novembre 2026</span></div>
+  </div>
+  <svg viewBox="0 0 360 260" role="img" aria-label="Illustrazione: dal chip al codice al modello BIM">
+    <rect class="s-as" x="10" y="10" width="340" height="240" rx="22"/>
+    <g transform="translate(34 150)"><rect class="s-w" x="0" y="0" width="80" height="80" rx="8"/><rect class="s-a" x="20" y="20" width="40" height="40" rx="4"/>
+      <path class="s-l" d="M10 0v-8M30 0v-8M50 0v-8M70 0v-8M10 80v8M30 80v8M50 80v8M70 80v8M0 10h-8M0 30h-8M0 50h-8M0 70h-8M80 10h8M80 30h8M80 50h8M80 70h8"/><text class="s-tw" x="40" y="45" text-anchor="middle">CPU</text></g>
+    <g transform="translate(140 40)"><rect class="s-w" x="0" y="0" width="120" height="96" rx="10"/><rect x="0" y="0" width="120" height="20" rx="10" class="s-a"/>
+      <text class="s-tm" x="12" y="40">for m in muri:</text><text class="s-tm" x="24" y="58">if m.h &gt; 3:</text><text class="s-tm" x="36" y="76">segna(m)</text></g>
+    <g transform="translate(250 150)"><path class="s-2s" d="M40 0 80 20 40 40 0 20z"/><path class="s-2" d="M0 20 40 40v40L0 60z" opacity=".55"/><path class="s-2" d="M80 20 40 40v40l40-20z"/><path class="s-l" d="M40 0 80 20v40L40 80 0 60V20zM0 20l40 20 40-20M40 40v40"/></g>
+    <path class="s-al" d="M118 170c20-30 20-40 22-56M262 110c20 10 26 20 26 36" stroke-dasharray="4 5"/>
+    <text class="s-tm" x="34" y="138">elettronica</text><text class="s-tm" x="160" y="152">linguaggio</text><text class="s-tm" x="262" y="246">modello</text>
+  </svg>
+</header>
+
+<section class="ch" id="guida">
+  <div class="ch-h"><span class="ch-n">?</span><h2>Come usare questa guida</h2></div>
+  <p>Per leggere codice non serve conoscere sessanta linguaggi: serve riconoscere a quale <b>famiglia</b> appartiene un linguaggio, perché le famiglie condividono idee, parole e punteggiatura. Chi sa leggere un po' di Python riconosce la struttura di Ruby; chi ha visto C# legge Java quasi senza accorgersene.</p>
+  <p>La guida segue un percorso dal basso verso l'alto. I primi quattro capitoli spiegano le idee di fondo e che cosa succede dentro il computer, con un'attenzione particolare a due temi che chi lavora nel BIM incontra ogni giorno: i numeri decimali delle coordinate e gli identificativi univoci degli oggetti. Dal capitolo 5 si passa ai linguaggi, famiglia per famiglia, con tabelle che dicono dove si usano, che cosa fanno bene e dove fanno fatica. Il capitolo 11 raccoglie quelli del mondo AEC e BIM, con esempi pronti da leggere.</p>
+  <div class="box bim"><b>Le analogie da cantiere</b><p>Lungo la guida trovi riquadri come questo: collegano un concetto informatico a qualcosa che chi progetta conosce già, dalle famiglie di Revit al capitolato, dal cronoprogramma al computo.</p></div>
+  <div class="box warn"><b>Le date e le versioni</b><p>Gli anni di nascita dei linguaggi sono un riferimento storico. Software, API e versioni dei linguaggi cambiano spesso: quando lavori su un programma preciso, controlla sempre la documentazione della versione che usi.</p></div>
+</section>
+
+<section class="ch" id="c1">
+  <div class="ch-h"><span class="ch-n">1</span><h2>Concetti di base per orientarsi</h2></div>
+  <p class="lead">Cinque idee bastano per collocare quasi ogni linguaggio: livello di astrazione, traduzione, tipi, memoria e paradigma.</p>
+  <h3>Livello di astrazione</h3>
+  <p>Più un linguaggio è «basso», più parla la lingua della macchina: registri, indirizzi di memoria, istruzioni del processore. Più è «alto», più parla la lingua del problema: muri, travi, liste di elementi, piani. Il basso livello è veloce ma faticoso; l'alto livello è comodo ma consuma più risorse. Ogni livello usa quello sotto senza doverne conoscere i dettagli: chi scrive Python non pensa ai transistor, come chi progetta un solaio non ricalcola la resistenza del singolo aggregato.</p>
+  <figure>
+    <svg viewBox="0 0 760 330" role="img" aria-label="Scala dell'astrazione, dal transistor ai linguaggi visuali">
+      <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker></defs>
+      <g font-family="sans-serif">
+        <rect class="s-as" x="0" y="0" width="760" height="330" rx="16"/>
+        <g transform="translate(40 18)">
+          <rect class="s-2" x="0" y="0" width="680" height="30" rx="8" opacity=".95"/><text class="s-tw" x="14" y="20">Linguaggi visuali · Dynamo, Grasshopper</text><text class="s-tw" x="666" y="20" text-anchor="end">il problema</text>
+          <rect class="s-2" x="20" y="36" width="640" height="30" rx="8" opacity=".8"/><text class="s-tw" x="34" y="56">Linguaggi di alto livello · Python, C#, JavaScript</text>
+          <rect class="s-a" x="40" y="72" width="600" height="30" rx="8" opacity=".75"/><text class="s-tw" x="54" y="92">Compilatore, interprete, macchina virtuale</text>
+          <rect class="s-a" x="60" y="108" width="560" height="30" rx="8" opacity=".9"/><text class="s-tw" x="74" y="128">Sistema operativo · Windows, macOS, Linux</text>
+          <rect class="s-4" x="80" y="144" width="520" height="30" rx="8" opacity=".85"/><text class="s-tw" x="94" y="164">Assembly e codice macchina · set di istruzioni</text>
+          <rect class="s-4" x="100" y="180" width="480" height="30" rx="8"/><text class="s-tw" x="114" y="200">Processore · ALU, registri, unità di controllo</text>
+          <rect class="s-3" x="120" y="216" width="440" height="30" rx="8"/><text class="s-tw" x="134" y="236">Porte logiche · AND, OR, NOT, NAND</text>
+          <rect class="s-5" x="140" y="252" width="400" height="30" rx="8"/><text class="s-tw" x="154" y="272">Transistor · interruttori comandati da tensione</text><text class="s-tw" x="526" y="272" text-anchor="end">la macchina</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption><b>La scala dell'astrazione.</b> Ogni gradino nasconde quello sotto. In alto si ragiona con muri e liste, in basso con tensioni e interruttori.</figcaption>
+  </figure>
+  <h3>Compilato, interpretato o a metà strada</h3>
+  <p>Un linguaggio <b>compilato</b> (C, C++, Rust, Go) viene tradotto una volta per tutte in un file eseguibile: è veloce, ma ogni modifica richiede una nuova compilazione. Uno <b>interpretato</b> (Python, JavaScript, i vecchi BASIC) viene letto ed eseguito al momento: più lento, ma immediato da provare. In mezzo c'è il <b>bytecode</b> su macchina virtuale (Java, C#): si compila per una macchina «astratta», che poi traduce per il processore reale. È per questo che un plug-in di Revit in C# va compilato, mentre uno script Python in Dynamo si modifica e si rilancia subito.</p>
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-label="Schema: compilato, interpretato, bytecode">
+      <defs><marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--muted)"/></marker></defs>
+      <rect class="s-as" width="760" height="250" rx="16"/>
+      <g class="s-t">
+        <text class="s-tb" x="24" y="40">Compilato</text>
+        <rect class="s-w" x="130" y="18" width="120" height="34" rx="8"/><text x="190" y="40" text-anchor="middle">codice C++</text>
+        <path d="M252 35h48" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-4" x="304" y="18" width="130" height="34" rx="8"/><text class="s-tw" x="369" y="40" text-anchor="middle">compilatore</text>
+        <path d="M436 35h48" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-w" x="488" y="18" width="120" height="34" rx="8"/><text x="548" y="40" text-anchor="middle">eseguibile</text>
+        <path d="M610 35h40" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/><text x="660" y="40">CPU</text>
+        <text class="s-tb" x="24" y="120">Interpretato</text>
+        <rect class="s-w" x="130" y="98" width="120" height="34" rx="8"/><text x="190" y="120" text-anchor="middle">script Python</text>
+        <path d="M252 115h48" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-2" x="304" y="98" width="304" height="34" rx="8"/><text class="s-tw" x="456" y="120" text-anchor="middle">interprete: legge ed esegue subito</text>
+        <path d="M610 115h40" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/><text x="660" y="120">CPU</text>
+        <text class="s-tb" x="24" y="200">Bytecode</text>
+        <rect class="s-w" x="130" y="178" width="120" height="34" rx="8"/><text x="190" y="200" text-anchor="middle">codice C#</text>
+        <path d="M252 195h18" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-4" x="274" y="178" width="100" height="34" rx="8"/><text class="s-tw" x="324" y="200" text-anchor="middle">compilatore</text>
+        <path d="M376 195h18" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-w" x="398" y="178" width="80" height="34" rx="8"/><text x="438" y="200" text-anchor="middle">bytecode</text>
+        <path d="M480 195h18" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/>
+        <rect class="s-a" x="502" y="178" width="106" height="34" rx="8"/><text class="s-tw" x="555" y="200" text-anchor="middle">macchina virt.</text>
+        <path d="M610 195h40" style="fill:none;stroke:var(--muted);stroke-width:1.6" marker-end="url(#arr2)"/><text x="660" y="200">CPU</text>
+      </g>
+    </svg>
+    <figcaption><b>Tre modi di arrivare al processore.</b> Il risultato finale è sempre lo stesso: istruzioni macchina. Cambia quando e da chi vengono tradotte.</figcaption>
+  </figure>
+  <h3>Tipizzazione</h3>
+  <p>Il <b>tipo</b> dice che cosa contiene una variabile: un numero intero, un decimale, un testo, una lista, un oggetto «Muro». Con la tipizzazione <b>statica</b> il tipo si dichiara e viene controllato prima di eseguire (C#, Java, TypeScript): più errori trovati subito, più parole da scrivere. Con quella <b>dinamica</b> il tipo si scopre durante l'esecuzione (Python, JavaScript): più rapida da scrivere, errori scoperti più tardi.</p>
+  <div class="box bim"><b>Analogia da cantiere</b><p>La tipizzazione statica è un abaco di Revit con i campi a valori controllati: non puoi scrivere «alto» dove serve un'altezza in metri. Quella dinamica è un foglio Excel libero: veloce da compilare, ma gli errori emergono quando qualcuno somma una cella che contiene testo.</p></div>
+  <h3>Gestione della memoria</h3>
+  <p>Ogni programma usa la memoria per tenere i suoi dati, e prima o poi deve liberarla. Nei linguaggi con <b>garbage collector</b> (Java, C#, Python, JavaScript) se ne occupa un meccanismo automatico. In C e C++ la gestisce chi scrive il codice: massimo controllo, ma è la fonte di molti errori e falle di sicurezza. Rust adotta una terza via: controlla l'uso della memoria già in compilazione, con regole di «proprietà» dei dati.</p>
+  <h3>Paradigmi</h3>
+  <p>I paradigmi sono i modi di ragionare con cui si scrive un programma. Quasi tutti i linguaggi moderni ne mescolano più d'uno.</p>
+  <div class="tbl"><table>
+    <tr><th>Paradigma</th><th>Idea di fondo</th><th>Analogia da cantiere</th><th>Esempi</th></tr>
+    <tr><td>Imperativo / procedurale</td><td>Una sequenza di ordini che modificano lo stato</td><td>Il cronoprogramma: fai questo, poi questo</td><td>C, Fortran, Pascal, Go</td></tr>
+    <tr><td>Orientato agli oggetti</td><td>Oggetti con dati (proprietà) e comportamenti (metodi), organizzati in classi ed ereditarietà</td><td>Le famiglie di Revit: categoria, famiglia, tipo, istanza, ognuna con i suoi parametri</td><td>Java, C#, C++, Python</td></tr>
+    <tr><td>Funzionale</td><td>Il programma è una catena di funzioni che producono nuovi dati senza modificare quelli esistenti</td><td>Una catena di verifiche dove ogni passaggio produce un nuovo risultato</td><td>Haskell, Lisp, F#, Elixir</td></tr>
+    <tr><td>Logico</td><td>Si dichiarano fatti e regole; il sistema deduce le risposte</td><td>Il controllo automatico di un modello rispetto alle regole di una norma</td><td>Prolog, Datalog</td></tr>
+    <tr><td>Dichiarativo</td><td>Si descrive <i>che cosa</i> si vuole, non <i>come</i> ottenerlo</td><td>Il capitolato prestazionale invece di quello descrittivo</td><td>SQL, HTML, espressioni regolari</td></tr>
+    <tr><td>Visuale</td><td>Si programma collegando blocchi invece di scrivere testo</td><td>Uno schema a blocchi di un impianto</td><td>Dynamo, Grasshopper, Scratch</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-h"><span class="ch-n">2</span><h2>Dal tasto al modello: elettricità, elettronica e codice</h2></div>
+  <p class="lead">Selezioni un muro in Revit e premi <code>Canc</code>. Il muro sparisce. In mezzo, in una frazione di secondo, succedono almeno otto passaggi, dalla corrente elettrica al database del modello.</p>
+  <figure>
+    <svg viewBox="0 0 900 360" role="img" aria-label="Il percorso di un tasto premuto fino alla modifica del modello">
+      <defs><marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--accent)"/></marker></defs>
+      <rect class="s-as" width="900" height="360" rx="18"/>
+      <g class="s-t">
+        <g transform="translate(24 30)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-5" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">1</text><text class="s-tb" x="50" y="31">Il tasto</text><text x="14" y="62">Chiude un contatto</text><text x="14" y="80">nella matrice di righe</text><text x="14" y="98">e colonne della tastiera</text><text class="s-tm" x="14" y="114">elettricità</text></g>
+        <g transform="translate(244 30)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-5" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">2</text><text class="s-tb" x="50" y="31">Il controllore</text><text x="14" y="62">Scansiona la matrice,</text><text x="14" y="80">filtra i rimbalzi, trova</text><text x="14" y="98">il codice del tasto</text><text class="s-tm" x="14" y="114">elettronica · firmware</text></g>
+        <g transform="translate(464 30)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-3" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">3</text><text class="s-tb" x="50" y="31">Il cavo USB</text><text x="14" y="62">Il PC interroga la</text><text x="14" y="80">tastiera a intervalli fissi:</text><text x="14" y="98">arriva un «report» HID</text><text class="s-tm" x="14" y="114">protocollo</text></g>
+        <g transform="translate(684 30)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-3" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">4</text><text class="s-tb" x="50" y="31">Interrupt e driver</text><text x="14" y="62">Il controller avvisa la</text><text x="14" y="80">CPU; il driver legge</text><text x="14" y="98">il codice ricevuto</text><text class="s-tm" x="14" y="114">hardware → software</text></g>
+        <path d="M214 90h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M434 90h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M654 90h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/>
+        <path d="M780 152v36H120v28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/>
+        <g transform="translate(24 218)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-4" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">5</text><text class="s-tb" x="50" y="31">Sistema operativo</text><text x="14" y="62">Traduce il codice in un</text><text x="14" y="80">evento e lo consegna</text><text x="14" y="98">alla finestra attiva</text><text class="s-tm" x="14" y="114">Windows · macOS</text></g>
+        <g transform="translate(244 218)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-4" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">6</text><text class="s-tb" x="50" y="31">L'applicazione</text><text x="14" y="62">Il ciclo degli eventi di</text><text x="14" y="80">Revit riceve «Canc» e lo</text><text x="14" y="98">associa al comando Elimina</text><text class="s-tm" x="14" y="114">codice dell'app</text></g>
+        <g transform="translate(464 218)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-2" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">7</text><text class="s-tb" x="50" y="31">Il modello</text><text x="14" y="62">Una transazione toglie</text><text x="14" y="80">l'elemento e aggiorna</text><text x="14" y="98">ciò che ne dipende</text><text class="s-tm" x="14" y="114">database del modello</text></g>
+        <g transform="translate(684 218)"><rect class="s-w" width="190" height="120" rx="14"/><circle class="s-2" cx="26" cy="26" r="15"/><text class="s-tw" x="26" y="31" text-anchor="middle">8</text><text class="s-tb" x="50" y="31">Lo schermo</text><text x="14" y="62">Le viste si rigenerano,</text><text x="14" y="80">la scheda video ridisegna,</text><text x="14" y="98">il monitor si aggiorna</text><text class="s-tm" x="14" y="114">grafica</text></g>
+        <path d="M214 278h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M434 278h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M654 278h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/>
+      </g>
+    </svg>
+    <figcaption><b>Dal dito al modello in otto passaggi.</b> I primi quattro sono elettronica e protocolli, il quinto è il sistema operativo, gli ultimi tre sono il software che usi ogni giorno.</figcaption>
+  </figure>
+  <h3>Passo per passo</h3>
+  <ol class="steps">
+    <li><b>Il tasto chiude un circuito.</b> Sotto i tasti c'è una griglia di conduttori disposti in righe e colonne. Premendo, un contatto mette in comunicazione una riga e una colonna (nelle tastiere ottiche o capacitive cambia il principio, non il risultato): un piccolo passaggio di corrente diventa la prova che quel tasto è premuto.</li>
+    <li><b>Il controllore della tastiera trova il tasto.</b> Un microcontrollore, cioè un minuscolo computer dentro la tastiera, alimenta le righe una alla volta e legge le colonne, moltissime volte al secondo. Quando trova un incrocio chiuso sa quale tasto è. Prima di crederci aspetta qualche millesimo di secondo, perché un contatto meccanico «rimbalza» e per un istante si apre e si chiude più volte: è il <i>debounce</i>. Poi traduce la posizione in un codice standard.</li>
+    <li><b>Il messaggio viaggia sul cavo.</b> Con USB è il computer a interrogare la tastiera a intervalli regolari, di solito ogni pochi millesimi di secondo. La tastiera risponde con un piccolo pacchetto di dati, il <i>report</i>, definito dallo standard HID (<i>Human Interface Device</i>), che dice quali tasti sono premuti. Lo stesso standard vale per mouse, joystick e molte tastiere Bluetooth.</li>
+    <li><b>L'hardware avvisa il processore.</b> Il controller USB del computer riceve i dati e manda alla CPU un <i>interrupt</i>, una specie di campanello: il processore sospende per un attimo ciò che stava facendo, esegue il driver della tastiera e poi riprende. Il driver è il primo pezzo di software della catena.</li>
+    <li><b>Il sistema operativo crea un evento.</b> Windows traduce il codice del tasto in un tasto «virtuale» (indipendente dal modello di tastiera) e, tenendo conto del layout italiano, nel carattere corrispondente. Poi consegna l'evento alla finestra che ha il fuoco: per questo, se stai scrivendo in un'altra finestra, il muro non sparisce.</li>
+    <li><b>L'applicazione decide che cosa significa.</b> Ogni programma con interfaccia grafica gira intorno a un <i>ciclo degli eventi</i>: aspetta un evento, lo gestisce, aspetta il successivo. Revit riceve «tasto Canc premuto» e lo collega al comando Elimina, come farebbe con una scorciatoia da tastiera che hai personalizzato.</li>
+    <li><b>Il comando modifica il database del modello.</b> Un modello BIM è un database di oggetti collegati. Il comando apre una <i>transazione</i>: toglie il muro, aggiorna gli elementi che dipendono da lui (porte, finestre, quote, locali) e chiude la transazione. Se qualcosa va storto la transazione si annulla per intero: è il motivo per cui un comando non lascia mai il modello a metà, ed è lo stesso meccanismo su cui si basa il comando Annulla.</li>
+    <li><b>Le viste si ridisegnano.</b> Il programma rigenera le viste interessate e passa la geometria alla scheda video (GPU), che calcola i pixel. Il monitor aggiorna l'immagine decine di volte al secondo e, al refresh successivo, il muro non c'è più.</li>
+  </ol>
+  <div class="box bim"><b>Perché interessa a chi fa BIM</b><p>Quando uno script Dynamo o un plug-in modifica il modello, salta i passi da 1 a 6 ma passa sempre dal 7: lavora dentro una transazione. Per questo l'API di Revit chiede di aprire e chiudere esplicitamente una transazione prima di cambiare qualcosa, e per questo un'operazione automatica si annulla tutta insieme con un solo «Annulla».</p></div>
+  <h3>Che cosa vuol dire «elettronica che calcola»</h3>
+  <p><b>Il transistor è un interruttore.</b> Un transistor lascia passare corrente oppure no a seconda della tensione sul suo terminale di comando. Tensione alta vale 1, tensione bassa vale 0: è il <b>bit</b>. Un processore moderno contiene miliardi di transistor.</p>
+  <p><b>Le porte logiche fanno ragionamenti elementari.</b> Pochi transistor collegati formano porte AND, OR e NOT. Con la sola porta NAND si può costruire qualsiasi altra funzione logica. È l'algebra di Boole (1854) diventata circuito: lo stesso <code>and</code>, <code>or</code>, <code>not</code> che leggerai in ogni <code>if</code>.</p>
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-label="Interruttore, transistor e porta logica">
+      <rect class="s-as" width="760" height="230" rx="16"/>
+      <g transform="translate(30 40)">
+        <text class="s-tb" x="0" y="0">Un interruttore</text>
+        <path class="s-l" d="M0 70h60M100 70h60" /><circle class="s-w" cx="60" cy="70" r="4"/><circle class="s-w" cx="100" cy="70" r="4"/><path class="s-l" d="M62 68 96 46"/>
+        <text class="s-tm" x="0" y="110">aperto = 0 · chiuso = 1</text>
+      </g>
+      <g transform="translate(270 40)">
+        <text class="s-tb" x="0" y="0">Un transistor</text>
+        <path class="s-l" d="M70 20v30M70 90v30M40 70h20M60 50v40"/><path class="s-l" d="M64 56l20-10M64 84l20 10M84 46v-26M84 94v26"/>
+        <text class="s-tm" x="0" y="74">comando</text><text class="s-tm" x="92" y="30">corrente</text>
+        <text class="s-tm" x="0" y="140">la tensione sul comando apre o chiude</text>
+      </g>
+      <g transform="translate(520 40)">
+        <text class="s-tb" x="0" y="0">Una porta NAND</text>
+        <path class="s-al" d="M20 30h30a30 30 0 0 1 0 60H20z"/><circle class="s-w" cx="86" cy="60" r="5" style="stroke:var(--accent);stroke-width:2"/>
+        <path class="s-l" d="M0 45h20M0 75h20M91 60h30"/><text class="s-tm" x="-6" y="40">A</text><text class="s-tm" x="-6" y="92">B</text><text class="s-tm" x="126" y="64">esce 0 solo se</text><text class="s-tm" x="126" y="78">A e B valgono 1</text>
+        <text class="s-tm" x="0" y="140">con sole NAND si costruisce tutto</text>
+      </g>
+    </svg>
+    <figcaption><b>Dall'interruttore al ragionamento.</b> Un bit è uno stato elettrico; una porta logica è un piccolo gruppo di interruttori che decide un'uscita in base agli ingressi.</figcaption>
+  </figure>
+  <p><b>Dalle porte al calcolo e alla memoria.</b> Combinando porte si ottiene un sommatore, che somma due numeri binari. Collegandole «in retroazione», con l'uscita che torna all'ingresso, si ottiene un <i>flip-flop</i>, che ricorda un bit: è la base dei registri e della memoria.</p>
+  <p><b>Il processore.</b> Contiene un'unità aritmetico-logica (ALU) che fa i calcoli, pochi registri velocissimi e un'unità di controllo che, a ogni colpo di clock, ripete il ciclo <i>preleva, decodifica, esegui</i>: legge un'istruzione dalla memoria, capisce che cosa chiede, la esegue, passa alla successiva. Un clock di 3 GHz scandisce tre miliardi di colpi al secondo.</p>
+  <p><b>L'architettura di von Neumann (1945).</b> Programma e dati stanno nella stessa memoria, organizzata come una fila di celle numerate (gli indirizzi). Quasi tutti i computer seguono ancora questo schema, ed è il motivo per cui la programmazione imperativa, cioè una sequenza di ordini che modificano celle di memoria, è la più diffusa: rispecchia la macchina.</p>
+  <p><b>Il set di istruzioni.</b> Ogni famiglia di processori ha il suo vocabolario di istruzioni elementari: x86-64 per la maggior parte dei PC con Windows, ARM per telefoni, tablet e Mac recenti. Il <b>codice macchina</b> sono queste istruzioni in binario; l'<b>assembly</b> è la stessa cosa scritta con sigle leggibili, una riga per istruzione.</p>
+  <h3>Che cosa si porta dietro ogni linguaggio dall'hardware</h3>
+  <div class="tbl"><table>
+    <tr><th>Cosa vedi nel codice</th><th>Cosa succede sotto</th></tr>
+    <tr><td>Variabile <code>x = 5</code></td><td>Una cella di memoria a un certo indirizzo, in cui si scrive 5 in binario</td></tr>
+    <tr><td>Tipi <code>int</code>, <code>float</code>, <code>bool</code>, <code>string</code></td><td>Istruzioni diverse del processore: la stessa sequenza di bit può essere un intero o un decimale, a seconda del tipo</td></tr>
+    <tr><td>Intero che «impazzisce» oltre un limite</td><td>Un intero a 32 bit ha posto per circa ±2,1 miliardi; oltre, i bit ricominciano (<i>overflow</i>)</td></tr>
+    <tr><td><code>0.1 + 0.2</code> che non fa <code>0.3</code></td><td>I decimali sono in virgola mobile binaria (norma IEEE 754): lo vediamo nel capitolo 3</td></tr>
+    <tr><td>Liste che partono da 0</td><td>L'indice è lo spostamento dall'indirizzo iniziale: il primo elemento è a spostamento 0</td></tr>
+    <tr><td><code>if</code> / <code>else</code></td><td>Un salto condizionato: «se il registro vale 0, salta all'istruzione n»</td></tr>
+    <tr><td>Cicli <code>for</code> / <code>while</code></td><td>Un salto all'indietro ripetuto finché la condizione è vera</td></tr>
+    <tr><td>Funzioni</td><td>Lo <i>stack</i>: si salva il punto di ritorno, si salta alla funzione, poi si torna. Una ricorsione senza fine esaurisce lo stack (<i>stack overflow</i>)</td></tr>
+    <tr><td><code>null</code> / <code>None</code></td><td>Un riferimento che non punta a niente: usarlo genera l'errore più comune di tutti</td></tr>
+    <tr><td>Thread, <code>async</code>, parallelismo</td><td>Da metà anni 2000 la frequenza dei processori cresce poco: si aumentano i core. Molti linguaggi recenti nascono anche per sfruttarli in sicurezza</td></tr>
+    <tr><td>Calcolo su GPU</td><td>Migliaia di piccoli core che fanno la stessa operazione su molti dati: grafica, rendering, intelligenza artificiale</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-h"><span class="ch-n">3</span><h2>Bit, numeri e coordinate</h2></div>
+  <p class="lead">Tutto, nel computer, è una fila di 0 e 1: lettere, colori, coordinate, modelli. Capire come vengono rappresentati i numeri evita errori molto concreti nei modelli e nei fogli di calcolo.</p>
+  <figure>
+    <svg viewBox="0 0 760 240" role="img" aria-label="La lettera A in binario e la struttura di un numero decimale a 64 bit">
+      <rect class="s-as" width="760" height="240" rx="16"/>
+      <g transform="translate(30 30)">
+        <text class="s-tb" x="0" y="10">Un byte: la lettera «A»</text>
+        <rect class="s-a" x="0" y="26" width="56" height="56" rx="10"/><text class="s-tw" x="28" y="62" text-anchor="middle" style="font-size:26px">A</text>
+        <text class="s-t" x="74" y="60">= 65 =</text>
+        <g transform="translate(130 26)"><rect class="s-w" x="0" y="0" width="34" height="56" rx="6"/><rect class="s-2" x="38" y="0" width="34" height="56" rx="6"/><rect class="s-w" x="76" y="0" width="34" height="56" rx="6"/><rect class="s-w" x="114" y="0" width="34" height="56" rx="6"/><rect class="s-w" x="152" y="0" width="34" height="56" rx="6"/><rect class="s-w" x="190" y="0" width="34" height="56" rx="6"/><rect class="s-w" x="228" y="0" width="34" height="56" rx="6"/><rect class="s-2" x="266" y="0" width="34" height="56" rx="6"/>
+          <text class="s-t" x="17" y="34" text-anchor="middle">0</text><text class="s-tw" x="55" y="34" text-anchor="middle">1</text><text class="s-t" x="93" y="34" text-anchor="middle">0</text><text class="s-t" x="131" y="34" text-anchor="middle">0</text><text class="s-t" x="169" y="34" text-anchor="middle">0</text><text class="s-t" x="207" y="34" text-anchor="middle">0</text><text class="s-t" x="245" y="34" text-anchor="middle">0</text><text class="s-tw" x="283" y="34" text-anchor="middle">1</text></g>
+        <text class="s-tm" x="130" y="100">8 bit = 1 byte · 64 + 1 = 65</text>
+        <text class="s-tb" x="0" y="140">Un decimale a 64 bit (IEEE 754)</text>
+        <rect class="s-5" x="0" y="154" width="22" height="34" rx="5"/><rect class="s-3" x="24" y="154" width="120" height="34" rx="5"/><rect class="s-4" x="146" y="154" width="550" height="34" rx="5"/>
+        <text class="s-tw" x="11" y="176" text-anchor="middle">±</text><text class="s-tw" x="84" y="176" text-anchor="middle">esponente · 11 bit</text><text class="s-tw" x="421" y="176" text-anchor="middle">cifre significative (mantissa) · 52 bit</text>
+        <text class="s-tm" x="0" y="206">circa 15–16 cifre decimali significative in tutto, prima e dopo la virgola</text>
+      </g>
+    </svg>
+    <figcaption><b>Testo e numeri sono codici.</b> Una lettera è un numero in una tabella condivisa (ASCII, oggi Unicode); un decimale è un segno, un esponente e un numero limitato di cifre.</figcaption>
+  </figure>
+  <h3>Il testo: da ASCII a Unicode</h3>
+  <p>Per scrivere una lettera il computer usa un numero preso da una tabella condivisa. La tabella storica, ASCII, aveva 128 caratteri: niente lettere accentate. Oggi si usa Unicode, che assegna un numero a oltre centomila caratteri di tutte le lingue, e quasi sempre la codifica UTF-8 per salvarli. Quando in un file esportato compaiono simboli strani al posto delle accentate (<code>Ã¨</code> invece di <code>è</code>), un programma ha letto in un modo un testo scritto in un altro.</p>
+  <h3>I decimali: perché 0,1 + 0,2 non fa 0,3</h3>
+  <p>I numeri decimali sono salvati in <b>virgola mobile binaria</b>, secondo la norma IEEE 754. Come 1/3 in base dieci diventa 0,3333… senza fine, così 0,1 in base due è un numero periodico: il computer lo tronca, e il risultato di <code>0.1 + 0.2</code> è <code>0.30000000000000004</code>. Non è un difetto di un linguaggio: succede in Python, in C#, in JavaScript e anche in Excel.</p>
+  <div class="box warn"><b>Regola pratica</b><p>Non confrontare mai due decimali con <code>==</code>. Confrontali con una tolleranza: <code>abs(a - b) &lt; 1e-9</code>. Vale per le lunghezze lette da un modello, per le aree e per i risultati di calcolo.</p></div>
+  <h3>Coordinate lontane dall'origine</h3>
+  <p>Un decimale a 64 bit ha circa 15–16 cifre significative in tutto. Se una coordinata è molto grande, per esempio una coordinata geografica espressa in millimetri, le cifre «si consumano» prima della virgola e ne restano meno per i decimali. Molti programmi di grafica lavorano poi internamente con numeri a 32 bit, che di cifre ne hanno circa sette. Ecco perché i software BIM consigliano di modellare vicino all'origine interna e di gestire la posizione reale con un sistema di coordinate condiviso, invece di spostare la geometria a chilometri di distanza.</p>
+  <div class="box bim"><b>Unità interne</b><p>I programmi non salvano «metri» o «millimetri»: salvano numeri in un'unità interna e li convertono quando li mostrano. L'API di Revit, per esempio, restituisce le lunghezze in piedi e gli angoli in radianti, qualunque siano le unità del progetto: uno script che legge una lunghezza e la scrive in un foglio senza convertirla sbaglia di un fattore 0,3048. Controlla sempre l'unità interna del programma su cui lavori.</p></div>
+</section>
+
+<section class="ch" id="c4">
+  <div class="ch-h"><span class="ch-n">4</span><h2>Il GUID: l'identità degli oggetti</h2></div>
+  <p class="lead">Un muro può cambiare nome, tipo, spessore, livello. Quello che non deve cambiare mai è la sua identità. Il GUID serve a questo.</p>
+  <h3>Che cos'è</h3>
+  <p>GUID significa <i>Globally Unique Identifier</i>, identificatore unico globale; lo stesso concetto si chiama anche UUID (<i>Universally Unique Identifier</i>). È un numero a <b>128 bit</b>, di solito scritto come 32 cifre esadecimali divise in cinque gruppi da 8, 4, 4, 4 e 12 caratteri. Lo standard di riferimento è l'RFC 9562, pubblicato nel maggio 2024, che ha sostituito il precedente RFC 4122.</p>
+  <p>La forza del GUID è che <b>non serve un registro centrale</b>: ogni programma, su ogni computer, può generarne uno da solo con la certezza pratica che nessun altro, al mondo, ne generi uno uguale. Nella versione più comune (la 4) quasi tutti i bit sono casuali: le combinazioni possibili sono così tante che, per avere anche solo una probabilità su due di trovare due GUID uguali, bisognerebbe generarne miliardi di miliardi.</p>
+  <figure>
+    <svg viewBox="0 0 760 270" role="img" aria-label="Anatomia di un GUID e della sua forma compressa IFC">
+      <rect class="s-as" width="760" height="270" rx="16"/>
+      <g transform="translate(24 28)">
+        <text class="s-tb" x="0" y="8">Un GUID scritto per esteso · 36 caratteri</text>
+        <g transform="translate(0 22)" style="font-family:var(--mono);font-size:15px">
+          <rect class="s-a" x="0" y="0" width="152" height="40" rx="8"/><text class="s-tw" x="76" y="26" text-anchor="middle" style="font-family:var(--mono)">3f2504e0</text>
+          <rect class="s-2" x="160" y="0" width="80" height="40" rx="8"/><text class="s-tw" x="200" y="26" text-anchor="middle" style="font-family:var(--mono)">4f89</text>
+          <rect class="s-4" x="248" y="0" width="80" height="40" rx="8"/><text class="s-tw" x="288" y="26" text-anchor="middle" style="font-family:var(--mono)">41d3</text>
+          <rect class="s-3" x="336" y="0" width="80" height="40" rx="8"/><text class="s-tw" x="376" y="26" text-anchor="middle" style="font-family:var(--mono)">9a0c</text>
+          <rect class="s-5" x="424" y="0" width="226" height="40" rx="8"/><text class="s-tw" x="537" y="26" text-anchor="middle" style="font-family:var(--mono)">0305e82c3301</text>
+        </g>
+        <text class="s-tm" x="0" y="84">8 – 4 – 4 – 4 – 12 cifre esadecimali (0–9, a–f) = 128 bit · esempio dimostrativo</text>
+        <path d="M325 98v26" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/>
+        <text class="s-tb" x="0" y="150">Lo stesso GUID nel file IFC · 22 caratteri</text>
+        <g transform="translate(0 164)"><rect class="s-w" x="0" y="0" width="420" height="40" rx="8" style="stroke:var(--accent);stroke-width:2"/><text x="16" y="26" style="font-family:var(--mono);font-size:16px;fill:var(--ink)">attributo GlobalId: 22 caratteri</text></g>
+        <text class="s-tm" x="0" y="226">alfabeto di 64 simboli: 0–9, A–Z, a–z, _ e $ · 22 × 6 bit bastano per 128 bit</text>
+        <g transform="translate(470 150)"><rect class="s-2s" x="0" y="0" width="240" height="70" rx="12"/><text class="s-t" x="14" y="26">Stesso numero,</text><text class="s-t" x="14" y="46">scrittura più corta:</text><text class="s-tm" x="14" y="62">ifcopenshell.guid.compress()</text></g>
+      </g>
+    </svg>
+    <figcaption><b>Due modi di scrivere lo stesso numero.</b> Nel formato IFC il GUID viene compresso in 22 caratteri con un alfabeto di 64 simboli: per questo i GlobalId sembrano stringhe casuali.</figcaption>
+  </figure>
+  <h3>Il GUID nel BIM</h3>
+  <p>Nel formato <b>IFC</b> ogni oggetto che deriva da <code>IfcRoot</code> (muri, solai, porte, spazi, ma anche relazioni e proprietà) ha un attributo obbligatorio <code>GlobalId</code>: un GUID di 128 bit compresso in 22 caratteri. È questo valore, non il nome né il tipo, a dire «questo è lo stesso muro» tra due versioni del modello.</p>
+  <p>In <b>Revit</b> ogni elemento ha due identificativi. L'<code>ElementId</code> è un numero valido solo dentro quel file. L'<code>UniqueId</code> è una stringa più lunga, formata da un GUID e dall'identificativo dell'elemento in esadecimale, ed è stabile nel tempo: resta lo stesso anche dopo aggiornamenti di versione e sincronizzazioni con il modello centrale. In esportazione IFC il programma ricava da qui il GlobalId, e l'esportatore può anche salvarlo in un parametro dell'elemento.</p>
+  <figure>
+    <svg viewBox="0 0 860 200" role="img" aria-label="Il GUID accompagna l'oggetto lungo tutto il processo">
+      <rect class="s-as" width="860" height="200" rx="16"/>
+      <g class="s-t">
+        <g transform="translate(20 40)"><rect class="s-w" width="180" height="110" rx="14"/><text class="s-tb" x="14" y="28">Software di autoria</text><text x="14" y="54">Revit, Archicad,</text><text x="14" y="72">Allplan, Tekla…</text><text class="s-tm" x="14" y="96">UniqueId stabile</text></g>
+        <g transform="translate(230 40)"><rect class="s-w" width="180" height="110" rx="14"/><text class="s-tb" x="14" y="28">File IFC</text><text x="14" y="54">ogni oggetto ha</text><text x="14" y="72">il suo GlobalId</text><text class="s-tm" x="14" y="96">22 caratteri</text></g>
+        <g transform="translate(440 40)"><rect class="s-w" width="180" height="110" rx="14"/><text class="s-tb" x="14" y="28">Coordinamento</text><text x="14" y="54">le segnalazioni BCF</text><text x="14" y="72">puntano al GlobalId</text><text class="s-tm" x="14" y="96">clash, commenti</text></g>
+        <g transform="translate(650 40)"><rect class="s-w" width="190" height="110" rx="14"/><text class="s-tb" x="14" y="28">Gestione</text><text x="14" y="54">la scheda di manuten-</text><text x="14" y="72">zione resta collegata</text><text class="s-tm" x="14" y="96">facility management</text></g>
+        <path d="M200 95h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M410 95h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/><path d="M620 95h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#arr3)"/>
+        <text class="s-tm" x="20" y="180">Se il GUID cambia a ogni esportazione, ogni anello della catena perde il collegamento con l'oggetto.</text>
+      </g>
+    </svg>
+    <figcaption><b>Il filo che tiene insieme il processo.</b> Il GUID permette di riconoscere lo stesso oggetto in programmi, versioni e fasi diverse.</figcaption>
+  </figure>
+  <h3>Perché è così importante</h3>
+  <ul>
+    <li><b>Confrontare due versioni del modello.</b> Gli strumenti di confronto riconoscono che un oggetto è stato modificato, e non cancellato e ricreato, proprio grazie al GlobalId.</li>
+    <li><b>Coordinamento e BCF.</b> Una segnalazione di interferenza in formato BCF dice a quali oggetti si riferisce indicandone il GlobalId: se l'oggetto cambia identità alla versione successiva, la segnalazione resta orfana.</li>
+    <li><b>Collegare dati esterni.</b> Computi, programmi di manutenzione, database di gestione: tutto ciò che si aggancia al modello dall'esterno usa il GUID come chiave, come un codice fiscale dell'oggetto.</li>
+    <li><b>Tracciabilità nel tempo.</b> Dal progetto al cantiere alla gestione, l'oggetto cambia livello di dettaglio, ma resta lo stesso oggetto.</li>
+  </ul>
+  <div class="box warn"><b>Errori da evitare</b>
+    <ul>
+      <li>Ricreare un elemento invece di modificarlo: il nuovo oggetto avrà un nuovo GUID.</li>
+      <li>Usare l'ElementId di Revit come chiave tra file diversi: vale solo dentro il suo file.</li>
+      <li>Copiare oggetti in un altro modello e aspettarsi che mantengano l'identità.</li>
+      <li>Modificare a mano i GlobalId in un file IFC: due oggetti con lo stesso GUID rendono il file non valido.</li>
+      <li>Fidarsi senza controllare: dopo due esportazioni dello stesso modello, verifica su qualche oggetto che il GlobalId sia rimasto uguale.</li>
+    </ul></div>
+  <h3>Il GUID nel codice</h3>
+  <p class="codecap">Python · creare un UUID e convertirlo nel formato IFC con IfcOpenShell</p>
+<pre><code><span class="k">import</span> uuid
+<span class="k">import</span> ifcopenshell.guid
+
+u = uuid.uuid4()                                  <span class="c"># un nuovo UUID casuale (versione 4)</span>
+print(u)                                          <span class="c"># 36 caratteri con i trattini</span>
+print(ifcopenshell.guid.compress(u.hex))          <span class="c"># gli stessi 128 bit in 22 caratteri IFC</span>
+print(ifcopenshell.guid.new())                    <span class="c"># un GlobalId IFC nuovo, in un solo passaggio</span></code></pre>
+  <p class="codecap">Python · leggere i GlobalId dei muri di un file IFC</p>
+<pre><code><span class="k">import</span> ifcopenshell
+
+modello = ifcopenshell.open(<span class="s">"scuola.ifc"</span>)
+<span class="k">for</span> muro <span class="k">in</span> modello.by_type(<span class="s">"IfcWall"</span>):
+    print(muro.GlobalId, muro.Name)</code></pre>
+  <p class="codecap">C# · leggere l'UniqueId degli elementi in un plug-in di Revit</p>
+<pre><code><span class="k">var</span> muri = <span class="k">new</span> FilteredElementCollector(doc)
+    .OfCategory(BuiltInCategory.OST_Walls)
+    .WhereElementIsNotElementType();
+
+<span class="k">foreach</span> (Element m <span class="k">in</span> muri)
+{
+    <span class="k">string</span> id = m.UniqueId;   <span class="c">// stabile nel tempo, a differenza di m.Id</span>
+}</code></pre>
+</section>
+
+<section class="ch" id="c5">
+  <div class="ch-h"><span class="ch-n">5</span><h2>La mappa dei linguaggi</h2></div>
+  <p class="lead">Esistono migliaia di linguaggi, ma quasi tutti discendono da pochi antenati. Riconoscere la parentela è il modo più rapido per leggerli.</p>
+  <figure>
+    <svg viewBox="0 0 900 420" role="img" aria-label="Albero genealogico semplificato dei linguaggi">
+      <rect class="s-as" width="900" height="420" rx="18"/>
+      <g class="s-t" style="font-size:12.5px">
+        <text class="s-tm" x="24" y="30">anni '50–'60</text><text class="s-tm" x="24" y="130">anni '70</text><text class="s-tm" x="24" y="230">anni '80–'90</text><text class="s-tm" x="24" y="330">dal 2000</text>
+        <path d="M110 108H880M110 208H880M110 308H880" style="stroke:var(--line);stroke-width:1;fill:none" stroke-dasharray="4 6"/>
+        <g style="fill:none;stroke:var(--muted);stroke-width:1.5">
+          <path d="M175 56v40l-30 30M175 56v40l60 30M175 56l170 70"/>
+          <path d="M235 152v50l-40 30M235 152v50l40 30M235 152l140 80"/>
+          <path d="M195 258v50l-20 30M195 258l60 80M375 258v80M275 258v60l50 20"/>
+          <path d="M470 56v176M470 258v80"/>
+          <path d="M600 56v176"/><path d="M600 258l-20 80M600 258l40 80"/>
+          <path d="M740 56v76M740 158v74M740 258v80"/>
+          <path d="M820 152v80"/>
+        </g>
+        <g>
+          <rect class="s-a" x="130" y="34" width="90" height="26" rx="13"/><text class="s-tw" x="175" y="52" text-anchor="middle">ALGOL</text>
+          <rect class="s-3" x="420" y="34" width="100" height="26" rx="13"/><text class="s-tw" x="470" y="52" text-anchor="middle">Fortran</text>
+          <rect class="s-4" x="550" y="34" width="100" height="26" rx="13"/><text class="s-tw" x="600" y="52" text-anchor="middle">Lisp</text>
+          <rect class="s-5" x="690" y="34" width="100" height="26" rx="13"/><text class="s-tw" x="740" y="52" text-anchor="middle">BASIC</text>
+          <rect class="s-w" x="100" y="128" width="90" height="26" rx="13"/><text x="145" y="146" text-anchor="middle">Pascal</text>
+          <rect class="s-a" x="195" y="128" width="80" height="26" rx="13"/><text class="s-tw" x="235" y="146" text-anchor="middle">C</text>
+          <rect class="s-w" x="300" y="128" width="110" height="26" rx="13"/><text x="355" y="146" text-anchor="middle">Smalltalk</text>
+          <rect class="s-w" x="770" y="128" width="100" height="26" rx="13"/><text x="820" y="146" text-anchor="middle">SQL</text>
+          <rect class="s-a" x="150" y="232" width="90" height="26" rx="13"/><text class="s-tw" x="195" y="250" text-anchor="middle">C++</text>
+          <rect class="s-w" x="240" y="232" width="80" height="26" rx="13"/><text x="280" y="250" text-anchor="middle">Python</text>
+          <rect class="s-w" x="330" y="232" width="90" height="26" rx="13"/><text x="375" y="250" text-anchor="middle">Java</text>
+          <rect class="s-w" x="420" y="232" width="100" height="26" rx="13"/><text x="470" y="250" text-anchor="middle">MATLAB</text>
+          <rect class="s-4" x="550" y="232" width="100" height="26" rx="13"/><text class="s-tw" x="600" y="250" text-anchor="middle">AutoLISP</text>
+          <rect class="s-5" x="690" y="232" width="100" height="26" rx="13"/><text class="s-tw" x="740" y="250" text-anchor="middle">Visual Basic</text>
+          <rect class="s-w" x="770" y="232" width="110" height="26" rx="13" opacity="0"/>
+          <rect class="s-a" x="130" y="336" width="90" height="26" rx="13"/><text class="s-tw" x="175" y="354" text-anchor="middle">C#</text>
+          <rect class="s-w" x="230" y="336" width="80" height="26" rx="13"/><text x="270" y="354" text-anchor="middle">Rust</text>
+          <rect class="s-w" x="320" y="336" width="80" height="26" rx="13"/><text x="360" y="354" text-anchor="middle">Kotlin</text>
+          <rect class="s-w" x="420" y="336" width="100" height="26" rx="13"/><text x="470" y="354" text-anchor="middle">Julia</text>
+          <rect class="s-w" x="540" y="336" width="80" height="26" rx="13"/><text x="580" y="354" text-anchor="middle">Clojure</text>
+          <rect class="s-w" x="625" y="336" width="60" height="26" rx="13"/><text x="655" y="354" text-anchor="middle">F#</text>
+          <rect class="s-5" x="690" y="336" width="100" height="26" rx="13"/><text class="s-tw" x="740" y="354" text-anchor="middle">VBA</text>
+          <rect class="s-w" x="796" y="336" width="90" height="26" rx="13"/><text x="841" y="354" text-anchor="middle">Dynamo</text>
+        </g>
+        <text class="s-tm" x="24" y="400">Albero semplificato: le parentele principali, non tutte le influenze.</text>
+      </g>
+    </svg>
+    <figcaption><b>Quattro antenati, molte famiglie.</b> Dalla linea di ALGOL e del C viene la sintassi con graffe e punto e virgola; da Lisp viene AutoLISP; da BASIC viene il VBA dei fogli Excel; da Fortran il calcolo scientifico.</figcaption>
+  </figure>
+  <h3>A che cosa servono, per ambito</h3>
+  <p>La domanda utile spesso non è «quando è nato» ma «a che cosa serve». Lo stesso linguaggio compare in più ambiti: Python è quasi ovunque, ed è il motivo per cui è il primo da imparare a leggere.</p>
+  <div class="grid3">
+    <div class="card"><h4>Automazione BIM</h4><p>Python (Dynamo, pyRevit), C# (plug-in Revit, Navisworks, Tekla), linguaggi visuali</p></div>
+    <div class="card"><h4>CAD</h4><p>AutoLISP, script di AutoCAD, .NET in C#, GDL per Archicad</p></div>
+    <div class="card"><h4>Dati del modello</h4><p>Python con IfcOpenShell, SQL, JSON, espressioni regolari</p></div>
+    <div class="card"><h4>Fogli di calcolo</h4><p>Formule e LAMBDA di Excel, VBA, Power Query, Python in Excel</p></div>
+    <div class="card"><h4>Calcolo tecnico</h4><p>Python con NumPy e SciPy, MATLAB, Julia, Fortran nei solutori storici</p></div>
+    <div class="card"><h4>Web e visualizzatori</h4><p>JavaScript e TypeScript, HTML e CSS, visualizzatori IFC nel browser</p></div>
+    <div class="card"><h4>Impianti e building automation</h4><p>Linguaggi IEC 61131-3 per PLC, C sui microcontrollori</p></div>
+    <div class="card"><h4>Intelligenza artificiale</h4><p>Python con le sue librerie; C++ e CUDA sotto, per la velocità</p></div>
+    <div class="card"><h4>Sistemi e prestazioni</h4><p>C, C++, Rust, Go: il motore dei programmi che usi</p></div>
+  </div>
+</section>
+
+<section class="ch" id="c6">
+  <div class="ch-h"><span class="ch-n">6</span><h2>Basso livello e imperativi</h2></div>
+  <p class="lead">I linguaggi più vicini al processore e il grande ceppo da cui discende quasi tutto il resto.</p>
+  <h3>Basso livello</h3>
+  <p>Nessuno li sceglie per comodità: si usano dove servono controllo totale o massima velocità.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>Codice macchina</td><td>anni '40</td><td>Ciò che il processore esegue davvero; nessuno lo scrive a mano</td><td>È l'unica cosa che la CPU capisce</td><td>Illeggibile: solo sequenze di bit</td></tr>
+    <tr><td>Assembly</td><td>~1949</td><td>Parti critiche di sistemi operativi, firmware, microcontrollori, analisi di virus</td><td>Controllo completo e velocità massima</td><td>Lunghissimo da scrivere, diverso per ogni famiglia di processori</td></tr>
+  </table></div>
+<pre><code>mov eax, 5     <span class="c">; metti 5 nel registro eax</span>
+add eax, 3     <span class="c">; aggiungi 3: eax vale 8</span></code></pre>
+  <h3>Imperativi e procedurali</h3>
+  <p>Il programma è una sequenza di istruzioni raggruppate in procedure. La sintassi del C (graffe, punto e virgola) la ritrovi in C++, Java, C#, JavaScript, PHP, Go e Rust.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>Fortran</td><td>1957</td><td>Calcolo scientifico e ingegneristico: solutori agli elementi finiti, meteorologia, fluidodinamica; molti codici di calcolo strutturale storici</td><td>Velocissimo sui calcoli numerici, librerie collaudate da decenni</td><td>Sintassi datata, poco adatto a interfacce e testo</td></tr>
+    <tr><td>COBOL</td><td>1959</td><td>Banche, assicurazioni, sistemi gestionali storici della pubblica amministrazione</td><td>Stabile, preciso sui calcoli contabili</td><td>Prolisso; pochi programmatori giovani lo conoscono</td></tr>
+    <tr><td>ALGOL</td><td>1958–60</td><td>Oggi nessun uso: è il «nonno» di Pascal, C e di quasi tutti i linguaggi moderni</td><td>Ha introdotto i blocchi annidati e una grammatica formale</td><td>Mai diffuso nell'industria</td></tr>
+    <tr><td>BASIC</td><td>1964</td><td>Didattica e primi personal computer; vive in Visual Basic e VBA</td><td>Facilissimo da imparare</td><td>Le versioni storiche incoraggiavano codice disordinato</td></tr>
+    <tr><td>Pascal / Delphi</td><td>1970</td><td>Didattica; Delphi per software gestionale desktop</td><td>Rigoroso e leggibile</td><td>Oggi di nicchia</td></tr>
+    <tr><td>C</td><td>1972</td><td>Sistemi operativi, firmware, microcontrollori, motori di altri linguaggi (l'interprete standard di Python è scritto in C)</td><td>Veloce, portabile, «lingua franca» dei sistemi</td><td>Memoria gestita a mano: errori pericolosi</td></tr>
+    <tr><td>Ada</td><td>1980</td><td>Aeronautica, ferrovie, difesa, sistemi critici</td><td>Controlli rigorosissimi</td><td>Verboso, comunità piccola</td></tr>
+    <tr><td>Go</td><td>2009</td><td>Server e servizi cloud (Docker e Kubernetes sono scritti in Go)</td><td>Semplice, compila in fretta, buono per il lavoro in parallelo</td><td>Volutamente minimale</td></tr>
+    <tr><td>Zig</td><td>2016</td><td>Programmazione di sistema, alternativa moderna al C</td><td>Semplice, con più controlli del C</td><td>Giovane e ancora in evoluzione</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c7">
+  <div class="ch-h"><span class="ch-n">7</span><h2>Orientati agli oggetti</h2></div>
+  <p class="lead">La famiglia dominante nel software commerciale, comprese le API di Revit, Archicad, Allplan e Tekla.</p>
+  <p>Il programma è un insieme di <b>oggetti</b> che hanno proprietà e metodi e appartengono a <b>classi</b>; le classi possono ereditare da altre.</p>
+  <div class="box bim"><b>Se conosci Revit conosci già l'idea</b><p>La classe <code>Wall</code> ha proprietà (spessore, altezza, livello) e metodi (unisci, dividi). Ogni muro del progetto è un'<b>istanza</b> di quella classe. Un muro strutturale <b>eredita</b> tutto dal muro generico e aggiunge le sue proprietà: è la stessa logica di categoria, famiglia, tipo e istanza.</p></div>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>Simula</td><td>1967</td><td>Nato per le simulazioni, ha inventato classi e oggetti</td><td>Ha introdotto il paradigma</td><td>Solo interesse storico</td></tr>
+    <tr><td>Smalltalk</td><td>1972</td><td>Didattica e ricerca; ha ispirato le interfacce grafiche moderne</td><td>«Tutto è un oggetto», molto coerente</td><td>Uso industriale marginale</td></tr>
+    <tr><td>C++</td><td>1985</td><td>Software tecnico pesante: CAD, motori di calcolo e di rendering, videogiochi; il nucleo di molti programmi BIM</td><td>Velocità del C con le classi</td><td>Molto complesso, memoria a mano</td></tr>
+    <tr><td>Objective-C</td><td>1984</td><td>App Apple storiche, sostituito da Swift</td><td>Base di macOS e iOS per decenni</td><td>In declino</td></tr>
+    <tr><td>Java</td><td>1995</td><td>Gestionali aziendali, banche, Android, server; molti software della pubblica amministrazione</td><td>«Scrivi una volta, gira ovunque», ecosistema enorme</td><td>Verboso, consumo di memoria</td></tr>
+    <tr><td>C#</td><td>2000</td><td>Ecosistema .NET, applicazioni Windows, videogiochi (Unity), <b>plug-in per Revit, Navisworks, AutoCAD, Tekla</b></td><td>Moderno, ottimi strumenti di sviluppo</td><td>Nato legato a Microsoft, oggi multipiattaforma</td></tr>
+    <tr><td>VB.NET</td><td>2002</td><td>Plug-in .NET e gestionali</td><td>Sintassi vicina al vecchio Visual Basic</td><td>In declino rispetto a C#</td></tr>
+    <tr><td>Kotlin</td><td>2011</td><td>App Android (il linguaggio preferito da Google), server</td><td>Più conciso e sicuro di Java</td><td>Legato all'ecosistema Java</td></tr>
+    <tr><td>Dart</td><td>2011</td><td>App multipiattaforma con Flutter</td><td>Una sola base di codice per Android, iOS e web</td><td>Usato quasi solo con Flutter</td></tr>
+    <tr><td>Swift</td><td>2014</td><td>App per iPhone, iPad, Mac</td><td>Sicuro, moderno, veloce</td><td>Quasi solo nel mondo Apple</td></tr>
+    <tr><td>Rust</td><td>2015 (1.0)</td><td>Sistemi, browser, strumenti da riga di comando, parti di Windows e Linux</td><td>Velocità del C++ con la sicurezza della memoria garantita</td><td>Difficile da imparare</td></tr>
+  </table></div>
+  <p>Anche Python, JavaScript, PHP e Ruby sono orientati agli oggetti, ma li trovi tra i linguaggi di scripting, per il loro uso tipico.</p>
+</section>
+
+<section class="ch" id="c8">
+  <div class="ch-h"><span class="ch-n">8</span><h2>Funzionali, logici e dichiarativi</h2></div>
+  <h3>Funzionali</h3>
+  <p>Il programma è una composizione di funzioni che prendono dati e restituiscono dati nuovi, senza modificare quelli esistenti. Si usano meno direttamente, ma le loro idee sono ovunque: <code>map</code>, <code>filter</code>, le funzioni <i>lambda</i> e le liste immutabili di Python, C#, JavaScript e delle formule LAMBDA di Excel vengono da qui. Anche Dynamo ragiona così: ogni nodo riceve dati e ne produce di nuovi.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>Lisp</td><td>1958</td><td>Intelligenza artificiale storica; vive in AutoLISP ed Emacs</td><td>Il codice è una lista di dati: estremamente flessibile</td><td>Tante parentesi</td></tr>
+    <tr><td>Scheme / Racket</td><td>1975</td><td>Didattica universitaria</td><td>Minimale ed elegante</td><td>Poco uso industriale</td></tr>
+    <tr><td>ML / OCaml</td><td>1973 / 1996</td><td>Compilatori, verifica formale, finanza</td><td>Tipi controllati senza doverli scrivere</td><td>Comunità piccola</td></tr>
+    <tr><td>Erlang</td><td>1986</td><td>Telecomunicazioni, messaggistica</td><td>Sistemi che non si fermano mai</td><td>Sintassi ostica</td></tr>
+    <tr><td>Haskell</td><td>1990</td><td>Ricerca, finanza, strumenti dove la correttezza è critica</td><td>Puro e rigoroso</td><td>Concetti astratti, curva ripida</td></tr>
+    <tr><td>Scala</td><td>2004</td><td>Elaborazione di grandi volumi di dati</td><td>Oggetti e funzionale sulla piattaforma Java</td><td>Complesso</td></tr>
+    <tr><td>F#</td><td>2005</td><td>Finanza, analisi dati in .NET</td><td>Funzionale ma integrato con tutto .NET</td><td>Poco diffuso rispetto a C#</td></tr>
+    <tr><td>Clojure</td><td>2007</td><td>Servizi web e dati su piattaforma Java</td><td>Lisp moderno</td><td>Nicchia</td></tr>
+    <tr><td>Elixir</td><td>2012</td><td>Applicazioni web in tempo reale</td><td>Robustezza di Erlang con sintassi moderna</td><td>Ecosistema più piccolo</td></tr>
+  </table></div>
+  <h3>Logici e dichiarativi</h3>
+  <p>Si descrive <i>che cosa</i> si vuole e il sistema decide <i>come</i> ottenerlo. SQL è di gran lunga il più importante: ogni gestionale, ogni sito, ogni database lo usa, anche quelli che archiviano i dati di un modello.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>SQL</td><td>1974</td><td>Interrogare e modificare database: gestionali, siti, archivi tecnici</td><td>Standard universale, poche parole per domande complesse</td><td>Ogni database ha il suo dialetto</td></tr>
+    <tr><td>Prolog</td><td>1972</td><td>Intelligenza artificiale simbolica, sistemi esperti</td><td>Basta dichiarare fatti e regole</td><td>Difficile da controllare su problemi grandi</td></tr>
+    <tr><td>Datalog</td><td>anni '70–'80</td><td>Interrogazioni su grafi di dati, verifica di regole</td><td>Più prevedibile di Prolog</td><td>Nicchia specialistica</td></tr>
+  </table></div>
+<pre><code><span class="c">-- quanti muri ci sono per piano, in un database di elementi</span>
+<span class="k">SELECT</span> Livello, <span class="k">COUNT</span>(*) <span class="k">AS</span> Muri
+<span class="k">FROM</span> Elementi
+<span class="k">WHERE</span> Categoria = <span class="s">'Muri'</span>
+<span class="k">GROUP BY</span> Livello;</code></pre>
+</section>
+
+<section class="ch" id="c9">
+  <div class="ch-h"><span class="ch-n">9</span><h2>Scripting e web</h2></div>
+  <p class="lead">Linguaggi interpretati, rapidi da scrivere, nati per automatizzare e collegare programmi. Sono quelli che incontrerai più spesso.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>Bash (shell)</td><td>1989</td><td>Automazione su Linux e macOS, server</td><td>Combina programmi esistenti in poche righe</td><td>Sintassi criptica</td></tr>
+    <tr><td>PowerShell</td><td>2006</td><td>Automazione di Windows e Microsoft 365</td><td>Lavora con oggetti, non solo testo</td><td>Quasi solo mondo Microsoft</td></tr>
+    <tr><td>Perl</td><td>1987</td><td>Elaborazione di testo, vecchi script</td><td>Potentissimo con il testo</td><td>Difficile da rileggere; in declino</td></tr>
+    <tr><td>Python</td><td>1991</td><td>Ovunque: analisi dati, intelligenza artificiale, automazione, calcolo; nel BIM in Dynamo, pyRevit, Rhino e Grasshopper, Blender, Allplan, QGIS, IfcOpenShell</td><td>Leggibile quasi come pseudocodice, librerie per tutto</td><td>Lento sul calcolo puro (si compensa con librerie scritte in C); l'indentazione fa parte della sintassi</td></tr>
+    <tr><td>Ruby</td><td>1995</td><td>Siti web (Ruby on Rails); in passato i plug-in di SketchUp</td><td>Elegante e produttivo</td><td>In calo di popolarità</td></tr>
+    <tr><td>PHP</td><td>1995</td><td>Siti web lato server, WordPress</td><td>Disponibile ovunque</td><td>Fama di codice disordinato, molto migliorato</td></tr>
+    <tr><td>JavaScript</td><td>1995</td><td>L'unico linguaggio eseguito nativamente dai browser; anche server (Node.js) e visualizzatori BIM web</td><td>Gira ovunque ci sia un browser</td><td>Molte stranezze storiche (<code>"2" + 2</code> fa <code>"22"</code>)</td></tr>
+    <tr><td>TypeScript</td><td>2012</td><td>Applicazioni web medio-grandi</td><td>JavaScript con i tipi: errori trovati prima</td><td>Richiede una fase di traduzione</td></tr>
+    <tr><td>Lua</td><td>1993</td><td>Linguaggio incorporato in altri programmi: videogiochi, plug-in, configurazioni</td><td>Piccolissimo e veloce da integrare</td><td>Libreria standard minima</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c10">
+  <div class="ch-h"><span class="ch-n">10</span><h2>Calcolo scientifico e analisi dati</h2></div>
+  <p class="lead">Linguaggi pensati per chi fa conti: vettori e matrici sono di casa, i grafici dei risultati sono immediati.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio</th><th>Anno</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>MATLAB</td><td>1984</td><td>Ingegneria, controllo, elaborazione dei segnali, università</td><td>Matrici native, toolbox specialistici</td><td>Licenza costosa</td></tr>
+    <tr><td>GNU Octave</td><td>1993</td><td>Alternativa libera a MATLAB</td><td>Gratuito, sintassi quasi identica</td><td>Meno strumenti</td></tr>
+    <tr><td>R</td><td>1993</td><td>Statistica e ricerca</td><td>Il riferimento per l'analisi statistica</td><td>Sintassi irregolare</td></tr>
+    <tr><td>Mathematica</td><td>1988</td><td>Calcolo simbolico, matematica, fisica</td><td>Risolve equazioni in forma simbolica</td><td>Commerciale, sistema chiuso</td></tr>
+    <tr><td>Julia</td><td>2012</td><td>Calcolo ad alte prestazioni, simulazioni</td><td>Facile come Python, veloce quasi come C</td><td>Ecosistema giovane</td></tr>
+  </table></div>
+  <p>Nella pratica di oggi molto di questo lavoro si fa in Python con NumPy, SciPy, pandas e Matplotlib: per un ufficio tecnico è spesso la scelta più economica e più condivisa.</p>
+</section>
+
+<section class="ch" id="c11">
+  <div class="ch-h"><span class="ch-n">11</span><h2>I linguaggi del BIM e dell'ufficio tecnico</h2></div>
+  <p class="lead">Quasi nessuno è un linguaggio «nuovo»: sono linguaggi generali applicati alle API dei software tecnici, più alcuni ambienti visuali.</p>
+  <div class="tbl"><table>
+    <tr><th>Linguaggio o ambiente</th><th>Base</th><th>Dove si usa</th><th>Punti di forza</th><th>Punti deboli</th></tr>
+    <tr><td>C# per le API</td><td>C# / .NET</td><td>Plug-in di Revit, Navisworks, AutoCAD, Tekla</td><td>Accesso completo all'API, interfacce vere</td><td>Serve un ambiente di sviluppo e la compilazione</td></tr>
+    <tr><td>Python in Revit</td><td>Python</td><td>pyRevit e simili: rinomina, controlli, esportazioni</td><td>Veloce da scrivere e modificare</td><td>Meno strumenti rispetto a C#</td></tr>
+    <tr><td>Dynamo</td><td>Visuale + nodi Python</td><td>Automazioni in Revit e Civil 3D senza partire da zero</td><td>Accessibile e visivo</td><td>Grafi grandi diventano illeggibili e lenti; dipendenza dai pacchetti</td></tr>
+    <tr><td>Grasshopper</td><td>Visuale + C# / Python</td><td>Progettazione parametrica in Rhino, forme complesse, ottimizzazione</td><td>Potentissimo per la geometria</td><td>Meno orientato ai dati BIM</td></tr>
+    <tr><td>AutoLISP</td><td>Lisp</td><td>Comandi personalizzati di AutoCAD</td><td>Moltissime routine già scritte</td><td>Sintassi datata</td></tr>
+    <tr><td>Script di AutoCAD (.scr)</td><td>Sequenza di comandi</td><td>Ripetere operazioni su molti disegni</td><td>Nessuna programmazione: si registrano i comandi</td><td>Nessuna logica (niente condizioni né cicli)</td></tr>
+    <tr><td>GDL</td><td>Linguaggio proprio</td><td>Oggetti parametrici di Archicad</td><td>Controllo completo dell'oggetto 2D e 3D</td><td>Solo Archicad</td></tr>
+    <tr><td>PythonParts</td><td>Python</td><td>Oggetti parametrici e automazioni in Allplan</td><td>Usa Python standard</td><td>Comunità più piccola</td></tr>
+    <tr><td>IfcOpenShell</td><td>Python / C++</td><td>Leggere, controllare e modificare file IFC con qualsiasi software</td><td>Libero, indipendente dal produttore</td><td>Serve conoscere lo schema IFC</td></tr>
+    <tr><td>VBA</td><td>Visual Basic</td><td>Macro di Excel, Word, Access; fogli di calcolo tecnici</td><td>Già dentro Office</td><td>Linguaggio vecchio, rischi di sicurezza delle macro</td></tr>
+    <tr><td>Formule, LAMBDA, Power Query</td><td>Dichiarativo e funzionale</td><td>Calcoli e trasformazioni di dati in Excel</td><td>Nessuna installazione</td><td>Difficili da verificare quando crescono</td></tr>
+    <tr><td>EXPRESS</td><td>ISO 10303-11</td><td>Definisce lo schema IFC: entità e attributi</td><td>Formale e rigoroso</td><td>Descrive dati, non esegue nulla</td></tr>
+    <tr><td>IEC 61131-3</td><td>Standard per PLC</td><td>Building automation, controlli degli impianti</td><td>Standard internazionale per tecnici di impianti</td><td>Ogni costruttore ha i suoi ambienti</td></tr>
+  </table></div>
+  <h3>Lo stesso compito in quattro linguaggi</h3>
+  <p>Contare i muri del modello, quattro volte. Guarda come cambiano le parole e come resta uguale l'idea.</p>
+  <div class="grid2">
+    <div><p class="codecap">Python con IfcOpenShell · su un file IFC</p>
+<pre><code><span class="k">import</span> ifcopenshell
+m = ifcopenshell.open(<span class="s">"modello.ifc"</span>)
+muri = m.by_type(<span class="s">"IfcWall"</span>)
+print(len(muri), <span class="s">"muri"</span>)</code></pre></div>
+    <div><p class="codecap">C# · dentro un plug-in di Revit</p>
+<pre><code><span class="k">int</span> n = <span class="k">new</span> FilteredElementCollector(doc)
+    .OfCategory(BuiltInCategory.OST_Walls)
+    .WhereElementIsNotElementType()
+    .GetElementCount();</code></pre></div>
+    <div><p class="codecap">Python in un nodo di Dynamo</p>
+<pre><code><span class="c"># IN[0]: la lista dei muri da un nodo precedente</span>
+muri = IN[0]
+OUT = len(muri)</code></pre></div>
+    <div><p class="codecap">AutoLISP · contare le polilinee di un disegno</p>
+<pre><code>(<span class="k">defun</span> c:CONTA ( / s)
+  (<span class="k">setq</span> s (ssget <span class="s">"_X"</span> '((0 . <span class="s">"LWPOLYLINE"</span>))))
+  (princ (<span class="k">if</span> s (sslength s) 0))
+  (princ))</code></pre></div>
+  </div>
+  <div class="box warn"><b>Le API cambiano</b><p>Le API di Revit e di Dynamo cambiano tra le versioni annuali, e così i pacchetti della comunità. Uno script che funziona su una versione può richiedere modifiche sulla successiva: tieni traccia della versione per cui l'hai scritto.</p></div>
+</section>
+
+<section class="ch" id="c12">
+  <div class="ch-h"><span class="ch-n">12</span><h2>Non sono linguaggi di programmazione, ma li leggerai</h2></div>
+  <p class="lead">Descrivono dati, aspetto o struttura, ma non contengono logica: niente condizioni né cicli.</p>
+  <div class="tbl"><table>
+    <tr><th>Formato</th><th>Che cosa descrive</th><th>Dove lo trovi</th><th>Da sapere</th></tr>
+    <tr><td>IFC-SPF (.ifc)</td><td>Il modello BIM in testo, una riga per entità</td><td>File IFC aperti in un editor di testo</td><td>Ogni riga è del tipo <code>#123=IFCWALL(...)</code>, con riferimenti ad altre righe</td></tr>
+    <tr><td>XML</td><td>Dati strutturati ad albero</td><td>ifcXML, gbXML per l'energetica, BCF, configurazioni</td><td>Prolisso ma rigoroso</td></tr>
+    <tr><td>JSON</td><td>Coppie chiave–valore e liste</td><td>API web, configurazioni, file di Dynamo (.dyn)</td><td>Più leggero di XML, è lo standard del web</td></tr>
+    <tr><td>CSV</td><td>Tabelle in testo semplice</td><td>Esportazioni da Revit, Excel, database</td><td>Il separatore cambia tra paesi: attenzione ai decimali con la virgola</td></tr>
+    <tr><td>HTML e CSS</td><td>Struttura e aspetto di una pagina web</td><td>Ogni sito</td><td>Marcatori tra parentesi angolari e regole di stile</td></tr>
+    <tr><td>YAML</td><td>Come JSON, ma più leggibile</td><td>Configurazioni di software e server</td><td>L'indentazione ha significato</td></tr>
+    <tr><td>Markdown</td><td>Testo formattato in modo semplice</td><td>Documentazione, note</td><td><code># titolo</code>, <code>**grassetto**</code></td></tr>
+    <tr><td>Espressioni regolari</td><td>Modelli di ricerca nel testo</td><td>Cerca e sostituisci avanzato, rinomina in Revit e Dynamo</td><td>Potentissime ma poco leggibili: <code>^\d{3}-[A-Z]+$</code></td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c13">
+  <div class="ch-h"><span class="ch-n">13</span><h2>Come leggere codice che non conosci</h2></div>
+  <p class="lead">Quasi tutti i linguaggi usano gli stessi sette mattoni con parole diverse. Se li riconosci, segui il filo di un programma anche senza conoscerne il linguaggio.</p>
+  <div class="tbl"><table>
+    <tr><th>Mattone</th><th>Python</th><th>C#</th><th>Cosa fa</th></tr>
+    <tr><td>Variabile</td><td><code>h = 3.0</code></td><td><code>double h = 3.0;</code></td><td>Dà un nome a un valore</td></tr>
+    <tr><td>Condizione</td><td><code>if h &gt; 2.7:</code></td><td><code>if (h &gt; 2.7) { }</code></td><td>Esegue un blocco solo se vale una condizione</td></tr>
+    <tr><td>Ciclo</td><td><code>for muro in muri:</code></td><td><code>foreach (var muro in muri) { }</code></td><td>Ripete per ogni elemento</td></tr>
+    <tr><td>Funzione</td><td><code>def area(b, h): return b*h</code></td><td><code>double Area(double b, double h) =&gt; b*h;</code></td><td>Un pezzo di codice riutilizzabile</td></tr>
+    <tr><td>Lista</td><td><code>muri = [m1, m2]</code></td><td><code>List&lt;Wall&gt; muri</code></td><td>Più valori in un contenitore</td></tr>
+    <tr><td>Oggetto e metodo</td><td><code>muro.Width</code></td><td><code>muro.Width</code></td><td>Proprietà e azioni di un oggetto</td></tr>
+    <tr><td>Gestione degli errori</td><td><code>try: … except:</code></td><td><code>try { } catch { }</code></td><td>Che cosa fare se qualcosa va storto</td></tr>
+  </table></div>
+  <h3>Metodo di lettura in cinque passi</h3>
+  <ol class="steps">
+    <li><b>Trova il punto di ingresso.</b> In Python spesso è il fondo del file; in un plug-in di Revit il metodo <code>Execute</code>; in Dynamo il primo nodo a sinistra.</li>
+    <li><b>Leggi i nomi prima del contenuto.</b> Un buon codice si racconta dai nomi delle funzioni e delle variabili.</li>
+    <li><b>Segui i dati.</b> Da dove entrano (file, modello, utente), come si trasformano, dove escono.</li>
+    <li><b>All'inizio ignora i dettagli tecnici.</b> Import, configurazioni e gestione degli errori si guardano dopo.</li>
+    <li><b>Leggi i commenti, ma verificali.</b> <code>#</code> in Python, <code>//</code> in C#: non sempre sono aggiornati quanto il codice.</li>
+  </ol>
+  <h3>La stessa idea in sette linguaggi</h3>
+  <div class="tbl"><table>
+    <tr><th>Concetto</th><th>Python</th><th>JavaScript</th><th>C# / Java</th><th>C</th><th>VBA</th><th>SQL</th></tr>
+    <tr><td>Commento</td><td><code># nota</code></td><td><code>// nota</code></td><td><code>// nota</code></td><td><code>/* nota */</code></td><td><code>' nota</code></td><td><code>-- nota</code></td></tr>
+    <tr><td>Variabile</td><td><code>x = 5</code></td><td><code>let x = 5</code></td><td><code>int x = 5;</code></td><td><code>int x = 5;</code></td><td><code>Dim x As Integer</code></td><td>una colonna</td></tr>
+    <tr><td>Uguaglianza</td><td><code>==</code></td><td><code>===</code></td><td><code>==</code></td><td><code>==</code></td><td><code>=</code></td><td><code>=</code></td></tr>
+    <tr><td>Blocco</td><td>indentazione</td><td><code>{ }</code></td><td><code>{ }</code></td><td><code>{ }</code></td><td><code>If … End If</code></td><td>—</td></tr>
+    <tr><td>Condizione</td><td><code>if x &gt; 0:</code></td><td><code>if (x &gt; 0) {}</code></td><td><code>if (x &gt; 0) {}</code></td><td><code>if (x &gt; 0) {}</code></td><td><code>If x &gt; 0 Then</code></td><td><code>WHERE x &gt; 0</code></td></tr>
+    <tr><td>Ciclo</td><td><code>for m in muri:</code></td><td><code>for (const m of muri)</code></td><td><code>foreach (var m in muri)</code></td><td><code>for (i = 0; i &lt; n; i++)</code></td><td><code>For Each m In muri</code></td><td>implicito, su tutte le righe</td></tr>
+    <tr><td>Funzione</td><td><code>def f(a):</code></td><td><code>function f(a) {}</code></td><td><code>int F(int a) {}</code></td><td><code>int f(int a) {}</code></td><td><code>Function F(a)</code></td><td><code>CREATE FUNCTION</code></td></tr>
+    <tr><td>Valore nullo</td><td><code>None</code></td><td><code>null</code>, <code>undefined</code></td><td><code>null</code></td><td><code>NULL</code></td><td><code>Nothing</code></td><td><code>NULL</code></td></tr>
+  </table></div>
+  <h3>Chi assomiglia a chi</h3>
+  <ul>
+    <li><b>C → C++ → Java → C#</b>: quattro generazioni della stessa famiglia.</li>
+    <li><b>Java e C#</b> sono quasi gemelli; <b>JavaScript e Java</b>, invece, non sono parenti: il nome fu una scelta commerciale del 1995.</li>
+    <li><b>TypeScript</b> sta a JavaScript come un abaco con campi controllati sta a un foglio libero.</li>
+    <li><b>Kotlin</b> sta a Java come <b>Swift</b> sta a Objective-C: la versione moderna dello stesso ecosistema.</li>
+    <li><b>Python e Ruby</b> sono cugini; <b>Python e MATLAB</b> si sovrappongono molto nel calcolo tecnico.</li>
+    <li><b>Go e Rust</b> sono i due eredi moderni del C: uno punta alla semplicità, l'altro alla sicurezza.</li>
+    <li><b>Dynamo e Grasshopper</b> sono la stessa idea, programmazione a nodi, applicata a Revit e a Rhino.</li>
+    <li><b>SQL e i filtri di Revit o di Excel</b> fanno la stessa cosa: scelgono le righe che rispettano una condizione.</li>
+    <li><b>Lisp e AutoLISP</b>: il secondo è un dialetto del primo, adattato ad AutoCAD.</li>
+  </ul>
+</section>
+
+<section class="ch" id="c14">
+  <div class="ch-h"><span class="ch-n">14</span><h2>Da dove cominciare</h2></div>
+  <p class="lead">Un percorso pensato per chi lavora in uno studio o in un'impresa e vuole automatizzare, controllare e capire i dati dei modelli.</p>
+  <figure>
+    <svg viewBox="0 0 860 170" role="img" aria-label="Percorso consigliato in cinque tappe">
+      <rect class="s-as" width="860" height="170" rx="16"/>
+      <path d="M60 90H800" style="stroke:var(--accent);stroke-width:4;fill:none" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <g class="s-t">
+        <g transform="translate(30 40)"><circle class="s-2" cx="50" cy="50" r="34"/><text class="s-tw" x="50" y="56" text-anchor="middle">Dynamo</text><text class="s-tm" x="50" y="112" text-anchor="middle">pensare per dati</text></g>
+        <g transform="translate(200 40)"><circle class="s-a" cx="50" cy="50" r="34"/><text class="s-tw" x="50" y="56" text-anchor="middle">Python</text><text class="s-tm" x="50" y="112" text-anchor="middle">leggere e scrivere</text></g>
+        <g transform="translate(370 40)"><circle class="s-3" cx="50" cy="50" r="34"/><text class="s-tw" x="50" y="56" text-anchor="middle">IFC</text><text class="s-tm" x="50" y="112" text-anchor="middle">il dato aperto</text></g>
+        <g transform="translate(540 40)"><circle class="s-4" cx="50" cy="50" r="34"/><text class="s-tw" x="50" y="56" text-anchor="middle">JSON·SQL</text><text class="s-tm" x="50" y="112" text-anchor="middle">dove passano i dati</text></g>
+        <g transform="translate(710 40)"><circle class="s-5" cx="50" cy="50" r="34"/><text class="s-tw" x="50" y="56" text-anchor="middle">C#</text><text class="s-tm" x="50" y="112" text-anchor="middle">quando serve di più</text></g>
+      </g>
+    </svg>
+    <figcaption><b>Cinque tappe.</b> Non è obbligatorio arrivare in fondo: già le prime due bastano per automatizzare buona parte del lavoro ripetitivo.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><b>Dynamo.</b> Abitua a ragionare per liste di elementi e trasformazioni, senza scrivere codice.</li>
+    <li><b>Python.</b> È il più leggibile e il più usato nel BIM: entra in Dynamo, in pyRevit, in Rhino, in Blender e nella lettura degli IFC.</li>
+    <li><b>IFC con IfcOpenShell.</b> Insegna a lavorare sul dato aperto, indipendente dal software di partenza, e a capire davvero il GUID.</li>
+    <li><b>JSON e SQL.</b> I dati passano quasi sempre da lì: configurazioni, API web, database dei computi e della gestione.</li>
+    <li><b>C#.</b> Quando serve un plug-in vero, con interfaccia e prestazioni, la documentazione dell'API di Revit è scritta in C#.</li>
+  </ol>
+  <div class="box tip"><b>Un consiglio di metodo</b><p>Parti da un problema reale e ripetitivo del tuo lavoro: rinominare tavole, controllare parametri vuoti, esportare quantità. Un piccolo script che fa risparmiare mezz'ora alla settimana insegna più di un corso generico, e si migliora un pezzo alla volta.</p></div>
+</section>
+
+<section class="ch" id="c15">
+  <div class="ch-h"><span class="ch-n">15</span><h2>Glossario essenziale</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Termine</th><th>Significato in breve</th></tr>
+    <tr><td>Algoritmo</td><td>Sequenza finita di passi per risolvere un problema; esiste prima e indipendentemente dal linguaggio</td></tr>
+    <tr><td>API</td><td>Insieme di funzioni che un programma mette a disposizione di altri (l'API di Revit permette ai plug-in di leggere e modificare il modello)</td></tr>
+    <tr><td>Bit, byte</td><td>Il bit è un singolo 0 o 1; un byte sono 8 bit</td></tr>
+    <tr><td>Booleano</td><td>Valore vero o falso</td></tr>
+    <tr><td>Bug, debug</td><td>Errore nel codice; ricerca e correzione dell'errore</td></tr>
+    <tr><td>Bytecode</td><td>Codice intermedio eseguito da una macchina virtuale</td></tr>
+    <tr><td>Classe, istanza</td><td>Lo «stampo» e il singolo oggetto creato da esso, come famiglia e istanza in Revit</td></tr>
+    <tr><td>Compilatore</td><td>Programma che traduce tutto il codice in eseguibile prima di avviarlo</td></tr>
+    <tr><td>Dizionario</td><td>Collezione di coppie chiave → valore</td></tr>
+    <tr><td>Driver</td><td>Programma che fa dialogare il sistema operativo con un dispositivo</td></tr>
+    <tr><td>Ereditarietà</td><td>Una classe riceve proprietà e metodi da un'altra</td></tr>
+    <tr><td>Eccezione</td><td>Errore che interrompe il flusso e si può intercettare</td></tr>
+    <tr><td>Firmware</td><td>Software scritto dentro un dispositivo, come la tastiera o una caldaia</td></tr>
+    <tr><td>Framework</td><td>Struttura già pronta su cui si costruisce un'applicazione</td></tr>
+    <tr><td>Funzione, metodo</td><td>Blocco di codice riutilizzabile; è un metodo quando appartiene a un oggetto</td></tr>
+    <tr><td>Garbage collector</td><td>Meccanismo che libera da solo la memoria non più usata</td></tr>
+    <tr><td>Git</td><td>Sistema di controllo delle versioni: chi ha cambiato che cosa, e quando</td></tr>
+    <tr><td>GUID, UUID</td><td>Identificatore a 128 bit unico nel mondo, senza bisogno di un registro centrale</td></tr>
+    <tr><td>IDE</td><td>Ambiente di sviluppo: editor, compilatore, debugger insieme</td></tr>
+    <tr><td>Interprete</td><td>Programma che esegue il codice senza produrre un eseguibile</td></tr>
+    <tr><td>Interrupt</td><td>Segnale con cui un dispositivo chiede l'attenzione del processore</td></tr>
+    <tr><td>Libreria, pacchetto</td><td>Codice scritto da altri, pronto da riutilizzare</td></tr>
+    <tr><td>Namespace, modulo</td><td>Contenitore che raggruppa nomi ed evita conflitti</td></tr>
+    <tr><td>Overflow</td><td>Valore che supera la capacità del tipo che lo contiene</td></tr>
+    <tr><td>Ricorsione</td><td>Funzione che chiama se stessa</td></tr>
+    <tr><td>Runtime</td><td>Il momento, e l'ambiente, in cui il programma è in esecuzione</td></tr>
+    <tr><td>Script</td><td>Programma breve, di solito interpretato, per automatizzare un compito</td></tr>
+    <tr><td>Stack, heap</td><td>Le due zone di memoria: ordinata per le chiamate di funzione, libera per i dati</td></tr>
+    <tr><td>Stringa</td><td>Sequenza di caratteri</td></tr>
+    <tr><td>Thread</td><td>Filo di esecuzione; più thread lavorano in parallelo</td></tr>
+    <tr><td>Transazione</td><td>Gruppo di modifiche che riesce per intero o si annulla per intero</td></tr>
+    <tr><td>Virgola mobile</td><td>Il modo in cui il computer salva i decimali: segno, esponente e cifre significative</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c16">
+  <div class="ch-h"><span class="ch-n">16</span><h2>Curiosità che insegnano qualcosa</h2></div>
+  <p class="lead">Dietro quasi ogni aneddoto della storia del software c'è un limite del calcolatore o un'ipotesi non verificata: lezioni valide anche per chi progetta.</p>
+  <h3>Errori celebri</h3>
+  <div class="grid2">
+    <div class="card"><h4>Mars Climate Orbiter, 1999</h4><p>La sonda della NASA andò perduta perché un software forniva gli impulsi in unità anglosassoni e un altro li leggeva in unità SI. Nessun linguaggio controllava le unità di misura: vale per ogni foglio di calcolo strutturale.</p></div>
+    <div class="card"><h4>Ariane 5, volo 501, 1996</h4><p>Il razzo si autodistrusse dopo circa 40 secondi: un valore decimale a 64 bit fu convertito in un intero a 16 bit troppo piccolo. Il codice era stato riusato dall'Ariane 4 senza riverificarne le ipotesi.</p></div>
+    <div class="card"><h4>Missili Patriot, 1991</h4><p>Il sistema contava il tempo in decimi di secondo, ma 0,1 in binario non è esatto. Dopo circa 100 ore l'errore accumulato spostò il calcolo e un missile non fu intercettato: 28 militari uccisi. È lo stesso fenomeno del capitolo 3.</p></div>
+    <div class="card"><h4>Therac-25, 1985–87</h4><p>Una macchina per radioterapia somministrò dosi letali per una <i>race condition</i>: due parti del software lavoravano in parallelo e lo stato della macchina diventava incoerente.</p></div>
+    <div class="card"><h4>Millennium bug</h4><p>Per risparmiare memoria molti programmi salvavano l'anno con due cifre: il 2000 diventava «00», cioè 1900. Fu evitato con anni di lavoro preventivo.</p></div>
+    <div class="card"><h4>Anno 2038</h4><p>Molti sistemi contano il tempo in secondi dal 1° gennaio 1970 con un intero a 32 bit, che si esaurisce il 19 gennaio 2038. I sistemi moderni usano 64 bit; il rischio resta nei dispositivi vecchi.</p></div>
+  </div>
+  <h3>Nomi e origini</h3>
+  <ul>
+    <li><b>Python</b> prende il nome dai Monty Python, non dal serpente.</li>
+    <li><b>JavaScript</b> fu scritto in circa dieci giorni nel 1995; il nome richiamava Java solo per motivi commerciali.</li>
+    <li><b>Ada</b> porta il nome di Ada Lovelace, che nel 1843 descrisse un algoritmo per la macchina analitica di Babbage.</li>
+    <li><b>C</b> si chiama così perché viene dopo il linguaggio <b>B</b>.</li>
+    <li><b>Il primo «bug»</b>: nel 1947 il gruppo di Grace Hopper trovò una falena in un relè del calcolatore Harvard Mark II e la incollò sul registro. La parola esisteva già in ingegneria, ma l'episodio la rese celebre.</li>
+    <li><b>L'Apollo 11</b> atterrò con un software di guida sviluppato dal gruppo di Margaret Hamilton al MIT: durante la discesa il computer segnalò un sovraccarico e scartò i compiti meno importanti, come previsto dal progetto.</li>
+  </ul>
+  <h3>Stranezze che vengono dall'hardware o dalla storia</h3>
+  <ul>
+    <li><b>Da 0 o da 1?</b> I linguaggi della famiglia C contano da 0; Fortran, MATLAB, R, Julia e Lua contano da 1, come gli ingegneri.</li>
+    <li><b>Excel e il 29 febbraio 1900.</b> Excel considera bisestile il 1900, che non lo era: l'errore fu mantenuto per compatibilità con Lotus 1-2-3.</li>
+    <li><b>Excel e la genetica.</b> La conversione automatica in date trasformava nomi di geni come SEPT1 in date; nel 2020 quei geni sono stati rinominati.</li>
+    <li><b>Il «null» da un miliardo di dollari.</b> Tony Hoare, che introdusse il riferimento nullo nel 1965, l'ha definito il suo «errore da un miliardo di dollari». Linguaggi recenti come Rust, Kotlin e Swift lo limitano di proposito.</li>
+    <li><b>Turing-completezza.</b> Un linguaggio con memoria, condizioni e ripetizione può in teoria calcolare tutto ciò che è calcolabile. Lo sono anche Excel con LAMBDA e Dynamo: la differenza tra linguaggi è di comodità, non di potenza.</li>
+  </ul>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-h"><span class="ch-n">≡</span><h2>Fonti e approfondimenti</h2></div>
+  <p>I fatti tecnici di questa guida sono stati controllati sulle fonti seguenti. Le pagine sono in inglese, salvo dove indicato.</p>
+  <ul class="src">
+    <li>IETF, <a href="https://www.rfc-editor.org/rfc/rfc9562" target="_blank" rel="noopener">RFC 9562 · Universally Unique IDentifiers (UUIDs)</a>, maggio 2024: struttura, versioni e generazione degli UUID; sostituisce l'RFC 4122.</li>
+    <li>IfcOpenShell, <a href="https://docs.ifcopenshell.org/autoapi/ifcopenshell/guid/index.html" target="_blank" rel="noopener">modulo ifcopenshell.guid</a>: conversione tra UUID e GlobalId IFC a 22 caratteri, alfabeto usato da IFC.</li>
+    <li>IfcOpenShell, <a href="https://docs.ifcopenshell.org/" target="_blank" rel="noopener">documentazione</a>: lettura e modifica di file IFC con Python.</li>
+    <li>Autodesk, <a href="https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/f9a9cb77-6913-6d41-ecf5-4398a24e8ff8.htm" target="_blank" rel="noopener">Revit API · Element.UniqueId</a>: identificativo stabile degli elementi.</li>
+    <li>Autodesk, <a href="https://help.autodesk.com/view/RVT/2026/ENU/?guid=Revit_API_Revit_API_Developers_Guide_html" target="_blank" rel="noopener">Revit API Developer's Guide</a>: transazioni, raccolta di elementi, unità interne.</li>
+    <li>J. Tammik, <a href="https://jeremytammik.github.io/tbc/a/0104_uniqueid_dwf_ifc_guid.htm" target="_blank" rel="noopener">UniqueId versus DWF and IFC GUID</a>: differenza tra UniqueId, GUID di esportazione e GUID IFC.</li>
+    <li>USB Implementers Forum, <a href="https://www.usb.org/hid" target="_blank" rel="noopener">Human Interface Devices (HID)</a>: lo standard con cui tastiere e mouse comunicano con il computer.</li>
+    <li>Microsoft, <a href="https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input" target="_blank" rel="noopener">About Keyboard Input</a>: come Windows trasforma la pressione di un tasto in un evento per l'applicazione.</li>
+    <li>Python Software Foundation, <a href="https://docs.python.org/3/tutorial/floatingpoint.html" target="_blank" rel="noopener">Floating-Point Arithmetic: Issues and Limitations</a>: perché 0,1 + 0,2 non fa 0,3.</li>
+  </ul>
+  <div class="box idea"><b>Come è nata questa guida</b><p>È uno dei «manuali di Claude»: l'ha scritta Claude, l'assistente di intelligenza artificiale di Anthropic, seguendo indicazioni precise su argomenti, struttura e livello di dettaglio. Le grafiche sono disegnate per questa guida. Segnalazioni e correzioni sono benvenute, dal sito.</p></div>
+  <p class="foot">BIM News · I manuali di Claude · Linguaggi di programmazione per chi lavora nel BIM · edizione novembre 2026</p>
+</section>
+</main>
+</div>
+</body>
+</html>
