@@ -1139,6 +1139,17 @@ body{transition:background-color .3s}
 .tour-dots i.on{background:var(--k-news)}
 .tour-x{position:absolute;top:.5rem;right:.6rem;border:0;background:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1}
 .tour-step{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+
+/* BIM in 5 minuti: sezioni 03, 04 e 05 a tutta larghezza, in riga come la 02 */
+#bim-5-minuti .b5-cols{grid-template-columns:minmax(0,1fr);gap:1.6rem}
+#bim-5-minuti .b5-life li,#bim-5-minuti .b5-list li{align-content:start}
+#bim-5-minuti .b5-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+#bim-5-minuti .b5-list li{border-left:0;border-top:3px solid var(--accent);padding:.9rem .9rem .9rem 0}
+#bim-5-minuti .b5-list li+li{padding-left:.9rem;border-left:1px dashed var(--line)}
+#bim-5-minuti .b5-list b{display:block;font-family:var(--display);font-size:1.1rem;margin-bottom:.3rem}
+#bim-5-minuti .b5-law{max-width:none;border-top:3px solid var(--accent)}
+#bim-5-minuti .tl-intro,#bim-5-minuti .dm-note{max-width:none}
+@media (max-width:760px){#bim-5-minuti .b5-list{grid-template-columns:minmax(0,1fr)}#bim-5-minuti .b5-list li+li{padding-left:0;border-left:0}}
 </style>
 </head>
 <body>
@@ -1871,7 +1882,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>85 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>86 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
