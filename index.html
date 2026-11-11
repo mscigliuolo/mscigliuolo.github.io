@@ -1101,6 +1101,18 @@ body{transition:background-color .3s}
 .man-btn:hover{background:var(--accent-2)}
 .man-btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
 .man-btn.ghost:hover{border-color:var(--accent);background:var(--hi)}
+
+/* tasto Home: «BIM News» in alto a sinistra come bottone riconoscibile */
+.brand-box{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:.5rem;padding:.38rem .5rem .38rem .38rem;border-radius:999px;background:var(--k-news);color:#fff;font-stretch:normal;font-size:1.02rem;box-shadow:0 2px 8px rgba(42,111,201,.28);border:2px solid var(--k-news);transition:background-color .2s,box-shadow .2s,transform .2s}
+.brand:hover,.brand:focus-visible{background:var(--k-news-2);box-shadow:0 4px 14px rgba(42,111,201,.38);transform:translateY(-1px)}
+.br-ico{width:1.8rem;height:1.8rem;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.br-ico svg{width:1.05rem;height:1.05rem;fill:none;stroke:var(--k-news);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.br-t{font-weight:800;letter-spacing:.01em}
+.br-home{font-family:var(--mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,.22);border-radius:999px;padding:.15rem .5rem}
+:root[data-theme="dark"] .brand{color:#0f1a2b}:root[data-theme="dark"] .br-ico{background:#0f1a2b}:root[data-theme="dark"] .br-home{background:rgba(0,0,0,.18)}
+.brand-by{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+@media (max-width:640px){.brand-by{display:none}}
 </style>
 </head>
 <body>
@@ -1117,7 +1129,7 @@ body{transition:background-color .3s}
 </div></div>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#home">BIM News <small>a cura di Marco Scigliuolo</small></a>
+    <div class="brand-box"><a class="brand" href="#home" title="Torna alla home"><span class="br-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></span><span class="br-t">BIM News</span><span class="br-home">Home</span></a><small class="brand-by">a cura di Marco Scigliuolo</small></div>
     <nav aria-label="Sezioni">
       <a href="#bim-news">BIM News</a>
       <a href="#bim-ai">BIM &amp; AI</a>
@@ -1508,7 +1520,7 @@ body{transition:background-color .3s}
           <article class="st-item" id="man-pro-05"><span class="st-n">05</span><div><h4>AutoCAD 2026: script, riferimenti esterni e stampa</h4><p>Guida rapida a script, xrif e stampa in AutoCAD 2026.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-06"><span class="st-n">06</span><div><h4>Checklist BIM-MEP</h4><p>I controlli da fare su un modello degli impianti.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-07"><span class="st-n">07</span><div><h4>Promemoria avvio progetto MEP</h4><p>Che cosa preparare all'inizio di un progetto impiantistico.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
-          <article class="st-item" id="man-pro-08"><span class="st-n">08</span><div><h4>Guida alla progettazione elettrica in iProject</h4><p>Il percorso di progettazione elettrica con il software iProject.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
+          <article class="st-item" id="man-pro-08"><span class="st-n">08</span><div><h4>Progettazione elettrica con i-project</h4><p>Il workflow completo per progettare un impianto elettrico con i-project di Schneider Electric, in nove fasi: i dati da chiedere prima di disegnare, il disegno in CAD, le impostazioni del programma, quadri e utenze, i calcoli con formule ed esempi numerici, che cosa fare quando una verifica non passa, schemi, computo con l'elenco prezzi provinciale e una checklist finale. Con schemi disegnati apposta, le norme di riferimento (CEI 64-8, 9ª edizione) e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/progettazione-elettrica-iproject.html">Leggi online</a><a class="man-btn ghost" href="manuali/progettazione-elettrica-iproject.pdf" download>Scarica il PDF · 30 pagine</a></p></div></article>
           <article class="st-item" id="man-pro-09"><span class="st-n">09</span><div><h4>Guida alla progettazione antincendio</h4><p>Un percorso guidato nella progettazione antincendio.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-10"><span class="st-n">10</span><div><h4>Programma di studio: progettare un edificio in c.a.</h4><p>Un programma di studio per progettare un edificio in cemento armato.</p><p class="st-wip"><span class="tag">Work in progress</span> Pubblicazione in preparazione.</p></div></article>
           <article class="st-item" id="man-pro-11"><span class="st-n">11</span><div><h4>Linguaggi di programmazione per chi lavora nel BIM</h4><p>Una guida per chi ha già visto un po' di codice e vuole orientarsi: le famiglie dei linguaggi e dove si usano, con esempi in Python, C#, Dynamo, SQL e AutoLISP. Due capitoli spiegano che cosa succede nel computer, dal tasto premuto alla modifica del modello, e perché il GUID è l'identità di ogni oggetto BIM. Sedici capitoli, con grafiche disegnate apposta e le fonti.</p><p class="man-dl"><span class="tag ok">Pubblicato</span><a class="man-btn" href="manuali/linguaggi-di-programmazione.html">Leggi online</a><a class="man-btn ghost" href="manuali/linguaggi-di-programmazione.pdf" download>Scarica il PDF · 40 pagine</a></p></div></article>
@@ -1827,7 +1839,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>81 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>82 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>

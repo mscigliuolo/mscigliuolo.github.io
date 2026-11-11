@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Progettazione elettrica con i-project · I manuali di BIM News</title>
+<meta name="description" content="Guida al workflow di progettazione di un impianto elettrico con i-project: dati di partenza, impostazioni, quadri, utenze, calcoli, verifiche, computo e checklist, con formule, esempi e norme di riferimento.">
+<link rel="stylesheet" href="manuale.css">
+<script>try{var t=localStorage.getItem("tema-2026");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+.eq{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.22rem;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--a3);border-radius:12px;padding:.8rem 1.1rem;margin:.6rem 0 1rem;overflow-x:auto;white-space:nowrap}
+.eq .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .2rem}
+.eq .fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .3rem .1rem}
+.eq .fr>span:last-child{padding:.1rem .3rem 0}
+.eq small{font-family:var(--body);font-size:.8rem;color:var(--muted);margin-left:1rem;white-space:normal}
+.ck{list-style:none;padding:0;display:grid;gap:.35rem}
+.ck li{position:relative;padding:.45rem .7rem .45rem 2.3rem;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.ck li::before{content:"";position:absolute;left:.75rem;top:.7rem;width:.95rem;height:.95rem;border:2px solid var(--a2);border-radius:4px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--accent)"/></marker><marker id="arg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--muted)"/></marker></defs></svg>
+<div class="topbar"><div class="in"><a class="back" href="../#studio">← BIM News · Nello studio</a><span class="sp"></span><a class="btn" href="progettazione-elettrica-iproject.pdf" download>Scarica il PDF</a></div></div>
+<div class="layout">
+<nav class="toc" aria-label="Indice">
+  <b>Indice</b>
+  <ol>
+    <li><a href="#guida">Come usare questa guida</a></li>
+    <li><a href="#c1">1 · Il workflow in nove fasi</a></li>
+    <li><a href="#c2">2 · I dati di partenza</a></li>
+    <li><a href="#c3">3 · Il disegno in CAD</a></li>
+    <li><a href="#c4">4 · Impostare il progetto in i-project</a></li>
+    <li><a href="#c5">5 · Alimentazione e quadri</a></li>
+    <li><a href="#c6">6 · Dalle piante alle utenze</a></li>
+    <li><a href="#c7">7 · Protezioni, cavi e componenti</a></li>
+    <li><a href="#c8">8 · Calcoli: formule ed esempi</a></li>
+    <li><a href="#c9">9 · Quando una verifica non passa</a></li>
+    <li><a href="#c10">10 · Schemi, relazione e computo</a></li>
+    <li><a href="#c11">11 · Checklist finale</a></li>
+    <li><a href="#c12">12 · Norme, fonti e punti da verificare</a></li>
+  </ol>
+</nav>
+<main>
+<header class="cover">
+  <div>
+    <span class="kick">I manuali di BIM News · Nello studio</span>
+    <h1>Progettazione elettrica con i-project</h1>
+    <p>Il percorso completo, dal file dell'architetto allo schema dei quadri calcolato e al computo: che cosa preparare, come impostare il programma, come inserire utenze e linee, quali verifiche fare e come leggerle.</p>
+    <p class="lead">Per chi inizia a progettare impianti elettrici negli edifici, e per chi vuole un metodo da seguire ogni volta.</p>
+    <div class="meta"><span class="pill">12 capitoli</span><span class="pill">workflow in 9 fasi</span><span class="pill">formule con esempi numerici</span><span class="pill">CEI 64-8, 9ª edizione</span><span class="pill">Edizione novembre 2026</span></div>
+  </div>
+  <svg viewBox="0 0 360 260" role="img" aria-label="Illustrazione: un quadro elettrico con le linee verso le utenze">
+    <rect class="s-as" x="10" y="10" width="340" height="240" rx="22"/>
+    <rect class="s-w" x="34" y="44" width="110" height="170" rx="10"/>
+    <rect class="s-a" x="34" y="44" width="110" height="26" rx="10"/><text class="s-tw" x="89" y="62" text-anchor="middle">QG</text>
+    <g><rect class="s-2" x="50" y="84" width="14" height="30" rx="3"/><rect class="s-2" x="70" y="84" width="14" height="30" rx="3"/><rect class="s-3" x="90" y="84" width="14" height="30" rx="3"/><rect class="s-3" x="110" y="84" width="14" height="30" rx="3"/>
+    <rect class="s-4" x="50" y="126" width="14" height="30" rx="3"/><rect class="s-4" x="70" y="126" width="14" height="30" rx="3"/><rect class="s-5" x="90" y="126" width="14" height="30" rx="3"/><rect class="s-2" x="110" y="126" width="14" height="30" rx="3"/>
+    <rect class="s-w" x="50" y="170" width="74" height="28" rx="5"/><text class="s-tm" x="87" y="189" text-anchor="middle">Icc 14 kA</text></g>
+    <path d="M144 100h50v-40h40M144 130h90M144 160h50v40h40" style="fill:none;stroke:var(--accent);stroke-width:3"/>
+    <g transform="translate(238 46)"><circle class="s-3s" cx="14" cy="14" r="14"/><path class="s-l" d="M8 20h12M10 23h8M14 4a7 7 0 0 0-5 12h10a7 7 0 0 0-5-12z"/></g>
+    <g transform="translate(238 116)"><rect class="s-2s" x="0" y="0" width="28" height="28" rx="6"/><circle class="s-l" cx="9" cy="14" r="2.5"/><circle class="s-l" cx="19" cy="14" r="2.5"/></g>
+    <g transform="translate(238 186)"><rect class="s-4s" x="0" y="0" width="28" height="28" rx="6"/><path class="s-l" d="M7 20l5-12 4 8 3-4 3 8"/></g>
+    <text class="s-tm" x="276" y="64">luci</text><text class="s-tm" x="276" y="134">prese</text><text class="s-tm" x="276" y="204">macchine</text>
+  </svg>
+</header>
+
+<section class="ch" id="guida">
+  <div class="ch-h"><span class="ch-n">?</span><h2>Come usare questa guida</h2></div>
+  <p>La guida segue l'ordine in cui si lavora davvero: prima i dati, poi il disegno, poi il calcolo, infine il computo e le verifiche incrociate. Ogni formula è quella che il programma applica, o che serve per controllarne i risultati, con un esempio numerico che si può rifare a mano. Ogni grandezza è spiegata la prima volta che compare.</p>
+  <p>Gli esempi vengono da un <b>progetto di esempio</b> realistico: fornitura in bassa tensione 400 V, sistema TT, un quadro di consegna, un quadro generale e sei sottoquadri, uno dei quali dedicato al fotovoltaico.</p>
+  <div class="box warn"><b>La regola di fondo</b><p>i-project calcola, ma non decide. Potenze, coefficienti, lunghezze e pose sono scelte del progettista; il programma restituisce numeri coerenti con ciò che riceve. Un dato inserito male produce un quadro formalmente verificato, ma sbagliato.</p></div>
+  <div class="box bim"><b>Il programma</b><p>i-project è il software tecnico di Schneider Electric per la progettazione di impianti e quadri elettrici in bassa tensione: calcolo delle linee, scelta delle protezioni, schemi e documentazione. I nomi di schede e campi citati qui si riferiscono alla versione 6; in versioni diverse possono cambiare leggermente.</p></div>
+  <div class="box tip"><b>Se hai già esperienza</b><p>Parti dal capitolo 4 (impostazioni), poi usa il capitolo 9 quando una verifica non passa e la checklist del capitolo 11 prima di consegnare.</p></div>
+</section>
+
+<section class="ch" id="c1">
+  <div class="ch-h"><span class="ch-n">1</span><h2>Il workflow in nove fasi</h2></div>
+  <p class="lead">Un impianto efficace nasce da un ordine preciso: prima si sa da dove arriva l'energia e a che cosa serve, poi si disegna, poi si calcola, e solo alla fine si conta.</p>
+  <figure>
+    <svg viewBox="0 0 900 420" role="img" aria-label="Il workflow di progettazione in nove fasi, con il ciclo di verifica">
+      <rect class="s-as" width="900" height="420" rx="18"/>
+      <g class="s-t">
+        <g transform="translate(24 30)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-5" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">1</text><text class="s-tb" x="46" y="29">Dati di partenza</text><text x="14" y="56">distributore, architetto,</text><text x="14" y="74">meccanici, antincendio</text></g>
+        <g transform="translate(244 30)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-5" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">2</text><text class="s-tb" x="46" y="29">Fattibilità · 1:100</text><text x="14" y="56">consegna, locale tecnico,</text><text x="14" y="74">quadri, cavedi, dorsali</text></g>
+        <g transform="translate(464 30)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-3" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">3</text><text class="s-tb" x="46" y="29">Esecutivo · 1:50</text><text x="14" y="56">prese, comandi, luci</text><text x="14" y="74">dopo DIALux, sicurezze</text></g>
+        <g transform="translate(684 30)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-3" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">4</text><text class="s-tb" x="46" y="29">Impostazioni</text><text x="14" y="56">scheda di progetto:</text><text x="14" y="74">cavo, posa, protezioni</text></g>
+        <g transform="translate(684 164)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-4" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">5</text><text class="s-tb" x="46" y="29">Quadri</text><text x="14" y="56">tensione, sistema, Icc;</text><text x="14" y="74">albero dei quadri</text></g>
+        <g transform="translate(464 164)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-4" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">6</text><text class="s-tb" x="46" y="29">Utenze e linee</text><text x="14" y="56">un circuito per gruppo,</text><text x="14" y="74">potenze e lunghezze</text></g>
+        <g transform="translate(244 164)"><rect class="s-a" width="190" height="92" rx="14"/><circle style="fill:#fff" cx="24" cy="24" r="14"/><text class="s-tb" x="24" y="29" text-anchor="middle">7</text><text class="s-tw" x="46" y="29">Calcolo e verifiche</text><text class="s-tw" x="14" y="56" style="font-weight:400">Ib ≤ In ≤ Iz, ΔV, Icc,</text><text class="s-tw" x="14" y="74" style="font-weight:400">differenziali, PE</text></g>
+        <g transform="translate(24 164)"><rect class="s-w" width="190" height="92" rx="14"/><circle class="s-2" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">8</text><text class="s-tb" x="46" y="29">Schemi e relazione</text><text x="14" y="56">schemi dei quadri,</text><text x="14" y="74">tabelle, relazione</text></g>
+        <g transform="translate(24 298)"><rect class="s-w" width="410" height="92" rx="14"/><circle class="s-2" cx="24" cy="24" r="14"/><text class="s-tw" x="24" y="29" text-anchor="middle">9</text><text class="s-tb" x="46" y="29">Computo e verifica incrociata</text><text x="14" y="56">conteggio per layer, voci dell'elenco prezzi;</text><text x="14" y="74">piante, schemi, calcoli e computo devono coincidere</text></g>
+        <g transform="translate(464 298)"><rect class="s-2s" width="410" height="92" rx="14"/><text class="s-tb" x="18" y="30">Il ciclo di verifica</text><text x="18" y="56">Se una verifica non passa si torna alla fase 6:</text><text x="18" y="74">sezione, protezione, posa o dati (capitolo 9).</text></g>
+      </g>
+      <path d="M214 76h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M434 76h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M654 76h28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M779 122v40" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M684 210h-28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M464 210h-28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M244 210h-28" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M119 256v40" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      <path d="M380 258C400 292 520 292 540 262" style="fill:none;stroke:var(--a2);stroke-width:2.6" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+      <text x="420" y="292" style="font-family:var(--mono);font-size:11px;fill:var(--a2)">si ripete</text>
+    </svg>
+    <figcaption><b>Nove fasi e un ciclo.</b> Le fasi 6 e 7 si ripetono finché tutte le verifiche passano; solo allora si producono schemi, relazione e computo.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><b>Dati di partenza.</b> Si raccolgono da tutti gli attori prima di disegnare: senza la corrente di cortocircuito del distributore non si scelgono gli interruttori, senza le schede delle macchine non si dimensionano le linee dedicate (capitolo 2).</li>
+    <li><b>Fattibilità, in CAD a scala 1:100.</b> Da dove arriva l'energia: punto di consegna, bassa o media tensione, contatore, locale tecnico, quadro generale, cavedio principale, tubi tra locale tecnico e cavedio, quadri di piano o di zona.</li>
+    <li><b>Definitivo ed esecutivo, in CAD a scala 1:50.</b> Con la pianta degli arredi definita: prese, comandi (tradizionali o KNX), illuminazione dopo il calcolo illuminotecnico, sicurezza e accessi, rivelazione incendi.</li>
+    <li><b>Impostazioni in i-project.</b> I valori di default che il programma userà per ogni linea (capitolo 4).</li>
+    <li><b>Alimentazione e gerarchia dei quadri.</b> Prima l'albero, poi le potenze (capitolo 5).</li>
+    <li><b>Utenze e linee.</b> Un circuito per ogni gruppo di utenze che condivide protezione e continuità di servizio (capitolo 6).</li>
+    <li><b>Calcolo e verifiche.</b> Il programma calcola correnti, sezioni, cadute di tensione e cortocircuiti; il progettista legge e corregge (capitoli 8 e 9).</li>
+    <li><b>Schemi e relazione.</b> Gli schemi dei quadri e le tabelle di calcolo diventano elaborati di progetto (capitolo 10).</li>
+    <li><b>Computo e verifica incrociata.</b> Si contano gli elementi per layer e si collegano alle voci dell'elenco prezzi; piante, schemi, calcoli e computo devono descrivere gli stessi circuiti e gli stessi componenti.</li>
+  </ol>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-h"><span class="ch-n">2</span><h2>I dati di partenza</h2></div>
+  <p class="lead">La maggior parte degli errori di un impianto nasce da un dato mancante, non da un calcolo sbagliato. Prima di aprire il programma, chiedi questi dati e scrivi da dove arrivano.</p>
+  <div class="tbl"><table>
+    <tr><th>Da chi</th><th>Che cosa chiedere</th><th>Perché serve</th></tr>
+    <tr><td>Distributore di energia</td><td>Tensione di fornitura, sistema di distribuzione (TT, TN), corrente di cortocircuito presunta all'origine, potenza disponibile, posizione del punto di consegna</td><td>L'Icc fissa il potere d'interruzione di tutti gli interruttori a valle; il sistema decide come si protegge dai contatti indiretti</td></tr>
+    <tr><td>Architetto</td><td>Piante aggiornate, pianta degli arredi, destinazione d'uso dei locali, altezze, controsoffitti, cavedi, locale tecnico</td><td>Posizione dei punti, percorsi dei cavi, dotazioni per destinazione d'uso</td></tr>
+    <tr><td>Progettista meccanico</td><td>Elenco delle macchine con potenza, tensione, fasi, corrente di spunto, posizione</td><td>Linee dedicate, protezioni adatte, contemporaneità</td></tr>
+    <tr><td>Progettista antincendio</td><td>Compartimenti, vie di esodo, impianti di sicurezza, classe di reazione al fuoco richiesta per i cavi</td><td>Classe CPR dei cavi, alimentazioni di sicurezza, rivelazione</td></tr>
+    <tr><td>Committente</td><td>Standard tecnici, marche ammesse, livello di automazione (KNX, DALI), riserve richieste, eventuale fotovoltaico e ricarica dei veicoli</td><td>Scelte di sistema e spazio di riserva nei quadri</td></tr>
+    <tr><td>Illuminotecnico</td><td>Calcolo DIALux con apparecchi, potenze e posizioni</td><td>Potenze e circuiti dell'illuminazione</td></tr>
+  </table></div>
+  <div class="box tip"><b>Un foglio dei dati</b><p>Tieni un foglio unico con ogni dato, la sua fonte e la data. Quando un dato cambia (una macchina più potente, un'Icc diversa), sai subito quali linee ricalcolare.</p></div>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-h"><span class="ch-n">3</span><h2>Il disegno in CAD</h2></div>
+  <h3>Lavorare sopra il file dell'architetto</h3>
+  <ul>
+    <li>Si disegna sempre sopra un <b>riferimento esterno</b> (Xrif) del file architettonico, mai dentro il file originale. Una trasparenza dell'Xrif intorno a 70, impostata dal layer, aiuta a distinguere l'impianto dall'architettura.</li>
+    <li>Prima di toccare qualunque cosa si lavora su una <b>copia</b> degli originali ricevuti, archiviati con la loro data.</li>
+    <li>Non si cancella e non si corregge il disegno dell'architetto: chi modifica si assume la responsabilità della modifica. Se un oggetto disturba, lo si sposta su un layer dedicato da spegnere o congelare.</li>
+    <li><b>Un layer per ogni tipologia di elemento</b>: prese 10/16 A, prese CEE, punti luce, comandi, rivelatori, canali, tubi. È ciò che permette di contare correttamente i pezzi nel computo, senza doppi conteggi.</li>
+  </ul>
+  <h3>Le due scale del disegno</h3>
+  <div class="grid2">
+    <div class="card"><h4>Fattibilità · 1:100</h4><p>Punto di consegna e contatore, locale tecnico, quadro generale, cavedi, dorsali principali, quadri di piano o di zona. Serve a verificare spazi e percorsi prima di entrare nel dettaglio.</p></div>
+    <div class="card"><h4>Esecutivo · 1:50</h4><p>Ogni presa, comando, punto luce, apparecchio di sicurezza, con quote non standard indicate in pianta. Si disegna solo con la pianta degli arredi definita.</p></div>
+  </div>
+  <div class="box bim"><b>Verso il BIM</b><p>Le stesse regole valgono in un modello BIM: un oggetto per ogni elemento, parametri al posto dei layer per tipologia, circuiti assegnati agli oggetti. Il conteggio per layer diventa un abaco.</p></div>
+</section>
+
+<section class="ch" id="c4">
+  <div class="ch-h"><span class="ch-n">4</span><h2>Impostare il progetto in i-project</h2></div>
+  <p class="lead">Prima di inserire qualunque linea si compila la scheda delle impostazioni generali del progetto: sono i default che il programma applica a ogni linea, salvo modifica puntuale.</p>
+  <p>La tabella riporta i valori del progetto di esempio e quando conviene cambiarli. Un default sbagliato si propaga a decine di linee senza che nessuno se ne accorga: è il passaggio da fare con più calma.</p>
+  <div class="tbl"><table>
+    <tr><th>Gruppo</th><th>Campo</th><th>Valore di esempio</th><th>Che cosa significa</th><th>Quando cambiarlo</th></tr>
+    <tr><td>Alimentazione</td><td>Dimensionamento basato su</td><td>Pn</td><td>Il calcolo parte dalla potenza nominale di ogni utenza</td><td>Quasi mai: è il criterio più trasparente</td></tr>
+    <tr><td>Utenza</td><td>K utilizzo (Ku)</td><td>1</td><td>Frazione della potenza del singolo carico realmente usata</td><td>Solo con un profilo d'uso documentato</td></tr>
+    <tr><td>Utenza</td><td>K contemporaneità (Kc)</td><td>1</td><td>Quota di carichi accesi insieme</td><td>Si riduce sui quadri e sulle dorsali, non qui (8.2)</td></tr>
+    <tr><td>Utenza</td><td>Rendimento (η)</td><td>1</td><td>Rapporto tra potenza utile e assorbita</td><td>Sulla singola utenza se Pn è potenza resa (motori, pompe)</td></tr>
+    <tr><td>Utenza</td><td>ΔV ammessa</td><td>4 %</td><td>Caduta di tensione massima cumulata dall'origine all'utenza</td><td>Più bassa per linee lunghe o carichi sensibili</td></tr>
+    <tr><td>Utenza</td><td>Parafulmine · rischio</td><td>Sì · basso</td><td>Dati per gli scaricatori</td><td>Secondo la valutazione del rischio fulmine (CEI EN 62305-2)</td></tr>
+    <tr><td>Interruttore</td><td>K maggiorazione</td><td>1,00</td><td>Moltiplica Ib prima di scegliere la taglia</td><td>Solo con una strategia di riserva esplicita</td></tr>
+    <tr><td>Interruttore</td><td>Norma</td><td>Industriale</td><td>Famiglia CEI EN 60947-2 (Icu) invece di CEI EN 60898-1 (Icn)</td><td>Domestica e similare per impianti usati da persone non addestrate</td></tr>
+    <tr><td>Interruttore</td><td>Limite modulari</td><td>125 A</td><td>Taglia massima per cui cerca un modulare</td><td>Secondo catalogo e standard di studio</td></tr>
+    <tr><td>Interruttore</td><td>Minimo scatolati</td><td>140 A</td><td>Sopra questa taglia usa scatolati</td><td>Coerente con il limite dei modulari</td></tr>
+    <tr><td>Interruttore</td><td>Limite scatolati</td><td>1600 A</td><td>Taglia massima di ricerca degli scatolati</td><td>È un limite di ricerca, non una previsione</td></tr>
+    <tr><td>Interruttore</td><td>Modulari con N protetto</td><td>No</td><td>Neutro sezionato ma non protetto</td><td>Sì con neutro ridotto o forti armoniche</td></tr>
+    <tr><td>Interruttore</td><td>Ir minima</td><td>4 A</td><td>Taglia o regolazione minima selezionabile</td><td>Secondo la gamma commerciale</td></tr>
+    <tr><td>Interruttore</td><td>Differenziale obbligato</td><td>No</td><td>Il differenziale si decide linea per linea</td><td>Lasciare No e progettare la selettività</td></tr>
+    <tr><td>Interruttore</td><td>Classe differenziali modulari</td><td>A</td><td>Default tipo A</td><td>Tipo F o B se lo chiede il costruttore del carico</td></tr>
+    <tr><td>Contattore</td><td>Poli linee monofase</td><td>1 polo</td><td>Il contattore apre la sola fase</td><td>2 poli se va interrotto anche il neutro</td></tr>
+    <tr><td>Cavo</td><td>Conduttore</td><td>Rame</td><td>Materiale</td><td>Alluminio solo per grandi sezioni e scelta motivata</td></tr>
+    <tr><td>Cavo</td><td>Temperatura aria · terreno</td><td>30 °C · 20 °C</td><td>Condizioni di riferimento delle tabelle di portata</td><td>Temperature reali più alte: locale tecnico, sottotetto, sole</td></tr>
+    <tr><td>Cavo</td><td>Isolante</td><td>EPR</td><td>Conduttore fino a 90 °C in servizio continuo</td><td>Solo se il capitolato prevede altro</td></tr>
+    <tr><td>Cavo</td><td>CPR · designazione</td><td>FG16M16 0,6/1 kV Cca-s1b,d1,a1</td><td>Cavo classificato per la reazione al fuoco</td><td>Classe più alta se la chiede il progetto antincendio</td></tr>
+    <tr><td>Cavo</td><td>Modalità di posa</td><td>codice del programma</td><td>Condiziona la portata del cavo (7.5)</td><td>Va impostata linea per linea secondo la posa reale</td></tr>
+    <tr><td>Cavo</td><td>Sezioni escluse</td><td>nessuna</td><td>Sezioni che il programma non deve proporre</td><td>Escludere poco: rischio di sovradimensionare</td></tr>
+    <tr><td>Cavo</td><td>Calcolo ΔV su</td><td>Ib</td><td>Caduta calcolata sulla corrente d'impiego</td><td>In, per linee destinate ad ampliamenti</td></tr>
+    <tr><td>Cavo</td><td>Rapporto minimo Iz/Ib</td><td>1</td><td>Margine minimo tra portata e corrente</td><td>1,2 o più per riserva o ambienti critici</td></tr>
+    <tr><td>Cavo</td><td>Ottimizzazione sezione PE</td><td>No</td><td>PE uguale alle fasi per le sezioni piccole</td><td>Sì solo se si sa leggere la verifica del PE (8.7)</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c5">
+  <div class="ch-h"><span class="ch-n">5</span><h2>Alimentazione e gerarchia dei quadri</h2></div>
+  <h3>Il punto di fornitura</h3>
+  <p>Dopo le impostazioni si inserisce l'alimentazione. Nel progetto di esempio: <b>400 V, 50 Hz, sistema TT, Icc all'origine 14,1 kA</b>. Tensione, sistema di distribuzione e corrente di cortocircuito presunta vanno chiesti al distributore: da Icc dipende il potere d'interruzione di tutti gli interruttori a valle.</p>
+  <h3>Prima l'albero, poi le potenze</h3>
+  <p>Si costruisce la gerarchia dei quadri prima di assegnare le potenze: il quadro di consegna, il quadro generale, i sottoquadri di piano, di zona o di impianto. Solo dopo si inseriscono le linee terminali.</p>
+  <figure>
+    <svg viewBox="0 0 860 300" role="img" aria-label="Gerarchia dei quadri del progetto di esempio">
+      <rect class="s-as" width="860" height="300" rx="16"/>
+      <g class="s-t">
+        <rect class="s-5" x="360" y="20" width="140" height="44" rx="12"/><text class="s-tw" x="430" y="40" text-anchor="middle">V-Z</text><text class="s-tw" x="430" y="56" text-anchor="middle" style="font-size:11px;font-weight:400">consegna · 500 mA</text>
+        <rect class="s-a" x="340" y="100" width="180" height="44" rx="12"/><text class="s-tw" x="430" y="120" text-anchor="middle">QG-HV</text><text class="s-tw" x="430" y="136" text-anchor="middle" style="font-size:11px;font-weight:400">quadro generale · Icc 11,5 kA</text>
+        <path d="M430 64v34" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M430 144v26H85v18M430 170h-215v18M430 170h-85v18M430 170h85v18M430 170h215v18M430 170h345v18" style="fill:none;stroke:var(--muted);stroke-width:2"/>
+        <g><rect class="s-w" x="30" y="190" width="110" height="44" rx="10"/><text class="s-tb" x="85" y="210" text-anchor="middle">SQ1</text><text class="s-tm" x="85" y="226" text-anchor="middle">piano terra</text></g>
+        <g><rect class="s-w" x="160" y="190" width="110" height="44" rx="10"/><text class="s-tb" x="215" y="210" text-anchor="middle">SQ2</text><text class="s-tm" x="215" y="226" text-anchor="middle">primo piano</text></g>
+        <g><rect class="s-w" x="290" y="190" width="110" height="44" rx="10"/><text class="s-tb" x="345" y="210" text-anchor="middle">SQ3</text><text class="s-tm" x="345" y="226" text-anchor="middle">secondo piano</text></g>
+        <g><rect class="s-w" x="420" y="190" width="110" height="44" rx="10"/><text class="s-tb" x="475" y="210" text-anchor="middle">SQ4</text><text class="s-tm" x="475" y="226" text-anchor="middle">zona</text></g>
+        <g><rect class="s-w" x="550" y="190" width="110" height="44" rx="10"/><text class="s-tb" x="605" y="210" text-anchor="middle">SQ5</text><text class="s-tm" x="605" y="226" text-anchor="middle">impianti</text></g>
+        <g><rect class="s-3" x="720" y="190" width="110" height="44" rx="10"/><text class="s-tw" x="775" y="210" text-anchor="middle">SQ6</text><text class="s-tw" x="775" y="226" text-anchor="middle" style="font-size:11px;font-weight:400">fotovoltaico</text></g>
+        <text class="s-tm" x="30" y="270">Ogni sottoquadro ha le sue linee terminali: prese, luci, macchine. Le etichette di piano e di zona sono indicative.</text>
+      </g>
+    </svg>
+    <figcaption><b>L'albero dei quadri.</b> La corrente di cortocircuito si riduce scendendo lungo l'albero, la caduta di tensione si somma: per questo ogni quadro va inserito al suo posto prima delle linee.</figcaption>
+  </figure>
+  <h3>Il locale tecnico</h3>
+  <p>Secondo la destinazione d'uso e gli impianti previsti, il locale tecnico ospita: quadri principali; inverter e quadri del fotovoltaico; centrale di rivelazione incendi; centrali di sicurezza, supervisione e controllo; eventuale gestione centralizzata dell'illuminazione. Nelle scuole anche centrali di aspirazione fumi, orologio principale che sincronizza i secondari, centrali di campanella e di comunicazione. Non tutto va nello stesso locale: contano spazi, manutenzione, prescrizioni e separazione tra impianti con funzioni diverse. Gli spazi davanti ai quadri devono restare liberi per accesso e manutenzione.</p>
+</section>
+
+<section class="ch" id="c6">
+  <div class="ch-h"><span class="ch-n">6</span><h2>Dalle piante alle utenze</h2></div>
+  <p class="lead">In i-project non si inserisce una linea per ogni presa disegnata: si inserisce un circuito per ogni gruppo di utenze che condivide protezione, limite di corrente e continuità di servizio.</p>
+  <h3>Il metodo, passo per passo</h3>
+  <ol class="steps">
+    <li><b>Elenca le utenze per ambiente.</b> Esempio, sala del personale: 6 prese generiche, illuminazione, una finestra motorizzata, un'unità di ventilazione, una piastra a induzione.</li>
+    <li><b>Raggruppa le utenze generiche.</b> Circuito 1: prese sala personale. Circuito 2: luce sala personale.</li>
+    <li><b>Separa le utenze tecniche.</b> Circuito 3: finestra motorizzata. Circuito 4: ventilazione. Circuito 5: piastra a induzione.</li>
+    <li><b>Assegna la potenza Pn.</b> Somma delle utenze per luci e apparecchi noti, dalla scheda tecnica (piastra 3,2 kW, ventilatore 0,35 kW, finestra 0,1 kW); potenza convenzionale motivata dalla destinazione d'uso per i gruppi di prese.</li>
+    <li><b>Inserisci i parametri elettrici.</b> Tensione, monofase o trifase, Pn, Ku, cosφ, η se serve, lunghezza, posa, cavo, differenziale, tipo di comando.</li>
+    <li><b>Lascia calcolare Ib</b> e controlla che il valore sia plausibile (8.1).</li>
+    <li><b>Verifica interruttore e cavo:</b> Ib ≤ In ≤ Iz (8.3).</li>
+    <li><b>Controlla la caduta di tensione cumulata</b> (8.4).</li>
+    <li><b>Bilancia le fasi:</b> distribuisci i circuiti monofase su L1, L2, L3 fino a correnti simili.</li>
+  </ol>
+  <div class="box idea"><b>Sei domande per ogni circuito</b><p>Qual è la funzione? Quale la zona? Quale la potenza? Quali utenze possono condividere un guasto? Quali devono restare indipendenti? Quale protezione chiede ogni apparecchio?</p></div>
+  <h3>Che lunghezza inserire</h3>
+  <p>Per una linea che alimenta più punti si inserisce la lunghezza fino al <b>punto più sfavorito</b>, misurata sul percorso reale: salite, discese, giri del canale. Con prese a 8, 14, 21 e 30 m dal quadro si inseriscono 30 m.</p>
+  <h3>Quando serve una linea dedicata</h3>
+  <p>Un'utenza va su un circuito proprio quando ha potenza elevata o corrente vicina al limite di una presa ordinaria; ha corrente di avviamento significativa; è collegata in modo fisso; chiede una protezione o un differenziale particolare; non deve essere disalimentata da guasti altrui; il costruttore lo prescrive; va misurata o comandata separatamente; appartiene a un impianto tecnologico; è trifase. Esempi: inverter fotovoltaico, forno a vapore, brasiera, piastra a induzione, ventilazione centrale, ascensore, cella frigorifera.</p>
+  <div class="box warn"><b>Il limite della presa da 16 A</b><p>Una presa da 16 A a 230 V regge in teoria P = U × I = 230 × 16 = 3680 W. Un apparecchio da 4 kW (17,4 A) non va su una presa ordinaria: serve un collegamento fisso, una presa CEE di taglia superiore, un'alimentazione trifase o una linea dedicata. Due apparecchi da 2 kW sulla stessa presa multipla danno 8,7 + 8,7 = 17,4 A: sovraccarico, anche se l'interruttore non interviene subito.</p></div>
+  <p>Per ogni utilizzatore importante verifica in ordine: tensione (230 o 400 V), monofase o trifase, corrente nominale, corrente di spunto, presa o collegamento prescritto dal costruttore, adeguatezza di presa e interruttore, Ib ≤ In ≤ Iz, caduta di tensione alla distanza reale, necessità di un circuito dedicato.</p>
+  <h3>Prese: dotazione e posizione</h3>
+  <p>Le prese si posizionano solo con una pianta degli arredi definita. In ogni ambiente: almeno una presa vicino all'ingresso, una presa di servizio accessibile per le pulizie (che copra l'intera superficie con un cavo di circa 9 m), le altre secondo dimensioni e apparecchi. Ogni presa a quota diversa da quella standard di progetto riporta la quota in pianta.</p>
+  <p>Nel <b>residenziale</b> la dotazione minima è quella del livello 1 del capitolo 37 della CEI 64-8:</p>
+  <div class="tbl"><table>
+    <tr><th>Locale</th><th>Condizione</th><th>Punti presa minimi</th><th>Note</th></tr>
+    <tr><td>Soggiorno, studio, locale generico</td><td>oltre 8 fino a 12 m²</td><td>4</td><td>Distribuire secondo gli arredi</td></tr>
+    <tr><td>Soggiorno, studio, locale generico</td><td>oltre 12 fino a 20 m²</td><td>5</td><td>Una presa vicino alla porta</td></tr>
+    <tr><td>Soggiorno, studio, locale generico</td><td>oltre 20 m²</td><td>6</td><td>Punti aggiuntivi per TV, lavoro, lettura</td></tr>
+    <tr><td>Camera da letto</td><td>per fascia di superficie</td><td>un punto in meno del locale generico</td><td>Prese sui due lati del letto</td></tr>
+    <tr><td>Cucina separata</td><td>—</td><td>5, di cui 2 sul piano di lavoro</td><td>Predisporre il tubo per un piano a induzione</td></tr>
+    <tr><td>Angolo cottura</td><td>in un altro ambiente</td><td>+2, di cui 1 sul piano</td><td>Si sommano a quelle del locale</td></tr>
+    <tr><td>Lavanderia</td><td>—</td><td>3</td><td>Lavatrice e asciugatrice possono chiedere circuiti dedicati</td></tr>
+    <tr><td>Bagno o doccia</td><td>—</td><td>2; 1 se non è previsto l'attacco lavatrice</td><td>Rispetto delle zone 0-1-2 (CEI 64-8, Parte 7-701)</td></tr>
+    <tr><td>WC separato</td><td>—</td><td>1</td><td></td></tr>
+    <tr><td>Corridoio</td><td>fino a 5 m · oltre 5 m</td><td>1 · 2</td><td>Misurare lo sviluppo del percorso</td></tr>
+    <tr><td>Balcone o terrazzo</td><td>da 10 m²</td><td>1</td><td>Componenti adatti all'esterno</td></tr>
+    <tr><td>Ripostiglio</td><td>da 1 m²</td><td>0</td><td>Il minimo riguarda il punto luce</td></tr>
+  </table></div>
+  <p>Nel <b>terziario</b> (scuole, uffici) non c'è una tabella: il numero si ricava dall'uso reale.</p>
+  <div class="tbl"><table>
+    <tr><th>Ambiente</th><th>Dotazione da prevedere</th></tr>
+    <tr><td>Aula</td><td>Prese elettriche e dati alla cattedra; alimentazione per monitor interattivo, proiettore, lavagna digitale; prese lungo le pareti; prese di servizio</td></tr>
+    <tr><td>Aula studio, biblioteca</td><td>Botole a pavimento per i tavoli centrali, indicativamente 4 prese elettriche e 4 dati per botola; banconi, antitaccheggio, postazioni PC</td></tr>
+    <tr><td>Ufficio</td><td>Per postazione: prese per PC, monitor, caricabatterie, almeno una presa dati; prese dedicate per stampanti e fotocopiatrici; torrette o botole negli open space</td></tr>
+    <tr><td>Corridoi, vani scala</td><td>Prese di servizio, almeno una per pianerottolo</td></tr>
+    <tr><td>Locali tecnici</td><td>Presa di servizio, alimentazioni dedicate a ogni apparecchiatura secondo la scheda tecnica, prese dati per la supervisione</td></tr>
+    <tr><td>Cucine professionali</td><td>Verifica quali apparecchi sono trifase: simbolo distinto in pianta, dati da scheda tecnica</td></tr>
+    <tr><td>Esterni, autorimesse</td><td>Prese con grado IP adeguato, cancelli e accessi, eventuale ricarica dei veicoli</td></tr>
+  </table></div>
+  <h3>Illuminazione: dal calcolo al circuito</h3>
+  <p>Le luci si inseriscono in pianta solo dopo il calcolo illuminotecnico, con il file fotometrico (IES o LDT) dell'apparecchio scelto. Il circuito riceve la potenza assorbita dalla scheda tecnica: 8 lampade da 25 W danno Pn = 200 W e Ib ≈ 1,0 A. Il magnetotermico da 10 A protegge la linea: non significa che le lampade assorbano 10 A.</p>
+  <p>Una descrizione d'apparecchio utilizzabile in computo e nelle richieste d'offerta contiene sempre: tipologia e montaggio, potenza [W], flusso [lm], efficienza [lm/W], temperatura di colore [K], resa cromatica Ra, UGR, grado IP, grado IK se esposto a urti, classe di isolamento, alimentazione o driver (on/off, DALI, KNX), eventuale kit di emergenza. Con questi dati si chiedono almeno tre offerte. Per l'illuminazione di emergenza, quando possibile, si preferiscono apparecchi autonomi con batteria a un sistema centralizzato.</p>
+</section>
+
+<section class="ch" id="c7">
+  <div class="ch-h"><span class="ch-n">7</span><h2>Protezioni, cavi e componenti</h2></div>
+  <p class="lead">Ogni linea è la catena <b>protezione (QF) → cavo (WC) → carico</b>. Questo capitolo spiega i componenti e come leggerli nello schema.</p>
+  <h3>7.1 Le sigle dello schema</h3>
+  <div class="tbl"><table>
+    <tr><th>Sigla</th><th>Componente</th><th>Funzione</th></tr>
+    <tr><td>QF</td><td>Interruttore automatico (magnetotermico o magnetotermico differenziale)</td><td>Protegge la linea da sovraccarico, cortocircuito e, se differenziale, dispersione</td></tr>
+    <tr><td>QS</td><td>Interruttore-sezionatore</td><td>Toglie tensione al quadro; non protegge la linea, lo fa il QF a monte</td></tr>
+    <tr><td>WC</td><td>Linea, conduttura</td><td>Il cavo, con sezione, lunghezza, Iz, ΔV, Icc</td></tr>
+    <tr><td>FU</td><td>Fusibile</td><td>Protegge circuiti ausiliari e voltmetrici</td></tr>
+    <tr><td>KM / CNT</td><td>Contattore</td><td>Accende e spegne il carico, anche da KNX; non lo protegge</td></tr>
+    <tr><td>SPD</td><td>Scaricatore di sovratensione</td><td>Scarica a terra le sovratensioni; T1 e T2 indicano il tipo di prova</td></tr>
+    <tr><td>TA</td><td>Trasformatore amperometrico</td><td>Riduce la corrente per lo strumento di misura</td></tr>
+    <tr><td>PM</td><td>Analizzatore di rete</td><td>Misura tensioni, correnti, potenze, energia, cosφ, armoniche</td></tr>
+    <tr><td>SPI</td><td>Sistema di protezione di interfaccia</td><td>Controlla tensione e frequenza e comanda il DDI</td></tr>
+    <tr><td>DDI</td><td>Dispositivo di interfaccia</td><td>Separa l'impianto di produzione dalla rete su comando dello SPI</td></tr>
+    <tr><td>L1, L2, L3, N, PE</td><td>Fasi, neutro, protezione</td><td>Il PE collega le masse alla terra e non porta corrente di esercizio</td></tr>
+  </table></div>
+  <h3>7.2 Interruttori</h3>
+  <ul>
+    <li><b>Modulari</b> fino a 125 A nelle impostazioni; <b>scatolati</b> oltre 140 A e per i generali, perché regolabili, selettivi e con accessori.</li>
+    <li><b>In</b> è la corrente nominale, non la soglia esatta di scatto. <b>Ir</b> è la regolazione della protezione di sovraccarico di uno scatolato; <b>Isd</b> la soglia di cortocircuito ritardata; <b>Ii</b> quella istantanea; <b>Ig</b> la protezione contro il guasto a terra negli sganciatori che la prevedono.</li>
+    <li><b>Icn</b> (CEI EN 60898-1, modulari per uso domestico e similare) e <b>Icu</b> (CEI EN 60947-2, industriali) sono i poteri d'interruzione: devono superare l'Icc massima nel punto di installazione (8.5).</li>
+    <li><b>Curva C</b> per circuiti con spunti moderati (driver LED, alimentatori): la soglia magnetica va verificata a fondo linea.</li>
+    <li>Neutro <b>sezionato</b> (aperto insieme alle fasi) non vuol dire neutro <b>protetto</b> (con sganciatore proprio).</li>
+  </ul>
+  <h3>7.3 Differenziali e selettività</h3>
+  <figure>
+    <svg viewBox="0 0 860 220" role="img" aria-label="Livelli dei differenziali e selettività">
+      <rect class="s-as" width="860" height="220" rx="16"/>
+      <g class="s-t">
+        <rect class="s-5" x="30" y="70" width="170" height="70" rx="12"/><text class="s-tw" x="115" y="98" text-anchor="middle">Generale</text><text class="s-tw" x="115" y="120" text-anchor="middle" style="font-weight:400">500 mA · ritardato</text>
+        <rect class="s-3" x="270" y="70" width="170" height="70" rx="12"/><text class="s-tw" x="355" y="98" text-anchor="middle">Dorsali</text><text class="s-tw" x="355" y="120" text-anchor="middle" style="font-weight:400">100–300 mA · tipo S</text>
+        <rect class="s-2" x="510" y="70" width="170" height="70" rx="12"/><text class="s-tw" x="595" y="98" text-anchor="middle">Circuiti terminali</text><text class="s-tw" x="595" y="120" text-anchor="middle" style="font-weight:400">30 mA · istantaneo</text>
+        <path d="M200 105h66" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M440 105h66" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M680 105h40l20 -20 10 30 10 -20" style="fill:none;stroke:var(--a5);stroke-width:3"/><text class="s-tm" x="700" y="150">guasto su una presa</text>
+        <text class="s-t" x="30" y="185">Con la selettività interviene solo il differenziale più vicino al guasto: il resto dell'edificio resta alimentato.</text>
+      </g>
+    </svg>
+    <figcaption><b>Tre livelli di protezione differenziale.</b> I livelli a monte devono essere selettivi (tipo S o ritardati): altrimenti un guasto su una presa apre l'intero quadro.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Tipo</th><th>Rileva</th><th>Per</th></tr>
+    <tr><td>AC</td><td>Correnti alternate sinusoidali</td><td>Carichi semplici; uso sempre più limitato</td></tr>
+    <tr><td>A</td><td>Anche correnti pulsanti unidirezionali</td><td>Default: apparecchi monofase con elettronica</td></tr>
+    <tr><td>F</td><td>Anche frequenze miste</td><td>Alcuni azionamenti monofase (lavatrici, pompe a inverter)</td></tr>
+    <tr><td>B</td><td>Anche correnti continue lisce</td><td>Convertitori trifase, alcuni inverter fotovoltaici e stazioni di ricarica, se prescritto</td></tr>
+  </table></div>
+  <p>Per inverter e variatori il tipo di differenziale lo decide la scheda del costruttore.</p>
+  <h3>7.4 Contattori</h3>
+  <p>I contattori comandati da KNX accendono e spengono i circuiti luce. Si dimensionano su categoria d'impiego e corrente reale del carico, con attenzione agli spunti dei LED, non sulla taglia del magnetotermico. Interrompono la sola fase; bipolari se va aperto anche il neutro.</p>
+  <h3>7.5 Cavi e posa</h3>
+  <figure>
+    <svg viewBox="0 0 860 210" role="img" aria-label="Come si legge la designazione FG16M16 0,6/1 kV Cca-s1b,d1,a1">
+      <rect class="s-as" width="860" height="210" rx="16"/>
+      <g style="font-family:var(--mono);font-size:22px;font-weight:700">
+        <rect class="s-a" x="30" y="30" width="40" height="44" rx="8"/><text x="50" y="60" text-anchor="middle" fill="#fff">F</text>
+        <rect class="s-2" x="76" y="30" width="70" height="44" rx="8"/><text x="111" y="60" text-anchor="middle" fill="#fff">G16</text>
+        <rect class="s-4" x="152" y="30" width="70" height="44" rx="8"/><text x="187" y="60" text-anchor="middle" fill="#fff">M16</text>
+        <rect class="s-3" x="240" y="30" width="120" height="44" rx="8"/><text x="300" y="60" text-anchor="middle" fill="#fff">0,6/1 kV</text>
+        <rect class="s-5" x="378" y="30" width="80" height="44" rx="8"/><text x="418" y="60" text-anchor="middle" fill="#fff">Cca</text>
+        <rect class="s-w" x="464" y="30" width="70" height="44" rx="8"/><text x="499" y="60" text-anchor="middle" style="fill:var(--ink)">s1b</text>
+        <rect class="s-w" x="540" y="30" width="56" height="44" rx="8"/><text x="568" y="60" text-anchor="middle" style="fill:var(--ink)">d1</text>
+        <rect class="s-w" x="602" y="30" width="56" height="44" rx="8"/><text x="630" y="60" text-anchor="middle" style="fill:var(--ink)">a1</text>
+      </g>
+      <g class="s-t" style="font-size:12px">
+        <text x="30" y="100">flessibile</text><text x="78" y="118">isolante HEPR</text><text x="152" y="100">guaina</text><text x="240" y="118">tensione verso terra / tra conduttori</text>
+        <text x="378" y="100">reazione al fuoco</text><text x="464" y="140">fumi</text><text x="540" y="140">gocce</text><text x="602" y="140">acidità</text>
+        <text class="s-tm" x="30" y="185">Classi CPR dei cavi, dalla migliore: Aca, B1ca, B2ca, Cca, Dca, Eca, Fca. La classe va scelta con il progetto antincendio.</text>
+      </g>
+    </svg>
+    <figcaption><b>Una designazione si legge a blocchi.</b> Deve coincidere con il cavo del capitolato e con la classe richiesta per i locali e le vie di esodo attraversati.</figcaption>
+  </figure>
+  <p>La <b>posa</b> decide quanto calore il cavo riesce a smaltire e quindi la sua portata. i-project usa codici propri che rimandano ai metodi di riferimento della IEC 60364-5-52 e delle tabelle CEI-UNEL. La posa reale (tubo in massetto, canale chiuso, passerella, controsoffitto, fascio con altri circuiti) va ricondotta dal progettista al metodo più vicino e impostata linea per linea.</p>
+  <div class="tbl"><table>
+    <tr><th>Metodo</th><th>Posa</th><th>Portata relativa</th></tr>
+    <tr><td>A1</td><td>Conduttori isolati in tubo in parete termoisolante</td><td>Molto bassa</td></tr>
+    <tr><td>A2</td><td>Cavo multipolare in tubo in parete termoisolante</td><td>Bassa</td></tr>
+    <tr><td>B1</td><td>Unipolari in tubo o canale su parete</td><td>Media</td></tr>
+    <tr><td>B2</td><td>Multipolare in tubo o canale su parete</td><td>Media</td></tr>
+    <tr><td>C</td><td>Cavo fissato direttamente a parete</td><td>Buona</td></tr>
+    <tr><td>D1 · D2</td><td>Interrato in tubo · direttamente</td><td>Dipende dal terreno</td></tr>
+    <tr><td>E</td><td>Multipolare in aria, su passerella perforata</td><td>Alta</td></tr>
+    <tr><td>F</td><td>Unipolari a contatto, in aria</td><td>Alta</td></tr>
+    <tr><td>G</td><td>Unipolari distanziati, in aria</td><td>Massima</td></tr>
+  </table></div>
+  <h3>7.6 Le colonne della tabella delle linee</h3>
+  <div class="tbl"><table>
+    <tr><th>Colonna</th><th>Significato</th></tr>
+    <tr><td>Ib, Ib L1/L2/L3</td><td>Corrente d'impiego totale e per fase</td></tr>
+    <tr><td>P · Pn</td><td>Potenza attiva calcolata · potenza nominale inserita</td></tr>
+    <tr><td>Kc, Ku, η, cosφ</td><td>Coefficienti applicati alla linea</td></tr>
+    <tr><td>In · Ir</td><td>Taglia o regolazione della protezione</td></tr>
+    <tr><td>Iz</td><td>Portata del cavo nella posa inserita</td></tr>
+    <tr><td>Icc max · Icc min</td><td>Cortocircuito massimo (all'origine) e minimo (a fondo linea)</td></tr>
+    <tr><td>Icu · Icn</td><td>Potere d'interruzione dell'interruttore</td></tr>
+    <tr><td>IΔn</td><td>Soglia del differenziale (0,03 A = 30 mA)</td></tr>
+    <tr><td>ΔV totale</td><td>Caduta di tensione cumulata dall'arrivo generale</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c8">
+  <div class="ch-h"><span class="ch-n">8</span><h2>Calcoli: formule ed esempi</h2></div>
+  <p class="lead">Il programma segue sempre la stessa sequenza. Le formule servono a controllare che i suoi risultati siano plausibili, non a sostituirlo.</p>
+  <figure>
+    <svg viewBox="0 0 900 120" role="img" aria-label="La sequenza di calcolo">
+      <rect class="s-as" width="900" height="120" rx="16"/>
+      <g class="s-t" style="font-size:12.5px">
+        <rect class="s-w" x="16" y="38" width="80" height="44" rx="10"/><text x="56" y="65" text-anchor="middle">Pn</text>
+        <rect class="s-w" x="114" y="38" width="96" height="44" rx="10"/><text x="162" y="65" text-anchor="middle">Ku Kc η</text>
+        <rect class="s-a" x="228" y="38" width="70" height="44" rx="10"/><text class="s-tw" x="263" y="65" text-anchor="middle">Ib</text>
+        <rect class="s-w" x="316" y="38" width="70" height="44" rx="10"/><text x="351" y="65" text-anchor="middle">In</text>
+        <rect class="s-w" x="404" y="38" width="96" height="44" rx="10"/><text x="452" y="65" text-anchor="middle">sezione · Iz</text>
+        <rect class="s-w" x="518" y="38" width="70" height="44" rx="10"/><text x="553" y="65" text-anchor="middle">ΔV</text>
+        <rect class="s-w" x="606" y="38" width="96" height="44" rx="10"/><text x="654" y="65" text-anchor="middle">Icc max/min</text>
+        <rect class="s-w" x="720" y="38" width="80" height="44" rx="10"/><text x="760" y="65" text-anchor="middle">IΔn · RA</text>
+        <rect class="s-w" x="818" y="38" width="66" height="44" rx="10"/><text x="851" y="65" text-anchor="middle">PE</text>
+      </g>
+      <path d="M96 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M210 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M298 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M386 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M500 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M588 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M702 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M800 60h16" style="fill:none;stroke:var(--accent);stroke-width:2" marker-end="url(#ar)"/>
+      <path d="M851 84v18H452V84" style="fill:none;stroke:var(--a2);stroke-width:2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    </svg>
+    <figcaption><b>Dalla potenza al conduttore di protezione.</b> Il tratteggio indica il ritorno: se una verifica a valle non passa, si cambia sezione o protezione e si ricalcola.</figcaption>
+  </figure>
+
+  <h3>8.1 Corrente d'impiego Ib</h3>
+  <div class="eq">I<sub>b</sub> = <span class="fr"><span>P<sub>n</sub> · K<sub>u</sub> · K<sub>c</sub></span><span>U · cosφ · η</span></span><small>monofase, U = 230 V tra fase e neutro</small></div>
+  <div class="eq">I<sub>b</sub> = <span class="fr"><span>P<sub>n</sub> · K<sub>u</sub> · K<sub>c</sub></span><span>√3 · U · cosφ · η</span></span><small>trifase equilibrato, U = 400 V concatenata</small></div>
+  <p>Ib in A, Pn in W, U in V. Il √3 nasce dal passaggio tra tensione di fase e concatenata: la potenza trifase vale P = √3 × U × I × cosφ.</p>
+  <div class="tbl"><table>
+    <tr><th>Caso</th><th>Dati</th><th>Risultato</th></tr>
+    <tr><td>Gruppo di prese</td><td>2 kW, 230 V, cosφ 0,90, Ku = Kc = η = 1</td><td>2000 ÷ (230 × 0,90) = 9,66 A</td></tr>
+    <tr><td>8 lampade da 25 W</td><td>200 W, 230 V, cosφ 0,9</td><td>200 ÷ (230 × 0,9) = 0,97 A ≈ 1,0 A</td></tr>
+    <tr><td>Inverter fotovoltaico</td><td>20 kW, 400 V, cosφ 1</td><td>20 000 ÷ (1,732 × 400) = 28,9 A</td></tr>
+    <tr><td>Stesso carico, cosφ 0,8</td><td>20 kW, 400 V</td><td>36,1 A</td></tr>
+    <tr><td>Stesso carico, cosφ 0,7</td><td>20 kW, 400 V</td><td>41,2 A</td></tr>
+  </table></div>
+  <p>A parità di potenza attiva, un cosφ più basso chiede più corrente: più caduta di tensione, cavi e interruttori più grandi, più perdite (P = R × I²). Due carichi da 2 kW a 230 V con cosφ 1 e 0,7 assorbono 8,70 A e 12,42 A: il secondo produce circa il doppio delle perdite nel cavo (12,42² ÷ 8,70² ≈ 2,04).</p>
+  <div class="eq">S = √(P² + Q²) &nbsp;&nbsp;&nbsp; cosφ = <span class="fr"><span>P</span><span>S</span></span><small>P in W, Q in var, S in VA</small></div>
+  <p>Carichi resistivi (stufe, bollitori): cosφ ≈ 1. Induttivi (motori, trasformatori): cosφ &lt; 1. Elettronici (LED, PC, inverter, alimentatori): corrente deformata, con armoniche; il fattore di potenza vero PF = P ÷ S può essere minore del cosφ. Le armoniche di ordine 3 (150 Hz) si sommano nel neutro: con molti carichi elettronici monofase il neutro può essere carico anche con le fasi equilibrate, quindi non va ridotto senza verificarne la corrente.</p>
+
+  <h3>8.2 Coefficienti Ku, Kc, η</h3>
+  <div class="eq">P<sub>u</sub> = P<sub>n</sub> · K<sub>u</sub> &nbsp;&nbsp;&nbsp; P<sub>c</sub> = K<sub>c</sub> · ΣP<sub>i</sub> &nbsp;&nbsp;&nbsp; P<sub>ass</sub> = <span class="fr"><span>P<sub>utile</sub></span><span>η</span></span></div>
+  <div class="tbl"><table>
+    <tr><th>Coefficiente</th><th>Risponde a</th><th>Esempio</th><th>Regola</th></tr>
+    <tr><td>Ku</td><td>Quanto intensamente uso il singolo carico?</td><td>Macchina da 10 kW usata al 70 %: 7 kW</td><td>1 sui carichi che possono andare a piena potenza; mai per «far tornare» una linea</td></tr>
+    <tr><td>Kc</td><td>Quanti carichi funzionano insieme?</td><td>10 carichi da 2 kW, Kc 0,5: 20 → 10 kW</td><td>Si applica a monte (quadri, dorsali)</td></tr>
+    <tr><td>η</td><td>Quanta potenza elettrica serve per quella utile?</td><td>10 kW resi, η 0,90: 11,11 kW assorbiti</td><td>Solo se Pn è potenza resa; 1 se Pn è già assorbita</td></tr>
+  </table></div>
+  <div class="box warn"><b>Attenzione</b><p>Non applicare la contemporaneità sia sulle utenze sia sul quadro senza controllarne l'effetto cumulato, e scrivi in relazione il motivo di ogni valore inferiore a 1.</p></div>
+
+  <h3>8.3 Coordinamento interruttore–cavo</h3>
+  <div class="eq">I<sub>b</sub> ≤ I<sub>n</sub> ≤ I<sub>z</sub> &nbsp;&nbsp;&nbsp;&nbsp; I<sub>f</sub> ≤ 1,45 · I<sub>z</sub><small>protezione dal sovraccarico</small></div>
+  <figure>
+    <svg viewBox="0 0 760 170" role="img" aria-label="Esempio di coordinamento: Ib 26,6 A, In 32 A, Iz 58 A">
+      <rect class="s-as" width="760" height="170" rx="16"/>
+      <g class="s-t">
+        <path d="M60 110H720" style="stroke:var(--line);stroke-width:2;fill:none"/>
+        <g class="s-tm"><text x="60" y="132" text-anchor="middle">0</text><text x="240" y="132" text-anchor="middle">20 A</text><text x="420" y="132" text-anchor="middle">40 A</text><text x="600" y="132" text-anchor="middle">60 A</text></g>
+        <rect class="s-2" x="60" y="34" width="239" height="22" rx="6"/><text class="s-tw" x="70" y="50">Ib = 26,6 A · quello che il carico chiede</text>
+        <rect class="s-3" x="60" y="60" width="288" height="22" rx="6"/><text class="s-tw" x="70" y="76">In = 32 A · la taglia scelta</text>
+        <rect class="s-a" x="60" y="86" width="522" height="22" rx="6"/><text class="s-tw" x="70" y="102">Iz = 58 A · quello che il cavo regge in quella posa</text>
+        <text class="s-tm" x="60" y="158">Esempio della linea verso un sottoquadro: cavo FG16M16 6 mm², EPR. 26,6 ≤ 32 ≤ 58: verificata.</text>
+      </g>
+    </svg>
+    <figcaption><b>Tre barre in ordine crescente.</b> Se Ib supera In l'interruttore scatta in servizio ordinario; se In supera Iz il cavo si surriscalda senza che l'interruttore intervenga.</figcaption>
+  </figure>
+  <p>If è la corrente che fa intervenire l'interruttore entro il tempo convenzionale (CEI 64-8, art. 433). Per gli interruttori automatici a norma If ≤ 1,45 × In, quindi la seconda condizione è soddisfatta quando In ≤ Iz.</p>
+  <div class="eq">I<sub>z</sub> = I<sub>0</sub> · k<sub>T</sub> · k<sub>G</sub> · k<sub>S</sub> · …<small>I0 tabellare; kT temperatura; kG raggruppamento; kS terreno o altre condizioni</small></div>
+  <p>Con I0 = 60 A, kT = 0,91 e kG = 0,70 si ottiene Iz = 60 × 0,91 × 0,70 = 38,2 A: lo stesso cavo perde un terzo della portata. Con il K di maggiorazione la taglia si sceglie su K × Ib (Ib 26,6 A, K 1,2 → 31,9 A, ancora 32 A); con il rapporto minimo Iz/Ib = 1,2 si chiede Iz ≥ 31,9 A. Entrambi alzano le sezioni: usali solo per scelta motivata.</p>
+
+  <h3>8.4 Caduta di tensione</h3>
+  <div class="eq">ΔV<sub>mono</sub> = 2 · L · I<sub>b</sub> · (R′ cosφ + X′ sinφ) &nbsp;&nbsp;&nbsp; ΔV<sub>tri</sub> = √3 · L · I<sub>b</sub> · (R′ cosφ + X′ sinφ)<small>L in km, R′ e X′ in Ω/km</small></div>
+  <div class="eq">ΔV% = <span class="fr"><span>ΔV</span><span>U<sub>n</sub></span></span> · 100 &nbsp;&nbsp;&nbsp; ΔV ≈ <span class="fr"><span>2 · ρ · L · I</span><span>S</span></span><small>forma semplificata per sezioni piccole e cosφ = 1, ρ ≈ 0,022 Ω·mm²/m (rame in esercizio), L in m</small></div>
+  <p>Il 2 del monofase conta andata e ritorno. <b>Esempio:</b> macchina da 3200 W, 230 V, cosφ 1, a 40 m dal quadro: Ib = 13,9 A, presa e interruttore da 16 A.</p>
+  <div class="tbl"><table>
+    <tr><th>Sezione</th><th>ΔV del tratto finale</th><th>ΔV%</th><th>Esito con limite 4 %</th></tr>
+    <tr><td>2,5 mm²</td><td>2 × 0,022 × 40 × 13,9 ÷ 2,5 = 9,8 V</td><td>4,3 %</td><td>Non verificata già da sola</td></tr>
+    <tr><td>4 mm²</td><td>6,1 V</td><td>2,7 %</td><td>Verificata se a monte c'è meno dell'1,3 %</td></tr>
+    <tr><td>6 mm²</td><td>4,1 V</td><td>1,8 %</td><td>Verificata anche partendo da un sottoquadro con 1,8 % (totale 3,6 %)</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 760 210" role="img" aria-label="Caduta di tensione cumulata lungo la linea">
+      <rect class="s-as" width="760" height="210" rx="16"/>
+      <g class="s-t">
+        <path d="M70 30v140h640" style="fill:none;stroke:var(--muted);stroke-width:1.5"/>
+        <path d="M70 58H710" style="fill:none;stroke:var(--a5);stroke-width:2" stroke-dasharray="6 5"/><text class="s-tm" x="600" y="50">limite 4 %</text>
+        <path d="M70 170 L250 150 L250 150 L460 107 L700 56" style="fill:none;stroke:var(--accent);stroke-width:3"/>
+        <path d="M460 107 L700 82" style="fill:none;stroke:var(--a2);stroke-width:3"/>
+        <circle class="s-a" cx="70" cy="170" r="5"/><circle class="s-a" cx="250" cy="150" r="5"/><circle class="s-a" cx="460" cy="107" r="5"/>
+        <text class="s-tm" x="60" y="190">origine</text><text class="s-tm" x="226" y="190">QG</text><text class="s-tm" x="440" y="190">SQ · 1,8 %</text><text class="s-tm" x="640" y="190">utenza a 40 m</text>
+        <text x="560" y="40" style="font-size:12px">4 mm²: 4,5 %</text><text x="600" y="100" style="font-size:12px;fill:var(--a2)">6 mm²: 3,6 %</text>
+      </g>
+    </svg>
+    <figcaption><b>La caduta si somma lungo il percorso.</b> Partendo da un sottoquadro che ha già l'1,8 %, il 4 mm² porterebbe la macchina al 4,5 %: serve il 6 mm². La sezione cresce per la combinazione di corrente, lunghezza, posa e limite di caduta.</figcaption>
+  </figure>
+  <p>In i-project la caduta è <b>cumulata</b> dall'arrivo generale. Il limite del 4 % è quello indicato dalla CEI 64-8 per gli impianti utilizzatori; un limite più basso si può fissare per scelta di progetto.</p>
+
+  <h3>8.5 Cortocircuito</h3>
+  <p>Tre verifiche, tutte calcolate dal programma una volta inserita l'Icc all'origine.</p>
+  <p><b>Potere d'interruzione</b> nel punto di installazione:</p>
+  <div class="eq">I<sub>cu</sub> (o I<sub>cn</sub>) ≥ I<sub>cc,max</sub></div>
+  <p>Nel progetto di esempio: al quadro di consegna uno scatolato con Icu 25 kA ≥ 14,1 kA. Al quadro generale l'Icc massima è 11,5 kA: un modulare con Icn 6 kA o 10 kA lì non basta da solo. Serve un apparecchio con potere d'interruzione maggiore o un coordinamento in serie (back-up) garantito dalle tabelle del costruttore.</p>
+  <p><b>Energia passante</b> sopportata dal cavo (CEI 64-8, art. 434), con k = 143 per il rame isolato in EPR:</p>
+  <div class="eq">(I²t) ≤ k² · S²</div>
+  <p><b>Intervento a fondo linea.</b> L'Icc minima, cioè il guasto fase-neutro all'estremità, deve superare la soglia magnetica: per la curva C fino a 10 × In. Stima convenzionale per una linea monofase con fase e neutro di uguale sezione:</p>
+  <div class="eq">I<sub>cc,min</sub> ≈ <span class="fr"><span>0,8 · U<sub>0</sub> · S</span><span>1,5 · ρ · 2L</span></span><small>U0 = 230 V; ρ = 0,018 Ω·mm²/m a 20 °C; 1,5 per il riscaldamento del cavo; 0,8 per la riduzione di tensione durante il guasto</small></div>
+  <p>Linea di 40 m da 2,5 mm²: Icc min ≈ 0,8 × 230 × 2,5 ÷ (1,5 × 0,018 × 80) ≈ 213 A, maggiore di 160 A (10 × 16 A, curva C): verificata.</p>
+
+  <h3>8.6 Contatti indiretti nel sistema TT</h3>
+  <p>Nel sistema TT la protezione la fa il differenziale, coordinato con la resistenza di terra:</p>
+  <div class="eq">R<sub>A</sub> · I<sub>Δn</sub> ≤ 50 V<small>RA = resistenza del dispersore più i conduttori di protezione, in Ω</small></div>
+  <p>Con 30 mA: RA ≤ 1667 Ω; con 300 mA: RA ≤ 167 Ω; con 500 mA: RA ≤ 100 Ω. È il differenziale a monte con la soglia più alta a fissare il valore di terra da garantire.</p>
+
+  <h3>8.7 Conduttore di protezione PE</h3>
+  <div class="eq">S<sub>PE</sub> ≥ <span class="fr"><span>I · √t</span><span>k</span></span><small>I corrente di guasto in A; t tempo d'intervento in s; k come sopra</small></div>
+  <p>Esempio: 2 kA per 0,2 s → 2000 × 0,447 ÷ 143 = 6,3 mm², quindi la sezione commerciale superiore, 10 mm².</p>
+
+  <h3>8.8 Stima preliminare dell'illuminazione</h3>
+  <div class="eq">N = <span class="fr"><span>E<sub>m</sub> · A</span><span>Φ · CU · MF</span></span><small>Em lx; A m²; Φ lm per apparecchio; CU utilizzazione 0,4–0,7; MF manutenzione circa 0,8</small></div>
+  <p>Aula di 7 × 8 m, 500 lx, apparecchi da 4000 lm, CU 0,6, MF 0,8: N = 500 × 56 ÷ (4000 × 0,6 × 0,8) = 14,6, quindi 15 apparecchi. È solo una stima per partire: decide il calcolo illuminotecnico, con i valori della UNI EN 12464-1 per la destinazione d'uso.</p>
+</section>
+
+<section class="ch" id="c9">
+  <div class="ch-h"><span class="ch-n">9</span><h2>Quando una verifica non passa</h2></div>
+  <p class="lead">Il calcolo è iterativo. Ogni verifica fallita ha poche cause possibili: questa tabella dice dove guardare, nell'ordine in cui conviene farlo.</p>
+  <div class="tbl"><table>
+    <tr><th>Verifica fallita</th><th>Prima controlla</th><th>Poi intervieni su</th></tr>
+    <tr><td>Ib &gt; In</td><td>Potenza, cosφ, Ku e Kc inseriti; carico davvero monofase o trifase</td><td>Taglia dell'interruttore; divisione del circuito in due</td></tr>
+    <tr><td>In &gt; Iz</td><td>Posa e raggruppamento inseriti; temperatura ambiente</td><td>Sezione del cavo; posa migliore (canale invece di tubo, distanziamento)</td></tr>
+    <tr><td>ΔV oltre il limite</td><td>Lunghezza fino al punto più sfavorito; caduta già presente a monte</td><td>Sezione del tratto finale o della dorsale; posizione del sottoquadro; linea trifase</td></tr>
+    <tr><td>Icu o Icn &lt; Icc max</td><td>Icc all'origine fornita dal distributore</td><td>Interruttore con potere d'interruzione maggiore; back-up con le tabelle del costruttore</td></tr>
+    <tr><td>Intervento magnetico non garantito</td><td>Lunghezza e sezione; curva dell'interruttore</td><td>Sezione maggiore; curva B; linea più corta; protezione differenziale come garanzia nel TT</td></tr>
+    <tr><td>I²t oltre k²S²</td><td>Tempo d'intervento della protezione</td><td>Sezione; protezione più rapida o limitatrice</td></tr>
+    <tr><td>RA · IΔn &gt; 50 V</td><td>Valore di terra misurato o di progetto</td><td>Dispersore migliore; soglia del differenziale più bassa</td></tr>
+    <tr><td>Fasi sbilanciate</td><td>Distribuzione dei circuiti monofase</td><td>Spostare circuiti tra L1, L2, L3</td></tr>
+  </table></div>
+  <div class="box warn"><b>Non forzare i numeri</b><p>Abbassare Ku o Kc, alzare la temperatura di riferimento o escludere sezioni per far tornare una verifica produce un progetto che passa sulla carta e non in cantiere. Ogni correzione deve corrispondere a una scelta tecnica reale e scritta in relazione.</p></div>
+</section>
+
+<section class="ch" id="c10">
+  <div class="ch-h"><span class="ch-n">10</span><h2>Schemi, relazione e computo</h2></div>
+  <h3>Gli schemi dei quadri</h3>
+  <p>Lo schema riporta, per ogni partenza, la catena protezione → cavo → carico con i dati di calcolo. I numeri in alto sono le coordinate del foglio, quelli in basso la numerazione progressiva delle partenze. Prima di consegnare controlla che le sigle dei circuiti coincidano con quelle delle piante.</p>
+  <h3>La relazione</h3>
+  <p>Deve dire i dati di partenza e la loro fonte, le ipotesi (coefficienti diversi da 1, temperature, pose), i criteri di scelta delle protezioni e della selettività, i risultati delle verifiche e i punti che restano da confermare in cantiere, come il valore della resistenza di terra.</p>
+  <h3>Il computo con l'elenco prezzi provinciale</h3>
+  <p>In provincia di Bolzano le voci si prendono dall'elenco prezzi informativo della Provincia, che dedica agli impianti elettrici e speciali il capitolo 15. Il metodo: ogni layer del disegno corrisponde a una voce, si contano gli elementi per layer e si assegna il codice.</p>
+  <div class="tbl"><table>
+    <tr><th>Gruppo di voci</th><th>Che cosa conta</th></tr>
+    <tr><td>Tubi e portacavi</td><td>Tubi flessibili e rigidi per diametro, canali per dimensione, in metri</td></tr>
+    <tr><td>Linee</td><td>Cavi per formazione e sezione, in metri</td></tr>
+    <tr><td>Quadri</td><td>Quadri per corrente nominale</td></tr>
+    <tr><td>Protezioni</td><td>Magnetotermici e differenziali per taglia e potere d'interruzione; scatolati</td></tr>
+    <tr><td>Punti luce e comandi</td><td>Punto luce, punto di comando</td></tr>
+    <tr><td>Prese</td><td>Punti presa 10/16 A, prese CEE</td></tr>
+    <tr><td>Automazione</td><td>Motorizzazioni, KNX e DALI: alimentatori, attuatori, sensori, programmazione</td></tr>
+    <tr><td>Sicurezza</td><td>Illuminazione di sicurezza, antintrusione, rivelazione incendi</td></tr>
+    <tr><td>Terra</td><td>Dispersori, collettore, collegamenti equipotenziali</td></tr>
+    <tr><td>Impianti speciali</td><td>Videocitofonia, rete dati, orologi, fotovoltaico</td></tr>
+    <tr><td>Corpi illuminanti</td><td>Voci con descrizione di progetto, da compilare con i dati del 6</td></tr>
+  </table></div>
+  <div class="box warn"><b>Due controlli sul computo</b><p>Usa sempre l'edizione dell'elenco prezzi in vigore alla data del progetto, con i suoi codici. Prima di usare una voce di protezione, controlla che il suo potere d'interruzione sia adeguato all'Icc del quadro in cui la monti (8.5).</p></div>
+</section>
+
+<section class="ch" id="c11">
+  <div class="ch-h"><span class="ch-n">11</span><h2>Checklist finale</h2></div>
+  <p class="lead">Il progetto è chiuso quando piante, schemi, calcoli, relazione e computo descrivono gli stessi circuiti con gli stessi componenti.</p>
+  <div class="grid2">
+    <div><h4>Impostazioni e alimentazione</h4><ul class="ck">
+      <li>Scheda delle impostazioni coerente con il capitolato: cavo, isolante, posa, CPR</li>
+      <li>Tensione, sistema e Icc all'origine confermati dal distributore</li>
+      <li>Gerarchia dei quadri uguale alla pianta e al locale tecnico</li></ul>
+    <h4>Utenze</h4><ul class="ck">
+      <li>Ogni ambiente controllato sulla pianta arredi definitiva</li>
+      <li>Quote non standard indicate in pianta</li>
+      <li>Utenze dedicate su linea propria, con i dati della scheda tecnica</li>
+      <li>Potenze convenzionali delle prese motivate</li>
+      <li>Ku, Kc, η diversi da 1 giustificati per iscritto</li>
+      <li>Lunghezze fino al punto più sfavorito, sul percorso reale</li>
+      <li>Fasi bilanciate</li></ul></div>
+    <div><h4>Calcoli</h4><ul class="ck">
+      <li>Ib ≤ In ≤ Iz su tutte le linee</li>
+      <li>ΔV totale entro il limite all'utenza più lontana</li>
+      <li>Icu o Icn ≥ Icc max in ogni quadro</li>
+      <li>Intervento magnetico garantito con l'Icc minima</li>
+      <li>Differenziali: tipo, soglie, selettività, RA · IΔn ≤ 50 V</li>
+      <li>Sezione del PE verificata</li>
+      <li>Neutro non ridotto dove ci sono molti carichi elettronici</li></ul>
+    <h4>Illuminazione e coerenza</h4><ul class="ck">
+      <li>Destinazione d'uso, superficie e altezze corrette nel calcolo illuminotecnico</li>
+      <li>File fotometrico uguale all'apparecchio scelto</li>
+      <li>Ogni punto disegnato appartiene a un circuito, e viceversa</li>
+      <li>Riserve previste nei quadri</li>
+      <li>Computo generato dai layer e confrontato con gli schemi</li></ul></div>
+  </div>
+</section>
+
+<section class="ch" id="c12">
+  <div class="ch-h"><span class="ch-n">12</span><h2>Norme, fonti e punti da verificare</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Ambito</th><th>Riferimento</th><th>Uso nella guida</th></tr>
+    <tr><td>Impianti utilizzatori in bassa tensione</td><td>CEI 64-8, 9ª edizione, in vigore dal 1° novembre 2024</td><td>Sovraccarico, cortocircuito, caduta di tensione, sistema TT, bagni (Parte 7-701), dotazioni residenziali (capitolo 37)</td></tr>
+    <tr><td>Progetto e dichiarazione di conformità</td><td>DM 37/2008</td><td>Progetto obbligatorio, dichiarazione di conformità</td></tr>
+    <tr><td>Interruttori</td><td>CEI EN 60898-1 (Icn); CEI EN 60947-2 (Icu)</td><td>Scelta della «norma» nelle impostazioni</td></tr>
+    <tr><td>Portate dei cavi</td><td>IEC 60364-5-52; tabelle CEI-UNEL 35024/1 (posa in aria) e 35026 (interrata)</td><td>Iz e metodi di posa</td></tr>
+    <tr><td>Cavi e fuoco</td><td>Regolamento UE 305/2011 (CPR); CEI-UNEL 35016</td><td>Classe di reazione al fuoco</td></tr>
+    <tr><td>Fulmini e scaricatori</td><td>CEI EN 62305</td><td>Dati per gli SPD</td></tr>
+    <tr><td>Illuminazione</td><td>UNI EN 12464-1:2021; UNI EN 1838 e UNI 11222 (emergenza)</td><td>Valori per destinazione d'uso</td></tr>
+    <tr><td>Fotovoltaico</td><td>CEI 0-21 (BT) e CEI 0-16 (MT)</td><td>SPI, DDI</td></tr>
+    <tr><td>Rivelazione incendi</td><td>UNI 9795</td><td>Componenti in pianta</td></tr>
+    <tr><td>Computo in provincia di Bolzano</td><td>Elenco prezzi informativo della Provincia autonoma di Bolzano, edizione in vigore</td><td>Voci di computo</td></tr>
+  </table></div>
+  <div class="box bim"><b>Provincia di Bolzano</b><p>Per le regole tecniche degli impianti elettrici valgono le norme CEI e il DM 37/2008 statale. Il riferimento provinciale specifico è l'elenco prezzi. Per gli edifici pubblici controlla anche le prescrizioni del committente e i requisiti antincendio, che incidono sulla classe CPR dei cavi.</p></div>
+  <div class="box warn"><b>Da verificare di persona</b><ul>
+    <li>La numerazione degli articoli della CEI 64-8 citata qui va controllata sul testo della 9ª edizione.</li>
+    <li>I valori di illuminamento, UGR e uniformità per aule e uffici vanno letti nelle tabelle della UNI EN 12464-1:2021.</li>
+    <li>Le portate Iz vanno prese dalle tabelle o dal programma, non stimate.</li>
+    <li>La corrispondenza tra i codici di posa di i-project e i metodi A1–G va letta nel programma.</li>
+    <li>Le soglie dei poli protetti degli scatolati si leggono nell'aiuto in linea del programma.</li>
+  </ul></div>
+  <h3>Fonti</h3>
+  <ul class="src">
+    <li>Schneider Electric Italia, <a href="https://www.se.com/it/it/work/support/technical-software/" target="_blank" rel="noopener">software tecnici</a>: i-project per la progettazione di impianti e quadri.</li>
+    <li>Certifico, <a href="https://certifico.com/impianti/cei-64-8" target="_blank" rel="noopener">CEI 64-8: edizioni e varianti</a>.</li>
+    <li>Edilizia.com, <a href="https://www.edilizia.com/guide/dotazione-minima-impianto-elettrico-prese-punti-luce-cei-64-8/" target="_blank" rel="noopener">dotazione minima di prese e punti luce secondo la CEI 64-8, capitolo 37</a>, nona edizione.</li>
+    <li>CEI, <a href="https://www.ceinorme.it/" target="_blank" rel="noopener">Comitato Elettrotecnico Italiano</a>: testi ufficiali delle norme CEI.</li>
+    <li>Gazzetta Ufficiale, <a href="https://www.gazzettaufficiale.it/eli/id/2008/03/12/008G0057/sg" target="_blank" rel="noopener">DM 22 gennaio 2008, n. 37</a>.</li>
+    <li>EUR-Lex, <a href="https://eur-lex.europa.eu/eli/reg/2011/305/oj" target="_blank" rel="noopener">Regolamento (UE) n. 305/2011</a> sui prodotti da costruzione.</li>
+    <li>UNI, <a href="https://store.uni.com/en/uni-en-12464-1-2021" target="_blank" rel="noopener">UNI EN 12464-1:2021</a>, illuminazione dei luoghi di lavoro in interni.</li>
+    <li>Provincia autonoma di Bolzano, <a href="https://www.provincia.bz.it/lavoro-economia/appalti/" target="_blank" rel="noopener">appalti ed elenco prezzi informativo</a>.</li>
+    <li>DIAL, <a href="https://www.dialux.com/" target="_blank" rel="noopener">DIALux</a>, software di calcolo illuminotecnico.</li>
+  </ul>
+  <div class="box idea"><b>Come è nata questa guida</b><p>È uno dei «manuali di Claude»: l'ha scritta Claude, l'assistente di intelligenza artificiale di Anthropic, seguendo indicazioni precise su argomenti, struttura e livello di dettaglio, a partire da appunti di lavoro su progetti reali. Formule ed esempi numerici sono stati ricontrollati. Non sostituisce le norme né il giudizio del progettista che firma.</p></div>
+  <p class="foot">BIM News · I manuali di Claude · Progettazione elettrica con i-project · edizione novembre 2026</p>
+</section>
+</main>
+</div>
+</body>
+</html>
