@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sostituire l'IFC collegato con Dynamo · I manuali di BIM News</title>
+<meta name="description" content="Come aggiornare un IFC collegato in Revit senza perdere gli elementi ospitati: lo schema delle azioni, come caricare i grafi Dynamo e che cosa fanno, dalla fotografia della posizione alla riassociazione.">
+<link rel="stylesheet" href="manuale.css">
+<script>try{var t=localStorage.getItem("tema-2026");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+.tl{list-style:none;margin:1rem 0 1.4rem;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:1.35rem;top:.6rem;bottom:.6rem;width:4px;border-radius:2px;background:linear-gradient(var(--a5),var(--a3),var(--a4),var(--accent),var(--a2))}
+.tl>li{position:relative;padding:.2rem 0 1.1rem 3.6rem}
+.tl>li .dot{position:absolute;left:.3rem;top:.15rem;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 0 0 4px var(--bg)}
+.tl>li h4{margin:.25rem 0 .2rem;font-size:1.08rem}
+.tl>li p{margin:0;color:var(--muted);font-size:.97rem}
+.tl>li .who{display:inline-block;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem;margin-left:.4rem;color:var(--muted);vertical-align:middle}
+.pending{border:2px dashed var(--line);border-radius:14px;padding:1rem 1.2rem;background:var(--surface)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" style="fill:var(--accent)"/></marker></defs></svg>
+<div class="topbar"><div class="in"><a class="back" href="../#studio">← BIM News · Nello studio</a><span class="sp"></span><a class="btn" href="dynamo-sostituzione-ifc.pdf" download>Scarica il PDF</a></div></div>
+<div class="layout">
+<nav class="toc" aria-label="Indice">
+  <b>Indice</b>
+  <ol>
+    <li><a href="#perche">Perché questa guida</a></li>
+    <li><a href="#c1">1 · Lo schema delle azioni</a></li>
+    <li><a href="#c2">2 · Che cosa fanno i grafi</a></li>
+    <li><a href="#c3">3 · Caricare e avviare i file</a></li>
+    <li><a href="#c4">4 · Fotografia</a></li>
+    <li><a href="#c5">5 · Ricaricare il nuovo IFC</a></li>
+    <li><a href="#c6">6 · Verifica, allineamento, riassociazione</a></li>
+    <li><a href="#c7">7 · Leggere il report</a></li>
+    <li><a href="#c8">8 · Problemi frequenti</a></li>
+    <li><a href="#file">I file da scaricare</a></li>
+  </ol>
+</nav>
+<main>
+<header class="cover">
+  <div>
+    <span class="kick">I manuali di BIM News · Nello studio</span>
+    <h1>Sostituire l'IFC collegato con Dynamo</h1>
+    <p>Aggiornare il modello dell'architetto in Revit senza perdere prese, apparecchi e tutti gli elementi ospitati sul vecchio IFC, anche quando il nuovo file arriva spostato o ruotato.</p>
+    <div class="meta"><span class="pill">Revit 2026 · Dynamo 3.7</span><span class="pill">2 grafi Dynamo</span><span class="pill">schema delle azioni</span><span class="pill">Edizione novembre 2026</span></div>
+  </div>
+  <svg viewBox="0 0 360 240" role="img" aria-label="Illustrazione: un IFC vecchio e uno nuovo ruotato, con un elemento ospitato che passa dall'uno all'altro">
+    <rect class="s-as" x="10" y="10" width="340" height="220" rx="22"/>
+    <g transform="translate(60 60)"><rect class="s-w" width="110" height="110" rx="6" style="opacity:.6"/><path class="s-l" d="M0 55h110M55 0v110" style="opacity:.35"/><rect class="s-5" x="102" y="40" width="14" height="18" rx="3"/></g>
+    <g transform="translate(200 70) rotate(8)"><rect class="s-w" width="110" height="110" rx="6" style="stroke:var(--accent);stroke-width:2"/><path class="s-al" d="M0 55h110M55 0v110" style="opacity:.6"/><rect class="s-2" x="102" y="40" width="14" height="18" rx="3"/></g>
+    <path d="M180 108c10-14 20-14 30 0" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+    <text class="s-tm" x="72" y="196">IFC vecchio</text><text class="s-tm" x="222" y="210">IFC nuovo</text>
+  </svg>
+</header>
+
+<section class="ch" id="perche">
+  <div class="ch-h"><span class="ch-n">?</span><h2>Perché questa guida</h2></div>
+  <p class="lead">Quante volte ci è capitato di dover aggiornare il modello IFC collegato, perché l'architetto ha mandato una nuova versione?</p>
+  <p>In Revit gli elementi degli impianti, come prese, interruttori, apparecchi e corpi illuminanti, sono spesso <b>ospitati</b> sulle facce del modello dell'architetto collegato in IFC. Quando il file cambia, molti perdono l'host: restano dove sono, ma non sono più agganciati a niente. Se poi il nuovo IFC arriva spostato o ruotato, il problema raddoppia, e rimettere a posto tutto a mano richiede ore.</p>
+  <p>L'obiettivo di questa guida è risolvere il problema <b>nel modo più rapido possibile</b>, con due file Dynamo preparati apposta. Prima analizzano ciò che c'è: il collegamento IFC, la sua posizione e rotazione, gli elementi ospitati. Poi, dopo che hai ricaricato il nuovo IFC, riallineano il collegamento se serve e riassociano gli elementi alle nuove facce.</p>
+  <div class="box warn"><b>Regola d'oro</b><p>La <b>fotografia</b> va fatta <b>prima</b> di toccare l'IFC. Senza fotografia i grafi non sanno dove stavano le cose. E finché il report non ti convince, lavora su una copia del modello e non salvare.</p></div>
+</section>
+
+<section class="ch" id="c1">
+  <div class="ch-h"><span class="ch-n">1</span><h2>Lo schema delle azioni</h2></div>
+  <p>Una sequenza da seguire sempre nello stesso ordine. Accanto a ogni passo trovi chi lo fa: tu in Revit, oppure uno dei due grafi in Dynamo.</p>
+  <ol class="tl">
+    <li><span class="dot" style="background:var(--a5)">1</span><h4>Prepara <span class="who">Revit</span></h4><p>Apri il modello con il <b>vecchio</b> IFC ancora collegato e al suo posto. Se hai dubbi, lavora su una copia.</p></li>
+    <li><span class="dot" style="background:var(--a5)">2</span><h4>Fotografa <span class="who">Dynamo · grafo 1</span></h4><p>Esegui <code>IFC_1_Fotografia.dyn</code>: registra posizione e rotazione del collegamento e, per ogni elemento ospitato, l'elemento dell'IFC su cui poggia. Il modello non viene modificato.</p></li>
+    <li><span class="dot" style="background:var(--a3)">3</span><h4>Ricarica il nuovo IFC <span class="who">Revit</span></h4><p>Gestisci → Gestisci collegamenti → scheda IFC → <b>Ricarica da</b>, e scegli il nuovo file. Non rimuovere il collegamento.</p></li>
+    <li><span class="dot" style="background:var(--a4)">4</span><h4>Verifica <span class="who">Dynamo · grafo 2</span></h4><p>Esegui <code>IFC_2_Sostituzione.dyn</code> con Allinea e Riassocia su False: confronta il nuovo IFC con la fotografia e ti dice se è allineato.</p></li>
+    <li><span class="dot" style="background:var(--a4)">5</span><h4>Allinea, solo se serve <span class="who">Dynamo · grafo 2</span></h4><p>Se il riepilogo dice «Link DISALLINEATO» e traslazione e rotazione hanno senso, metti Allinea su True ed esegui.</p></li>
+    <li><span class="dot" style="background:var(--accent)">6</span><h4>Riassocia <span class="who">Dynamo · grafo 2</span></h4><p>Allinea di nuovo su False, Riassocia su True, esegui: gli elementi vengono ricreati sulle facce del nuovo IFC.</p></li>
+    <li><span class="dot" style="background:var(--a2)">7</span><h4>Controlla <span class="who">Revit · report</span></h4><p>Ultima esecuzione con tutto su False, poi il report CSV: controlli a campione e i casi «da fare a mano».</p></li>
+    <li><span class="dot" style="background:var(--a2)">8</span><h4>Salva <span class="who">Revit</span></h4><p>Solo quando il report è convincente. Fino ad allora ogni esecuzione si annulla con un solo Ctrl+Z.</p></li>
+  </ol>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-h"><span class="ch-n">2</span><h2>Che cosa fanno i grafi</h2></div>
+  <figure>
+    <svg viewBox="0 0 900 250" role="img" aria-label="Il lavoro dei due grafi: analisi, confronto, sostituzione">
+      <rect class="s-as" width="900" height="250" rx="18"/>
+      <g class="s-t">
+        <g transform="translate(24 30)"><rect class="s-w" width="260" height="180" rx="14"/><rect class="s-5" width="260" height="34" rx="14"/><text class="s-tw" x="16" y="23">1 · Analisi (Fotografia)</text>
+          <text x="16" y="62">• quale collegamento IFC</text><text x="16" y="84">• posizione e rotazione</text><text x="16" y="106">• elementi ospitati e loro host</text><text x="16" y="128">• identificativi IFC degli host</text><text class="s-tm" x="16" y="162">salvato in un file .json</text></g>
+        <g transform="translate(320 30)"><rect class="s-w" width="260" height="180" rx="14"/><rect class="s-4" width="260" height="34" rx="14"/><text class="s-tw" x="16" y="23">2 · Confronto (Verifica)</text>
+          <text x="16" y="62">• ritrova gli stessi elementi</text><text x="16" y="84">  nel nuovo IFC</text><text x="16" y="106">• stima traslazione e rotazione</text><text x="16" y="128">• elementi modificati oltre lo scarto</text><text class="s-tm" x="16" y="162">riepilogo nel Watch</text></g>
+        <g transform="translate(616 30)"><rect class="s-w" width="260" height="180" rx="14"/><rect class="s-2" width="260" height="34" rx="14"/><text class="s-tw" x="16" y="23">3 · Sostituzione</text>
+          <text x="16" y="62">• riporta il collegamento</text><text x="16" y="84">  nella posizione registrata</text><text x="16" y="106">• ricrea gli elementi sulle</text><text x="16" y="128">  facce del nuovo IFC</text><text class="s-tm" x="16" y="162">report .csv per ogni elemento</text></g>
+        <path d="M284 120h34" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+        <path d="M580 120h34" style="fill:none;stroke:var(--accent);stroke-width:2.4" marker-end="url(#ar)"/>
+      </g>
+    </svg>
+    <figcaption><b>Prima capire, poi cambiare.</b> Il grafo 1 analizza e non modifica nulla; il grafo 2 prima verifica, e cambia il modello solo quando glielo chiedi tu con gli interruttori Allinea e Riassocia.</figcaption>
+  </figure>
+  <h3>L'analisi</h3>
+  <p>Il grafo 1 trova il collegamento IFC (se ce n'è più d'uno, quello che corrisponde al filtro sul nome) e ne registra la <b>posizione</b>: punto di inserimento e <b>rotazione</b> rispetto al modello. È il dato decisivo quando i modelli sono <b>georeferenziati</b>: un IFC esportato con un'origine diversa, o ruotato verso il nord reale invece che verso il nord di progetto, arriva in una posizione diversa anche se l'edificio è lo stesso. Il grafo registra poi ogni elemento ospitato sull'IFC e l'elemento dell'architetto su cui poggia, riconosciuto dal suo identificativo IFC (il GlobalId, o IfcGUID).</p>
+  <h3>Il confronto</h3>
+  <p>Dopo la ricarica, il grafo 2 cerca nel nuovo IFC gli stessi elementi, con lo stesso identificativo, e confronta le loro posizioni con quelle della fotografia. Se coincidono, il collegamento è allineato. Se sono tutti spostati della stessa quantità, stima la <b>traslazione</b> e la <b>rotazione</b> da applicare. Gli elementi che si discostano oltre lo scarto massimo sono considerati modificati dall'architetto e restano fuori dalla stima.</p>
+  <h3>La sostituzione</h3>
+  <p>Con Allinea su True il grafo riporta il collegamento nella posizione registrata. Con Riassocia su True ricrea ogni elemento rimasto senza host sulla faccia più vicina del nuovo IFC, entro la tolleranza, seguendo il suo muro se questo si è spostato di poco. Ogni esito finisce nel report.</p>
+  <div class="box bim"><b>Perché funziona</b><p>Tutto si basa sull'identità degli oggetti IFC: finché l'architetto esporta con gli stessi GlobalId, lo stesso muro è riconoscibile da una versione all'altra. Se il nuovo IFC ha identificativi tutti diversi, la verifica dell'allineamento non è possibile e la riassociazione usa solo la vicinanza (capitolo 8).</p></div>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-h"><span class="ch-n">3</span><h2>Caricare e avviare i file</h2></div>
+  <ol class="steps">
+    <li><b>Salva i due file</b> <code>IFC_1_Fotografia.dyn</code> e <code>IFC_2_Sostituzione.dyn</code> in una cartella fissa, per esempio accanto agli altri strumenti di studio.</li>
+    <li><b>Apri Dynamo da Revit</b>: scheda <b>Gestisci</b> → <b>Dynamo</b>. Serve Revit 2026 con Dynamo 3.7.</li>
+    <li><b>Apri il grafo</b>: in Dynamo, <b>File</b> → <b>Apri</b>, e scegli il file <code>.dyn</code>.</li>
+    <li><b>Esecuzione manuale</b>: in basso a sinistra imposta <b>Manuale</b>, così il grafo parte solo quando premi <b>Esegui</b>.</li>
+    <li><b>Cambia solo i valori degli input</b>: sono i nodi a sinistra, numerati da 1 a 7 (capitolo 6). Il resto del grafo non va toccato.</li>
+    <li><b>Premi Esegui</b> e leggi il risultato nel nodo <b>Watch</b>.</li>
+  </ol>
+  <div class="box tip"><b>Il motore Python</b><p>I grafi contengono nodi Python. Se compare un errore sul motore, fai clic con il tasto destro sul nodo Python e scegli il motore <b>PythonNet3</b>.</p></div>
+</section>
+
+<section class="ch" id="c4">
+  <div class="ch-h"><span class="ch-n">4</span><h2>Fotografia, prima del cambio</h2></div>
+  <ol class="steps">
+    <li>Apri il modello Revit con il <b>vecchio</b> IFC ancora collegato e al suo posto.</li>
+    <li>Apri <code>IFC_1_Fotografia.dyn</code>.</li>
+    <li><b>Filtro nome link</b>: lascialo vuoto se nel modello c'è un solo collegamento IFC. Altrimenti scrivi una parte del nome del file, senza percorso.</li>
+    <li>Premi <b>Esegui</b>.</li>
+  </ol>
+  <p>Il modello non viene modificato. Nella cartella del file <code>.rvt</code> compare <code>fotografia_IFC_ultima.json</code>: è il file che userà il grafo 2. Nel Watch controlla che il numero di elementi ospitati sia plausibile e che non ci siano avvisi sugli identificativi IFC.</p>
+</section>
+
+<section class="ch" id="c5">
+  <div class="ch-h"><span class="ch-n">5</span><h2>Ricaricare il nuovo IFC</h2></div>
+  <ol class="steps">
+    <li><b>Gestisci</b> → <b>Gestisci collegamenti</b> → scheda <b>IFC</b>.</li>
+    <li>Seleziona il collegamento e usa <b>Ricarica da</b>, scegliendo il nuovo file IFC.</li>
+  </ol>
+  <p>Non rimuovere il collegamento per crearne uno nuovo: con Ricarica da il collegamento resta lo stesso e molti elementi restano agganciati da soli. Se è già stato rimosso e ricollegato, si può comunque andare avanti. Revit può avvisare che alcuni oggetti hanno perso l'host: è normale, chiudi l'avviso.</p>
+</section>
+
+<section class="ch" id="c6">
+  <div class="ch-h"><span class="ch-n">6</span><h2>Verifica, allineamento, riassociazione</h2></div>
+  <p>Apri <code>IFC_2_Sostituzione.dyn</code>. Questi sono gli input da impostare:</p>
+  <div class="tbl"><table>
+    <tr><th>Input</th><th>Valore normale</th><th>Che cosa fa</th></tr>
+    <tr><td>1 · Filtro nome link</td><td>vuoto</td><td>Come nella fotografia</td></tr>
+    <tr><td>2 · File fotografia</td><td>vuoto</td><td>Vuoto = usa l'ultima fotografia salvata accanto al modello</td></tr>
+    <tr><td>3 · Allinea link</td><td>False</td><td>True = sposta il collegamento nella posizione della fotografia</td></tr>
+    <tr><td>4 · Riassocia</td><td>False</td><td>True = ricrea gli elementi sul nuovo IFC</td></tr>
+    <tr><td>5 · Tolleranza raggio</td><td>50 mm</td><td>Distanza massima per cercare una faccia vicina</td></tr>
+    <tr><td>6 · Max spostamento muro</td><td>500 mm</td><td>Fino a quanto un elemento può seguire il suo muro spostato</td></tr>
+    <tr><td>7 · Scarto max allineamento</td><td>30 mm</td><td>Gli elementi oltre questo scarto sono considerati modificati</td></tr>
+  </table></div>
+  <ol class="steps">
+    <li><b>Prima esecuzione con 3 e 4 su False.</b> È solo una verifica: leggi il riepilogo nel Watch.</li>
+    <li>Se il riepilogo dice <b>«Link DISALLINEATO»</b>, controlla che traslazione e rotazione abbiano senso, poi metti <b>3 su True</b> ed esegui. Il Watch mostra lo scarto rimasto, che deve essere di pochi millimetri.</li>
+    <li>Riporta 3 su False, metti <b>4 su True</b> ed esegui: gli elementi vengono ricreati sul nuovo IFC.</li>
+    <li>Esegui un'ultima volta con tutto su False: gli elementi sistemati non devono più comparire come «senza host».</li>
+  </ol>
+  <div class="box warn"><b>Modelli georeferenziati</b><p>Se il progetto usa coordinate condivise, prima di allineare controlla con l'architetto se lo spostamento è voluto: un cambio del punto di rilievo o del nord reale sposta tutto il modello. In quel caso conviene correggere l'origine alla fonte, nel suo esporto, invece di inseguirla a ogni consegna.</p></div>
+</section>
+
+<section class="ch" id="c7">
+  <div class="ch-h"><span class="ch-n">7</span><h2>Leggere il report</h2></div>
+  <p>Ogni esecuzione salva un file <code>report_IFC_….csv</code> nella cartella del modello, che si apre in Excel. La colonna <b>Esito</b> dice che cosa è successo a ogni elemento.</p>
+  <div class="tbl"><table>
+    <tr><th>Esito</th><th>Significato</th><th>Che cosa fare</th></tr>
+    <tr><td>RIASSOCIATA</td><td>Ricreata sul nuovo IFC (l'Id cambia)</td><td>Niente; controllo a campione</td></tr>
+    <tr><td>RIASSOCIATA + «segue il muro spostato»</td><td>Il muro si è spostato e l'elemento l'ha seguito</td><td>Verificare che la posizione vada bene</td></tr>
+    <tr><td>AGGANCIATA - SPOSTATA</td><td>Era ancora agganciata, ma si è mossa con l'host</td><td>Verificare</td></tr>
+    <tr><td>faccia trovata</td><td>Solo verifica: verrà riassociata con Riassocia = True</td><td>Niente</td></tr>
+    <tr><td>DA FARE A MANO</td><td>Muro eliminato o troppo spostato</td><td>Selezionare l'elemento e usare <b>Seleziona nuovo host</b></td></tr>
+    <tr><td>ERRORE</td><td>Revit non ha accettato la nuova faccia</td><td>Come sopra, a mano</td></tr>
+    <tr><td>IN ATTESA DI ALLINEAMENTO</td><td>Il collegamento è spostato e non è stato allineato</td><td>Fare prima l'allineamento</td></tr>
+  </table></div>
+  <p>Per trovare un elemento dal suo Id: <b>Gestisci</b> → <b>Seleziona per ID</b>. Controlli a campione, sempre: 3–4 elementi ricreati (a filo del muro, girati dal lato giusto, alla quota giusta). Se nelle colonne Circuiti o Etichette i due numeri sono diversi, per esempio 0/1, ricollega il circuito o rifai l'etichetta.</p>
+</section>
+
+<section class="ch" id="c8">
+  <div class="ch-h"><span class="ch-n">8</span><h2>Problemi frequenti</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Messaggio o sintomo</th><th>Causa</th><th>Soluzione</th></tr>
+    <tr><td>«Nessun link caricato corrisponde al filtro»</td><td>Nel filtro c'è un percorso o un nome sbagliato</td><td>Svuotare il filtro o scrivere solo una parte del nome; il Watch elenca i collegamenti presenti</td></tr>
+    <tr><td>«Fotografia non trovata»</td><td>La fotografia non è stata fatta, o il modello è in un'altra cartella</td><td>Indicare il percorso del file <code>.json</code> nell'input 2</td></tr>
+    <tr><td>«Allineamento NON VERIFICABILE»</td><td>Il nuovo IFC ha identificativi diversi dal vecchio</td><td>Allineare il collegamento a mano; la riassociazione userà solo la vicinanza</td></tr>
+    <tr><td>«Stima NON AFFIDABILE»</td><td>Troppi elementi modificati dall'architetto</td><td>Allineare il collegamento a mano, poi rilanciare la verifica</td></tr>
+    <tr><td>Motore Python non disponibile</td><td>Dynamo non ha il motore previsto</td><td>Tasto destro sul nodo Python → motore <b>PythonNet3</b></td></tr>
+    <tr><td>Altro errore rosso su un nodo</td><td>—</td><td>Ctrl+Z in Revit, salvare il testo dell'errore e segnalarlo</td></tr>
+  </table></div>
+  <div class="box tip"><b>In caso di dubbio</b><p>Lavora su una copia del modello e non salvare finché il report non è convincente.</p></div>
+</section>
+
+<section class="ch" id="file">
+  <div class="ch-h"><span class="ch-n">↓</span><h2>I file da scaricare</h2></div>
+  <div class="pending"><p><b>I due grafi Dynamo sono in preparazione per la pubblicazione.</b> Appena pronti li trovi qui da scaricare: <code>IFC_1_Fotografia.dyn</code> e <code>IFC_2_Sostituzione.dyn</code>.</p></div>
+  <div class="box idea"><b>Come è nata questa guida</b><p>È uno dei «manuali di Claude»: l'ha scritta Claude, l'assistente di intelligenza artificiale di Anthropic, a partire da un caso reale di aggiornamento di un IFC collegato in un progetto di impianti. Non sostituisce il controllo del progettista: verifica sempre il risultato prima di salvare.</p></div>
+  <p class="foot">BIM News · I manuali di Claude · Sostituire l'IFC collegato con Dynamo · edizione novembre 2026</p>
+</section>
+</main>
+</div>
+</body>
+</html>
