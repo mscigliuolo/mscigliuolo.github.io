@@ -744,6 +744,45 @@ body{transition:background-color .3s}
 .bdg{pointer-events:none}
 .bdg circle{fill:var(--accent);stroke:var(--surface);stroke-width:1.6px;vector-effect:non-scaling-stroke;filter:drop-shadow(0 1px 1.5px rgba(20,40,70,.3))}
 .bdg text{fill:var(--on-accent);font-family:var(--display);font-weight:800;text-anchor:middle;dominant-baseline:central}
+
+/* eventi e webinar */
+.filters{position:static}
+.agenda{margin-top:1rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);padding:.9rem .9rem 1rem;display:grid;gap:.6rem}
+.agenda h3{margin:0;font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.ag-tabs{display:flex;gap:.35rem}
+.ag-tabs button,.ag-geo{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:.32rem .7rem;border-radius:999px;cursor:pointer}
+.ag-tabs button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.ag-geo{display:inline-flex;align-items:center;gap:.35rem}
+.ag-geo svg{width:.95rem;height:.95rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.ag-geo[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.ag-tabs button:hover,.ag-geo:hover{border-color:var(--accent)}
+.ag-ctx{margin:0;font-size:.82rem;color:var(--muted)}
+.ag-ctx:empty{display:none}
+.ag-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.ag-it{display:grid;grid-template-columns:2.7rem minmax(0,1fr);gap:.2rem .65rem;padding:.6rem;border-radius:var(--r-s);background:var(--bg);transition:background-color .2s}
+.ag-it:hover{background:var(--hi)}
+.ag-it.near{box-shadow:inset 3px 0 0 var(--accent)}
+.ag-date{grid-row:span 3;display:grid;place-items:center;align-content:center;border-radius:10px;background:var(--accent-soft);color:var(--accent);height:2.9rem;line-height:1}
+.ag-date b{font-family:var(--display);font-size:1.15rem;font-weight:800}
+.ag-date small{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;margin-top:.15rem}
+.ag-t{font-family:var(--display);font-weight:750;font-size:.98rem;line-height:1.25}
+.ag-t a{color:var(--ink);text-decoration:none}
+.ag-t a:hover{color:var(--accent);text-decoration:underline}
+.ag-w{font-size:.8rem;color:var(--muted);line-height:1.35}
+.ag-tags{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
+.ag-pr{font-family:var(--mono);font-size:.64rem;padding:.12rem .45rem;border-radius:999px;border:1px solid transparent}
+.ag-pr.free{background:#dff3e8;color:#17663f}.ag-pr.paid{background:#fbeccd;color:#7a4b06}.ag-pr.verify{background:var(--bg);color:var(--muted);border-color:var(--line)}
+:root[data-theme="dark"] .ag-pr.free{background:#1d3a2c;color:#8fdcb0}:root[data-theme="dark"] .ag-pr.paid{background:#3d2f15;color:#f0c97a}
+.ag-km{font-family:var(--mono);font-size:.64rem;color:var(--accent)}
+.ag-note{margin:0;font-size:.74rem;color:var(--muted);line-height:1.4}
+.crit{border-top:1px dashed var(--line);padding-top:.8rem;display:grid;gap:.45rem}
+.crit h4{margin:0;font-family:var(--display);font-size:1.05rem;font-weight:750}
+.crit p{margin:0;font-size:.98rem}
+.crit ul{margin:0;padding-left:1.1rem;display:grid;gap:.2rem;font-size:.95rem}
+.fc-next{margin:0;font-size:.9rem;color:var(--muted)}
+.fc-next a{color:var(--accent);font-weight:700;text-decoration:none}
+.fc-next a:hover{text-decoration:underline}
+.fc-next:empty{display:none}
 </style>
 </head>
 <body>
@@ -791,6 +830,7 @@ body{transition:background-color .3s}
           <p class="fc-p">Le novità sul BIM da tutto il mondo, raccolte ogni settimana e riassunte in italiano, ognuna con il link alla fonte.</p>
           <nav class="fc-nav" aria-label="Pagine del sito"><a class="fc-btn k-news" href="#bim-news"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="fc-t"><b>BIM News</b><small>La rassegna settimanale dal mondo</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-ai" href="#bim-ai"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="fc-t"><b>BIM &amp; AI</b><small>Quando il BIM incontra l'intelligenza artificiale</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-b5" href="#bim-5-minuti"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/></svg></span><span class="fc-t"><b>BIM in 5 minuti</b><small>Che cos'è il BIM, spiegato semplice</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-cur" href="#chi-sono"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6"/></svg></span><span class="fc-t"><b>Il curatore</b><small>Chi cura il sito, profilo e progetti</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
           <p class="fc-upd" id="fc-upd"></p>
+          <p class="fc-next" id="fc-next"></p>
         </div>
         <div class="fc-right">
           <div class="fc-map" id="fc-map"></div>
@@ -812,7 +852,19 @@ body{transition:background-color .3s}
         <h3>Il BIM nel mondo, una settimana alla volta</h3>
         <p>Questa è la rassegna completa: ogni settimana le notizie sul BIM arrivano da ogni parte del mondo, vengono riassunte in italiano e collocate sulla mappa, fino alla regione o allo stato in cui accadono. Norme e obblighi, appalti pubblici, progetti, standard e tecnologie.</p>
         <p>La mappa è mondiale per scelta: il BIM non appartiene a un solo paese. Il desiderio del curatore è che ogni realtà, in qualunque parte del mondo, possa servirsi di questa tecnologia per costruire meglio, e quindi per migliorare la vita di chi negli edifici abita, studia e lavora.</p>
-        <p class="ai-crit">Esplora le notizie per luogo, tema e periodo con la mappa, i filtri e l'archivio; nella scheda BIM &amp; AI trovi quelle dedicate all'intelligenza artificiale.</p>
+        <div class="crit">
+          <h4>Come scegliamo le notizie</h4>
+          <p>Le notizie sul BIM sono tantissime: ogni giorno la stampa di settore pubblica novità su prodotti, corsi e casi aziendali. Questa rassegna non le raccoglie tutte: è una selezione di ciò che può davvero interessare a chi progetta e a chi lavora nel settore.</p>
+          <ul>
+            <li><b>Norme e obblighi</b>: leggi, decreti e scadenze per gli appalti pubblici</li>
+            <li><b>Standard</b>: ISO 19650, UNI 11337, IFC e gli altri formati aperti</li>
+            <li><b>Strategie nazionali e appalti</b>: piani BIM dei governi, grandi progetti e opere pubbliche</li>
+            <li><b>Software e intelligenza artificiale</b>: solo le novità che cambiano il modo di lavorare</li>
+            <li><b>Eventi di riferimento</b>: fiere, congressi e premi del settore</li>
+          </ul>
+          <p>Ogni notizia ha il link alla fonte principale, per chi vuole leggerla per intero. Quando una data o un dettaglio non sono certi, lo segnala una nota.</p>
+        </div>
+        <p class="ai-crit">Esplora le notizie per luogo, tema e periodo con la mappa, i filtri e l'archivio; nella scheda BIM &amp; AI trovi quelle dedicate all'intelligenza artificiale. Nella colonna a sinistra trovi anche i prossimi eventi e webinar.</p>
       </article>
       <article class="ai-intro" id="ai-intro" hidden>
         <span class="f-lab">BIM &amp; AI</span>
@@ -822,7 +874,7 @@ body{transition:background-color .3s}
         <p class="ai-crit">Qui trovi le notizie in cui l'intelligenza artificiale applicata al BIM è il tema principale, con la stessa mappa, gli stessi filtri e lo stesso archivio di BIM News.</p>
       </article>
       <div class="news-layout">
-        <aside class="filters" aria-label="Filtri">
+        <aside class="filters" aria-label="Filtri, eventi e webinar">
           <details id="filters-box" open>
             <summary>Filtri e ricerca</summary>
             <div class="f-stack" role="search">
@@ -836,6 +888,14 @@ body{transition:background-color .3s}
               <div class="status-line"><span id="count" aria-live="polite"></span><button class="reset" id="reset" type="button">Azzera filtri</button></div>
             </div>
           </details>
+                  <section class="agenda" id="agenda" aria-labelledby="ag-h">
+            <h3 id="ag-h">Eventi e webinar</h3>
+            <div class="ag-tabs" role="group" aria-label="Tipo"><button type="button" data-k="ev" aria-pressed="true">Eventi</button><button type="button" data-k="wb" aria-pressed="false">Webinar</button></div>
+            <div class="ag-tools"><button type="button" class="ag-geo" id="ag-geo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Il più vicino a me</span></button></div>
+            <p class="ag-ctx" id="ag-ctx" aria-live="polite"></p>
+            <ol class="ag-list" id="ag-list"></ol>
+            <p class="ag-note">Date e costi verificati sulle pagine degli organizzatori quando li abbiamo inseriti: controllali sempre prima di iscriverti. La posizione resta nel tuo browser e non viene inviata a nessuno.</p>
+          </section>
         </aside>
         <div class="news-main">
           <div class="latest" id="latest" role="region" aria-labelledby="latest-h"></div>
@@ -1333,7 +1393,7 @@ di stelle –
   <div class="cartiglio">
     <div><span>Elaborato</span><strong>BIM News — a cura di Marco Scigliuolo</strong></div>
     <div><span>Stato</span><strong>In aggiornamento continuo</strong></div>
-    <div><span>Rev.</span><strong>55 · 11/11/2026</strong></div>
+    <div><span>Rev.</span><strong>56 · 11/11/2026</strong></div>
     <div><span>Oggi</span><strong><time id="oggi">10/11/2026</time></strong></div>
   </div>
   <div class="foot-links"><a href="privacy.html">Privacy</a><span>Nessun cookie. Statistiche anonime con GoatCounter.</span></div>
@@ -1444,9 +1504,16 @@ var ARTS=[
  {id:"n89",w:"2025-10-20",d:"2025-10-23",r:"2026-11-11",c:"europa",n:"Ungheria",p:"Ungheria · Budapest",t:"Archicad 29 con l'assistente AI integrato",x:"Graphisoft rilascia Archicad 29 con l'assistente AI annunciato a gennaio, ancora in versione beta: risponde a domande sul software e sul modello e si integra con l'AI Visualizer. La versione commerciale completa è attesa nel 2026.",tags:["Software", "AI"],src:[["Mexico Business News", "https://mexicobusiness.news/infrastructure/news/graphisoft-unveils-archicad-29-built-ai-assistant"]]},
  {id:"n90",w:"2025-11-03",d:"2025-11-04",r:"2026-11-11",c:"europa",n:"Cechia",p:"Repubblica Ceca",t:"Repubblica Ceca: legge sul BIM, obbligo dal 2027",x:"Con la nuova legge sul BIM, dal 1° gennaio 2027 i progetti pubblici oltre 135 milioni di corone (circa 5,4 milioni di euro) dovranno usare il BIM per tutto il ciclo di vita dell'edificio, dalla progettazione alla demolizione. La legge introduce anche uno standard nazionale dei dati per le costruzioni.",m:"La notizia della Commissione europea è del 4 novembre 2025 e non indica il giorno di approvazione della legge.",tags:["Normativa", "Pubblica amministrazione"],src:[["Commissione europea, Public Buyers Community", "https://public-buyers-community.ec.europa.eu/communities/bim-and-public-procurement/news/czech-republic-adopts-bim-mandate-major-public"]]},
  {id:"n91",w:"2025-12-15",d:"2025-12-15",r:"2026-11-11",c:"europa",n:"",p:"Unione europea",t:"EU BIM Task Group: un approccio europeo equilibrato al BIM negli appalti",x:"La EU BIM Task Group pubblica un documento di posizione sul ruolo del BIM negli appalti pubblici: più valore per il denaro pubblico, trasparenza e opere più sostenibili, con regole comuni ma senza imporre a tutti gli stessi tempi.",m:"L'Unione europea non è una nazione della mappa: la notizia si trova con il filtro Europa.",tags:["Pubblica amministrazione", "Associazioni"],src:[["Commissione europea, Public Buyers Community", "https://public-buyers-community.ec.europa.eu/communities/bim-and-public-procurement/resources/bim-and-future-public-procurement-why-balanced"]]},
- {id:"n92",w:"2025-12-15",d:"2025-12-17",r:"2026-11-11",c:"europa",n:"Germania",rg:["Berlino"],p:"Germania · Berlino",t:"Germania: i modelli BIM diventano elaborati ufficiali di progetto",x:"Il governo federale approva il disegno di legge «Infrastruktur-Zukunftsgesetz» per accelerare le infrastrutture: le procedure di approvazione dei progetti diventano interamente digitali e i modelli BIM sono riconosciuti come elaborati ufficiali. Il testo passa ora al Parlamento.",tags:["Normativa", "Pubblica amministrazione"],src:[["Ministero federale dei trasporti", "https://www.bmv.de/SharedDocs/DE/Pressemitteilungen/2025/088-schnieder-infrastruktur-zukunftsgesetz.html"], ["Baulinks", "https://www.baulinks.de/webplugin/2025/1839.php4"]]}
+ {id:"n92",w:"2025-12-15",d:"2025-12-17",r:"2026-11-11",c:"europa",n:"Germania",rg:["Berlino"],p:"Germania · Berlino",t:"Germania: i modelli BIM diventano elaborati ufficiali di progetto",x:"Il governo federale approva il disegno di legge «Infrastruktur-Zukunftsgesetz» per accelerare le infrastrutture: le procedure di approvazione dei progetti diventano interamente digitali e i modelli BIM sono riconosciuti come elaborati ufficiali. Il testo passa ora al Parlamento.",tags:["Normativa", "Pubblica amministrazione"],src:[["Ministero federale dei trasporti", "https://www.bmv.de/SharedDocs/DE/Pressemitteilungen/2025/088-schnieder-infrastruktur-zukunftsgesetz.html"], ["Baulinks", "https://www.baulinks.de/webplugin/2025/1839.php4"]]},
+ {id:"n93",w:"2025-06-02",d:"2025-06-02",r:"2026-11-11",c:"mondo",n:"",p:"Globale",t:"IFC 5: esce la prima versione alpha",x:"buildingSMART pubblica la versione alpha di IFC 5, la nuova generazione del formato aperto per lo scambio dei modelli BIM: più semplice da implementare, pensata per il web e rilasciata a moduli, partendo dal nucleo comune. A ottobre segue il rapporto sulla consultazione del nucleo.",m:"L'alpha è uscita tra maggio e giugno 2025 e le fonti non danno un giorno preciso: uso il 2 giugno come data indicativa.",tags:["openBIM", "Normativa"],src:[["buildingSMART, IFC 5", "https://ifc5.technical.buildingsmart.org/"], ["Nordic BIM Group", "https://www.nordicbim.com/en/insights/what-ifc5-means-for-the-construction-industry"]]},
+ {id:"n94",w:"2025-06-02",d:"2025-06-02",r:"2026-11-11",c:"europa",n:"Irlanda",p:"Irlanda",t:"Irlanda: l'obbligo BIM si estende ai progetti sopra i 20 milioni",x:"Nuova tappa dell'obbligo BIM negli appalti pubblici irlandesi: dopo i progetti oltre 100 milioni, da giugno 2025 i gruppi di progettazione devono applicarlo anche sopra i 20 milioni di euro; per imprese e fornitori la scadenza è a fine anno.",m:"Le fonti indicano giugno 2025 senza un giorno preciso e non concordano del tutto sulle tappe successive: uso il 2 giugno come data indicativa.",tags:["Normativa", "Pubblica amministrazione"],src:[["PBC Today", "https://www.pbctoday.co.uk/news/mmc-news/transforming-irelands-construction-pj-rudden-challenges-innovation-digital-adoption/155044/"], ["NTI Group", "https://www.nti-group.com/ie/blog/ie/2025/iso-19650-irish-bim-mandate/"]]},
+ {id:"n95",w:"2025-06-02",d:"2025-06-03",r:"2026-11-11",c:"asia",n:"Cina",rg:["Shanghai"],p:"Cina · Shanghai",t:"Shanghai: nuove regole per consegnare i modelli BIM in verifica",x:"La commissione per l'edilizia di Shanghai fissa come vanno modellati e consegnati, in formato IFC, i modelli BIM dei progetti esecutivi usati nella verifica assistita dei progetti. Le regole valgono dal 15 giugno 2025, insieme all'aggiornamento della verifica automatica.",tags:["Normativa", "Pubblica amministrazione", "openBIM"],src:[["Commissione edilizia di Shanghai (documento ufficiale, in cinese)", "https://zjw.sh.gov.cn/cmsres/f7/f7ef9113fd5c4a45b4aebe5fcec2ef21/b80791aa8c389e36eb5f8dc5f0058ce6.pdf"]]},
+ {id:"n96",w:"2026-03-30",d:"2026-04-01",r:"2026-11-11",c:"asia",n:"Giappone",p:"Giappone",t:"Giappone: parte la verifica dei progetti con il BIM",x:"Dal 1° aprile i permessi di costruire possono passare dalla «BIM図面審査»: gli elaborati prodotti da un modello BIM vengono verificati con controlli di coerenza semplificati, mentre il file IFC accompagna la pratica come riferimento. Il ministero punta a verificare direttamente i dati IFC dalla primavera 2029.",tags:["Normativa", "Pubblica amministrazione", "openBIM"],src:[["MLIT, Consiglio per la promozione del BIM (in giapponese)", "https://www.mlit.go.jp/jutakukentiku/kenchikuBIMsuishinkaigi.html"]]},
+ {id:"n97",w:"2026-04-13",d:"2026-04-13",r:"2026-11-11",c:"europa",n:"Italia",p:"Italia",t:"Report OICE: nel 2025 le gare BIM crescono dell'80%",x:"Secondo il nono rapporto OICE, nel 2025 le gare con il BIM aumentano dell'80,7% in numero e del 151% in valore e arrivano al 27% delle gare di servizi di ingegneria e architettura. Ma solo un bando su tre include il capitolato informativo.",tags:["Pubblica amministrazione", "Associazioni"],src:[["LavoriPubblici", "https://www.lavoripubblici.it/news/gare-bim-2025-report-oice-crescita-digitalizzazione-ia-37838"]]}
 ];
 var WEEKS={
+ "2025-06-02":{from:"2025-06-02",to:"2025-06-08"},
+ "2026-03-30":{from:"2026-03-30",to:"2026-04-05"},
  "2025-01-13":{from:"2025-01-13",to:"2025-01-19"},
  "2025-01-20":{from:"2025-01-20",to:"2025-01-26"},
  "2025-04-07":{from:"2025-04-07",to:"2025-04-13"},
@@ -1672,7 +1739,7 @@ function regions(){var cnt={},nat={},tot=0;ARTS.forEach(function(a){if(passes(a)
   else if(state.country){var ce=ctryEl(state.country);if(ce&&nat[state.country])bl.push({p:cen(ce),n:nat[state.country]})}
   else if(state.cont)document.querySelectorAll('.ctry[data-c="'+state.cont+'"]').forEach(function(p){if(nat[p.dataset.n])bl.push({p:cen(p),n:nat[p.dataset.n]})});
   else Object.keys(ANCH).forEach(function(k){var e=document.querySelector('.ctry[data-n="'+ANCH[k]+'"]');if(cnt[k]&&e)bl.push({p:cen(e),n:cnt[k]})});
-  badges(bl);
+  badges(bl);if(typeof agendaRender==="function")agendaRender();
   $("map-where").textContent=state.country?(state.country+(state.region?" · "+state.region:"")):(state.cont?AREE[state.cont]:"Mondo");$("map-back").hidden=!state.cont;if($("z-in"))zButtons()}
 function setCont(k){PAGE=1;state.country="";state.region="";state.cont=state.cont===k?"":k;zoomTo(state.cont&&CB[state.cont]?CB[state.cont]:null);render()}
 function setCountry(p){PAGE=1;state.region="";var n=p.dataset.n;if(state.country===n){setCont(p.dataset.c==="mondo"?"":p.dataset.c);state.cont=p.dataset.c;zoomTo(CB[p.dataset.c]);render();return}
@@ -1798,6 +1865,32 @@ mb.addEventListener("click",function(){var on=!r.classList.contains("lite");setL
 tLabel();$("settings").hidden=false})();
 
 latest();render();ranking();view();
+// eventi e webinar: i passati spariscono da soli; prima quelli della zona scelta sulla mappa o i più vicini a te
+var AGENDA=[{"k": "ev", "t": "Restructura 2026", "d": "2026-11-12", "e": "2026-11-14", "city": "Torino · Lingotto Fiere", "n": "Italia", "c": "europa", "lat": 45.031, "lon": 7.666, "pr": "free", "pn": "Ingresso gratuito per gli operatori del settore, con registrazione", "u": "https://www.restructura.com/", "x": "Recupero, riqualificazione e restauro dell'esistente, con tecnologie digitali e AI."}, {"k": "ev", "t": "Big 5 Global 2026", "d": "2026-11-23", "e": "2026-11-26", "city": "Dubai · World Trade Centre", "n": "Emirati Arabi Uniti", "c": "asia", "lat": 25.225, "lon": 55.287, "pr": "paid", "pn": "Biglietto a pagamento; gratuito con l'invito di un espositore", "u": "https://www.big5global.com/", "x": "La grande fiera delle costruzioni del Medio Oriente, con spazi dedicati al digitale."}, {"k": "ev", "t": "BIM World Munich 2026", "d": "2026-11-24", "e": "2026-11-25", "city": "Monaco di Baviera · ICM", "n": "Germania", "c": "europa", "lat": 48.138, "lon": 11.699, "pr": "free", "pn": "Biglietto gratuito con il codice di un partner (ad es. Bayern Innovativ)", "u": "https://www.bim-world.de/", "x": "Fiera e congresso tedesco del BIM e della digitalizzazione delle costruzioni, decima edizione."}, {"k": "ev", "t": "BAU 2027", "d": "2027-01-11", "e": "2027-01-15", "city": "Monaco di Baviera · Messe München", "n": "Germania", "c": "europa", "lat": 48.135, "lon": 11.7, "pr": "verify", "pn": "Costo del biglietto da verificare sul sito", "u": "https://bau-muenchen.com/", "x": "La fiera mondiale di architettura, materiali e sistemi, ogni due anni, con ampio spazio al digitale."}, {"k": "ev", "t": "Digital Construction Week 2027", "d": "2027-06-23", "e": "2027-06-24", "city": "Londra · ExCeL", "n": "Regno Unito", "c": "europa", "lat": 51.508, "lon": 0.029, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://digitalconstructionweek.com/", "x": "Due giorni sulla costruzione digitale, con un'area dedicata alla gestione informativa."}, {"k": "wb", "t": "BIMbrunch online · Archicad", "d": "2026-11-27", "e": "2026-12-16", "when": "27 novembre, 9 e 16 dicembre · 15:00–17:30", "org": "Fermat Design, rivenditore Graphisoft", "lang": "Italiano", "pr": "free", "pn": "Gratuito, con prenotazione", "u": "https://www.fermatdesign.it/", "x": "Incontri pratici su Archicad: stratigrafie, porte e finestre, viste e impaginazione."}, {"k": "wb", "t": "From BIM to Digital Twins", "d": "2026-12-09", "e": "2026-12-09", "when": "9 dicembre", "org": "Oxford Brookes University", "lang": "Inglese", "pr": "verify", "pn": "Costo da verificare: la pagina non lo indica", "u": "https://www.brookes.ac.uk/open-days/pg-webinars/2027/from-bim-to-digital-twins-practical-workflows-for", "x": "Flussi di lavoro pratici dal modello BIM al gemello digitale, per una costruzione guidata dai dati."}, {"k": "wb", "t": "Building Information Modeling · corso virtuale AGC", "d": "2026-12-14", "e": "2026-12-14", "when": "14 dicembre", "org": "Associated General Contractors of America", "lang": "Inglese", "pr": "paid", "pn": "A pagamento: 1.695 $ per i soci, 2.075 $ per gli altri", "u": "https://business.nwagc.org/ap/Events/Register/QZFya4mhdCnC0", "x": "Corso online su Zoom per imprese e tecnici di cantiere."}, {"k": "ev", "t": "Sommet BIM+ 2026", "d": "2026-11-17", "e": "2026-11-18", "city": "Québec · Centre des congrès", "n": "Canada", "c": "america", "lat": 46.809, "lon": -71.212, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://www.sqi.gouv.qc.ca/feuille-de-route-gouvernementale-pour-le-bim/sommet-bim", "x": "Il vertice della roadmap governativa BIM del Québec per le infrastrutture."}, {"k": "ev", "t": "Ruta BIM 2026", "d": "2026-11-17", "e": "2026-11-17", "city": "Quito · Swissôtel", "n": "Ecuador", "c": "america", "lat": -0.196, "lon": -78.484, "pr": "verify", "pn": "Costo da verificare sul sito", "u": "https://rutabim.bimforum.ec/", "x": "Conferenze internazionali e confronto pubblico sul BIM in Ecuador, del BIM Forum Ecuador."}, {"k": "ev", "t": "Conferenza BIM/CIM · Sapporo", "d": "2026-11-26", "e": "2026-11-26", "city": "Sapporo", "n": "Giappone", "c": "asia", "lat": 43.062, "lon": 141.354, "pr": "free", "pn": "Gratuita", "u": "https://prtimes.jp/main/html/rd/p/000000008.000181525.html", "x": "Conferenza gratuita su BIM/CIM dell'ente giapponese per le indagini sui prezzi delle costruzioni; seguono Morioka e Hiroshima."}];
+(function(){var K="ev",POS=null,MM=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"],PR={free:"Gratuito",paid:"A pagamento",verify:"Costo da verificare"};
+function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function km(a){if(!POS||a.lat==null)return null;var R=6371,r=Math.PI/180,dl=(a.lat-POS[0])*r,dn=(a.lon-POS[1])*r,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(POS[0]*r)*Math.cos(a.lat*r)*Math.sin(dn/2)*Math.sin(dn/2);return Math.round(2*R*Math.asin(Math.sqrt(x)))}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
+function span(a){var d=a.d.split("-"),e=a.e.split("-");if(a.when)return a.when;return a.d===a.e?+d[2]+" "+MM[+d[1]-1]+" "+d[0]:(+d[2])+(d[1]!==e[1]?" "+MM[+d[1]-1]:"")+"–"+(+e[2])+" "+MM[+e[1]-1]+" "+e[0]}
+function list(){var t=today();return AGENDA.filter(function(a){return a.e>=t})}
+window.agendaRender=function(){var t=today(),L=list().filter(function(a){return a.k===K}),ctx="";
+  var zone=K==="ev"&&typeof state!=="undefined"?(state.country?function(a){return a.n===state.country}:state.cont?function(a){return a.c===state.cont}:null):null;
+  L.forEach(function(a){a._km=km(a);a._z=zone?!!zone(a):false});
+  if(K==="ev"&&POS){L.sort(function(a,b){return(a._km==null?1e9:a._km)-(b._km==null?1e9:b._km)});ctx="Ordinati dal più vicino alla tua posizione."}
+  else{L.sort(function(a,b){return a.d<b.d?-1:1});if(zone){L.sort(function(a,b){return(b._z?1:0)-(a._z?1:0)});var nz=L.filter(function(a){return a._z}).length,w=state.country||(typeof AREE!=="undefined"?AREE[state.cont]:"");ctx=nz?"Prima quelli in "+w+", poi gli altri.":"Nessun evento in "+w+" per ora: ecco i prossimi nel mondo."}}
+  $("ag-ctx").textContent=ctx;
+  $("ag-list").innerHTML=L.length?L.map(function(a){var d=a.d.split("-"),near=(POS&&a._km!=null&&a===L[0])||a._z;
+    return '<li class="ag-it'+(near?' near':'')+'"><span class="ag-date"><b>'+(+d[2])+'</b><small>'+MM[+d[1]-1]+'</small></span><span class="ag-t"><a href="'+esc(a.u)+'" target="_blank" rel="noopener">'+esc(a.t)+' ↗</a></span><span class="ag-w">'+esc(span(a))+' · '+esc(a.k==="ev"?a.city:"Online, "+a.lang+(a.org?" · "+a.org:""))+'<br>'+esc(a.x)+'</span><span class="ag-tags"><span class="ag-pr '+a.pr+'" title="'+esc(a.pn)+'">'+PR[a.pr]+'</span>'+(a._km!=null?'<span class="ag-km">a circa '+a._km.toLocaleString("it-IT")+' km</span>':'')+'</span></li>'}).join(""):'<li class="ag-w">Nessun appuntamento in programma: il curatore aggiorna l\'elenco ogni settimana.</li>';
+  $("ag-geo").hidden=K!=="ev"};
+document.querySelectorAll(".ag-tabs button").forEach(function(b){b.addEventListener("click",function(){K=b.dataset.k;document.querySelectorAll(".ag-tabs button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});agendaRender()})});
+$("ag-geo").addEventListener("click",function(){var b=this;if(POS){POS=null;b.setAttribute("aria-pressed","false");agendaRender();return}
+  if(!navigator.geolocation){$("ag-ctx").textContent="Il tuo browser non permette di usare la posizione.";return}
+  $("ag-ctx").textContent="Cerco la tua posizione…";
+  navigator.geolocation.getCurrentPosition(function(p){POS=[p.coords.latitude,p.coords.longitude];b.setAttribute("aria-pressed","true");agendaRender()},function(){$("ag-ctx").textContent="Posizione non disponibile: per vedere gli eventi di una zona, scegli un paese sulla mappa."},{maximumAge:600000,timeout:15000})});
+agendaRender();
+var nx=list().filter(function(a){return a.k==="ev"}).sort(function(a,b){return a.d<b.d?-1:1})[0];
+if(nx&&$("fc-next"))$("fc-next").innerHTML='Prossimo evento: <a href="'+esc(nx.u)+'" target="_blank" rel="noopener">'+esc(nx.t)+' ↗</a> · '+esc(nx.city.split(" · ")[0])+', '+esc(span(nx))})();
+
 // prima pagina: la mappa di BIM News si sposta nella facciata e torna al suo posto sulle altre pagine
 (function(){var fig=document.querySelector("figure.world"),home=$("fc-map"),lat=$("latest");if(!fig||!home)return;
 function place(){var h=document.documentElement.dataset.view==="home";if(h&&fig.parentNode!==home)home.appendChild(fig);else if(!h&&fig.parentNode===home)lat.parentNode.insertBefore(fig,lat.nextSibling);if(typeof bScale==="function")bScale()}
