@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BIM News · Un sito a cura di Marco Scigliuolo</title>
 <meta name="description" content="BIM News: le novità sul BIM dall'Alto Adige al resto del mondo, ogni settimana, con sintesi in italiano e link alle fonti. Mappa, filtri, archivio per mese, BIM in 5 minuti e timeline delle norme. A cura di Marco Scigliuolo.">
-<meta name="revisione" content="95 · 11/11/2026">
+<meta name="revisione" content="96 · 11/11/2026">
 <meta name="color-scheme" content="dark light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%232f6db5' stroke-width='3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%232f6db5'%3EM%3C/text%3E%3C/svg%3E">
 <script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("tema-2026")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}})();</script>
@@ -1490,6 +1490,85 @@ section:has(>.pg-hero)>.content{position:relative;z-index:1}
 .tools>li{flex:1 1 13rem}
 .top .wrap{padding-block:.45rem}
 .brand{padding-block:.22rem!important}
+
+/* home versione A: tre pagine a sinistra, mappa al centro con la ricerca, tre pagine a destra */
+:root[data-view="home"] .facade.fa-a{grid-template-columns:minmax(0,1fr) minmax(0,2.7fr) minmax(0,1fr);align-items:stretch;gap:.9rem 1.3rem;min-height:0}
+.fa-a .fc-center{display:grid;grid-template-rows:auto minmax(0,1fr);gap:.55rem;min-width:0}
+.fa-a .fc-head{display:grid;justify-items:center;text-align:center;gap:.15rem}
+.fa-a .fc-head .bn-kick,.fa-a .fc-head .fc-by{display:none}
+.fa-a .fc-h{margin:0;font-size:clamp(2rem,2.8vw,2.9rem)!important;line-height:1}
+.fa-a .fc-p{margin:0;font-size:.95rem;color:var(--muted)}
+.fa-a .fc-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:.2rem 1.2rem;align-items:center}
+.fa-a .fc-meta p{margin:0}
+.fa-a .fc-map-link{font-size:.8rem!important}
+.fa-a .fc-upd{font-size:.68rem}
+.fa-a .fc-right{display:grid;grid-template-rows:minmax(0,1fr) auto auto;gap:.3rem;min-width:0}
+.fa-a .fc-side{display:grid!important;grid-template-rows:repeat(3,minmax(0,1fr));gap:.7rem!important;min-height:0}
+.fa-a .fc-side .fc-btn{position:relative;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) auto;gap:.45rem!important;padding:.45rem!important;align-content:stretch;height:100%;min-height:0}
+.fa-a .fc-side .fc-ico{width:100%!important;height:100%!important;min-height:3.6rem;border-radius:9px!important}
+.fa-a .fc-side .fc-t{padding:0 2rem 0 .3rem;min-width:0}
+.fa-a .fc-side .fc-t small{display:block!important;font-size:.76rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fa-a .fc-side .fc-go{position:absolute;right:.8rem;bottom:.75rem}
+.lite .fa-a .fc-side .fc-ico{min-height:0;height:2.4rem!important;width:2.4rem!important;border-radius:50%!important}
+.lite .fa-a .fc-side .fc-btn{grid-template-columns:2.4rem minmax(0,1fr)!important;grid-template-rows:1fr;align-items:center}
+:root[data-view="home"] .fa-a .fc-map #map{max-height:calc(100dvh - 25.5rem)}
+.fa-a .fc-strip{grid-column:1/-1}
+.fa-a .fc-p{max-width:none;white-space:nowrap}
+@media (max-width:1500px){.fa-a .fc-p{white-space:normal}}
+.fa-a .fc-cta{flex-wrap:nowrap;gap:.4rem 1.2rem}
+.fa-a .fc-cta .fc-upd{order:2;margin:0 0 0 auto;font-size:.66rem;white-space:nowrap}
+.fa-a .fc-cta #fc-sel{order:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fa-a .fc-cta .fc-open{order:3;flex:none}
+@media (max-width:1300px){.fa-a .fc-cta .fc-upd{display:none}}
+:root[data-view="home"] .fa-a .fc-map #map{max-height:calc(100dvh - 24.6rem)}
+.fa-a .fc-right>*,#fc-map,.fc-search,.fs-box{min-width:0;max-width:100%}
+.fs-box input{width:100%}
+.fc-search:has(.fs-list:not([hidden])) .fs-q,.fc-search:has(.fs-list:not([hidden]))::before{opacity:0}
+.fc-search.away{top:.8rem;transform:translate(-50%,0);width:min(26rem,60%)}
+.fc-search.away .fs-box{padding:.45rem .8rem}
+:root[data-view="home"] #fc-map .rg-list{display:none!important}
+.fa-a .fc-head{order:-2}
+.fa-a .fc-center>.fc-right{order:0}
+/* la ricerca sulla mappa */
+#fc-map{position:relative}
+.fc-search{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);z-index:6;display:grid;justify-items:center;gap:.6rem;width:min(33rem,82%);transition:top .45s cubic-bezier(.2,.7,.2,1)}
+.fc-search::before{content:"";position:absolute;inset:-2.2rem -3.5rem;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--bg) 85%,transparent),transparent);pointer-events:none;transition:opacity .4s}
+.fc-search.away::before,.fc-search.away .fs-q{opacity:0;pointer-events:none}
+.fs-box{position:relative;display:flex;align-items:center;gap:.65rem;width:100%;padding:.62rem 1rem;border-radius:13px;background:color-mix(in srgb,var(--surface) 86%,transparent);border:1px solid color-mix(in srgb,var(--k-news) 45%,var(--line));box-shadow:0 18px 40px -20px rgba(0,0,0,.75),0 0 28px -14px var(--k-news);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.fs-box:focus-within{border-color:var(--k-news);box-shadow:0 0 0 3px color-mix(in srgb,var(--k-news) 30%,transparent),0 18px 40px -20px rgba(0,0,0,.75)}
+.fs-box svg{width:1.15rem;height:1.15rem;stroke:var(--k-news);fill:none;stroke-width:2;flex:none}
+.fs-box input{flex:1;min-width:0;font:inherit;font-size:1rem;background:transparent;border:0;outline:0;color:var(--ink)}
+.fs-box input::placeholder{color:var(--muted)}
+.fs-box input::-webkit-search-cancel-button{display:none}
+.fs-box kbd{font-family:var(--mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:.08rem .38rem}
+.fs-list{position:absolute;top:3.4rem;left:0;right:0;margin:0;padding:.3rem;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-hi);max-height:19rem;overflow:auto;z-index:2}
+.fs-list li{display:grid;grid-template-columns:4.6rem minmax(0,1fr) auto;gap:.6rem;align-items:baseline;padding:.45rem .6rem;border-radius:8px;cursor:pointer}
+.fs-list li[aria-selected="true"],.fs-list li:hover{background:var(--k-news-s)}
+.fs-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--k-news)}
+.fs-t{font-size:.92rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-t i{font-style:normal;color:var(--muted);font-size:.8rem;margin-left:.3rem}
+.fs-n{font-family:var(--mono);font-size:.66rem;color:var(--muted);white-space:nowrap}
+.fs-q{margin:0;text-align:center;font-family:var(--display);font-weight:650;font-size:clamp(1.5rem,2.3vw,2.2rem);letter-spacing:-.02em;color:var(--ink);text-shadow:0 2px 18px rgba(0,0,0,.6);pointer-events:none;transition:opacity .35s}
+.fs-q small{display:block;font:500 .64rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.35rem;text-shadow:none}
+:root:not([data-theme="dark"]) .fs-q{text-shadow:0 2px 16px rgba(255,255,255,.9)}
+.lite .fc-search{position:relative;left:auto;top:auto;transform:none;margin:0 auto .8rem}
+.lite .fc-search::before{display:none}
+@media (prefers-reduced-motion:reduce){.fc-search{transition:none}}
+@media (max-width:1100px){
+ :root[data-view="home"] .facade.fa-a{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .fa-a .fc-center{grid-column:1/-1;order:-1}
+ .fa-a .fc-side{grid-template-rows:none}
+ .fa-a .fc-side .fc-btn{grid-template-columns:4.2rem minmax(0,1fr)!important;grid-template-rows:auto;align-items:center}
+ .fa-a .fc-side .fc-ico{height:3rem!important;min-height:0}
+ :root[data-view="home"] .fa-a .fc-map #map{max-height:none}
+}
+@media (max-width:640px){
+ :root[data-view="home"] .facade.fa-a{grid-template-columns:minmax(0,1fr)}
+ .fc-search{position:relative;left:auto;top:auto;transform:none;width:100%;margin-bottom:.6rem}
+ .fc-search.away{top:auto;transform:none;width:100%}
+ .fc-search::before{display:none}
+ .fs-q{font-size:1.4rem}
+}
 </style>
 </head>
 <body>
@@ -1541,20 +1620,28 @@ section:has(>.pg-hero)>.content{position:relative;z-index:1}
 
   <section id="bim-news">
     <div class="content">
-      <div class="facade">
-        <div class="fc-left">
-          <span class="bn-kick">Rassegna settimanale · il BIM nel mondo</span>
-          <h1 class="fc-h">BIM News</h1>
-          <p class="fc-by">a cura dell'Ing. <a href="#chi-sono">Marco Scigliuolo</a></p>
-          <p class="fc-p">Il BIM dal mondo, in italiano e con la fonte. Per tutti, dal grande ente al piccolo studio.</p>
-          <nav class="fc-nav" aria-label="Pagine del sito"><a class="fc-btn k-news" href="#bim-news"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="fc-t"><b>BIM News</b><small>La rassegna settimanale dal mondo</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-ai" href="#bim-ai"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="fc-t"><b>BIM &amp; AI</b><small>Quando il BIM incontra l'intelligenza artificiale</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-acc" href="#bim-accademia"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></span><span class="fc-t"><b>BIM Accademia</b><small>Le ricerche universitarie, tradotte in italiano</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-b5" href="#bim-5-minuti"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/></svg></span><span class="fc-t"><b>BIM in 5 minuti</b><small>Che cos'è il BIM, spiegato semplice</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-vid" href="#video"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg></span><span class="fc-t"><b>Video</b><small>Webinar registrati e canali gratuiti sul BIM</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-cur" href="#chi-sono"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6"/></svg></span><span class="fc-t"><b>Il curatore</b><small>Chi cura il sito, profilo e progetti</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
-          <p class="fc-map-link"><a href="#mappa">Non sai da dove iniziare? Apri la mappa del sito →</a></p>
-          <p class="fc-upd" id="fc-upd"></p>
+      <div class="facade fa-a">
+        <nav class="fc-nav fc-side" id="fc-nav-l" aria-label="Pagine del sito"><a class="fc-btn k-news" href="#bim-news"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="fc-t"><b>BIM News</b><small>La rassegna settimanale dal mondo</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-ai" href="#bim-ai"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="fc-t"><b>BIM &amp; AI</b><small>Quando il BIM incontra l'intelligenza artificiale</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-acc" href="#bim-accademia"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></span><span class="fc-t"><b>BIM Accademia</b><small>Le ricerche universitarie, tradotte in italiano</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
+        <div class="fc-center">
+          <div class="fc-head"><span class="bn-kick">Rassegna settimanale · il BIM nel mondo</span>
+            <h1 class="fc-h">BIM News</h1>
+            <p class="fc-by">a cura dell'Ing. <a href="#chi-sono">Marco Scigliuolo</a></p>
+            <p class="fc-p">Il BIM dal mondo, in italiano e con la fonte. Per tutti, dal grande ente al piccolo studio.</p>
+          </div>
+          <div class="fc-right">
+          <div class="fc-map" id="fc-map"><div class="fc-search" id="fc-search">
+              <div class="fs-box" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="fs-list">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+                <input type="search" id="fs-q" size="1" autocomplete="off" spellcheck="false" placeholder="Cerca un paese, una regione, una città o un tema…" aria-label="Cerca un paese, una regione, una città o un tema" aria-autocomplete="list" aria-controls="fs-list">
+                <kbd aria-hidden="true">/</kbd>
+              </div>
+              <ul class="fs-list" id="fs-list" role="listbox" aria-label="Suggerimenti" hidden></ul>
+              <p class="fs-q" id="fs-say" data-i18n="dove">Dove andiamo oggi?<small>Scegli un paese sulla mappa o scrivilo qui sopra</small></p>
+            </div></div>
+          <div class="fc-cta"><p class="fc-upd" id="fc-upd"></p><span id="fc-sel">Tocca un paese sulla mappa per vedere le sue notizie.</span><a class="fc-open" href="#bim-news" id="fc-open">Vedi le notizie →</a></div>
         </div>
-        <div class="fc-right">
-          <div class="fc-map" id="fc-map"></div>
-          <div class="fc-cta"><span id="fc-sel">Tocca un paese sulla mappa per vedere le sue notizie.</span><a class="fc-open" href="#bim-news" id="fc-open">Vedi le notizie →</a></div>
         </div>
+        <nav class="fc-nav fc-side" id="fc-nav-r" aria-label="Altre pagine del sito"><a class="fc-btn k-b5" href="#bim-5-minuti"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/></svg></span><span class="fc-t"><b>BIM in 5 minuti</b><small>Che cos'è il BIM, spiegato semplice</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-vid" href="#video"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg></span><span class="fc-t"><b>Video</b><small>Webinar registrati e canali gratuiti sul BIM</small></span><span class="fc-go" aria-hidden="true">→</span></a><a class="fc-btn k-cur" href="#chi-sono"><span class="fc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6"/></svg></span><span class="fc-t"><b>Il curatore</b><small>Chi cura il sito, profilo e progetti</small></span><span class="fc-go" aria-hidden="true">→</span></a></nav>
         <section class="fc-strip" id="fc-strip" aria-label="Prossimi eventi e webinar" hidden></section>
       </div>
       <h1 id="news-h" class="pg-h">BIM News</h1>
@@ -2731,13 +2818,13 @@ tLabel();$("settings").hidden=false})();
 // guida al sito: visita guidata della home, con zone evidenziate, frecce e descrizioni
 (function(){var T=$("tour"),btn=$("tour-btn");if(!T||!btn)return;var i=0,NS="http://www.w3.org/2000/svg";
 var STEPS=[
- {t:["fc-nav"],h:"Le pagine del sito",p:"Qui trovi tutto quello che ti serve sul mondo del BIM: la rassegna delle notizie, il BIM e l'intelligenza artificiale, il BIM spiegato in cinque minuti, i video e chi cura il sito."},
- {t:["fc-map"],h:"La mappa del mondo",p:"Questa è la mappa con tutte le notizie che arrivano dal mondo. I numeri dicono quante sono; tocca un continente, poi un paese e una regione per vederle."},
+ {t:["fc-nav","fc-nav-r"],h:"Le pagine del sito",p:"Ai due lati della mappa trovi tutto quello che ti serve sul mondo del BIM: la rassegna delle notizie, il BIM e l'intelligenza artificiale, il BIM spiegato in cinque minuti, i video e chi cura il sito."},
+ {t:["fc-map"],h:"La mappa del mondo",p:"Al centro c'è la mappa con tutte le notizie che arrivano dal mondo. Scrivi un paese, una regione, una città o un tema nella barra di ricerca, oppure tocca la mappa. I numeri dicono quante sono; tocca un continente, poi un paese e una regione per vederle."},
  {t:["fc-strip"],h:"Eventi e agenda",p:"Questa è la barra degli eventi e dell'agenda: il prossimo evento gratuito e quello a pagamento, il prossimo webinar e la prossima scadenza normativa. Con «Tutti gli appuntamenti» apri l'agenda completa."},
  {t:["util"],h:"Le impostazioni",p:"Qui scegli la tua area geografica, che filtra eventi e scadenze, il tema chiaro o scuro e la versione essenziale, più leggera per le connessioni lente."},
- {t:innerWidth<700?["topnav","fc-nav"]:["fc-nav","topnav"],h:"Due modi per navigare",p:"Per muoverti nel sito puoi usare i pulsanti a sinistra oppure le schede in alto a destra: portano alle stesse pagine. Il bottone «BIM News» in alto a sinistra ti riporta sempre qui."},
+ {t:innerWidth<700?["topnav","fc-nav"]:["fc-nav","fc-nav-r","topnav"],h:"Due modi per navigare",p:"Per muoverti nel sito puoi usare le schede ai lati della mappa oppure il menu in alto a destra: portano alle stesse pagine. Il bottone «BIM News» in alto a sinistra ti riporta sempre qui."},
  {t:["faq"],h:"Le domande frequenti",p:"Il sito è grande e cresce ogni settimana. Nelle FAQ trovi le risposte alle domande che ci si pone esplorandolo: che cosa c'è nelle varie pagine, come scegliamo le notizie, in che lingue cerchiamo e come si usa il sito."}];
-function el(k){return k==="fc-nav"?document.querySelector(".fc-nav"):k==="fc-map"?document.querySelector("#fc-map .map-wrap")||$("fc-map"):k==="fc-strip"?$("fc-strip"):k==="util"?document.querySelector(".util"):k==="topnav"?document.querySelector(".top nav"):k==="faq"?document.querySelector('.top nav a[href="#faq"]'):null}
+function el(k){return k==="fc-nav"?$("fc-nav-l"):k==="fc-nav-r"?$("fc-nav-r"):k==="fc-map"?document.querySelector("#fc-map .map-wrap")||$("fc-map"):k==="fc-strip"?$("fc-strip"):k==="util"?document.querySelector(".util"):k==="topnav"?document.querySelector(".top nav"):k==="faq"?document.querySelector('.top nav a[href="#faq"]'):null}
 function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
 function draw(){var st=STEPS[i],W=innerWidth,H=innerHeight,pad=8,R=[];
   st.t.forEach(function(k){var e=el(k);if(!e||!e.offsetParent&&e!==document.querySelector(".util"))return;var r=e.getBoundingClientRect();R.push({x:r.left-pad,y:r.top-pad,w:r.width+2*pad,h:r.height+2*pad})});
@@ -2992,6 +3079,54 @@ document.addEventListener("visibilitychange",check);
 function norm(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 q.addEventListener("input",function(){var v=norm(q.value.trim()),n=0;L.forEach(function(d){var ok=!v||norm(d.textContent).indexOf(v)>=0;d.hidden=!ok;if(ok)n++;if(v&&ok)d.open=true});
   document.querySelectorAll(".faq-g").forEach(function(g){g.hidden=!g.querySelector(".faq-q:not([hidden])")});$("faq-none").hidden=n>0})})();
+// «Dove andiamo oggi?»: ricerca di paesi, regioni, città e temi che porta la mappa sul luogo o alle notizie
+(function(){var q=$("fs-q"),list=$("fs-list"),box=document.querySelector(".fs-box"),wrap=$("fc-search");if(!q)return;
+var R=[],cur=-1,IDX=null;if(innerWidth<560)q.placeholder="Paese, regione, città o tema…";
+function norm(t){return String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]/g," ").trim()}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
+function index(){var I=[],nat={},reg={},city={},tag={};
+  ARTS.forEach(function(a){if(a.n)nat[a.n]=(nat[a.n]||0)+1;(a.rg||[]).forEach(function(r){var k=a.n+"|"+r;reg[k]=(reg[k]||0)+1});
+    var parts=(a.p||"").split("·").map(function(x){return x.trim()}).filter(Boolean);if(parts.length>=2&&a.n){var c=parts[parts.length-1];if(c!==a.n&&(a.rg||[]).indexOf(c)<0){var k=a.n+"|"+(a.rg&&a.rg[0]||"")+"|"+c;city[k]=(city[k]||0)+1}}
+    (a.tags||[]).forEach(function(t){tag[t]=(tag[t]||0)+1})});
+  document.querySelectorAll("#ctrs .ctry").forEach(function(p){var n=p.dataset.n;I.push({k:"Paese",t:n,s:nat[n]||0,n:n})});
+  if(!I.length)Object.keys(nat).forEach(function(n){I.push({k:"Paese",t:n,s:nat[n],n:n})});
+  Object.keys(reg).forEach(function(k){var a=k.split("|");I.push({k:"Regione",t:a[1],sub:a[0],s:reg[k],n:a[0],r:a[1]})});
+  Object.keys(city).forEach(function(k){var a=k.split("|");I.push({k:"Città",t:a[2],sub:a[0]+(a[1]?" · "+a[1]:""),s:city[k],n:a[0],r:a[1]||"",c:a[2]})});
+  Object.keys(tag).forEach(function(t){I.push({k:"Tema",t:t,s:tag[t]})});
+  I.forEach(function(x){x.q=norm(x.t)});return I}
+function find(v){if(!IDX)IDX=index();var w=norm(v);if(!w)return[];
+  var out=IDX.filter(function(x){return x.q.indexOf(w)>=0}).map(function(x){return{x:x,sc:(x.q.indexOf(w)===0?0:1)+(x.s?0:.5)-Math.min(x.s,50)/200}});
+  out.sort(function(a,b){return a.sc-b.sc||a.x.t.localeCompare(b.x.t)});
+  var r=out.slice(0,7).map(function(o){return o.x});r.push({k:"Testo",t:v.trim()});return r}
+function show(){var v=q.value;R=find(v);cur=R.length?0:-1;
+  if(!R.length){list.hidden=true;box.setAttribute("aria-expanded","false");return}
+  list.innerHTML=R.map(function(x,i){var lab=x.k==="Testo"?'Cerca «'+esc(x.t)+'» in tutte le notizie':esc(x.t)+(x.sub?' <i>'+esc(x.sub)+'</i>':'');
+    var cnt=x.k==="Testo"?"":(x.s?x.s+(x.s===1?" notizia":" notizie"):"ancora nessuna notizia");
+    return '<li role="option" id="fs-o'+i+'" aria-selected="'+(i===cur)+'" data-i="'+i+'"><span class="fs-k">'+x.k+'</span><span class="fs-t">'+lab+'</span><span class="fs-n">'+cnt+'</span></li>'}).join("");
+  list.hidden=false;box.setAttribute("aria-expanded","true");mark()}
+function mark(){[].forEach.call(list.children,function(li,i){li.setAttribute("aria-selected",i===cur)});q.setAttribute("aria-activedescendant",cur>=0?"fs-o"+cur:"")}
+function close(){list.hidden=true;box.setAttribute("aria-expanded","false")}
+function toNews(text){var back=$("map-back");if(back&&!back.hidden)clickEl(back);var f=$("q");if(f){f.value=text;f.dispatchEvent(new Event("input"))}location.hash="#bim-news"}
+function clickEl(e){if(e)e.dispatchEvent(new MouseEvent("click",{bubbles:true}))}
+function go(x){close();if(!x)return;
+  if(x.k==="Tema"||x.k==="Testo"){toNews(x.t);return}
+  var p=document.querySelector('#ctrs .ctry[data-n="'+x.n.replace(/"/g,"")+'"]');
+  if(!p||document.documentElement.classList.contains("lite")){toNews(x.c||x.r||x.n);return}
+  var back=$("map-back");if(back&&!back.hidden)clickEl(back);
+  clickEl(p);clickEl(p);
+  if(x.r){setTimeout(function(){clickEl(document.querySelector('#rgs .rg[data-r="'+x.r.replace(/"/g,"")+'"]'))},60)}
+  q.value="";q.blur()}
+q.addEventListener("input",show);q.addEventListener("focus",function(){if(q.value)show()});
+q.addEventListener("keydown",function(e){if(e.key==="ArrowDown"){e.preventDefault();if(R.length){cur=(cur+1)%R.length;mark()}}
+  else if(e.key==="ArrowUp"){e.preventDefault();if(R.length){cur=(cur-1+R.length)%R.length;mark()}}
+  else if(e.key==="Enter"){e.preventDefault();go(R[cur])}else if(e.key==="Escape"){close();q.blur()}});
+list.addEventListener("mousedown",function(e){var li=e.target.closest("li");if(li){e.preventDefault();go(R[+li.dataset.i])}});
+document.addEventListener("click",function(e){if(!wrap.contains(e.target))close()});
+document.addEventListener("keydown",function(e){if(e.key==="/"&&document.documentElement.dataset.view==="home"&&!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"")){e.preventDefault();q.focus()}});
+// quando sei dentro un continente o un paese la frase si fa da parte e la barra sale
+var mw=$("map-where");function sync(){wrap.classList.toggle("away",!!mw&&mw.textContent.trim()!==""&&mw.textContent.trim()!=="Mondo")}
+if(mw){new MutationObserver(sync).observe(mw,{childList:true,characterData:true,subtree:true});sync()}
+})();
 // «Grafici della veste C»: articoli di BIM Accademia per anno (filtro) e misuratori dei risultati
 (function(){
 // misuratori: ogni percentuale sulla sua scala da 0 a 100, senza confronti tra voci diverse
